@@ -9,11 +9,10 @@ import (
 //服务器各种返回结果
 func main() {
 	app := hydra.NewApp(
-		hydra.WithPlatName("test"),
-		hydra.WithSystemName("apiserver03"),
-		hydra.WithClusterName("cluster"),
+		hydra.WithPlatName("hydra-t"),
+		hydra.WithSystemName("apiserver"),
+		hydra.WithClusterName("render"),
 		hydra.WithServerTypes(http.API),
-		hydra.WithUsage("apiserver"),
 	)
 
 	app.API("/tx/request", request)
