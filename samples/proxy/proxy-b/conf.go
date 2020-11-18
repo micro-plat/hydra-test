@@ -14,10 +14,8 @@ func init() {
         getUpCluster := func(){
             ip := request.getClientIP()
             current:= app.getCurrentClusterName()
-            fmt.println(ip,current,app.getAllClusterNames())
             if text.has_prefix(ip,"192.168."){
-                fmt.println(types.getStringByIndex(types.exclude(app.getAllClusterNames(),current),0))
-                return types.getStringByIndex(types.exclude(app.getAllClusterNames(),current),0)
+                return app.getClusterNameBy("a")
             }
             return current
         }

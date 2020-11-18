@@ -5070,3 +5070,1513 @@
 [2020/11/18 12:07:37.711496][i][f26c4a13b] 关闭[api]服务...
 [2020/11/18 12:07:38.229071][e][094db8314] [api]服务器启动失败:api服务发布失败 服务发布失败:(/hydra-t/services/api/providers/192.168.4.121:8091_)[zk: node already exists]
 [2020/11/18 12:07:38.229079][d][094db8314] 监听服务器配置...
+
+--------------------begin------------------------
+
+[2020/11/18 12:43:29.328611][i][09918ad19] Connected to 192.168.0.109:2181
+[2020/11/18 12:43:29.341539][i][09918ad19] authenticated: id=248410042754598479, timeout=4000
+[2020/11/18 12:43:29.341546][i][09918ad19] re-submitting `0` credentials after reconnect
+[2020/11/18 12:43:29.380054][i][7e304e1f8] 初始化: /hydra-t/apiserver/api/proxy-b/conf
+[2020/11/18 12:43:29.404189][i][7e304e1f8] 启动[api]服务...
+[2020/11/18 12:43:29.923918][i][cdfd739d7] 启动成功(api,http://192.168.4.121:8091,[1])
+[2020/11/18 12:43:35.325626][i][4657a6920] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.330475][i][8d8943250] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.333218][i][729ae103a] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.335799][i][c4235ee02] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.338294][i][0204e0bec] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.339124][i][49d7710dc] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.340267][i][1c10809b6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.341355][i][b00f97123] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.342271][i][e7be08d7b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.343198][i][65d03620f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.344024][i][a81863d6c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.344841][i][96c7eddb7] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.345633][i][6907fe28f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.346458][i][05a06f18a] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.347271][i][9eba456cb] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.348055][i][7af95397e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.348792][i][fd06a498b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.349602][i][b2b73e557] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.351022][i][03347d402] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.351859][i][8a3c1743a] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.353408][i][2cb11da25] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.354288][i][b05df07f9] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.355121][i][f71a2c76e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.355961][i][4911c418b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.357052][i][231bcb309] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.358282][i][ff59f4fdb] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.359848][i][4a6e33578] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.360800][i][9e5e70961] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.361678][i][f4f2d438f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.362611][i][421ace51f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.363423][i][2e7973176] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.364274][i][c468d452a] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.365409][i][8dbb94b9d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.366419][i][aa0a5cf3f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.367392][i][9f54911b4] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.368546][i][11085a0a1] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.370018][i][17416f9e6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.371121][i][bd2342d83] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.372763][i][2ea08b5fc] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.373767][i][6165ed954] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.374792][i][e59c1e6e5] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.375707][i][4024614fe] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.376778][i][3a84bdfec] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.377729][i][3a79be857] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.378628][i][a6f49e2c3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.379471][i][e1d7cd564] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.380337][i][4b7ba7adb] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.381111][i][19d5988ba] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.382042][i][de41a5dd8] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.384410][i][33b512ab0] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.385918][i][dcf15611f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.387220][i][39d59c95a] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.388316][i][6f0f48d1f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.389470][i][c65d1ca4a] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.390868][i][11e846155] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.392481][i][d9e49313f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.393426][i][4b7643ff6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.394295][i][cd5ba1121] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.395173][i][eab7377de] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.396028][i][a5dea01d6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.396887][i][8b6b9787c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.397849][i][ec1e1e396] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.398685][i][1624fad11] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.399551][i][9dd7281bb] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.400367][i][52514c98d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.401307][i][d99abfd09] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.402328][i][3725b1606] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.403518][i][153488bf5] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.404780][i][184917e34] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.405743][i][f17803abb] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.406744][i][f14630361] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.407834][i][ae194f556] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.408755][i][1ac75053b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.409870][i][0e22a5292] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.410951][i][5f632f367] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.411865][i][005c1f7a5] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.412841][i][a5729cd18] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.413772][i][1c724d22f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.414604][i][24bf35f5b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.417016][i][a1c7f38cf] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.418351][i][846e4be7b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.419575][i][ed4080f67] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.420474][i][899f69054] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.421319][i][f04ebdbe5] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.422183][i][dd3b625c6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.424918][i][7708c9bfb] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.454653][i][fbde8f6bf] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.455830][i][9fc8b2dab] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.458661][i][84de7c952] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.479359][i][852fa2623] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.480573][i][0c98d64d0] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.481751][i][9047f1531] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.483139][i][021060fed] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.484562][i][f3fd5cb9d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.485886][i][1fc1d9ccf] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.486953][i][66c5e6d5b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.488044][i][b3bee850b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.488929][i][c1437ecc7] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.489810][i][e84768db7] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.490734][i][0a4efa4f4] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.491773][i][585943c9b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.492936][i][df9dcdbe9] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.494123][i][11250ec34] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.495219][i][19a9a03d5] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.496242][i][779d0fce9] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.497159][i][54e87ba25] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.498043][i][a2d38fb8f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.499075][i][d309d03de] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.500067][i][c7f9bdf63] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.501116][i][a7e3b7ea5] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.502115][i][eeeb6429e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.503123][i][4d1f6806e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.504036][i][09101cf8e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.504917][i][f3e899c96] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.505791][i][32d2f3d54] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.506663][i][d6282f540] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.507624][i][302c1911c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.508512][i][a88be0149] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.509691][i][4a484d147] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.511087][i][e559cac8c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.511997][i][65bb9b54e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.512871][i][72d2a5224] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.513747][i][0427cafa0] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.514618][i][3fc99fc0c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.515412][i][36eafeabd] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.517715][i][163d02ab7] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.519042][i][c0368561e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.520077][i][f3e429c4c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.522129][i][36cd4feef] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.523957][i][8f2ceff94] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.533226][i][4b7b9bffc] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.534156][i][1c295d427] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.535097][i][90c4b2d19] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.535974][i][60cd4810b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.537980][i][3502863ee] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.538968][i][604e6b450] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.540028][i][3a6d0d9cd] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.541080][i][247fc2661] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.542091][i][e5468c5ce] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.543266][i][a31af3a53] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.544233][i][0e97f7021] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.545438][i][6ddda556e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.546451][i][6737ee014] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.547599][i][ebbf63ca6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.548520][i][f7cc75c7f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.549576][i][e67dd42a4] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.550644][i][698dc0d6c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.551645][i][0643ad94b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.552615][i][73f9a1ead] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.553811][i][8860a9f00] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.554903][i][d81c20918] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.555800][i][1d6a883a4] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.556865][i][6d37e2340] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.557834][i][aae77195b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.558803][i][6967bed8c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.559939][i][07a0915f6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.561161][i][63107cce9] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.562233][i][36a4f2971] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.563237][i][50918c7a6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.564292][i][24134b460] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.565422][i][ae44e3f83] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.566585][i][c8ffa9798] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.568913][i][29a42cdb0] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.570046][i][ab22036a3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.571002][i][73d75b539] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.571901][i][345968fa3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.572859][i][bbadd40b0] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.573870][i][017b5cda4] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.574899][i][320658dde] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.576091][i][fcb7c53fe] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.577201][i][bef2c78ef] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.578262][i][5d35c0b7e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.579255][i][744b2fbfd] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.580137][i][145096b01] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.581062][i][9f98d0d96] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.581909][i][b47b13529] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.582854][i][05dcd1858] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.584274][i][0c9aa4f98] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.587505][i][6c2c866c7] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.589896][i][f29daed58] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.594178][i][3597fd4e6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.595484][i][9bfd56925] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.596447][i][f2f8eb2bd] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.597433][i][95ff99a18] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.598432][i][44287203d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.599208][i][8ce837af1] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.599989][i][9f6639a1d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.601220][i][332fcf330] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.606436][i][c6c6e67e6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.607771][i][b003898ad] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.608772][i][36a666dc0] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.609751][i][a42a3301b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.610822][i][0a5027755] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.611829][i][1bf1932fb] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.612765][i][a994db231] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.613720][i][836682663] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.614813][i][263f6cbe1] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.615750][i][0c3dac7c5] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.616589][i][ed876b338] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.617640][i][4384aac65] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.618563][i][eff851913] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.619419][i][314857e7d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.620333][i][a2681ae44] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.621390][i][49e561dbd] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.622353][i][0554b123f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.623676][i][c9a9f8065] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.624818][i][971e59cbd] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.625821][i][2fcdd9da3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.627042][i][058298dd0] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.628305][i][071b04431] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.629367][i][c2efe99b8] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.630539][i][39b3451ab] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.631514][i][a09f353d3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.632451][i][b65b5e680] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.658761][i][9eb3d6b57] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.660315][i][b97c24ebc] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.661706][i][a3221f620] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.675268][i][039eed2c1] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.676594][i][44ee3f722] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.678042][i][ad497191b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.679180][i][95ceecda4] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.680229][i][631d416b3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.681207][i][c8ee89fa2] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.682176][i][0ebedbd20] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.683391][i][a622980b9] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.684544][i][b81ce56fa] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.685730][i][b9dd910aa] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.686825][i][6af43c139] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.687795][i][21dc8633c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.688710][i][ac5d5a897] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.689751][i][646b9cf1d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.690822][i][09799f75d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.691752][i][e7418ae1d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.692873][i][31b92d708] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.698095][i][1d16dcb3c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.702112][i][87000c739] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.703874][i][b7f32306e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.705415][i][fdb6985a4] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.707275][i][d032bbed9] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.708461][i][7906c86e9] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.709513][i][a1d425f3a] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.710943][i][b08125c19] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.711956][i][810d2b7a3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.713070][i][54e057fff] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.714165][i][9d9e9c0dd] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.715252][i][d86d398c1] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.716961][i][0f2a69ecc] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.717991][i][97b7df8cc] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.718977][i][5ca28d89b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.719858][i][c57cc8696] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.720790][i][91bcd2fd7] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.721844][i][d1ed741fd] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.722992][i][92e8d6837] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.724129][i][f91cd7c04] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.725157][i][c96e03f7c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.726004][i][4bce0d541] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.727038][i][af36ad28f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.728178][i][7e855b0fe] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.729126][i][0b1d05e10] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.730083][i][ce6471366] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.731013][i][3b4d5e951] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.732908][i][31eb9ea89] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.734146][i][c8d377cab] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.735382][i][b14d0239d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.736386][i][c156648c3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.737372][i][28937317b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.738385][i][9af375a56] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.739532][i][6be7748ad] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.740564][i][2822a551a] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.741640][i][eb43cdb69] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.742839][i][b3a9fb63f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.744093][i][37b7b86fb] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.745307][i][1dd335134] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.746244][i][28204d1cd] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.747237][i][8b2e21dfc] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.748211][i][446557054] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.749087][i][833f981fa] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.749989][i][54e89be23] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.750988][i][cf990bb6e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.751969][i][01b89428f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.753493][i][0482f6019] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.754670][i][cf89c0df5] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.755756][i][bd8ff6623] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.756924][i][f782300b0] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.759112][i][fbc214aed] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.760398][i][72182eb55] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.761714][i][04cd71053] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.762929][i][262f72390] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.763992][i][f7a44807c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.765052][i][f270a2a1b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.766046][i][2fc7b7817] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.767167][i][e08b1dd64] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.768882][i][b42450852] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.770285][i][521d642a5] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.771446][i][502811771] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.772464][i][99500921e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.773497][i][c1892954e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.774706][i][a941193fc] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.776193][i][51c471cf1] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.782854][i][a70616c2c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.784172][i][3b0632e1c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.785469][i][3cfc4a24d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.786606][i][80ec4a569] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.794883][i][420e764dd] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.796364][i][b19c7af4e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.797379][i][c96ab41e7] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.798447][i][74f67fbd1] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.799485][i][fe9854210] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.800519][i][696cf7535] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.802040][i][268a1dee7] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.803206][i][9c6c01a1b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.804409][i][f2699e50a] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.805503][i][64aa950d1] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.806752][i][b7d69a1f0] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.807926][i][e9181b2af] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.809167][i][c6b99c39c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.810338][i][0c4338e2a] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.811938][i][e5ab7e39f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.812999][i][ed5fc3d38] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.813979][i][4fb9c3750] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.814943][i][fafb8756b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.815946][i][cf4ba4d61] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.817164][i][d351610e2] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.818424][i][96fd43e4e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.819441][i][5053f9afa] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.820462][i][56a304ff0] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.821552][i][74fbc7174] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.822656][i][9d1d5e7d0] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.824006][i][996952e99] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.825247][i][aef3df182] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.826352][i][e22160da3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.827438][i][45127ce39] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.828818][i][67590b119] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.829841][i][33222eb05] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.830869][i][091e4e3ea] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.831870][i][077d1d5c7] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.833203][i][34740fb4b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.834769][i][36ba6c204] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.835970][i][5b6d2ef8d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.837042][i][33c2e56a3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.838146][i][21629204d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.839293][i][59e16991d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.840426][i][2eb20adc7] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.841788][i][2c97377d6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.843040][i][63bb9f3a9] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.844328][i][13c0944f6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.845537][i][d2fe5b764] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.846694][i][702fd28b6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.847716][i][d54e32928] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.848676][i][a658b7c19] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.849749][i][9b08a1f35] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.851494][i][d1fe514ee] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.852602][i][55a92b4ca] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.853686][i][e12aea2db] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.854822][i][7ff7e6261] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.855927][i][98363a1a6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.857081][i][702243ffc] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.858318][i][cb5b737bf] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.859529][i][41744c0fb] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.861349][i][3d6b3d2fe] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.862554][i][d6d013f97] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.863613][i][98278acd4] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.864655][i][705bc0a23] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.865823][i][32cf9f450] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.867092][i][b71a2ba1b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.868401][i][0a5265784] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.870644][i][949d5b23a] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.871863][i][899c42960] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.873192][i][9a88b6a31] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.874344][i][209f8f788] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.875616][i][07524d7c6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.876904][i][a8802b3a1] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.878422][i][fe2f7493f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.879577][i][d0340936e] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.880655][i][414a750f8] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.881752][i][56a747fa5] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.883139][i][118645b36] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.896660][i][cf933423b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.898147][i][3a31d70ed] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.899429][i][11e7ddfba] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.900546][i][729e06714] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.901616][i][b877e2f32] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.902741][i][03ac773b6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.903824][i][7eac472d7] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.904954][i][d28afbc96] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.906055][i][26b5edcbf] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.907922][i][94d0b8132] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.909215][i][1298e65f8] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.910100][i][1c99bd343] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.911035][i][941fc94f4] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.911925][i][87b0cbf08] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.912817][i][dac1657cd] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.913835][i][c7ba42459] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.915514][i][1d437e7a2] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.917435][i][ef7c59623] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.920324][i][b39b678b3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.921039][e][4657a6920] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.921088][e][4657a6920] api.response: GET /request 502 proxy 1.595465536s
+[2020/11/18 12:43:36.921575][e][8d8943250] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.921593][e][8d8943250] api.response: GET /request 502 proxy 591.131418ms
+[2020/11/18 12:43:36.921705][e][729ae103a] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.921716][e][729ae103a] api.response: GET /request 502 proxy 588.509469ms
+[2020/11/18 12:43:36.921797][i][f39043509] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.922274][e][c4235ee02] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.922287][e][c4235ee02] api.response: GET /request 502 proxy 586.4976ms
+[2020/11/18 12:43:36.923872][e][0204e0bec] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.923924][e][0204e0bec] api.response: GET /request 502 proxy 585.628942ms
+[2020/11/18 12:43:36.924195][i][61fe357c1] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.924910][e][49d7710dc] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.924926][e][49d7710dc] api.response: GET /request 502 proxy 585.803429ms
+[2020/11/18 12:43:36.925337][e][1c10809b6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.925349][e][1c10809b6] api.response: GET /request 502 proxy 585.086099ms
+[2020/11/18 12:43:36.925479][e][b00f97123] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.925489][e][b00f97123] api.response: GET /request 502 proxy 584.137797ms
+[2020/11/18 12:43:36.925565][i][ed2402db1] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.925578][e][e7be08d7b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.925586][e][e7be08d7b] api.response: GET /request 502 proxy 583.319083ms
+[2020/11/18 12:43:36.925641][e][65d03620f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.925648][e][65d03620f] api.response: GET /request 502 proxy 582.453251ms
+[2020/11/18 12:43:36.925862][e][a81863d6c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.925873][e][a81863d6c] api.response: GET /request 502 proxy 581.851181ms
+[2020/11/18 12:43:36.925965][e][96c7eddb7] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.925974][e][96c7eddb7] api.response: GET /request 502 proxy 581.135114ms
+[2020/11/18 12:43:36.926062][e][6907fe28f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.926072][e][6907fe28f] api.response: GET /request 502 proxy 580.441095ms
+[2020/11/18 12:43:36.926925][e][05a06f18a] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.926939][e][05a06f18a] api.response: GET /request 502 proxy 580.482794ms
+[2020/11/18 12:43:36.927050][e][9eba456cb] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.927060][e][9eba456cb] api.response: GET /request 502 proxy 579.791602ms
+[2020/11/18 12:43:36.927119][e][7af95397e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.927129][e][7af95397e] api.response: GET /request 502 proxy 579.080039ms
+[2020/11/18 12:43:36.927168][i][a9d68a0ee] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.927227][e][fd06a498b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.927234][e][fd06a498b] api.response: GET /request 502 proxy 578.444986ms
+[2020/11/18 12:43:36.927361][e][b2b73e557] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.927370][e][b2b73e557] api.response: GET /request 502 proxy 577.770294ms
+[2020/11/18 12:43:36.927456][e][03347d402] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.927464][e][03347d402] api.response: GET /request 502 proxy 576.444588ms
+[2020/11/18 12:43:36.927624][e][8a3c1743a] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.927632][e][8a3c1743a] api.response: GET /request 502 proxy 575.77598ms
+[2020/11/18 12:43:36.928211][i][c6a15456c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.928230][e][2cb11da25] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.928241][e][2cb11da25] api.response: GET /request 502 proxy 574.838158ms
+[2020/11/18 12:43:36.928309][e][b05df07f9] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.928317][e][b05df07f9] api.response: GET /request 502 proxy 574.03215ms
+[2020/11/18 12:43:36.928376][e][f71a2c76e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.928385][e][f71a2c76e] api.response: GET /request 502 proxy 573.266432ms
+[2020/11/18 12:43:36.928558][e][4911c418b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.928571][e][4911c418b] api.response: GET /request 502 proxy 572.613936ms
+[2020/11/18 12:43:36.928731][e][231bcb309] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.928742][e][231bcb309] api.response: GET /request 502 proxy 571.695086ms
+[2020/11/18 12:43:36.928888][e][ff59f4fdb] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.928898][e][ff59f4fdb] api.response: GET /request 502 proxy 570.620134ms
+[2020/11/18 12:43:36.928989][e][4a6e33578] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.928998][e][4a6e33578] api.response: GET /request 502 proxy 569.155889ms
+[2020/11/18 12:43:36.929090][e][9e5e70961] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.929098][e][9e5e70961] api.response: GET /request 502 proxy 568.302012ms
+[2020/11/18 12:43:36.929179][e][f4f2d438f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.929186][e][f4f2d438f] api.response: GET /request 502 proxy 567.512121ms
+[2020/11/18 12:43:36.929302][e][421ace51f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.929310][e][421ace51f] api.response: GET /request 502 proxy 566.709586ms
+[2020/11/18 12:43:36.929425][i][5bf7685ec] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.930858][e][2e7973176] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.930882][e][2e7973176] api.response: GET /request 502 proxy 567.459539ms
+[2020/11/18 12:43:36.931040][e][c468d452a] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.931080][e][c468d452a] api.response: GET /request 502 proxy 566.808091ms
+[2020/11/18 12:43:36.931122][e][8dbb94b9d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.931136][e][8dbb94b9d] api.response: GET /request 502 proxy 565.734192ms
+[2020/11/18 12:43:36.931202][e][aa0a5cf3f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.931211][e][aa0a5cf3f] api.response: GET /request 502 proxy 564.796637ms
+[2020/11/18 12:43:36.931854][e][9f54911b4] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.931890][e][9f54911b4] api.response: GET /request 502 proxy 564.495454ms
+[2020/11/18 12:43:36.932936][i][ba481ee35] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.933152][e][11085a0a1] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.933544][e][11085a0a1] api.response: GET /request 502 proxy 564.643473ms
+[2020/11/18 12:43:36.934989][e][17416f9e6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.935028][e][17416f9e6] api.response: GET /request 502 proxy 565.011125ms
+[2020/11/18 12:43:36.935257][i][90badea6a] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.935512][e][bd2342d83] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.935540][e][bd2342d83] api.response: GET /request 502 proxy 564.421089ms
+[2020/11/18 12:43:36.935770][e][2ea08b5fc] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.935794][e][2ea08b5fc] api.response: GET /request 502 proxy 563.039318ms
+[2020/11/18 12:43:36.935994][e][6165ed954] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.936011][e][6165ed954] api.response: GET /request 502 proxy 562.247011ms
+[2020/11/18 12:43:36.936123][e][e59c1e6e5] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.936140][e][e59c1e6e5] api.response: GET /request 502 proxy 561.350913ms
+[2020/11/18 12:43:36.936464][e][4024614fe] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.936482][e][4024614fe] api.response: GET /request 502 proxy 560.778382ms
+[2020/11/18 12:43:36.937011][e][3a84bdfec] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.937024][e][3a84bdfec] api.response: GET /request 502 proxy 560.252842ms
+[2020/11/18 12:43:36.937121][e][3a79be857] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.937131][e][3a79be857] api.response: GET /request 502 proxy 559.408068ms
+[2020/11/18 12:43:36.937208][i][a085d85d6] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.937315][e][a6f49e2c3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.937327][e][a6f49e2c3] api.response: GET /request 502 proxy 558.703526ms
+[2020/11/18 12:43:36.937412][e][e1d7cd564] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.937420][e][e1d7cd564] api.response: GET /request 502 proxy 557.955171ms
+[2020/11/18 12:43:36.937509][e][4b7ba7adb] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.937517][e][4b7ba7adb] api.response: GET /request 502 proxy 557.183598ms
+[2020/11/18 12:43:36.937614][e][19d5988ba] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.937621][e][19d5988ba] api.response: GET /request 502 proxy 556.51613ms
+[2020/11/18 12:43:36.937705][e][de41a5dd8] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.937713][e][de41a5dd8] api.response: GET /request 502 proxy 555.67529ms
+[2020/11/18 12:43:36.937822][e][33b512ab0] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.937830][e][33b512ab0] api.response: GET /request 502 proxy 553.433641ms
+[2020/11/18 12:43:36.937923][e][dcf15611f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.937938][e][dcf15611f] api.response: GET /request 502 proxy 552.02449ms
+[2020/11/18 12:43:36.938021][e][39d59c95a] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.938028][e][39d59c95a] api.response: GET /request 502 proxy 550.814311ms
+[2020/11/18 12:43:36.938110][e][6f0f48d1f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.938116][e][6f0f48d1f] api.response: GET /request 502 proxy 549.808108ms
+[2020/11/18 12:43:36.938199][e][c65d1ca4a] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.938206][e][c65d1ca4a] api.response: GET /request 502 proxy 548.748476ms
+[2020/11/18 12:43:36.938286][e][11e846155] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.938293][e][11e846155] api.response: GET /request 502 proxy 547.4312ms
+[2020/11/18 12:43:36.938383][e][d9e49313f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.938391][e][d9e49313f] api.response: GET /request 502 proxy 545.91722ms
+[2020/11/18 12:43:36.938639][e][4b7643ff6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.938651][e][4b7643ff6] api.response: GET /request 502 proxy 545.229569ms
+[2020/11/18 12:43:36.939555][e][cd5ba1121] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.939606][e][cd5ba1121] api.response: GET /request 502 proxy 545.315486ms
+[2020/11/18 12:43:36.939687][i][9ac4127cf] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.940028][e][eab7377de] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.940066][e][eab7377de] api.response: GET /request 502 proxy 544.897929ms
+[2020/11/18 12:43:36.940273][e][a5dea01d6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.940286][e][a5dea01d6] api.response: GET /request 502 proxy 544.262932ms
+[2020/11/18 12:43:36.940847][e][8b6b9787c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.940880][e][8b6b9787c] api.response: GET /request 502 proxy 543.995564ms
+[2020/11/18 12:43:36.941271][e][ec1e1e396] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.941306][e][ec1e1e396] api.response: GET /request 502 proxy 543.458515ms
+[2020/11/18 12:43:36.941499][e][1624fad11] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.941511][e][1624fad11] api.response: GET /request 502 proxy 542.829602ms
+[2020/11/18 12:43:36.941585][i][77a6b8c28] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.941763][e][9dd7281bb] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.941773][e][9dd7281bb] api.response: GET /request 502 proxy 542.236697ms
+[2020/11/18 12:43:36.942012][e][52514c98d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.942026][e][52514c98d] api.response: GET /request 502 proxy 541.663346ms
+[2020/11/18 12:43:36.942086][e][d99abfd09] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.942095][e][d99abfd09] api.response: GET /request 502 proxy 540.798454ms
+[2020/11/18 12:43:36.942180][e][3725b1606] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.942190][e][3725b1606] api.response: GET /request 502 proxy 539.870222ms
+[2020/11/18 12:43:36.942483][e][153488bf5] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.942501][e][153488bf5] api.response: GET /request 502 proxy 538.99221ms
+[2020/11/18 12:43:36.942629][e][184917e34] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.942638][e][184917e34] api.response: GET /request 502 proxy 537.865564ms
+[2020/11/18 12:43:36.942742][e][f17803abb] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.942752][e][f17803abb] api.response: GET /request 502 proxy 537.014358ms
+[2020/11/18 12:43:36.942828][i][819599c33] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.942929][e][f14630361] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.942938][e][f14630361] api.response: GET /request 502 proxy 536.199958ms
+[2020/11/18 12:43:36.943157][e][ae194f556] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.943167][e][ae194f556] api.response: GET /request 502 proxy 535.338212ms
+[2020/11/18 12:43:36.943253][e][1ac75053b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.943260][e][1ac75053b] api.response: GET /request 502 proxy 534.511084ms
+[2020/11/18 12:43:36.943352][e][0e22a5292] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.943359][e][0e22a5292] api.response: GET /request 502 proxy 533.495472ms
+[2020/11/18 12:43:36.943448][e][5f632f367] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.943455][e][5f632f367] api.response: GET /request 502 proxy 532.510735ms
+[2020/11/18 12:43:36.943563][e][005c1f7a5] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.943571][e][005c1f7a5] api.response: GET /request 502 proxy 531.713757ms
+[2020/11/18 12:43:36.943687][e][a5729cd18] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.943696][e][a5729cd18] api.response: GET /request 502 proxy 530.863783ms
+[2020/11/18 12:43:36.943786][e][1c724d22f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.943794][e][1c724d22f] api.response: GET /request 502 proxy 530.027899ms
+[2020/11/18 12:43:36.943858][i][c6b61d42d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.944245][e][24bf35f5b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.944255][e][24bf35f5b] api.response: GET /request 502 proxy 529.654389ms
+[2020/11/18 12:43:36.944336][e][a1c7f38cf] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.944346][e][a1c7f38cf] api.response: GET /request 502 proxy 527.3398ms
+[2020/11/18 12:43:36.944686][e][846e4be7b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.944695][e][846e4be7b] api.response: GET /request 502 proxy 526.351556ms
+[2020/11/18 12:43:36.944874][i][31d722358] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.945533][e][ed4080f67] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.945550][e][ed4080f67] api.response: GET /request 502 proxy 525.980441ms
+[2020/11/18 12:43:36.945816][e][899f69054] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.945826][e][899f69054] api.response: GET /request 502 proxy 525.361898ms
+[2020/11/18 12:43:36.945951][e][f04ebdbe5] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.945960][e][f04ebdbe5] api.response: GET /request 502 proxy 524.648371ms
+[2020/11/18 12:43:36.946055][e][dd3b625c6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.946065][e][dd3b625c6] api.response: GET /request 502 proxy 523.88694ms
+[2020/11/18 12:43:36.946153][e][7708c9bfb] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.946161][e][7708c9bfb] api.response: GET /request 502 proxy 521.258807ms
+[2020/11/18 12:43:36.946180][i][73c0809e4] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.947605][e][fbde8f6bf] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.947655][e][fbde8f6bf] api.response: GET /request 502 proxy 493.004904ms
+[2020/11/18 12:43:36.947962][e][9fc8b2dab] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.947990][e][9fc8b2dab] api.response: GET /request 502 proxy 492.170961ms
+[2020/11/18 12:43:36.948216][e][84de7c952] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.948238][e][84de7c952] api.response: GET /request 502 proxy 489.58386ms
+[2020/11/18 12:43:36.948461][e][852fa2623] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.948483][e][852fa2623] api.response: GET /request 502 proxy 469.132917ms
+[2020/11/18 12:43:36.948675][e][0c98d64d0] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.948691][e][0c98d64d0] api.response: GET /request 502 proxy 468.130686ms
+[2020/11/18 12:43:36.948872][e][9047f1531] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.948895][e][9047f1531] api.response: GET /request 502 proxy 467.152213ms
+[2020/11/18 12:43:36.949063][e][021060fed] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.949075][e][021060fed] api.response: GET /request 502 proxy 465.967188ms
+[2020/11/18 12:43:36.949238][e][f3fd5cb9d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.949254][e][f3fd5cb9d] api.response: GET /request 502 proxy 464.702671ms
+[2020/11/18 12:43:36.949509][e][1fc1d9ccf] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.949546][e][1fc1d9ccf] api.response: GET /request 502 proxy 463.670493ms
+[2020/11/18 12:43:36.949728][e][66c5e6d5b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.949744][e][66c5e6d5b] api.response: GET /request 502 proxy 462.800409ms
+[2020/11/18 12:43:36.949904][i][4f4bf941f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.950002][e][b3bee850b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.950017][e][b3bee850b] api.response: GET /request 502 proxy 461.979059ms
+[2020/11/18 12:43:36.950170][e][c1437ecc7] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.950183][e][c1437ecc7] api.response: GET /request 502 proxy 461.261181ms
+[2020/11/18 12:43:36.950315][e][e84768db7] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.950323][e][e84768db7] api.response: GET /request 502 proxy 460.523996ms
+[2020/11/18 12:43:36.951090][e][0a4efa4f4] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.951105][e][0a4efa4f4] api.response: GET /request 502 proxy 460.376014ms
+[2020/11/18 12:43:36.951140][i][07cdabb86] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.951588][e][585943c9b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.951601][e][585943c9b] api.response: GET /request 502 proxy 459.833446ms
+[2020/11/18 12:43:36.951710][e][df9dcdbe9] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.951721][e][df9dcdbe9] api.response: GET /request 502 proxy 458.794913ms
+[2020/11/18 12:43:36.952124][e][11250ec34] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.952138][e][11250ec34] api.response: GET /request 502 proxy 458.02826ms
+[2020/11/18 12:43:36.952225][i][7ceea908d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.952593][e][19a9a03d5] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.952613][e][19a9a03d5] api.response: GET /request 502 proxy 457.402064ms
+[2020/11/18 12:43:36.952989][e][779d0fce9] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.953003][e][779d0fce9] api.response: GET /request 502 proxy 456.765918ms
+[2020/11/18 12:43:36.953171][e][54e87ba25] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.953188][e][54e87ba25] api.response: GET /request 502 proxy 456.03264ms
+[2020/11/18 12:43:36.953477][e][a2d38fb8f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.953498][e][a2d38fb8f] api.response: GET /request 502 proxy 455.458181ms
+[2020/11/18 12:43:36.953742][e][d309d03de] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.953757][e][d309d03de] api.response: GET /request 502 proxy 454.687189ms
+[2020/11/18 12:43:36.953912][e][c7f9bdf63] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.953926][e][c7f9bdf63] api.response: GET /request 502 proxy 453.871284ms
+[2020/11/18 12:43:36.954173][e][a7e3b7ea5] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.954189][e][a7e3b7ea5] api.response: GET /request 502 proxy 453.083713ms
+[2020/11/18 12:43:36.954442][e][eeeb6429e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.954455][e][eeeb6429e] api.response: GET /request 502 proxy 452.349259ms
+[2020/11/18 12:43:36.954617][e][4d1f6806e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.954629][e][4d1f6806e] api.response: GET /request 502 proxy 451.515208ms
+[2020/11/18 12:43:36.954774][e][09101cf8e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.954785][e][09101cf8e] api.response: GET /request 502 proxy 450.758724ms
+[2020/11/18 12:43:36.954910][e][f3e899c96] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.954918][e][f3e899c96] api.response: GET /request 502 proxy 450.009208ms
+[2020/11/18 12:43:36.955007][e][32d2f3d54] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.955014][e][32d2f3d54] api.response: GET /request 502 proxy 449.231851ms
+[2020/11/18 12:43:36.955093][e][d6282f540] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.955099][e][d6282f540] api.response: GET /request 502 proxy 448.446915ms
+[2020/11/18 12:43:36.955182][e][302c1911c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.955195][e][302c1911c] api.response: GET /request 502 proxy 447.581354ms
+[2020/11/18 12:43:36.955281][e][a88be0149] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.955287][e][a88be0149] api.response: GET /request 502 proxy 446.785538ms
+[2020/11/18 12:43:36.955383][e][4a484d147] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.955392][e][4a484d147] api.response: GET /request 502 proxy 445.71068ms
+[2020/11/18 12:43:36.955481][e][e559cac8c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.955488][e][e559cac8c] api.response: GET /request 502 proxy 444.428254ms
+[2020/11/18 12:43:36.955570][e][65bb9b54e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.955577][e][65bb9b54e] api.response: GET /request 502 proxy 443.588315ms
+[2020/11/18 12:43:36.955662][e][72d2a5224] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.955669][e][72d2a5224] api.response: GET /request 502 proxy 442.80896ms
+[2020/11/18 12:43:36.955751][e][0427cafa0] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.955760][e][0427cafa0] api.response: GET /request 502 proxy 442.022559ms
+[2020/11/18 12:43:36.955844][e][3fc99fc0c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.955853][e][3fc99fc0c] api.response: GET /request 502 proxy 441.243078ms
+[2020/11/18 12:43:36.955937][e][36eafeabd] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.955945][e][36eafeabd] api.response: GET /request 502 proxy 440.54071ms
+[2020/11/18 12:43:36.956043][e][163d02ab7] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.956063][e][163d02ab7] api.response: GET /request 502 proxy 438.362693ms
+[2020/11/18 12:43:36.956310][e][c0368561e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.956332][e][c0368561e] api.response: GET /request 502 proxy 437.298439ms
+[2020/11/18 12:43:36.956510][e][f3e429c4c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.956542][e][f3e429c4c] api.response: GET /request 502 proxy 436.471191ms
+[2020/11/18 12:43:36.956827][e][36cd4feef] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.956852][e][36cd4feef] api.response: GET /request 502 proxy 434.732203ms
+[2020/11/18 12:43:36.956947][i][635cbd94b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.957190][e][8f2ceff94] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.957204][e][8f2ceff94] api.response: GET /request 502 proxy 433.257491ms
+[2020/11/18 12:43:36.957388][e][4b7b9bffc] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.957409][e][4b7b9bffc] api.response: GET /request 502 proxy 424.18865ms
+[2020/11/18 12:43:36.958022][e][1c295d427] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.958051][e][1c295d427] api.response: GET /request 502 proxy 423.896802ms
+[2020/11/18 12:43:36.958134][e][90c4b2d19] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.958144][e][90c4b2d19] api.response: GET /request 502 proxy 423.057525ms
+[2020/11/18 12:43:36.958260][e][60cd4810b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.958269][e][60cd4810b] api.response: GET /request 502 proxy 422.30208ms
+[2020/11/18 12:43:36.958518][e][604e6b450] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.958526][e][604e6b450] api.response: GET /request 502 proxy 419.568389ms
+[2020/11/18 12:43:36.958779][e][3a6d0d9cd] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.958788][e][3a6d0d9cd] api.response: GET /request 502 proxy 418.768408ms
+[2020/11/18 12:43:36.959006][i][835b2f891] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.959381][e][247fc2661] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.959390][e][247fc2661] api.response: GET /request 502 proxy 418.317383ms
+[2020/11/18 12:43:36.959522][e][e5468c5ce] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.959534][e][e5468c5ce] api.response: GET /request 502 proxy 417.454553ms
+[2020/11/18 12:43:36.959677][e][a31af3a53] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.959685][e][a31af3a53] api.response: GET /request 502 proxy 416.427862ms
+[2020/11/18 12:43:36.959769][e][0e97f7021] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.959783][e][0e97f7021] api.response: GET /request 502 proxy 415.55969ms
+[2020/11/18 12:43:36.959874][e][6ddda556e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.959882][e][6ddda556e] api.response: GET /request 502 proxy 414.451604ms
+[2020/11/18 12:43:36.959964][e][6737ee014] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.959971][e][6737ee014] api.response: GET /request 502 proxy 413.526852ms
+[2020/11/18 12:43:36.960084][e][ebbf63ca6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.960091][e][ebbf63ca6] api.response: GET /request 502 proxy 412.500023ms
+[2020/11/18 12:43:36.960255][i][3f45157e3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.960601][e][f7cc75c7f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.960610][e][f7cc75c7f] api.response: GET /request 502 proxy 412.096161ms
+[2020/11/18 12:43:36.960744][e][e67dd42a4] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.960752][e][e67dd42a4] api.response: GET /request 502 proxy 411.183918ms
+[2020/11/18 12:43:36.960895][e][3502863ee] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.960907][e][3502863ee] api.response: GET /request 502 proxy 422.937725ms
+[2020/11/18 12:43:36.961475][e][698dc0d6c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.961484][e][698dc0d6c] api.response: GET /request 502 proxy 410.851408ms
+[2020/11/18 12:43:36.961880][e][0643ad94b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.961889][e][0643ad94b] api.response: GET /request 502 proxy 410.253736ms
+[2020/11/18 12:43:36.961980][e][73f9a1ead] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.961990][e][73f9a1ead] api.response: GET /request 502 proxy 409.382514ms
+[2020/11/18 12:43:36.962100][i][31d55a026] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.962106][e][8860a9f00] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.962114][e][8860a9f00] api.response: GET /request 502 proxy 408.312568ms
+[2020/11/18 12:43:36.962176][e][d81c20918] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.962185][e][d81c20918] api.response: GET /request 502 proxy 407.290137ms
+[2020/11/18 12:43:36.962243][e][1d6a883a4] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.962250][e][1d6a883a4] api.response: GET /request 502 proxy 406.457614ms
+[2020/11/18 12:43:36.962304][e][6d37e2340] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.962310][e][6d37e2340] api.response: GET /request 502 proxy 405.461126ms
+[2020/11/18 12:43:36.962406][e][aae77195b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.962421][e][aae77195b] api.response: GET /request 502 proxy 404.595014ms
+[2020/11/18 12:43:36.962478][e][6967bed8c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.962488][e][6967bed8c] api.response: GET /request 502 proxy 403.694446ms
+[2020/11/18 12:43:36.962573][e][07a0915f6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.962581][e][07a0915f6] api.response: GET /request 502 proxy 402.661118ms
+[2020/11/18 12:43:36.962801][e][63107cce9] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.962810][e][63107cce9] api.response: GET /request 502 proxy 401.669038ms
+[2020/11/18 12:43:36.963546][e][36a4f2971] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.963562][e][36a4f2971] api.response: GET /request 502 proxy 401.339167ms
+[2020/11/18 12:43:36.963682][e][50918c7a6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.963723][e][50918c7a6] api.response: GET /request 502 proxy 400.492806ms
+[2020/11/18 12:43:36.963837][e][24134b460] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.963845][e][24134b460] api.response: GET /request 502 proxy 399.561329ms
+[2020/11/18 12:43:36.964004][i][8444348d3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.964646][e][ae44e3f83] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.964679][e][ae44e3f83] api.response: GET /request 502 proxy 399.263757ms
+[2020/11/18 12:43:36.964978][e][c8ffa9798] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.964996][e][c8ffa9798] api.response: GET /request 502 proxy 398.419031ms
+[2020/11/18 12:43:36.965255][e][29a42cdb0] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.965269][e][29a42cdb0] api.response: GET /request 502 proxy 396.371973ms
+[2020/11/18 12:43:36.965441][e][ab22036a3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.965463][e][ab22036a3] api.response: GET /request 502 proxy 395.42812ms
+[2020/11/18 12:43:36.965581][e][73d75b539] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.965591][e][73d75b539] api.response: GET /request 502 proxy 394.599795ms
+[2020/11/18 12:43:36.965769][e][345968fa3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.965780][e][345968fa3] api.response: GET /request 502 proxy 393.887835ms
+[2020/11/18 12:43:36.965912][e][bbadd40b0] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.965926][e][bbadd40b0] api.response: GET /request 502 proxy 393.078223ms
+[2020/11/18 12:43:36.966093][e][017b5cda4] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.966106][e][017b5cda4] api.response: GET /request 502 proxy 392.24324ms
+[2020/11/18 12:43:36.966249][e][320658dde] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.966262][e][320658dde] api.response: GET /request 502 proxy 391.372548ms
+[2020/11/18 12:43:36.967041][e][fcb7c53fe] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.967053][e][fcb7c53fe] api.response: GET /request 502 proxy 390.978214ms
+[2020/11/18 12:43:36.967197][e][bef2c78ef] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.967205][e][bef2c78ef] api.response: GET /request 502 proxy 390.026034ms
+[2020/11/18 12:43:36.967598][e][5d35c0b7e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.967848][i][1a90b8034] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.968228][e][744b2fbfd] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.968246][e][744b2fbfd] api.response: GET /request 502 proxy 389.002488ms
+[2020/11/18 12:43:36.968351][e][5d35c0b7e] api.response: GET /request 502 proxy 390.100323ms
+[2020/11/18 12:43:36.969030][e][145096b01] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.969048][e][145096b01] api.response: GET /request 502 proxy 388.91581ms
+[2020/11/18 12:43:36.969223][e][9f98d0d96] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.969236][e][9f98d0d96] api.response: GET /request 502 proxy 388.190456ms
+[2020/11/18 12:43:36.969408][e][b47b13529] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.969420][e][b47b13529] api.response: GET /request 502 proxy 387.521535ms
+[2020/11/18 12:43:36.969613][e][05dcd1858] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.969623][e][05dcd1858] api.response: GET /request 502 proxy 386.786241ms
+[2020/11/18 12:43:36.969759][e][0c9aa4f98] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.969770][e][0c9aa4f98] api.response: GET /request 502 proxy 385.507508ms
+[2020/11/18 12:43:36.969883][e][6c2c866c7] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.969892][e][6c2c866c7] api.response: GET /request 502 proxy 382.39854ms
+[2020/11/18 12:43:36.969902][i][ab13ec855] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.970116][e][f29daed58] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.970128][e][f29daed58] api.response: GET /request 502 proxy 380.391618ms
+[2020/11/18 12:43:36.970229][e][3597fd4e6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.970237][e][3597fd4e6] api.response: GET /request 502 proxy 376.068346ms
+[2020/11/18 12:43:36.970334][e][9bfd56925] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.970342][e][9bfd56925] api.response: GET /request 502 proxy 374.872719ms
+[2020/11/18 12:43:36.970418][e][f2f8eb2bd] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.970427][e][f2f8eb2bd] api.response: GET /request 502 proxy 373.993803ms
+[2020/11/18 12:43:36.970513][e][95ff99a18] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.970522][e][95ff99a18] api.response: GET /request 502 proxy 373.106618ms
+[2020/11/18 12:43:36.970605][e][44287203d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.970613][e][44287203d] api.response: GET /request 502 proxy 372.212351ms
+[2020/11/18 12:43:36.970723][e][8ce837af1] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.970730][e][8ce837af1] api.response: GET /request 502 proxy 371.532365ms
+[2020/11/18 12:43:36.970821][e][9f6639a1d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.970830][e][9f6639a1d] api.response: GET /request 502 proxy 370.849023ms
+[2020/11/18 12:43:36.970882][i][98b7dbe2c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.970948][e][332fcf330] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.970956][e][332fcf330] api.response: GET /request 502 proxy 369.749802ms
+[2020/11/18 12:43:36.971195][e][c6c6e67e6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.971209][e][c6c6e67e6] api.response: GET /request 502 proxy 364.783301ms
+[2020/11/18 12:43:36.971359][e][b003898ad] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.971369][e][b003898ad] api.response: GET /request 502 proxy 363.623582ms
+[2020/11/18 12:43:36.971474][e][36a666dc0] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.971485][e][36a666dc0] api.response: GET /request 502 proxy 362.721505ms
+[2020/11/18 12:43:36.971570][e][a42a3301b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.971580][e][a42a3301b] api.response: GET /request 502 proxy 361.843783ms
+[2020/11/18 12:43:36.971666][e][0a5027755] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.971674][e][0a5027755] api.response: GET /request 502 proxy 360.863086ms
+[2020/11/18 12:43:36.971802][e][1bf1932fb] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.971809][e][1bf1932fb] api.response: GET /request 502 proxy 359.996244ms
+[2020/11/18 12:43:36.971897][e][a994db231] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.971904][e][a994db231] api.response: GET /request 502 proxy 359.159983ms
+[2020/11/18 12:43:36.971976][i][aebecb0ca] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.971990][e][836682663] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.971996][e][836682663] api.response: GET /request 502 proxy 358.285707ms
+[2020/11/18 12:43:36.972079][e][263f6cbe1] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.972089][e][263f6cbe1] api.response: GET /request 502 proxy 357.283839ms
+[2020/11/18 12:43:36.972641][e][0c3dac7c5] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.972653][e][0c3dac7c5] api.response: GET /request 502 proxy 356.908092ms
+[2020/11/18 12:43:36.973528][e][ed876b338] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.973569][e][ed876b338] api.response: GET /request 502 proxy 356.986777ms
+[2020/11/18 12:43:36.973675][e][4384aac65] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.973684][e][4384aac65] api.response: GET /request 502 proxy 356.053134ms
+[2020/11/18 12:43:36.973818][e][eff851913] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.973827][e][eff851913] api.response: GET /request 502 proxy 355.276319ms
+[2020/11/18 12:43:36.974264][e][314857e7d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.974285][e][314857e7d] api.response: GET /request 502 proxy 354.870139ms
+[2020/11/18 12:43:36.974447][e][a2681ae44] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.974467][e][a2681ae44] api.response: GET /request 502 proxy 354.152884ms
+[2020/11/18 12:43:36.974703][e][49e561dbd] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.974723][e][49e561dbd] api.response: GET /request 502 proxy 353.341525ms
+[2020/11/18 12:43:36.974826][e][0554b123f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.974835][e][0554b123f] api.response: GET /request 502 proxy 352.49207ms
+[2020/11/18 12:43:36.974939][e][c9a9f8065] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.974950][e][c9a9f8065] api.response: GET /request 502 proxy 351.294722ms
+[2020/11/18 12:43:36.975042][e][971e59cbd] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.975050][e][971e59cbd] api.response: GET /request 502 proxy 350.258288ms
+[2020/11/18 12:43:36.975130][e][2fcdd9da3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.975140][e][2fcdd9da3] api.response: GET /request 502 proxy 349.329833ms
+[2020/11/18 12:43:36.975225][e][058298dd0] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.975232][e][058298dd0] api.response: GET /request 502 proxy 348.211081ms
+[2020/11/18 12:43:36.975319][e][071b04431] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.975327][e][071b04431] api.response: GET /request 502 proxy 347.033209ms
+[2020/11/18 12:43:36.975414][e][c2efe99b8] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.975421][e][c2efe99b8] api.response: GET /request 502 proxy 346.063967ms
+[2020/11/18 12:43:36.975502][e][39b3451ab] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.975508][e][39b3451ab] api.response: GET /request 502 proxy 344.985473ms
+[2020/11/18 12:43:36.975600][e][a09f353d3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.975607][e][a09f353d3] api.response: GET /request 502 proxy 344.102176ms
+[2020/11/18 12:43:36.975688][e][b65b5e680] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.975694][e][b65b5e680] api.response: GET /request 502 proxy 343.275897ms
+[2020/11/18 12:43:36.975776][e][9eb3d6b57] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.975801][e][9eb3d6b57] api.response: GET /request 502 proxy 317.052756ms
+[2020/11/18 12:43:36.975881][e][b97c24ebc] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.975888][e][b97c24ebc] api.response: GET /request 502 proxy 315.619315ms
+[2020/11/18 12:43:36.975983][e][a3221f620] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.975990][e][a3221f620] api.response: GET /request 502 proxy 314.302369ms
+[2020/11/18 12:43:36.976069][e][039eed2c1] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.976075][e][039eed2c1] api.response: GET /request 502 proxy 300.821958ms
+[2020/11/18 12:43:36.976155][e][44ee3f722] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.976164][e][44ee3f722] api.response: GET /request 502 proxy 299.587935ms
+[2020/11/18 12:43:36.976242][e][ad497191b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.976250][e][ad497191b] api.response: GET /request 502 proxy 298.223599ms
+[2020/11/18 12:43:36.976329][e][95ceecda4] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.976336][e][95ceecda4] api.response: GET /request 502 proxy 297.17148ms
+[2020/11/18 12:43:36.976415][e][631d416b3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.976421][e][631d416b3] api.response: GET /request 502 proxy 296.20828ms
+[2020/11/18 12:43:36.976502][e][c8ee89fa2] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.976509][e][c8ee89fa2] api.response: GET /request 502 proxy 295.31999ms
+[2020/11/18 12:43:36.976591][e][0ebedbd20] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.976598][e][0ebedbd20] api.response: GET /request 502 proxy 294.434753ms
+[2020/11/18 12:43:36.976677][e][a622980b9] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.976684][e][a622980b9] api.response: GET /request 502 proxy 293.308299ms
+[2020/11/18 12:43:36.976788][e][b81ce56fa] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.976795][e][b81ce56fa] api.response: GET /request 502 proxy 292.264921ms
+[2020/11/18 12:43:36.977066][e][b9dd910aa] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.977075][e][b9dd910aa] api.response: GET /request 502 proxy 291.361545ms
+[2020/11/18 12:43:36.977323][e][6af43c139] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.977334][e][6af43c139] api.response: GET /request 502 proxy 290.522967ms
+[2020/11/18 12:43:36.977470][e][21dc8633c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.977478][e][21dc8633c] api.response: GET /request 502 proxy 289.695856ms
+[2020/11/18 12:43:36.977724][e][ac5d5a897] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.977737][e][ac5d5a897] api.response: GET /request 502 proxy 289.038777ms
+[2020/11/18 12:43:36.977880][e][646b9cf1d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.977891][e][646b9cf1d] api.response: GET /request 502 proxy 288.152283ms
+[2020/11/18 12:43:36.977998][e][09799f75d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.978012][e][09799f75d] api.response: GET /request 502 proxy 287.202422ms
+[2020/11/18 12:43:36.978100][e][e7418ae1d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.978109][e][e7418ae1d] api.response: GET /request 502 proxy 286.369575ms
+[2020/11/18 12:43:36.978188][e][31b92d708] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.978197][e][31b92d708] api.response: GET /request 502 proxy 285.339734ms
+[2020/11/18 12:43:36.978284][e][1d16dcb3c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.978291][e][1d16dcb3c] api.response: GET /request 502 proxy 280.212116ms
+[2020/11/18 12:43:36.978397][e][87000c739] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.978404][e][87000c739] api.response: GET /request 502 proxy 276.306606ms
+[2020/11/18 12:43:36.978486][e][b7f32306e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.978496][e][b7f32306e] api.response: GET /request 502 proxy 274.638901ms
+[2020/11/18 12:43:36.978575][e][fdb6985a4] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.978582][e][fdb6985a4] api.response: GET /request 502 proxy 273.181018ms
+[2020/11/18 12:43:36.978661][e][d032bbed9] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.978668][e][d032bbed9] api.response: GET /request 502 proxy 271.411033ms
+[2020/11/18 12:43:36.978748][e][7906c86e9] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.978755][e][7906c86e9] api.response: GET /request 502 proxy 270.308382ms
+[2020/11/18 12:43:36.978831][e][a1d425f3a] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.978838][e][a1d425f3a] api.response: GET /request 502 proxy 269.337982ms
+[2020/11/18 12:43:36.978919][e][b08125c19] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.978927][e][b08125c19] api.response: GET /request 502 proxy 267.999011ms
+[2020/11/18 12:43:36.979004][e][810d2b7a3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.979011][e][810d2b7a3] api.response: GET /request 502 proxy 267.071047ms
+[2020/11/18 12:43:36.979088][e][54e057fff] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.979094][e][54e057fff] api.response: GET /request 502 proxy 266.036932ms
+[2020/11/18 12:43:36.979177][e][9d9e9c0dd] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.979184][e][9d9e9c0dd] api.response: GET /request 502 proxy 265.033158ms
+[2020/11/18 12:43:36.979292][e][d86d398c1] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.979301][e][d86d398c1] api.response: GET /request 502 proxy 264.062649ms
+[2020/11/18 12:43:36.979533][e][97b7df8cc] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.979542][e][97b7df8cc] api.response: GET /request 502 proxy 261.562421ms
+[2020/11/18 12:43:36.979556][i][c6d500996] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.979644][e][5ca28d89b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.979651][e][5ca28d89b] api.response: GET /request 502 proxy 260.686876ms
+[2020/11/18 12:43:36.979730][e][c57cc8696] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.979738][e][c57cc8696] api.response: GET /request 502 proxy 259.892383ms
+[2020/11/18 12:43:36.979832][e][91bcd2fd7] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.979842][e][91bcd2fd7] api.response: GET /request 502 proxy 259.06556ms
+[2020/11/18 12:43:36.979924][e][d1ed741fd] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.979931][e][d1ed741fd] api.response: GET /request 502 proxy 258.10249ms
+[2020/11/18 12:43:36.980019][e][92e8d6837] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.980028][e][92e8d6837] api.response: GET /request 502 proxy 257.052084ms
+[2020/11/18 12:43:36.980096][e][f91cd7c04] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.980107][e][f91cd7c04] api.response: GET /request 502 proxy 255.992842ms
+[2020/11/18 12:43:36.980207][e][c96e03f7c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.980212][e][0f2a69ecc] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.980215][e][c96e03f7c] api.response: GET /request 502 proxy 255.069779ms
+[2020/11/18 12:43:36.980323][e][4bce0d541] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.980332][e][4bce0d541] api.response: GET /request 502 proxy 254.338998ms
+[2020/11/18 12:43:36.980417][e][af36ad28f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.980424][e][af36ad28f] api.response: GET /request 502 proxy 253.404044ms
+[2020/11/18 12:43:36.980515][e][7e855b0fe] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.980525][e][7e855b0fe] api.response: GET /request 502 proxy 252.365712ms
+[2020/11/18 12:43:36.980804][e][0b1d05e10] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.980820][e][0b1d05e10] api.response: GET /request 502 proxy 251.710782ms
+[2020/11/18 12:43:36.981038][e][ce6471366] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.981057][e][ce6471366] api.response: GET /request 502 proxy 250.989693ms
+[2020/11/18 12:43:36.981158][e][0f2a69ecc] api.response: GET /request 502 proxy 264.203619ms
+[2020/11/18 12:43:36.981211][i][f72fb04e1] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.981694][e][3b4d5e951] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.981707][e][3b4d5e951] api.response: GET /request 502 proxy 250.703665ms
+[2020/11/18 12:43:36.981807][e][31eb9ea89] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.981817][e][31eb9ea89] api.response: GET /request 502 proxy 248.925262ms
+[2020/11/18 12:43:36.983072][e][c8d377cab] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.983092][e][c8d377cab] api.response: GET /request 502 proxy 248.956194ms
+[2020/11/18 12:43:36.983246][i][7a14ae43c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.983361][e][b14d0239d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.983369][e][b14d0239d] api.response: GET /request 502 proxy 248.000758ms
+[2020/11/18 12:43:36.983621][e][c156648c3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.983629][e][c156648c3] api.response: GET /request 502 proxy 247.254783ms
+[2020/11/18 12:43:36.983851][e][28937317b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.983861][e][28937317b] api.response: GET /request 502 proxy 246.499867ms
+[2020/11/18 12:43:36.984049][e][9af375a56] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.984057][e][9af375a56] api.response: GET /request 502 proxy 245.725403ms
+[2020/11/18 12:43:36.984265][e][6be7748ad] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.984274][e][6be7748ad] api.response: GET /request 502 proxy 244.753775ms
+[2020/11/18 12:43:36.984475][i][8148cd31d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.985858][e][2822a551a] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.985882][e][2822a551a] api.response: GET /request 502 proxy 245.345028ms
+[2020/11/18 12:43:36.985970][i][9233d2d92] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.986162][e][eb43cdb69] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.986179][e][eb43cdb69] api.response: GET /request 502 proxy 244.550893ms
+[2020/11/18 12:43:36.986579][e][b3a9fb63f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.986599][e][b3a9fb63f] api.response: GET /request 502 proxy 243.787172ms
+[2020/11/18 12:43:36.986823][e][37b7b86fb] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.986845][e][37b7b86fb] api.response: GET /request 502 proxy 242.761767ms
+[2020/11/18 12:43:36.987032][e][1dd335134] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.987045][e][1dd335134] api.response: GET /request 502 proxy 241.750439ms
+[2020/11/18 12:43:36.987256][e][28204d1cd] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.987267][e][28204d1cd] api.response: GET /request 502 proxy 241.042424ms
+[2020/11/18 12:43:36.987417][e][8b2e21dfc] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.987430][e][8b2e21dfc] api.response: GET /request 502 proxy 240.200403ms
+[2020/11/18 12:43:36.987573][e][446557054] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.987588][e][446557054] api.response: GET /request 502 proxy 239.391383ms
+[2020/11/18 12:43:36.987654][i][cfbf5454d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.987830][e][833f981fa] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.987841][e][833f981fa] api.response: GET /request 502 proxy 238.773432ms
+[2020/11/18 12:43:36.987859][e][54e89be23] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.987867][e][54e89be23] api.response: GET /request 502 proxy 237.892129ms
+[2020/11/18 12:43:36.987995][e][cf990bb6e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.988003][e][cf990bb6e] api.response: GET /request 502 proxy 237.029669ms
+[2020/11/18 12:43:36.988071][e][01b89428f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.988081][e][01b89428f] api.response: GET /request 502 proxy 236.12604ms
+[2020/11/18 12:43:36.988164][e][0482f6019] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.988177][e][0482f6019] api.response: GET /request 502 proxy 234.712276ms
+[2020/11/18 12:43:36.988274][e][cf89c0df5] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.988281][e][cf89c0df5] api.response: GET /request 502 proxy 233.627893ms
+[2020/11/18 12:43:36.988333][e][bd8ff6623] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.988341][e][bd8ff6623] api.response: GET /request 502 proxy 232.599123ms
+[2020/11/18 12:43:36.988385][e][f782300b0] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.988395][e][f782300b0] api.response: GET /request 502 proxy 231.49968ms
+[2020/11/18 12:43:36.988584][e][fbc214aed] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.988593][e][fbc214aed] api.response: GET /request 502 proxy 229.500741ms
+[2020/11/18 12:43:36.988698][i][1eba94c83] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.988747][e][72182eb55] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.988759][e][72182eb55] api.response: GET /request 502 proxy 228.397508ms
+[2020/11/18 12:43:36.988812][e][04cd71053] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.988819][e][04cd71053] api.response: GET /request 502 proxy 227.121909ms
+[2020/11/18 12:43:36.988966][e][262f72390] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.988976][e][262f72390] api.response: GET /request 502 proxy 226.063848ms
+[2020/11/18 12:43:36.989236][e][f7a44807c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.989247][e][f7a44807c] api.response: GET /request 502 proxy 225.282804ms
+[2020/11/18 12:43:36.989316][e][f270a2a1b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.989326][e][f270a2a1b] api.response: GET /request 502 proxy 224.288768ms
+[2020/11/18 12:43:36.989480][e][2fc7b7817] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.989529][e][2fc7b7817] api.response: GET /request 502 proxy 223.498909ms
+[2020/11/18 12:43:36.989774][e][e08b1dd64] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.989793][e][e08b1dd64] api.response: GET /request 502 proxy 222.637685ms
+[2020/11/18 12:43:36.990004][e][b42450852] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.990020][e][b42450852] api.response: GET /request 502 proxy 221.184399ms
+[2020/11/18 12:43:36.990217][e][521d642a5] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.990231][e][521d642a5] api.response: GET /request 502 proxy 219.971269ms
+[2020/11/18 12:43:36.990396][e][502811771] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.990404][e][502811771] api.response: GET /request 502 proxy 218.971956ms
+[2020/11/18 12:43:36.990491][e][99500921e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.990499][e][99500921e] api.response: GET /request 502 proxy 218.046808ms
+[2020/11/18 12:43:36.990524][i][64f38ceaf] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.991375][e][c1892954e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.991401][e][c1892954e] api.response: GET /request 502 proxy 217.917404ms
+[2020/11/18 12:43:36.992120][e][a941193fc] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.992129][e][a941193fc] api.response: GET /request 502 proxy 217.436784ms
+[2020/11/18 12:43:36.992246][i][cd5afd2be] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.992385][e][51c471cf1] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.992394][e][51c471cf1] api.response: GET /request 502 proxy 216.648155ms
+[2020/11/18 12:43:36.992513][e][a70616c2c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.992523][e][a70616c2c] api.response: GET /request 502 proxy 209.713595ms
+[2020/11/18 12:43:36.992615][e][3b0632e1c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.992624][e][3b0632e1c] api.response: GET /request 502 proxy 208.47834ms
+[2020/11/18 12:43:36.992692][e][3cfc4a24d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.992704][e][3cfc4a24d] api.response: GET /request 502 proxy 207.249394ms
+[2020/11/18 12:43:36.992792][e][80ec4a569] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.992801][e][80ec4a569] api.response: GET /request 502 proxy 206.20871ms
+[2020/11/18 12:43:36.992926][e][420e764dd] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.992934][e][420e764dd] api.response: GET /request 502 proxy 198.071929ms
+[2020/11/18 12:43:36.993003][e][b19c7af4e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.993010][e][b19c7af4e] api.response: GET /request 502 proxy 196.663711ms
+[2020/11/18 12:43:36.993246][e][c96ab41e7] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.993254][e][c96ab41e7] api.response: GET /request 502 proxy 195.889483ms
+[2020/11/18 12:43:36.993461][e][74f67fbd1] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.993469][e][74f67fbd1] api.response: GET /request 502 proxy 195.047497ms
+[2020/11/18 12:43:36.993619][i][fd6d3bc2b] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.994107][e][fe9854210] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.994119][e][fe9854210] api.response: GET /request 502 proxy 194.644419ms
+[2020/11/18 12:43:36.994207][e][696cf7535] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.994224][e][696cf7535] api.response: GET /request 502 proxy 193.717549ms
+[2020/11/18 12:43:36.994323][e][268a1dee7] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.994337][e][268a1dee7] api.response: GET /request 502 proxy 192.320657ms
+[2020/11/18 12:43:36.994457][e][9c6c01a1b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.994466][e][9c6c01a1b] api.response: GET /request 502 proxy 191.283514ms
+[2020/11/18 12:43:36.994690][i][a1c135200] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.995128][e][f2699e50a] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.995138][e][f2699e50a] api.response: GET /request 502 proxy 190.744226ms
+[2020/11/18 12:43:36.995314][e][64aa950d1] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.995325][e][64aa950d1] api.response: GET /request 502 proxy 189.838299ms
+[2020/11/18 12:43:36.995575][e][b7d69a1f0] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.995612][e][e9181b2af] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.995619][e][e9181b2af] api.response: GET /request 502 proxy 187.713192ms
+[2020/11/18 12:43:36.995654][i][0e6695663] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.995661][e][b7d69a1f0] api.response: GET /request 502 proxy 188.852024ms
+[2020/11/18 12:43:36.995742][e][c6b99c39c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.995750][e][c6b99c39c] api.response: GET /request 502 proxy 186.598926ms
+[2020/11/18 12:43:36.995804][e][0c4338e2a] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.995811][e][0c4338e2a] api.response: GET /request 502 proxy 185.501327ms
+[2020/11/18 12:43:36.996139][e][ed5fc3d38] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.996150][e][ed5fc3d38] api.response: GET /request 502 proxy 183.162629ms
+[2020/11/18 12:43:36.996256][e][4fb9c3750] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.996263][e][4fb9c3750] api.response: GET /request 502 proxy 182.296413ms
+[2020/11/18 12:43:36.996494][e][fafb8756b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.996507][e][fafb8756b] api.response: GET /request 502 proxy 181.576467ms
+[2020/11/18 12:43:36.996658][e][cf4ba4d61] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.996669][e][cf4ba4d61] api.response: GET /request 502 proxy 180.741997ms
+[2020/11/18 12:43:36.996796][e][d351610e2] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.996805][e][d351610e2] api.response: GET /request 502 proxy 179.661373ms
+[2020/11/18 12:43:36.996911][i][f0489ab6d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.996917][e][e5ab7e39f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.996925][e][e5ab7e39f] api.response: GET /request 502 proxy 185.013399ms
+[2020/11/18 12:43:36.998160][e][96fd43e4e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.998181][e][96fd43e4e] api.response: GET /request 502 proxy 179.769286ms
+[2020/11/18 12:43:36.998777][e][5053f9afa] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.998812][e][5053f9afa] api.response: GET /request 502 proxy 179.381625ms
+[2020/11/18 12:43:36.999309][e][56a304ff0] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.999336][e][56a304ff0] api.response: GET /request 502 proxy 178.891107ms
+[2020/11/18 12:43:36.999477][i][114bbd9b3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:36.999549][e][74fbc7174] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.999563][e][74fbc7174] api.response: GET /request 502 proxy 178.027706ms
+[2020/11/18 12:43:36.999694][e][9d1d5e7d0] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.999709][e][9d1d5e7d0] api.response: GET /request 502 proxy 177.066736ms
+[2020/11/18 12:43:36.999856][e][996952e99] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:36.999868][e][996952e99] api.response: GET /request 502 proxy 175.881428ms
+[2020/11/18 12:43:37.7][e][aef3df182] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.21][e][aef3df182] api.response: GET /request 502 proxy 174.790752ms
+[2020/11/18 12:43:37.155][e][e22160da3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.165][e][e22160da3] api.response: GET /request 502 proxy 173.831732ms
+[2020/11/18 12:43:37.295][e][45127ce39] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.321][e][45127ce39] api.response: GET /request 502 proxy 172.892522ms
+[2020/11/18 12:43:37.590][e][67590b119] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.609][e][67590b119] api.response: GET /request 502 proxy 171.802108ms
+[2020/11/18 12:43:37.828][e][33222eb05] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.859][e][33222eb05] api.response: GET /request 502 proxy 171.0125ms
+[2020/11/18 12:43:37.1014][e][091e4e3ea] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.1031][e][091e4e3ea] api.response: GET /request 502 proxy 170.175092ms
+[2020/11/18 12:43:37.1099][e][077d1d5c7] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.1113][e][077d1d5c7] api.response: GET /request 502 proxy 169.267823ms
+[2020/11/18 12:43:37.1194][i][fc3dde6a0] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.1236][e][34740fb4b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.1260][e][34740fb4b] api.response: GET /request 502 proxy 168.087162ms
+[2020/11/18 12:43:37.1402][e][36ba6c204] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.1421][e][36ba6c204] api.response: GET /request 502 proxy 166.665533ms
+[2020/11/18 12:43:37.1533][e][5b6d2ef8d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.1550][e][5b6d2ef8d] api.response: GET /request 502 proxy 165.597335ms
+[2020/11/18 12:43:37.1657][e][33c2e56a3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.1681][e][33c2e56a3] api.response: GET /request 502 proxy 164.650877ms
+[2020/11/18 12:43:37.1821][e][21629204d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.1836][e][21629204d] api.response: GET /request 502 proxy 163.702434ms
+[2020/11/18 12:43:37.2651][e][59e16991d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.2670][e][59e16991d] api.response: GET /request 502 proxy 163.398603ms
+[2020/11/18 12:43:37.2923][e][2eb20adc7] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.2940][e][2eb20adc7] api.response: GET /request 502 proxy 162.530615ms
+[2020/11/18 12:43:37.3971][i][1a67b1478] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.4391][e][2c97377d6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.4402][e][2c97377d6] api.response: GET /request 502 proxy 162.637982ms
+[2020/11/18 12:43:37.4510][e][63bb9f3a9] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.4521][e][63bb9f3a9] api.response: GET /request 502 proxy 161.50427ms
+[2020/11/18 12:43:37.4662][e][13c0944f6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.4673][e][13c0944f6] api.response: GET /request 502 proxy 160.367172ms
+[2020/11/18 12:43:37.4777][e][d2fe5b764] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.4784][e][d2fe5b764] api.response: GET /request 502 proxy 159.267141ms
+[2020/11/18 12:43:37.4873][e][702fd28b6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.4882][e][702fd28b6] api.response: GET /request 502 proxy 158.212015ms
+[2020/11/18 12:43:37.4969][e][d54e32928] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.4976][e][d54e32928] api.response: GET /request 502 proxy 157.294183ms
+[2020/11/18 12:43:37.5088][e][a658b7c19] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.5095][e][a658b7c19] api.response: GET /request 502 proxy 156.436923ms
+[2020/11/18 12:43:37.5183][e][9b08a1f35] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.5192][e][9b08a1f35] api.response: GET /request 502 proxy 155.462024ms
+[2020/11/18 12:43:37.5368][i][7c3b35635] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.5815][e][d1fe514ee] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.5825][e][d1fe514ee] api.response: GET /request 502 proxy 154.356224ms
+[2020/11/18 12:43:37.5932][e][55a92b4ca] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.5954][e][55a92b4ca] api.response: GET /request 502 proxy 153.372058ms
+[2020/11/18 12:43:37.6008][e][e12aea2db] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.6018][e][e12aea2db] api.response: GET /request 502 proxy 152.354815ms
+[2020/11/18 12:43:37.6434][e][7ff7e6261] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.6452][e][7ff7e6261] api.response: GET /request 502 proxy 151.649657ms
+[2020/11/18 12:43:37.6644][e][98363a1a6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.6660][e][98363a1a6] api.response: GET /request 502 proxy 150.754455ms
+[2020/11/18 12:43:37.6965][i][ffddd5d12] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.7611][e][702243ffc] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.7657][e][702243ffc] api.response: GET /request 502 proxy 150.604315ms
+[2020/11/18 12:43:37.10702][e][cb5b737bf] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.10716][e][cb5b737bf] api.response: GET /request 502 proxy 152.423309ms
+[2020/11/18 12:43:37.10902][e][41744c0fb] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.10912][e][41744c0fb] api.response: GET /request 502 proxy 151.406035ms
+[2020/11/18 12:43:37.11049][e][3d6b3d2fe] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.11057][e][3d6b3d2fe] api.response: GET /request 502 proxy 149.734225ms
+[2020/11/18 12:43:37.11156][e][d6d013f97] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.11167][e][d6d013f97] api.response: GET /request 502 proxy 148.637403ms
+[2020/11/18 12:43:37.11276][i][6b7937b83] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.11398][e][98278acd4] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.11407][e][98278acd4] api.response: GET /request 502 proxy 147.814994ms
+[2020/11/18 12:43:37.11623][e][705bc0a23] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.11632][e][705bc0a23] api.response: GET /request 502 proxy 147.0005ms
+[2020/11/18 12:43:37.11890][e][32cf9f450] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.11899][e][32cf9f450] api.response: GET /request 502 proxy 146.099941ms
+[2020/11/18 12:43:37.12105][e][b71a2ba1b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.12122][e][b71a2ba1b] api.response: GET /request 502 proxy 145.054713ms
+[2020/11/18 12:43:37.12386][e][0a5265784] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.12395][e][0a5265784] api.response: GET /request 502 proxy 144.051921ms
+[2020/11/18 12:43:37.12534][i][2f278a5b7] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.13171][e][949d5b23a] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.13193][e][949d5b23a] api.response: GET /request 502 proxy 142.573778ms
+[2020/11/18 12:43:37.13354][e][899c42960] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.13365][e][899c42960] api.response: GET /request 502 proxy 141.526575ms
+[2020/11/18 12:43:37.15227][e][9a88b6a31] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.15263][e][9a88b6a31] api.response: GET /request 502 proxy 142.087063ms
+[2020/11/18 12:43:37.17181][e][209f8f788] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.17211][e][209f8f788] api.response: GET /request 502 proxy 142.879985ms
+[2020/11/18 12:43:37.17371][e][07524d7c6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.17394][e][07524d7c6] api.response: GET /request 502 proxy 141.807154ms
+[2020/11/18 12:43:37.19883][e][a8802b3a1] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.19906][e][a8802b3a1] api.response: GET /request 502 proxy 143.027522ms
+[2020/11/18 12:43:37.20598][e][fe2f7493f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.20621][e][fe2f7493f] api.response: GET /request 502 proxy 142.227836ms
+[2020/11/18 12:43:37.21294][e][d0340936e] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.21307][i][d8a9bb083] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.21315][e][d0340936e] api.response: GET /request 502 proxy 141.758794ms
+[2020/11/18 12:43:37.21489][e][414a750f8] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.21505][e][414a750f8] api.response: GET /request 502 proxy 140.869326ms
+[2020/11/18 12:43:37.21711][e][56a747fa5] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.21726][e][56a747fa5] api.response: GET /request 502 proxy 139.98896ms
+[2020/11/18 12:43:37.24314][e][118645b36] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.24373][e][118645b36] api.response: GET /request 502 proxy 141.416509ms
+[2020/11/18 12:43:37.25038][i][cf3ece880] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.25085][e][cf933423b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.25102][e][cf933423b] api.response: GET /request 502 proxy 128.470611ms
+[2020/11/18 12:43:37.25178][e][3a31d70ed] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.25195][e][3a31d70ed] api.response: GET /request 502 proxy 127.070132ms
+[2020/11/18 12:43:37.25382][e][11e7ddfba] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.25393][e][11e7ddfba] api.response: GET /request 502 proxy 125.987276ms
+[2020/11/18 12:43:37.27007][e][729e06714] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.27022][e][729e06714] api.response: GET /request 502 proxy 126.499841ms
+[2020/11/18 12:43:37.27100][i][41909f9c8] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.27534][e][b877e2f32] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.27545][e][b877e2f32] api.response: GET /request 502 proxy 125.948118ms
+[2020/11/18 12:43:37.27639][e][03ac773b6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.27654][e][03ac773b6] api.response: GET /request 502 proxy 124.932634ms
+[2020/11/18 12:43:37.27741][e][7eac472d7] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.27750][e][7eac472d7] api.response: GET /request 502 proxy 123.946809ms
+[2020/11/18 12:43:37.27857][e][d28afbc96] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.27870][e][d28afbc96] api.response: GET /request 502 proxy 122.938156ms
+[2020/11/18 12:43:37.27966][e][26b5edcbf] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.27981][e][26b5edcbf] api.response: GET /request 502 proxy 121.95397ms
+[2020/11/18 12:43:37.28083][e][94d0b8132] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.28092][e][94d0b8132] api.response: GET /request 502 proxy 120.21754ms
+[2020/11/18 12:43:37.28187][e][1298e65f8] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.28195][e][1298e65f8] api.response: GET /request 502 proxy 118.994106ms
+[2020/11/18 12:43:37.28403][i][9bbf5b99f] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.28801][e][1c99bd343] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.28812][e][1c99bd343] api.response: GET /request 502 proxy 118.725423ms
+[2020/11/18 12:43:37.28868][e][941fc94f4] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.28876][e][941fc94f4] api.response: GET /request 502 proxy 117.866915ms
+[2020/11/18 12:43:37.28939][e][87b0cbf08] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.28947][e][87b0cbf08] api.response: GET /request 502 proxy 117.043369ms
+[2020/11/18 12:43:37.29050][e][dac1657cd] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.29058][e][dac1657cd] api.response: GET /request 502 proxy 116.255101ms
+[2020/11/18 12:43:37.29160][e][c7ba42459] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.29168][e][c7ba42459] api.response: GET /request 502 proxy 115.348156ms
+[2020/11/18 12:43:37.29252][e][1d437e7a2] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.29259][e][1d437e7a2] api.response: GET /request 502 proxy 113.78046ms
+[2020/11/18 12:43:37.29341][e][ef7c59623] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.29349][e][ef7c59623] api.response: GET /request 502 proxy 111.933273ms
+[2020/11/18 12:43:37.29531][i][1d151ddd3] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.29930][e][b39b678b3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.29939][e][b39b678b3] api.response: GET /request 502 proxy 109.633889ms
+[2020/11/18 12:43:37.30076][e][f39043509] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.30085][e][f39043509] api.response: GET /request 502 proxy 108.310393ms
+[2020/11/18 12:43:37.30949][e][61fe357c1] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.30979][e][61fe357c1] api.response: GET /request 502 proxy 106.833025ms
+[2020/11/18 12:43:37.32406][e][ed2402db1] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.32436][e][ed2402db1] api.response: GET /request 502 proxy 106.880161ms
+[2020/11/18 12:43:37.32598][i][fb7527d29] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.33179][e][a9d68a0ee] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.33207][e][a9d68a0ee] api.response: GET /request 502 proxy 106.19156ms
+[2020/11/18 12:43:37.34487][i][c85d1709d] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.34632][e][5bf7685ec] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.34656][e][5bf7685ec] api.response: GET /request 502 proxy 105.243868ms
+[2020/11/18 12:43:37.34752][e][ba481ee35] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.34766][e][ba481ee35] api.response: GET /request 502 proxy 101.878844ms
+[2020/11/18 12:43:37.34842][e][90badea6a] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.34853][e][90badea6a] api.response: GET /request 502 proxy 99.624469ms
+[2020/11/18 12:43:37.34880][e][c6a15456c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.34896][e][c6a15456c] api.response: GET /request 502 proxy 106.696383ms
+[2020/11/18 12:43:37.34964][e][a085d85d6] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.34975][e][a085d85d6] api.response: GET /request 502 proxy 97.785845ms
+[2020/11/18 12:43:37.35042][e][9ac4127cf] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.35052][e][9ac4127cf] api.response: GET /request 502 proxy 95.399563ms
+[2020/11/18 12:43:37.35114][e][77a6b8c28] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.35127][e][77a6b8c28] api.response: GET /request 502 proxy 93.563636ms
+[2020/11/18 12:43:37.35509][e][819599c33] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.35513][e][c6b61d42d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.35524][e][819599c33] api.response: GET /request 502 proxy 92.709348ms
+[2020/11/18 12:43:37.35525][e][c6b61d42d] api.response: GET /request 502 proxy 91.680981ms
+[2020/11/18 12:43:37.35604][e][31d722358] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.35614][e][31d722358] api.response: GET /request 502 proxy 90.753271ms
+[2020/11/18 12:43:37.35788][e][73c0809e4] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.35803][e][73c0809e4] api.response: GET /request 502 proxy 89.650212ms
+[2020/11/18 12:43:37.36220][e][4f4bf941f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.36242][e][4f4bf941f] api.response: GET /request 502 proxy 86.353444ms
+[2020/11/18 12:43:37.36441][i][2603301e0] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.36488][e][07cdabb86] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.36505][e][07cdabb86] api.response: GET /request 502 proxy 85.393012ms
+[2020/11/18 12:43:37.36597][e][7ceea908d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.36606][e][7ceea908d] api.response: GET /request 502 proxy 84.395744ms
+[2020/11/18 12:43:37.36679][e][635cbd94b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.36690][e][635cbd94b] api.response: GET /request 502 proxy 79.755869ms
+[2020/11/18 12:43:37.36797][e][835b2f891] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.36806][e][835b2f891] api.response: GET /request 502 proxy 77.814796ms
+[2020/11/18 12:43:37.36917][e][3f45157e3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.36927][e][3f45157e3] api.response: GET /request 502 proxy 76.685278ms
+[2020/11/18 12:43:37.37117][e][31d55a026] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.37126][e][31d55a026] api.response: GET /request 502 proxy 75.080467ms
+[2020/11/18 12:43:37.37172][e][8444348d3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.37184][e][8444348d3] api.response: GET /request 502 proxy 73.194538ms
+[2020/11/18 12:43:37.37949][e][1a90b8034] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.37959][e][1a90b8034] api.response: GET /request 502 proxy 70.139034ms
+[2020/11/18 12:43:37.38060][e][ab13ec855] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.38065][i][dbbaffa65] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.38068][e][ab13ec855] api.response: GET /request 502 proxy 68.186776ms
+[2020/11/18 12:43:37.38163][e][98b7dbe2c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.38171][e][98b7dbe2c] api.response: GET /request 502 proxy 67.308417ms
+[2020/11/18 12:43:37.38303][e][aebecb0ca] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.38311][e][aebecb0ca] api.response: GET /request 502 proxy 66.35029ms
+[2020/11/18 12:43:37.38460][e][c6d500996] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.38469][e][c6d500996] api.response: GET /request 502 proxy 58.93492ms
+[2020/11/18 12:43:37.38608][e][f72fb04e1] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.38619][e][f72fb04e1] api.response: GET /request 502 proxy 57.450071ms
+[2020/11/18 12:43:37.38714][e][7a14ae43c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.38725][e][7a14ae43c] api.response: GET /request 502 proxy 55.508868ms
+[2020/11/18 12:43:37.38858][e][8148cd31d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.38867][e][8148cd31d] api.response: GET /request 502 proxy 54.423175ms
+[2020/11/18 12:43:37.39007][e][9233d2d92] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.39016][e][9233d2d92] api.response: GET /request 502 proxy 53.074585ms
+[2020/11/18 12:43:37.39111][e][cfbf5454d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.39119][e][cfbf5454d] api.response: GET /request 502 proxy 51.480555ms
+[2020/11/18 12:43:37.39222][i][ea2a47800] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.39332][e][1eba94c83] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.39343][e][1eba94c83] api.response: GET /request 502 proxy 50.65937ms
+[2020/11/18 12:43:37.39720][e][64f38ceaf] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.39738][e][64f38ceaf] api.response: GET /request 502 proxy 49.239514ms
+[2020/11/18 12:43:37.39915][e][cd5afd2be] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.39932][e][cd5afd2be] api.response: GET /request 502 proxy 47.708091ms
+[2020/11/18 12:43:37.40365][e][fd6d3bc2b] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.40378][e][fd6d3bc2b] api.response: GET /request 502 proxy 46.77697ms
+[2020/11/18 12:43:37.40492][e][a1c135200] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.40502][e][a1c135200] api.response: GET /request 502 proxy 45.832774ms
+[2020/11/18 12:43:37.40967][e][0e6695663] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.40986][e][0e6695663] api.response: GET /request 502 proxy 45.34934ms
+[2020/11/18 12:43:37.41436][e][f0489ab6d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.41456][e][f0489ab6d] api.response: GET /request 502 proxy 44.56706ms
+[2020/11/18 12:43:37.41584][e][114bbd9b3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.41593][e][114bbd9b3] api.response: GET /request 502 proxy 42.144717ms
+[2020/11/18 12:43:37.41789][e][fc3dde6a0] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.41799][e][fc3dde6a0] api.response: GET /request 502 proxy 40.631255ms
+[2020/11/18 12:43:37.41905][i][713147d77] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.41931][e][1a67b1478] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.41941][e][1a67b1478] api.response: GET /request 502 proxy 37.989318ms
+[2020/11/18 12:43:37.42003][e][7c3b35635] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.42010][e][7c3b35635] api.response: GET /request 502 proxy 36.662463ms
+[2020/11/18 12:43:37.42215][e][ffddd5d12] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.42224][e][ffddd5d12] api.response: GET /request 502 proxy 35.282099ms
+[2020/11/18 12:43:37.42278][e][6b7937b83] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.42286][e][6b7937b83] api.response: GET /request 502 proxy 31.042645ms
+[2020/11/18 12:43:37.42994][i][c1a5cd69c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.43376][e][2f278a5b7] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.43389][e][2f278a5b7] api.response: GET /request 502 proxy 30.885414ms
+[2020/11/18 12:43:37.43463][e][d8a9bb083] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.43473][e][d8a9bb083] api.response: GET /request 502 proxy 22.18923ms
+[2020/11/18 12:43:37.43508][e][cf3ece880] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.43518][e][cf3ece880] api.response: GET /request 502 proxy 18.519574ms
+[2020/11/18 12:43:37.43622][e][41909f9c8] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.43631][e][41909f9c8] api.response: GET /request 502 proxy 16.5478ms
+[2020/11/18 12:43:37.43723][e][9bbf5b99f] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.43732][e][9bbf5b99f] api.response: GET /request 502 proxy 15.363953ms
+[2020/11/18 12:43:37.43818][e][1d151ddd3] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.43838][e][1d151ddd3] api.response: GET /request 502 proxy 14.311983ms
+[2020/11/18 12:43:37.43927][e][fb7527d29] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.43935][e][fb7527d29] api.response: GET /request 502 proxy 11.371397ms
+[2020/11/18 12:43:37.44122][i][e70bf8c7c] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.44124][e][c85d1709d] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.44150][e][c85d1709d] api.response: GET /request 502 proxy 9.699857ms
+[2020/11/18 12:43:37.44209][e][2603301e0] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.44217][e][2603301e0] api.response: GET /request 502 proxy 7.801686ms
+[2020/11/18 12:43:37.44271][e][dbbaffa65] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.44278][e][dbbaffa65] api.response: GET /request 502 proxy 6.238621ms
+[2020/11/18 12:43:37.44468][e][ea2a47800] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.44477][e][ea2a47800] api.response: GET /request 502 proxy 5.274403ms
+[2020/11/18 12:43:37.44652][e][713147d77] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.44660][e][713147d77] api.response: GET /request 502 proxy 2.77308ms
+[2020/11/18 12:43:37.45024][e][c1a5cd69c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.45046][e][c1a5cd69c] api.response: GET /request 502 proxy 2.071893ms
+[2020/11/18 12:43:37.45135][e][e70bf8c7c] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.45146][e][e70bf8c7c] api.response: GET /request 502 proxy 1.041318ms
+[2020/11/18 12:43:37.45245][i][8178567f5] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:37.45539][e][8178567f5] 远程请求出错[1]http://192.168.4.121:8090 context canceled
+[2020/11/18 12:43:37.45547][e][8178567f5] api.response: GET /request 502 proxy 320.902µs
+
+--------------------begin------------------------
+
+[2020/11/18 12:43:46.402651][i][18eb29e0b] Connected to 192.168.0.109:2181
+[2020/11/18 12:43:46.412341][i][18eb29e0b] authenticated: id=248410042754598481, timeout=4000
+[2020/11/18 12:43:46.412351][i][18eb29e0b] re-submitting `0` credentials after reconnect
+[2020/11/18 12:43:46.452882][i][c1a2af477] 初始化: /hydra-t/apiserver/api/proxy-b/conf
+[2020/11/18 12:43:46.475814][i][c1a2af477] 启动[api]服务...
+[2020/11/18 12:43:46.994503][i][3aabbf7c6] 启动成功(api,http://192.168.4.121:8091,[1])
+[2020/11/18 12:43:50.435781][i][443141a84] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:43:50.936594][e][443141a84] 无法获取上游服务器地址:集群proxy-a无可用服务器
+[2020/11/18 12:43:50.940345][e][443141a84] -----[Recovery] panic recovered:
+不能重复写入到响应流:status:502 已写入状态:502
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/context/ctx/response.go:71 (0xddf031)
+	(*response).Abort: c.Write(s, err)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/acl.proxy.go:65 (0xde3b03)
+	useProxy: ctx.Response().Abort(http.StatusBadGateway, fmt.Errorf("无法获取上游服务器地址:%w", err))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/acl.proxy.go:39 (0xdeab24)
+	Proxy.func1: useProxy(ctx, cluster)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xdf09d9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/context.go:156 (0xd82f9a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/acl.white.go:19 (0xdeb1f5)
+	WhiteList.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xdf09d9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/context.go:156 (0xd82f9a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/acl.black.go:17 (0xdea57b)
+	BlackList.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xdf09d9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/context.go:156 (0xd82f9a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/trace.go:9 (0xdf2306)
+	Trace.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xdf09d9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/context.go:156 (0xd82f9a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/logging.go:18 (0xdeeaa6)
+	Logging.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xdf09d9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/context.go:156 (0xd82f9a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/recovery.go:19 (0xdf1361)
+	Recovery.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xdf09d9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/context.go:156 (0xd82f9a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/gin.go:409 (0xd8d0b9)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/gin.go:367 (0xd8c77d)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/usr/local/go/src/net/http/server.go:2843 (0x8ea942)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/usr/local/go/src/net/http/server.go:1925 (0x8e604c)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/usr/local/go/src/runtime/asm_amd64.s:1374 (0x471ea0)
+	goexit: BYTE	$0x90	// NOP
+
+
+--------------------begin------------------------
+
+[2020/11/18 12:46:29.782146][i][1dbb6b7d7] Connected to 192.168.0.109:2181
+[2020/11/18 12:46:29.798875][i][1dbb6b7d7] authenticated: id=248410042754598482, timeout=4000
+[2020/11/18 12:46:29.798907][i][1dbb6b7d7] re-submitting `0` credentials after reconnect
+[2020/11/18 12:46:29.832947][i][d96f0ff9e] 初始化: /hydra-t/apiserver/api/proxy-b/conf
+[2020/11/18 12:46:29.854385][i][d96f0ff9e] 启动[api]服务...
+[2020/11/18 12:46:30.389110][i][e0174043d] 启动成功(api,http://192.168.4.121:8091,[1])
+[2020/11/18 12:46:33.762858][i][c061ed797] api.request: GET /request from 192.168.4.121
+[2020/11/18 12:46:34.263679][e][c061ed797] 无法获取上游服务器地址:集群proxy-a无可用服务器
+[2020/11/18 12:46:34.267575][e][c061ed797] -----[Recovery] panic recovered:
+不能重复写入到响应流:status:502 已写入状态:502
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/context/ctx/response.go:71 (0xddf031)
+	(*response).Abort: c.Write(s, err)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/acl.proxy.go:65 (0xde3b03)
+	useProxy: ctx.Response().Abort(http.StatusBadGateway, fmt.Errorf("无法获取上游服务器地址:%w", err))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/acl.proxy.go:39 (0xdeab24)
+	Proxy.func1: useProxy(ctx, cluster)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xdf09d9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/context.go:156 (0xd82f9a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/acl.white.go:19 (0xdeb1f5)
+	WhiteList.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xdf09d9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/context.go:156 (0xd82f9a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/acl.black.go:17 (0xdea57b)
+	BlackList.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xdf09d9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/context.go:156 (0xd82f9a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/trace.go:9 (0xdf2306)
+	Trace.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xdf09d9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/context.go:156 (0xd82f9a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/logging.go:18 (0xdeeaa6)
+	Logging.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xdf09d9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/context.go:156 (0xd82f9a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/recovery.go:19 (0xdf1361)
+	Recovery.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xdf09d9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/context.go:156 (0xd82f9a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/gin.go:409 (0xd8d0b9)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra-test/samples/vendor/github.com/gin-gonic/gin/gin.go:367 (0xd8c77d)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/usr/local/go/src/net/http/server.go:2843 (0x8ea942)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/usr/local/go/src/net/http/server.go:1925 (0x8e604c)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/usr/local/go/src/runtime/asm_amd64.s:1374 (0x471ea0)
+	goexit: BYTE	$0x90	// NOP
+
+[2020/11/18 14:03:02.357588][i][1dbb6b7d7] proxy-b 正在退出[interrupt]...
+[2020/11/18 14:03:02.357607][i][e0174043d] 关闭[api]服务...

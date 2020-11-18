@@ -6,7 +6,7 @@ import (
 
 func init() {
 	hydra.OnReady(func() {
-		hydra.Conf.API(":8080").Render(`
+		hydra.Conf.API(":8070").Render(`
         request := import("request")
 response := import("response")
 text := import("text")
