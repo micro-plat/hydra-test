@@ -23,7 +23,7 @@ getContent := func(){
         return [200,types.translate(rc,input)]
     }
      if text.has_prefix(request.getPath(),"/tx/query"){
-        return [200,"<json>","application/xml"]
+        return [200,types.translate(rc,input),"text/plain"]
     }
     return [200,response.getContent()]
 }
