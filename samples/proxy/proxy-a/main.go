@@ -12,7 +12,7 @@ func main() {
 		hydra.WithPlatName("hydra-t"),
 		hydra.WithSystemName("apiserver"),
 		hydra.WithClusterName("proxy-a"),
-		hydra.WithRegistry("zk://192.168.0.109"),
+		hydra.WithRegistry("fs://./"),
 		hydra.WithServerTypes(http.API),
 	)
 
