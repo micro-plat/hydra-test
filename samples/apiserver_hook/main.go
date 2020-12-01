@@ -2,14 +2,13 @@ package main
 
 import (
 	"github.com/micro-plat/hydra"
-	_ "github.com/micro-plat/hydra/components/caches/cache/redis"
 	"github.com/micro-plat/hydra/conf/server/api"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
 var app = hydra.NewApp(
 	hydra.WithServerTypes(http.API),
-	hydra.WithPlatName("hydra_demo"),
+	hydra.WithPlatName("hydra_test"),
 	hydra.WithSystemName("hook"),
 	hydra.WithClusterName("t"),
 	hydra.WithRegistry("zk://192.168.0.101"),
@@ -24,6 +23,9 @@ func init() {
 	app.API("/api/test/hook", &APIServices{})        //注册服务
 }
 
+// go build
+// ./apiserver run -r "zk://192.168.0.101" -c t
+// 查看函数和钩子执行顺序
 func main() {
 	app.Start()
 }
