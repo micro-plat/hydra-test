@@ -10,7 +10,7 @@ import (
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
-var funcAPI2 func(ctx context.IContext) (r interface{}) = func(ctx context.IContext) (r interface{}) {
+var funcCode3 func(ctx context.IContext) (r interface{}) = func(ctx context.IContext) (r interface{}) {
 	ctx.Log().Info("apiserver_code 测试程序命令指定配置")
 	if ctx.APPConf().GetServerConf().GetPlatName() != "hydratest1_debug" {
 		return fmt.Errorf("PlatName 数据错误,%s", ctx.APPConf().GetServerConf().GetPlatName())
@@ -48,12 +48,12 @@ var app = hydra.NewApp(
 
 func init() {
 	hydra.Conf.API(":8070")
-	app.API("/hydratest/apiserver/cmd", funcAPI2)
+	app.API("/hydratest/apiserver/cmd", funcCode3)
 }
 
-// 命令重新指定注册中心类型demo
+// apiserver命令重新指定注册中心类型demo
 
-//1.1 使用 ./apiserver_code run -r lm://. -p hydratest1 -c taosytest1 -s apiservercode1
+//1.1 使用 ./servercode03 run -r lm://. -p hydratest1 -c taosytest1 -s apiservercode1
 //1.2 调用接口：http://192.168.5.94:8070/hydratest/apiserver/cmd 判定配置是否正确
 func main() {
 	app.Start()

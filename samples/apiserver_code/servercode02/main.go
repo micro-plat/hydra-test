@@ -10,7 +10,7 @@ import (
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
-var funcAPI2 func(ctx context.IContext) (r interface{}) = func(ctx context.IContext) (r interface{}) {
+var funcCode func(ctx context.IContext) (r interface{}) = func(ctx context.IContext) (r interface{}) {
 	ctx.Log().Info("apiserver_code 测试程序命令指定配置")
 	if ctx.APPConf().GetServerConf().GetPlatName() != "hydratest1_debug" {
 		return fmt.Errorf("PlatName 数据错误,%s", ctx.APPConf().GetServerConf().GetPlatName())
@@ -37,7 +37,7 @@ var funcAPI2 func(ctx context.IContext) (r interface{}) = func(ctx context.ICont
 	return "success"
 }
 
-var funcAPI3 func(ctx context.IContext) (r interface{}) = func(ctx context.IContext) (r interface{}) {
+var funcCode1 func(ctx context.IContext) (r interface{}) = func(ctx context.IContext) (r interface{}) {
 	ctx.Log().Info("apiserver_code 测试程序命令指定配置")
 	if ctx.APPConf().GetServerConf().GetPlatName() != "hydratest1_debug" {
 		return fmt.Errorf("PlatName 数据错误,%s", ctx.APPConf().GetServerConf().GetPlatName())
@@ -75,14 +75,14 @@ var app = hydra.NewApp(
 
 func init() {
 	hydra.Conf.API(":8070")
-	app.API("/hydratest/apiserver/cmd", funcAPI2)
-	app.Web("/hydratest/apiserver/codeweb", funcAPI3)
+	app.API("/hydratest/apiserver/cmd", funcCode)
+	app.Web("/hydratest/apiserver/codeweb", funcCode1)
 }
 
-//命令覆盖代码配置demo
+//apiserver 命令覆盖代码配置demo
 
-//1.1 安装程序 sudo ./apiserver_code conf install -p hydratest1 -c taosytest1 -s apiservercode1 -S web -cover
-//1.2 使用 ./apiserver_code run -p hydratest1 -c taosytest1 -s apiservercode1 -S web
+//1.1 安装程序 sudo ./servercode02 conf install -p hydratest1 -c taosytest1 -s apiservercode1 -S web -cover
+//1.2 使用 ./servercode02 run -p hydratest1 -c taosytest1 -s apiservercode1 -S web
 //1.3 调用接口：http://192.168.5.94:8089/hydratest/apiserver/codeweb 判定配置是否正确
 func main() {
 	app.Start()
