@@ -1,12 +1,12 @@
 
 cd ./bin
 
-rm -rf bind
+rm -rf apiserver_bind
 
 go build ../
 
 
-./bind run
+./apiserver_bind run
 
 
 
