@@ -51,10 +51,10 @@ func init() {
 	app.API("/hydratest/apiserver/code", funcAPI1)
 }
 
-// 代码指定服务配置demo
+// apiserver代码指定服务配置demo
 
-//1.1 安装程序 sudo ./apiserver_code conf install -cover
-//1.2 使用 ./apiserver_code run
+//1.1 安装程序 sudo ./servercode01 conf install -cover
+//1.2 使用 ./servercode01 run
 //1.3 调用接口：http://192.168.5.94:8070/hydratest/apiserver/code 判定配置是否正确
 func main() {
 	app.Start()

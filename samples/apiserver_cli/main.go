@@ -10,7 +10,7 @@ import (
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
-var funcAPI1 func(ctx context.IContext) (r interface{}) = func(ctx context.IContext) (r interface{}) {
+var funcCli func(ctx context.IContext) (r interface{}) = func(ctx context.IContext) (r interface{}) {
 	ctx.Log().Info("apiserver_code 测试程序代码安装指定配置")
 	if ctx.APPConf().GetServerConf().GetPlatName() != "hydratest1" {
 		return fmt.Errorf("PlatName 数据错误,%s", ctx.APPConf().GetServerConf().GetPlatName())
@@ -47,9 +47,11 @@ var app = hydra.NewApp(
 
 func init() {
 	hydra.Conf.API(":8071")
-	app.API("/hydratest/apiserver/cli", funcAPI1)
-	app.Web("/hydratest/apiserver/cliweb", funcAPI1)
+	app.API("/hydratest/apiserver/cli", funcCli)
+	app.Web("/hydratest/apiserver/cliweb", funcCli)
 }
+
+//apiserver 通过命令指定服务配置demo
 
 //1.1 通过命令重新指定服务配置 sudo ./apiserver_cli conf install -p hydratest1 -c taosytest1 -s apiservercli1 -S web -cover
 //1.2 使用 ./apiserver_cli run -p hydratest1 -c taosytest1 -s apiservercli1 -S web
