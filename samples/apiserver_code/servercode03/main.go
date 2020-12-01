@@ -5,12 +5,32 @@ import (
 
 	"github.com/micro-plat/hydra"
 	_ "github.com/micro-plat/hydra/components/caches/cache/redis"
-	"github.com/micro-plat/hydra/context"
-	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
-var funcCode3 func(ctx context.IContext) (r interface{}) = func(ctx context.IContext) (r interface{}) {
+var app = hydra.NewApp(
+	hydra.WithDebug(),
+	hydra.WithServerTypes(http.API),
+	hydra.WithPlatName("hydratest"),
+	hydra.WithSystemName("apiservercode"),
+	hydra.WithClusterName("taosytest"),
+	hydra.WithRegistry("zk://192.168.0.101"),
+)
+
+func init() {
+	hydra.Conf.API(":8070")
+	app.API("/hydratest/apiserver/cmd", funcCode)
+}
+
+// apiserver命令重新指定注册中心类型demo
+
+//1.1 使用 ./servercode03 run -r lm://. -p hydratest1 -c taosytest1 -s apiservercode1
+//1.2 调用接口：http://192.168.5.94:8070/hydratest/apiserver/cmd 判定配置是否正确
+func main() {
+	app.Start()
+}
+
+var funcCode func(ctx context.IContext) (r interface{}) = func(ctx context.IContext) (r interface{}) {
 	ctx.Log().Info("apiserver_code 测试程序命令指定配置")
 	if ctx.APPConf().GetServerConf().GetPlatName() != "hydratest1_debug" {
 		return fmt.Errorf("PlatName 数据错误,%s", ctx.APPConf().GetServerConf().GetPlatName())
@@ -35,26 +55,4 @@ var funcCode3 func(ctx context.IContext) (r interface{}) = func(ctx context.ICon
 		return fmt.Errorf("IsDebug 数据错误,%v", global.IsDebug)
 	}
 	return "success"
-}
-
-var app = hydra.NewApp(
-	hydra.WithDebug(),
-	hydra.WithServerTypes(http.API),
-	hydra.WithPlatName("hydratest"),
-	hydra.WithSystemName("apiservercode"),
-	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("zk://192.168.0.101"),
-)
-
-func init() {
-	hydra.Conf.API(":8070")
-	app.API("/hydratest/apiserver/cmd", funcCode3)
-}
-
-// apiserver命令重新指定注册中心类型demo
-
-//1.1 使用 ./servercode03 run -r lm://. -p hydratest1 -c taosytest1 -s apiservercode1
-//1.2 调用接口：http://192.168.5.94:8070/hydratest/apiserver/cmd 判定配置是否正确
-func main() {
-	app.Start()
 }
