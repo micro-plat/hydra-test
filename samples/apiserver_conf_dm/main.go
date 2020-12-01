@@ -26,7 +26,8 @@ func init() {
 }
 
 //go build
-//启动服务 查看打印
+//启动服务
+//  ./apiserver_conf_dm run -p 
 func main() {
 	app.Start()
 }

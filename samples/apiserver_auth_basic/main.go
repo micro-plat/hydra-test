@@ -23,6 +23,7 @@ func init() {
 	})
 	app.API("/api/exclude", func(ctx context.IContext) (r interface{}) {
 		ctx.Log().Info("api-exclude")
+		ctx.User().Auth().Request("jwt_str")
 		return
 	})
 }
