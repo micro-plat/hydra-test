@@ -1,8 +1,6 @@
 <template>
-  <div id="app">
-    <Conf msg="Welcome to Your Vue.js App"/>
-    <Mixed msg="Welcome to Your Vue.js App"/>
-    <Options msg="Welcome to Your Vue.js App"/>
+  <div id="app"> 
+      <component v-bind:is="curComponent"></component>
   </div>
 </template>
 
@@ -15,15 +13,28 @@ import axios from "axios"
 
 export default {
   name: "App",
+  data(){
+    return {
+       curComponent:null,
+    }
+  },
   components: {
     Conf,
     Mixed,
     Options
   },
   mounted(){
+    var componentsMap = {
+      "conf":Conf,
+      "mixed":Mixed,
+      "options":Options
+    } 
+    console.log(componentsMap)
+    var that = this;
     axios.get('/vue/config').then(function(res){
         window.globalconfig=res.data
         console.log("globalconfig:",window.globalconfig);
+        that.curComponent =componentsMap[window.globalconfig.currentComponent]
     }).catch(function (error) {
         console.log(error);
     });

@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
       this is web page 
-      <button @click="queryapi" ><button>
+      <button @click="queryapi">点击验证接口请求</button>
   </div>
 </template>
 
