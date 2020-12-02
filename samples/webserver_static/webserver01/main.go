@@ -22,6 +22,16 @@ func init() {
 	hydra.Conf.Web(":50005")
 }
 
+//默认是否已配置静态文件规则，及默认规则是否合理
+//1. http://loaclhost:50005 正常相应页面
+//2. http://loaclhost:50005/aaa.txt 正常相应页面
+//3. http://loaclhost:50005/views/bbb.txt 状态们404
+//4. http://loaclhost:50005/views/aaa.exe 状态们404
+//5. http://loaclhost:50005/view/aaa.txt 状态们404
+//6. http://loaclhost:50005/web/aaa.txt 状态们404
+//7. http://loaclhost:50005/aaa.exe 状态们404
+//8. http://loaclhost:50005/aaa.so 状态们404
+
 func main() {
 	app.Start()
 }

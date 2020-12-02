@@ -25,6 +25,7 @@ func init() {
 	app.API("/hydratest/apiserver/router", &AddStruct{})
 }
 
+//同一个地址注册Action用完,启动会报错
 func main() {
 	app.Start()
 }

@@ -64,6 +64,7 @@ func init() {
 		}
 
 		return map[string]interface{}{
+			"api":  ctx.User().GetRequestID(),
 			"rpc1": res.Result,
 			"rpc2": res2.Result,
 			"rpc3": res3.Result,
@@ -78,11 +79,15 @@ func init() {
 	app.RPC("/rpc/localrpc", func(ctx context.IContext) (r interface{}) {
 
 		ctx.Log().Info("/rpc/localrpc:RequestID:", ctx.User().GetRequestID(), ctx.Request().GetString("name"))
-		return "success"
+		return ctx.User().GetRequestID()
 	})
 
 }
 
+//启动服务
+//  /api/localrpc [GET.POST]对比三种rpc 调用收集到的requestid
+//  /api/remoterpc [GET.POST] 通过rpc服务地址的方式注册（api转rpc)
+//  /api/remoterpcip [GET.POST] 通过ip+port方式注册（api转rpc)
 func main() {
 	app.Start()
 }

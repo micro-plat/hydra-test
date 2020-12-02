@@ -20,6 +20,7 @@ func init() {
 	app.API("/hydratest/apiserver/router", &SrvStruct{})
 }
 
+//同一个对象的Get/Post互斥,启动会报错
 func main() {
 	app.Start()
 }
