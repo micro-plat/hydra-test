@@ -1,5 +1,6 @@
 <template>
   <div class="hello"> 
+    从服务器读取vue 配置信息:{{config}}
   </div>
 </template>
 
@@ -10,8 +11,9 @@ export default {
     msg: String
   },
   data(){
+    var config = JSON.stringify( window.globalconfig)
     return {
-      config:""
+      config: config
     }
   },  
 }

@@ -8,9 +8,20 @@ new Vue({
   render: h => h(App),
 }).$mount('#app')
 
-newFunction();
+initAxiosConfig();
 
-function newFunction() {
+loadServerConfig();
+
+function initAxiosConfig(){
+  axios.defaults.timeout = 10000
+  axios.defaults.baseURL = '/'
+  axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+  axios.defaults.withCredentials = true
+}
+
+
+
+function loadServerConfig() {
   axios.get('/vue/config').then(function(res){
     window.globalconfig=res.data
     console.log("main.js:",window.globalconfig);
