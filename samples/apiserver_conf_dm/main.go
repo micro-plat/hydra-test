@@ -5,16 +5,10 @@ import (
 
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra/global"
-	"github.com/micro-plat/hydra/hydra/servers/http"
+	_ "github.com/micro-plat/hydra/hydra/servers/http"
 )
 
-var app = hydra.NewApp(
-	hydra.WithServerTypes(http.API),
-	hydra.WithPlatName("hydra_test"),
-	hydra.WithSystemName("conf_dm"),
-	hydra.WithClusterName("t"),
-	hydra.WithRegistry("zk://192.168.0.101"),
-)
+var app = hydra.NewApp()
 
 func init() {
 	global.OnReady(func() {
@@ -22,12 +16,13 @@ func init() {
 		fmt.Println("PlatName:", global.Def.PlatName)
 		fmt.Println("SysName:", global.Def.SysName)
 		fmt.Println("ClusterName:", global.Def.ClusterName)
+		fmt.Println("RegistryAddr:", global.Def.RegistryAddr)
 	})
 }
 
-//go build
-//启动服务
-//  ./apiserver_conf_dm run -p 
+// go build
+// 设置参数系统 ./apiserver_conf_dm run -r "lm://./" -p platname -S api -c t
+// 查看onReady日志打印,判断系统参数是否绑定完成
 func main() {
 	app.Start()
 }
