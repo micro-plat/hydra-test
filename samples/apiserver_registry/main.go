@@ -31,7 +31,7 @@ func init() {
 //  /api/registry/func [GET.POST] 查看服务名,日志打印
 //  /api/registry/multiple [GET] 查看编码(gbk),服务名,日志打印(service2)
 //  /api/registry/multiple [POST] 查看编码(gbk),服务名,日志打印(service3)
-//  /api/registry/multiple/query [POST.GET] 降级,查看编码(gbk),服务名,日志打印
+//  /api/registry/multiple/query [POST.GET] 降级,查看编码(gbk),服务名,日志打印,返回200,success
 //  /api/registry/handle [POST.GET] 查看服务名,日志打印
 //  /api/registry/query [POST.GET] 不降级,查看编码(utf-8),服务名,日志打印
 //  /api/registry/queryfallback [POST.GET] 不可访问

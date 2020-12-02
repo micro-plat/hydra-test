@@ -24,6 +24,7 @@ func init() {
 	hbulder.Jwt(jwt.WithEnable(), jwt.WithHeader(), jwt.WithSecret(secert), jwt.WithName("__jwt_"), jwt.WithMode(jwt.ModeHS512), jwt.WithExcludes("/api/exclude"))
 	app.API("/api/", func(ctx context.IContext) (r interface{}) {
 		ctx.Log().Info("api")
+		ctx.Log().Info("user_auth:", ctx.User().Auth().Request())
 		return
 	})
 	app.API("/api/exclude", func(ctx context.IContext) (r interface{}) {
@@ -37,6 +38,7 @@ func init() {
 	})
 }
 
+//试jwt组件，包括且不限于：jwt参数是否正确工作、登录时设置用户信息，登录成功后获取用户信息、更新用户信息，及自动自动延时等
 //启动服务
 //访问 /api [__jwt_值为空,返回错误码302,跳转至设置好的URL]
 //不设置跳转url, 访问api [__jwt_值为空,返回错误码401]
@@ -45,7 +47,10 @@ func init() {
 //访问 /api 在header中设置的__jwt_为正确的值 [返回200]  超过2分钟,再次访问 [Token is expired,返回403]
 
 //访问 /api/exclude 获取一个新的jwt
-//使用新的jwt 访问/api,查看响应的header中jwt的过期时间是否延长
+//使用新的jwt 访问/api,查看用户认证信息,查看响应的header中jwt的过期时间是否延长
+
+//通过秘钥123456,加密模式的HS512,生成新的jwt
+//使用新的jwt 访问/api,查看用户认证信息是否更新
 func main() {
 	app.Start()
 }

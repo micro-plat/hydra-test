@@ -27,11 +27,14 @@ func init() {
 
 }
 
+//使用zookeeper作为注册中心，当配置未创建，已创建，已修改，已启动，已关闭等情况的服务器状态，及修改服务超时时间后工作是否正常
+
 //go build
 //启动服务 ./apiserver_run run -r "zk://192.168.0.101" -c t [服务监听配置]
 //关闭服务
 //安装配置 ./apiserver_run conf install -r "zk://192.168.0.101" -c t
 //启动服务 ./apiserver_run run -r "zk://192.168.0.101" -c t [成功]
+//更新zk节点 /hydra_test/run/api/t/conf 的address值为8070 [服务器重新.配置更新完成]
 //更新zk节点 /hydra_test/run/api/t/conf 的status值为空,start 服务器进行重启成功
 //更新zk节点 /hydra_test/run/api/t/conf 的status值为stop 服务器关闭api服务,不进行重启
 //更新zk节点 /hydra_test/run/api/t/conf 的rTimeout,wTimeout值为1, 无法访问/api

@@ -23,11 +23,11 @@ func init() {
 	})
 	app.API("/api/exclude", func(ctx context.IContext) (r interface{}) {
 		ctx.Log().Info("api-exclude")
-		ctx.User().Auth().Request("jwt_str")
 		return
 	})
 }
 
+//测试basic组件，验证用户名密码正确、错误时服务响应内容
 //启动服务
 //访问 /api/exclude  [正常]
 //访问 /api [返回错误码401]
