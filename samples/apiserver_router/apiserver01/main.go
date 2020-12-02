@@ -10,7 +10,7 @@ var app = hydra.NewApp(
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserverrouter"),
-	hydra.WithClusterName("taosytest"),
+	hydra.WithClusterName("test"),
 	hydra.WithRegistry("lm://."),
 )
 
@@ -22,7 +22,7 @@ func init() {
 	app.API("/hydratest/apiserver/router", &DeleteStruct{})
 
 	//测试路由重复注册，或POST,GET,PUT,DELETE等已被占用时的服务注册,在增加注册会报错误
-	//app.API("/hydratest/apiserver/router", &AddStruct{})
+	app.API("/hydratest/apiserver/router", &AddStruct{})
 }
 
 func main() {
