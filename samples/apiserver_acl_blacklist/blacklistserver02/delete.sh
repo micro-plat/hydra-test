@@ -1,0 +1,1 @@
+rm -rf ./blacklistserver02
