@@ -1,17 +1,14 @@
 package main
 
 import (
-	"context"
-	"encoding"
-
 	"github.com/micro-plat/hydra"
 	_ "github.com/micro-plat/hydra/components/caches/cache/redis"
 	"github.com/micro-plat/hydra/conf/server/api"
+	"github.com/micro-plat/hydra/context"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
 var funcTrace func(ctx context.IContext) (r interface{}) = func(ctx context.IContext) (r interface{}) {
-
 	return "success"
 }
 
@@ -27,22 +24,17 @@ var app = hydra.NewApp(
 func init() {
 	hydra.Conf.API(":8070", api.WithTrace())
 
-	idx := 1
-
-//1. 路由编码 （1.不舍值，2,正确，3错误
-//2. 格式： form,body,fromdata, form+url,body+url,fromdata+url
-//3.contenttype: kv, json,yml,text,xml,
-//4. encoding : gbk,gb2312,utf8
-//5. 中文特殊字符
+	//1. 路由编码 （1.不舍值，2,正确，3错误
+	//2. 格式： form,body,fromdata, form+url,body+url,fromdata+url
+	//3.contenttype: kv, json,yml,text,xml,
+	//4. encoding : gbk,gb2312,utf8
+	//5. 中文特殊字符
 
 	// for contenttype {
 	// 	for encoding{
 	// 		for  xxx {
 	// 			idx ++
 	// app.API("/hydratest/apiserver/response"+idx, callback(contetype,encoding,xxx))
-}
-
-
 }
 
 // func  callback(contentType,encoding,xxx string) func(context.IContext) interface{}{

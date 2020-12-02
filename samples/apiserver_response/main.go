@@ -4,11 +4,11 @@ import (
 	"github.com/micro-plat/hydra"
 	_ "github.com/micro-plat/hydra/components/caches/cache/redis"
 	"github.com/micro-plat/hydra/conf/server/api"
+	"github.com/micro-plat/hydra/context"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
 var funcTrace func(ctx context.IContext) (r interface{}) = func(ctx context.IContext) (r interface{}) {
-
 	return "success"
 }
 
