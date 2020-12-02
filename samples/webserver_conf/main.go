@@ -21,21 +21,25 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	//配置vars 内容
+	vueconfig("conf")
+	hydra.Conf.Web(":50003").Static(static.WithArchive("dist.zip"), static.WithRoot("./dist"))
+}
+
+func main() {
+	app.Start()
+}
+
+func vueconfig(cur string) {
 	hydra.Conf.Vars()["config"] = map[string]interface{}{
 		"vue": map[string]interface{}{
-			"api_addr": fmt.Sprintf("//%s:50002", global.LocalIP()),
-			"version":  time.Now().Format("20060102150405"),
+			"api_addr":         fmt.Sprintf("//%s:50002", global.LocalIP()),
+			"version":          time.Now().Format("20060102150405"),
+			"currentComponent": cur,
 		},
 	}
-	hydra.Conf.Web(":50003").Static(static.WithArchive("dist.zip"), static.WithRoot("./dist"))
 	app.Web("/vue/config", func(ctx context.IContext) interface{} {
 		data := map[string]interface{}{}
 		ctx.APPConf().GetVarConf().GetObject("config", "vue", &data)
 		return data
 	})
-}
-
-func main() {
-	app.Start()
 }

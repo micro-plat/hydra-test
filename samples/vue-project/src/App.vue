@@ -8,6 +8,7 @@
 import Conf from "./components/Conf.vue";
 import Mixed from "./components/Mixed.vue";
 import Options from "./components/Options.vue";
+import Static from "./components/Static.vue";
 
 import axios from "axios"
 
@@ -21,13 +22,15 @@ export default {
   components: {
     Conf,
     Mixed,
-    Options
+    Options,
+    Static
   },
   mounted(){
     var componentsMap = {
       "conf":Conf,
       "mixed":Mixed,
-      "options":Options
+      "options":Options,
+      "static":Static,
     } 
     console.log(componentsMap)
     var that = this;
