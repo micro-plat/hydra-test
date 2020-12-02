@@ -24,6 +24,7 @@ func init() {
 
 }
 
+//使用zookeeper作为注册中心，通过代码指定服务器的关键配置，手动修改后自动更新
 //go build
 //安装配置 ./apiserver_conf conf install -r "zk://192.168.0.101" -c t
 //启动服务 ./apiserver_conf run -r "zk://192.168.0.101" -c t [成功] 可访问/api
