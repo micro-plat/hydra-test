@@ -27,6 +27,6 @@ build_go_app() {
 }
 
 #测试目录 test
-build_go_app ./
+build_go_app .
 
 

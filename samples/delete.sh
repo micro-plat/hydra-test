@@ -28,5 +28,5 @@ delete_go_app() {
 }
 
 #测试目录 test
-delete_go_app ./
+delete_go_app .
 
