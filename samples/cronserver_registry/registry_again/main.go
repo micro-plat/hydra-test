@@ -14,7 +14,7 @@ import (
 var app = hydra.NewApp(
 	hydra.WithServerTypes(cron.CRON, http.API),
 	hydra.WithPlatName("hydra_test"),
-	hydra.WithSystemName("_registry_again"),
+	hydra.WithSystemName("cron_registry_again"),
 	hydra.WithClusterName("t"),
 	hydra.WithRegistry("lm://./"),
 )
@@ -44,6 +44,7 @@ func init() {
 //启动服务  ./registry_again run
 //查看的服务启动前的任务数量[0个]和服务启动后的任务[1个]
 //反复请求 /cron/add 查看任务数量[1个]和信息
+//查看/cron 执行频率[每20s一次],动态与静态的重复注册对执行没有影响
 func main() {
 	fmt.Println("服务启动前的任务:", services.CRON.GetTasks().Tasks)
 	hydra.OnReady(func() {
