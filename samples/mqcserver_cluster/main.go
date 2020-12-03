@@ -1,62 +1,52 @@
 package main
 
 import (
-	"fmt"
-	"time"
-
 	"github.com/micro-plat/hydra"
 	mqcconf "github.com/micro-plat/hydra/conf/server/mqc"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
 	"github.com/micro-plat/hydra/conf/vars/redis"
 	"github.com/micro-plat/hydra/context"
+	"github.com/micro-plat/hydra/hydra/servers/http"
 	"github.com/micro-plat/hydra/hydra/servers/mqc"
 	"github.com/micro-plat/hydra/registry"
 	"github.com/micro-plat/lib4go/logger"
 )
 
 var app = hydra.NewApp(
+	hydra.WithServerTypes(mqc.MQC, http.API),
 	hydra.WithServerTypes(mqc.MQC),
 	hydra.WithPlatName("hydra_test"),
-	hydra.WithSystemName("mqc_cluster_master"),
+	hydra.WithSystemName("mqc_cluster"),
 	hydra.WithClusterName("t"),
-	hydra.WithRegistry("lm://./"),
+	hydra.WithRegistry("zk://192.168.0.101"),
 )
+var confPath = "/hydra_test/mqc_cluster/mqc/t/conf"
+var reg, _ = registry.NewRegistry("zk://192.168.0.101", logger.New("hydra"))
 
 func init() {
+	hydra.Conf.API(":8070")
 	hydra.Conf.Vars().Redis("5.79", redis.New([]string{"192.168.5.79:6379"}))
 	hydra.Conf.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
 	hydra.Conf.MQC("redis://xxx", mqcconf.WithMasterSlave()) //设置为主从模式
-	app.MQC("/mqc", func(ctx context.IContext) (r interface{}) {
-		ctx.Log().Info("mqc")
-		return
-	}, "mqcName")
+
+	app.MQC("/mqc", func(ctx context.IContext) (r interface{}) { return }, "mqcName")
+
+	app.API("/mqc/master", func(ctx context.IContext) (r interface{}) {
+		return reg.Update(confPath, `{"status":"start","sharding":1,"addr":"redis://xxx"}`)
+	})
+
+	app.API("/mqc/sharding", func(ctx context.IContext) (r interface{}) {
+		return reg.Update(confPath, `{"status":"start","sharding":3,"addr":"redis://xxx"}`)
+	})
+
+	app.API("/mqc/p2p", func(ctx context.IContext) (r interface{}) {
+		return reg.Update(confPath, `{"status":"start","sharding":0,"addr":"redis://xxx"}`)
+	})
 }
 
 //消息队列服务器异常关闭后正常启动，服务是否自动恢复
-//启动服务 ./cluster_master run 启动3个mqc服务
-//查询服务器在集群模式下相互切换时是否正常
+//启动服务 ./cluster_master run 启动3个mqc服务(仅一个服务开启api服务)
+//反复调用/mqc/master,mqc/stopsharding,mqc/p2p 查看服务器在模式相互切换时是否正常
 func main() {
-	go updateServerStatus()
 	app.Start()
-}
-
-func updateServerStatus() {
-	for k := 0; k < 54; k++ {
-		time.Sleep(time.Second * 5)
-		sharding := 0
-		if k%3 == 0 {
-			sharding = 0
-		}
-		if (k+1)%3 == 0 {
-			sharding = 1
-		}
-		if (k+2)%3 == 0 {
-			sharding = 2
-		}
-		reg, _ := registry.NewRegistry("lm://./", logger.New("hydra"))
-		path := "/hydra_test/mqc_cluster_master/mqc/t/conf"
-		err := reg.Update(path, fmt.Sprintf(`{"status":"start","sharding":%d,"addr":"redis://xxx"}`, sharding))
-		fmt.Println(err)
-	}
-
 }
