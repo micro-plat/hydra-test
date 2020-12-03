@@ -21,6 +21,11 @@ func init() {
 	hydra.Conf.API(":8080", api.WithTimeout(10, 10))
 	app.API("/api", func(ctx context.IContext) (r interface{}) {
 		ctx.Log().Info("api-Handle")
+		_, err := ctx.Request().GetFileBody("file")
+		ctx.Log().Info("GetFileBody:", err)
+		if err != nil {
+			return err
+		}
 		time.Sleep(time.Second * 2)
 		return "success"
 	})
@@ -37,7 +42,11 @@ func init() {
 //更新zk节点 /hydra_test/run/api/t/conf 的address值为8070 [服务器重新.配置更新完成]
 //更新zk节点 /hydra_test/run/api/t/conf 的status值为空,start 服务器进行重启成功
 //更新zk节点 /hydra_test/run/api/t/conf 的status值为stop 服务器关闭api服务,不进行重启
-//更新zk节点 /hydra_test/run/api/t/conf 的rTimeout,wTimeout值为1, 无法访问/api
+//更新zk节点 /hydra_test/run/api/t/conf 的wTimeout值为1, 无法访问/api
+//更新zk节点 /hydra_test/run/api/t/conf 的wTimeout值为0, 正常访问/api
+//更新zk节点 /hydra_test/run/api/t/conf 的wTimeout值为3, 正常访问/api
+//更新zk节点 /hydra_test/run/api/t/conf 的rTimeout值为1, 上传的大文件(600M),i/o timeout 返回400
+//更新zk节点 /hydra_test/run/api/t/conf 的rTimeout值为0, 上传的大文件(600M), 正常访问/api
 func main() {
 	app.Start()
 }
