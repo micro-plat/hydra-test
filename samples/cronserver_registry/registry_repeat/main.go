@@ -49,6 +49,7 @@ func init() {
 //启动服务  ./registry_repeat run
 //查看的服务启动前的任务数量[0]和启动后的任务信息
 //反复请求 /cron/add和/cron/remove 查看任务数量和信息
+//查看/cron 执行频率[每20s一次],重复动态注册对执行没有影响
 func main() {
 	hydra.CRON.Add(cronName, cronService)
 	hydra.CRON.Remove(cronName, cronService)
