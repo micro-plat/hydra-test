@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/micro-plat/hydra"
+	"github.com/micro-plat/hydra/conf/server/queue"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
 	"github.com/micro-plat/hydra/conf/vars/redis"
 	"github.com/micro-plat/hydra/context"
@@ -32,15 +33,12 @@ func init() {
 	hydra.Conf.API(":8070")
 	hydra.Conf.Vars().Redis("5.79", redis.New([]string{"192.168.5.79:6379"}))
 	hydra.Conf.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
-	hydra.Conf.MQC("redis://xxx")
+	hydra.Conf.MQC("redis://xxx").Queue(queue.NewQueue(mqcName, mqcService))
 
-	app.MQC("/mqc", func(ctx context.IContext) (r interface{}) {
-		ctx.Log().Info("mqc")
-		return
-	}, "mqcName")
+	app.MQC("/mqc", func(ctx context.IContext) (r interface{}) { return }, mqcName)
 
 	app.API("/mqc/add", func(ctx hydra.IContext) (r interface{}) {
-		hydra.MQC.Add(mqcName, mqcService)
+		hydra.MQC.Add(mqcName, mqcService) //已存在
 		printQueues()
 		return
 	})
@@ -49,9 +47,8 @@ func init() {
 //测试mqc服务注册重复注册
 //启动服务  ./registry_assign run
 //查看的服务启动前的消息队列数量[0]和启动后的消息队列信息[hydra_test:mqcName /mqc]
-//反复请求 /mqc/add 查看消息队列数量和信息
+//反复请求 /mqc/add 查看消息队列数量和信息[hydra_test:mqcName /mqc]
 func main() {
-	hydra.MQC.Add("mqcName", "/mqc3")
 	fmt.Println("服务启动前的队列:", services.MQC.GetQueues().Queues)
 	hydra.OnReady(func() {
 		fmt.Println("服务启动后的队列")
