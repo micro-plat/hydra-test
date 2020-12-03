@@ -18,7 +18,7 @@ build_go_app() {
             then
                 cd $1
                 echo "go build $1"
-                go build
+                go build -mod=mod
                 cd $BASE_DIR
                 sleep 0.1
             fi            
