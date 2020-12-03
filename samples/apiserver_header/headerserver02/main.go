@@ -21,7 +21,7 @@ func init() {
 	app.API("/hydratest/apiserver/header", funcHeader)
 }
 
-// apiserver-header中间件设置*通配默认跨域配置demo
+// apiserver-header中间件设置默认跨域配置demo
 
 //1.1 安装程序 sudo ./headerserver02 conf install -cover
 //1.2 使用 ./headerserver02 run
@@ -32,7 +32,7 @@ func main() {
 }
 
 var funcHeader = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("apiserver-header中间件设置*通配默认跨域配置demo")
+	ctx.Log().Info("apiserver-header中间件设置默认跨域配置demo")
 	headers := ctx.Response().GetHeaders()
 	ctx.Log().Info("HeaderMap:", headers)
 	ctx.Log().Info("GetSpecials:", ctx.Response().GetSpecials())
