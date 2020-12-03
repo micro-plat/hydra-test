@@ -8,7 +8,7 @@ delete_go_app() {
     do
         if [ "$file" = "vendor" ]
         then 
-            return
+            continue
         fi
         if [ -d $1"/"$file ]  #注意此处之间一定要加上空格，否则会报错
         then
@@ -28,5 +28,5 @@ delete_go_app() {
 }
 
 #测试目录 test
-delete_go_app ./
+delete_go_app .
 

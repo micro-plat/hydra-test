@@ -49,8 +49,6 @@ func main() {
 
 var funcTrace = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("apiserver_trace 检查各种输入和输出的数据demo")
-	mapT := ctx.Request().Path().Params()
-	trace := mapT.GetString("trace")
 	xmap, err := ctx.Request().GetMap()
 	if err != nil {
 		ctx.Log().Errorf("errerrerrerr:%v", err)

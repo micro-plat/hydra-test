@@ -17,7 +17,7 @@ var app = hydra.NewApp(
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserver_option"),
 	hydra.WithClusterName("test"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+	hydra.WithRegistry("lm://."),
 )
 
 func init() {
@@ -31,7 +31,7 @@ func init() {
 
 //测试option请求是否正确工作（已设置夸域头信息）
 //启动server: go run main.go run
-//1. 访问： http://localhost:50012 正常获取到页面
+//1. 访问： http://localhost:50014 正常获取到页面
 //2. 点击页面[Options]按钮，发起后端请求，正常请求
 func main() {
 	vueconfig("options")

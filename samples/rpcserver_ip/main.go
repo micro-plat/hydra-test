@@ -33,7 +33,7 @@ func init() {
 // rpcserver-ip访问demo
 
 //1.1 安装程序 sudo ./rpcserver_ip conf install -cover
-//1.2 使用 ./rpcserver_ip run -t cpu
+//1.2 使用 ./rpcserver_ip run
 //1.3 调用错误返回结果接口：http://localhost:8070/hydratest/rpcserver/apiip/fail 观察日志中rpc如参是否正确 返回值： 666/rpc服务返回异常
 //1.4 调用正确返回结果接口：http://localhost:8070/hydratest/rpcserver/apiip/succ 观察日志中rpc如参是否正确 返回值： 200/rpcsuccess
 func main() {
@@ -42,7 +42,7 @@ func main() {
 
 var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("rpcserver-ip-api rpc错返回访问demo")
-	url := fmt.Sprintf("/hydratest/rpcserver/rpcip/fail@tcp://%s:8071", global.LocalIP())
+	url := fmt.Sprintf("/hydratest/rpcserver/rpcip/fail@%s:8071", global.LocalIP())
 	input := map[string]interface{}{
 		"taosytest": "123456",
 	}
@@ -68,7 +68,7 @@ var funcRPC = func(ctx hydra.IContext) (r interface{}) {
 
 var funcAPI1 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("rpcserver-ip-api rpc正确返回访问demo")
-	url := fmt.Sprintf("/hydratest/rpcserver/rpcip/succ@tcp://%s:8071", global.LocalIP())
+	url := fmt.Sprintf("/hydratest/rpcserver/rpcip/succ@%s:8071", global.LocalIP())
 	input := map[string]interface{}{
 		"taosytest": "654321",
 	}
