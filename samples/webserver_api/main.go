@@ -17,8 +17,19 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	vueconfig("mixed")
 	hydra.Conf.Web(":50004").Static(static.WithArchive("dist.zip"), static.WithRoot("./"))
+	hydra.Conf.Vars().Custom("config", "vue", map[string]interface{}{
+		"api_addr":         "",
+		"version":          time.Now().Format("20060102150405"),
+		"currentComponent": "mixed",
+	})
+
+	app.Web("/vue/config", func(ctx hydra.IContext) interface{} {
+		data := map[string]interface{}{}
+		ctx.APPConf().GetVarConf().GetObject("config", "vue", &data)
+		return data
+	})
+
 	app.Web("/self/api", func(ctx hydra.IContext) interface{} {
 		return "self.api.success"
 	})
@@ -31,19 +42,4 @@ func init() {
 //3. http://localhost:50004/self/api 正常返回
 func main() {
 	app.Start()
-}
-
-func vueconfig(cur string) {
-	hydra.Conf.Vars()["config"] = map[string]interface{}{
-		"vue": map[string]interface{}{
-			"api_addr":         "",
-			"version":          time.Now().Format("20060102150405"),
-			"currentComponent": cur,
-		},
-	}
-	app.Web("/vue/config", func(ctx hydra.IContext) interface{} {
-		data := map[string]interface{}{}
-		ctx.APPConf().GetVarConf().GetObject("config", "vue", &data)
-		return data
-	})
 }
