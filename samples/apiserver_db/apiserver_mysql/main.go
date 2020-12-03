@@ -6,6 +6,10 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
+	"github.com/micro-plat/hydra/registry"
+	"github.com/micro-plat/hydra/global"
+
+
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/samples/apiserver_db/apiserver_mysql/sqls"
 	"github.com/micro-plat/hydra/conf/app"
@@ -18,13 +22,13 @@ import (
 var hydraApp = hydra.NewApp(
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
-	hydra.WithSystemName("apiserver_db_oracle"),
+	hydra.WithSystemName("apiserver_db_mysql"),
 	hydra.WithClusterName("test"),
 	hydra.WithRegistry("lm://."),
 )
 
 func init() {
-	hydra.Conf.Vars().DB().MySQL("0.36", mysql.New("root:rTo0CesHi2018Qx@tcp(192.168.0.36:3306)/test?charset=utf8"))
+	hydra.Conf.Vars().DB().MySQL("0.36", mysql.New("test:123456@tcp(192.168.0.36:3306)/test?charset=utf8"))
 
 	hydra.Conf.API(":50021", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
 
@@ -33,6 +37,8 @@ func init() {
 	hydraApp.API("/api/mysql/getdata", getdata)
 	hydraApp.API("/api/mysql/sp", sp)
 	hydraApp.API("/api/mysql/delete", delete)
+
+	hydraApp.API("/api/mysql/config", config)
 }
 
 // apiserver_db 数据库组件是否正确工作，修改配置是否自动生效（mysql）
@@ -44,7 +50,10 @@ func init() {
 // 5. 请求 http://localhost:50020/api/mysql/getdata 获取数据表中所有数据
 // 6. 请求 http://localhost:50020/api/mysql/sp 调用存储过错添加一条 10002数据
 // 7. 请求 http://localhost:50020/api/mysql/delete 删除所有数据
+// 8. 请求 http://localhost:50020/api/mysql/config 修改配置数据库 test==>test2
+
 func main() {
+
 	hydraApp.OnStarting(func(cnf app.IAPPConf) (err error) {
 		oracleDB := hydra.C.DB().GetRegularDB("0.36")
 
@@ -144,4 +153,21 @@ var sp = func(ctx hydra.IContext) (r interface{}) {
 		"effect_count": effCount,
 		"data_rows":    rows,
 	}
+}
+var config = func(ctx hydra.IContext) (r interface{}) {
+	regst, err := registry.NewRegistry(global.Def.RegistryAddr, global.Def.Log())
+	if err != nil {
+		return fmt.Errorf("NewRegistry:%v",err )
+	}
+	dbpath := "/hydratest/var/db/0.36"
+	err = regst.Update(dbpath,`{"provider":"mysql","connString":"test2:123456@tcp(192.168.0.36:3306)/test2?charset=utf8","maxOpen":10,"maxIdle":3,"lifeTime":600}`)
+	if err!=nil{
+		return fmt.Errorf("UpdateDB:%v",err)
+	}
+	path := "/hydratest/apiserver_db_mysql/api/test/conf"
+	err = regst.Update(path,`{"status":"start","address":":50021"}`)
+	if err!=nil{
+		return fmt.Errorf("UpdateConf:%v",err)
+	}
+	return "success"
 }

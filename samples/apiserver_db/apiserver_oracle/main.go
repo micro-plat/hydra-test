@@ -6,6 +6,9 @@ import (
 
 	_ "github.com/mattn/go-oci8"
 
+	"github.com/micro-plat/hydra/registry"
+	"github.com/micro-plat/hydra/global"
+
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/samples/apiserver_db/apiserver_oracle/sqls"
 	"github.com/micro-plat/hydra/conf/app"
@@ -33,6 +36,9 @@ func init() {
 	hydraApp.API("/api/oracle/getdata", getdata)
 	hydraApp.API("/api/oracle/sp", sp)
 	hydraApp.API("/api/oracle/delete", delete)
+
+	hydraApp.API("/api/oracle/config", 	config)
+
 }
 
 // apiserver_db 数据库组件是否正确工作，修改配置是否自动生效（mysql）
@@ -44,6 +50,7 @@ func init() {
 // 5. 请求 http://localhost:50020/api/oracle/getdata 获取数据表中所有数据
 // 6. 请求 http://localhost:50020/api/oracle/sp 调用存储过错添加一条 10002数据
 // 7. 请求 http://localhost:50020/api/oracle/delete 删除所有数据
+// 8. 请求 http://localhost:50020/api/oracle/config 修改数据库配置，并重启
 func main() {
 	hydraApp.OnStarting(func(cnf app.IAPPConf) (err error) {
 		oracleDB := hydra.C.DB().GetRegularDB("0.136")
@@ -152,4 +159,23 @@ var sp = func(ctx hydra.IContext) (r interface{}) {
 		"effect_count": effCount,
 		"data_rows":    rows,
 	}
+}
+
+
+var config = func(ctx hydra.IContext) (r interface{}) {
+	regst, err := registry.NewRegistry(global.Def.RegistryAddr, global.Def.Log())
+	if err != nil {
+		return fmt.Errorf("NewRegistry:%v",err )
+	}
+	dbpath := "/hydratest/var/db/0.136"
+	err = regst.Update(dbpath,`{"provider":"oracle","connString":"test/123456@orcl136","maxOpen":10,"maxIdle":3,"lifeTime":600}`)
+	if err!=nil{
+		return fmt.Errorf("UpdateDB:%v",err)
+	}
+	path := "/hydratest/apiserver_db_oracle/api/test/conf"
+	err = regst.Update(path,`{"status":"start","address":":50021"}`)
+	if err!=nil{
+		return fmt.Errorf("UpdateConf:%v",err)
+	}
+	return "success"
 }
