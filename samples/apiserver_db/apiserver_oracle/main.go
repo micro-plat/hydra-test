@@ -45,12 +45,12 @@ func init() {
 // 1. 编译程序： go build
 // 2. 启动程序：./apiserver_mysql run
 
-// 3. 请求 http://localhost:50020/api/oracle/insert 添加一条 10001数据
-// 4. 请求 http://localhost:50020/api/oracle/update 更新10001数据
-// 5. 请求 http://localhost:50020/api/oracle/getdata 获取数据表中所有数据
-// 6. 请求 http://localhost:50020/api/oracle/sp 调用存储过错添加一条 10002数据
-// 7. 请求 http://localhost:50020/api/oracle/delete 删除所有数据
-// 8. 请求 http://localhost:50020/api/oracle/config 修改数据库配置，并重启
+// 3. 请求 http://localhost:50021/api/oracle/insert 添加一条 10001数据
+// 4. 请求 http://localhost:50021/api/oracle/update 更新10001数据
+// 5. 请求 http://localhost:50021/api/oracle/getdata 获取数据表中所有数据
+// 6. 请求 http://localhost:50021/api/oracle/sp 调用存储过错添加一条 10002数据
+// 7. 请求 http://localhost:50021/api/oracle/delete 删除所有数据
+// 8. 请求 http://localhost:50021/api/oracle/config 修改数据库配置，并重启
 func main() {
 	hydraApp.OnStarting(func(cnf app.IAPPConf) (err error) {
 		oracleDB := hydra.C.DB().GetRegularDB("0.136")

@@ -30,7 +30,7 @@ var hydraApp = hydra.NewApp(
 func init() {
 	hydra.Conf.Vars().DB().MySQL("0.36", mysql.New("test:123456@tcp(192.168.0.36:3306)/test?charset=utf8"))
 
-	hydra.Conf.API(":50021", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
+	hydra.Conf.API(":50022", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
 
 	hydraApp.API("/api/mysql/insert", insert) 
 	hydraApp.API("/api/mysql/update", update)
@@ -45,12 +45,12 @@ func init() {
 // 1. 编译程序： go build
 // 2. 启动程序：./apiserver_mysql run
 
-// 3. 请求 http://localhost:50020/api/mysql/insert 添加一条 10001数据
-// 4. 请求 http://localhost:50020/api/mysql/update 更新10001数据
-// 5. 请求 http://localhost:50020/api/mysql/getdata 获取数据表中所有数据
-// 6. 请求 http://localhost:50020/api/mysql/sp 调用存储过错添加一条 10002数据
-// 7. 请求 http://localhost:50020/api/mysql/delete 删除所有数据
-// 8. 请求 http://localhost:50020/api/mysql/config 修改配置数据库 test==>test2
+// 3. 请求 http://localhost:50022/api/mysql/insert 添加一条 10001数据
+// 4. 请求 http://localhost:50022/api/mysql/update 更新10001数据
+// 5. 请求 http://localhost:50022/api/mysql/getdata 获取数据表中所有数据
+// 6. 请求 http://localhost:50022/api/mysql/sp 调用存储过错添加一条 10002数据
+// 7. 请求 http://localhost:50022/api/mysql/delete 删除所有数据
+// 8. 请求 http://localhost:50022/api/mysql/config 修改配置数据库 test==>test2
 
 func main() {
 
