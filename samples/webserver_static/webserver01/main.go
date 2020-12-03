@@ -17,8 +17,18 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	vueconfig("static")
 	hydra.Conf.Web(":50005")
+
+	hydra.Conf.Vars().Custom("config", "vue", map[string]interface{}{
+		"api_addr":         "",
+		"version":          time.Now().Format("20060102150405"),
+		"currentComponent": "static",
+	})
+	app.Web("/vue/config", func(ctx hydra.IContext) interface{} {
+		data := map[string]interface{}{}
+		ctx.APPConf().GetVarConf().GetObject("config", "vue", &data)
+		return data
+	})
 }
 
 //默认是否已配置静态文件规则，及默认规则是否合理 (查找目录下文件夹)
@@ -33,20 +43,4 @@ func init() {
 
 func main() {
 	app.Start()
-}
-
-func vueconfig(cur string) {
-	//todo:需要调整Vars 的功能，满足custom的设置
-	hydra.Conf.Vars()["config"] = map[string]interface{}{
-		"vue": map[string]interface{}{
-			"api_addr":         "",
-			"version":          time.Now().Format("20060102150405"),
-			"currentComponent": cur,
-		},
-	}
-	app.Web("/vue/config", func(ctx hydra.IContext) interface{} {
-		data := map[string]interface{}{}
-		ctx.APPConf().GetVarConf().GetObject("config", "vue", &data)
-		return data
-	})
 }
