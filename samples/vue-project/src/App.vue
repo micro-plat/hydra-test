@@ -9,6 +9,7 @@ import Conf from "./components/Conf.vue";
 import Mixed from "./components/Mixed.vue";
 import Options from "./components/Options.vue";
 import Static from "./components/Static.vue";
+import WebVue from "./components/WebVue.vue";
 
 import axios from "axios"
 
@@ -31,6 +32,7 @@ export default {
       "mixed":Mixed,
       "options":Options,
       "static":Static,
+      "webvue":WebVue,
     } 
     console.log(componentsMap)
     var that = this;
