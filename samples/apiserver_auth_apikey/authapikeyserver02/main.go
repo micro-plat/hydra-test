@@ -23,7 +23,7 @@ func init() {
 
 //apiserver_apikey 中间件启用，md5路径被排除demo
 
-//1.1  sudo ./authapikeyserver02 conf install -cover
+//1.1  ./authapikeyserver02 conf install -cover
 //1.2 使用 ./authapikeyserver02 run
 //1.3 模糊匹配被排除路径请求：http://localhost:8071/hydratest/apiserver/apikey  返回 200/success
 //1.4 精确匹配被排除路径请求：http://localhost:8071/hydratest/apiserver1/apikey  返回 200/success

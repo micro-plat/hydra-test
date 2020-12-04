@@ -22,7 +22,7 @@ func init() {
 
 // apiserver-header中间件设置指定跨域配置demo
 
-//1.1 安装程序 sudo ./headerserver03 conf install -cover
+//1.1 安装程序 ./headerserver03 conf install -cover
 //1.2 使用 ./headerserver03 run
 //1.3 请求不设置Origin头：http://localhost:8070/hydratest/apiserver/header 返回：只返回非allow的头信息
 //1.4 请求设置Origin头,不在配置内：http://localhost:8070/hydratest/apiserver/header 返回：只返回非allow的头信息

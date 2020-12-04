@@ -27,7 +27,7 @@ func init() {
 }
 
 // apiserver_dlock 高并发下调用偿试获取分布式锁测试demo
-//1.1 安装程序 sudo ./apiserverdlock01 conf install -cover
+//1.1 安装程序 ./apiserverdlock01 conf install -cover
 //1.2 使用 ./apiserverdlock01 run
 
 //1.3 调用接口：http://localhost:8070/hydratest/apiserverDlock/get  观察日志是否有异常,1000并发的耗时情况

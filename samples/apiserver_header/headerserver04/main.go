@@ -22,7 +22,7 @@ func init() {
 
 // apiserver-header中间件头信息覆盖demo
 
-//1.1 安装程序 sudo ./headerserver04 conf install -cover
+//1.1 安装程序 ./headerserver04 conf install -cover
 //1.2 使用 ./headerserver04 run
 //1.3 请求头：http://localhost:8070/hydratest/apiserver/header 返回：返回的taosy-header=test
 func main() {

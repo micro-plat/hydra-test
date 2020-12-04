@@ -22,7 +22,7 @@ func init() {
 
 // apiserver代码指定服务配置demo
 
-//1.1 安装程序 sudo ./servercode01 conf install -cover
+//1.1 安装程序 ./servercode01 conf install -cover
 //1.2 使用 ./servercode01 run
 //1.3 调用接口：http://localhost:8070/hydratest/apiserver/code 判定配置是否正确
 func main() {

@@ -22,8 +22,8 @@ func init() {
 
 // apiserver-request-get请求demo
 
-//1.1 安装程序 sudo ./servertrace01 conf install -cover
-//1.2 使用 ./servertrace01 run -t cpu
+//1.1 安装程序 ./servertrace01 conf install -cover
+//1.2 使用 ./servertrace01 run
 //1.3 调用接口：http://localhost:8070/hydratest/apiserver/trace 判定配置是否正确
 /*
 1.路由不设置编码格式-Get-gbk-带中文和特殊符号正确编码数据

@@ -25,12 +25,12 @@ func init() {
 	hydra.Conf.Vars().Redis("redis", redis.New([]string{"192.168.5.79:6379"}))
 	hydra.Conf.Vars().Queue().Redis("redis", queueredis.New(queueredis.WithConfigName("redis")))
 	app.API("/hydratest/mqcserver/:queue", funcAPI)
-	app.MQC("/hydratest/mqcserver/queue1", funcMQC1, "mqcserver:queue1")
+	// app.MQC("/hydratest/mqcserver/queue1", funcMQC1, "mqcserver:queue1")
 	app.MQC("/hydratest/mqcserver/queue2", funcMQC2)
 }
 
 // mqcserver-queue 静态加载队列后，手动修改注册配置demo
-//1.1 安装程序 sudo ./mqcserver_queue conf install -cover
+//1.1 安装程序 ./mqcserver_queue conf install -cover
 //1.2 使用 ./mqcserver_queue run
 
 //1.3 调用错误返回结果接口：http://localhost:8070/hydratest/mqcserver/queue1 都能执行指定的消息队列和mqc接受参数为：taosytest=queue1

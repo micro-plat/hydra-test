@@ -25,7 +25,7 @@ func init() {
 
 // 代码安装开启trace配置，跟踪mutex性能demo
 
-//1.1 安装程序 sudo ./servertrace04 conf install -cover
+//1.1 安装程序 ./servertrace04 conf install -cover
 //1.2 使用 ./servertrace04 run -t mutex
 //1.3 调用接口：http://localhost:8070/hydratest/apiserver/trace 判定配置是否正确
 func main() {
