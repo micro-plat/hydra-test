@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"time"
 
-	_ "github.com/micro-plat/hydra/components/caches/cache/redis"
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/registry"
 

@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/micro-plat/hydra"
-	_ "github.com/micro-plat/hydra/components/caches/cache/redis"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
