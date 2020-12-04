@@ -95,7 +95,7 @@ var apiBind = func(ctx hydra.IContext) (r interface{}) {
 		contentType = "application/json"
 	}
 	opts = append(opts, componentrpc.WithContentType(contentType))
-	fmt.Println("content-type:", contentType)
+	//fmt.Println("content-type:", contentType)
 	respones, err := hydra.C.RPC().GetRegularRPC().Request(rpcURL, input, opts...)
 	if err != nil {
 		ctx.Log().Errorf("rpc 请求异常：%v", err)
