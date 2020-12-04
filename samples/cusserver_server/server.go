@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/micro-plat/hydra/conf/server/router"
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/lib4go/types"
 )
@@ -27,12 +26,12 @@ type CusServer struct {
 }
 
 //NewServer 创建http api服务嚣
-func NewServer(name string, addr string, routers []*router.Router) (t *CusServer, err error) {
+func NewServer(name string, addr string, routers *RouterList) (t *CusServer, err error) {
 	t, err = new(name, addr)
 	if err != nil {
 		return
 	}
-	t.addHttpRouters(routers...)
+	t.addHttpRouters(routers)
 	return
 }
 
