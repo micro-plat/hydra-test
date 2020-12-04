@@ -25,7 +25,7 @@ func init() {
 
 // 代码安装开启trace配置，跟踪mem性能demo
 
-//1.1 安装程序 sudo ./servertrace02 conf install -cover
+//1.1 安装程序 ./servertrace02 conf install -cover
 //1.2 使用 ./servertrace02 run -t mem
 //1.3 调用接口：http://localhost:8070/hydratest/apiserver/trace 判定配置是否正确
 func main() {

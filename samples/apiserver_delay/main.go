@@ -22,7 +22,7 @@ func init() {
 
 // apiserver-delay延迟中间件测试demo
 
-//1.1 安装程序 sudo ./apiserver_delay conf install -cover
+//1.1 安装程序 ./apiserver_delay conf install -cover
 //1.2 使用 ./apiserver_delay run
 //1.3 不设置X-Add-Delay：http://localhost:8070/hydratest/apiserver/delay 观察日志X-Add-Delay的值和响应时间是否正常
 //1.4 设置X-Add-Delay=3s：http://localhost:8070/hydratest/apiserver/delay 观察日志X-Add-Delay的值和响应时间是否正常>3s

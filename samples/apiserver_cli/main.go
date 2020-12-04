@@ -22,7 +22,7 @@ func init() {
 
 //apiserver 通过命令指定服务配置demo
 
-//1.1 通过命令重新指定服务配置 sudo ./apiserver_cli conf install -p hydratest1 -c taosytest1 -s apiservercli1 -S web -cover
+//1.1 通过命令重新指定服务配置 ./apiserver_cli conf install -p hydratest1 -c taosytest1 -s apiservercli1 -S web -cover
 //1.2 使用 ./apiserver_cli run -p hydratest1 -c taosytest1 -s apiservercli1 -S web
 //1.3 调用接口：http://localhost:8089/hydratest/apiserver/cliweb 判定配置是否正确
 func main() {

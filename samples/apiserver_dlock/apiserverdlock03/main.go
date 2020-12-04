@@ -21,7 +21,7 @@ func init() {
 }
 
 // apiserver_dlock 锁获取成功，服务器断电，程序崩溃和强退锁是否被释放测试demo
-//1.1 安装程序 sudo ./apiserverdlock03 conf install -cover
+//1.1 安装程序 ./apiserverdlock03 conf install -cover
 //1.2 使用 ./apiserverdlock03 run
 
 //1.3 调用接口获取分布式锁不释放：http://localhost:8070/hydratest/apiserverDlock/get  查看接口日志两次获取锁是否满足预期

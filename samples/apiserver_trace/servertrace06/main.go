@@ -22,7 +22,7 @@ func init() {
 
 // 检查各种输入和输出的数据demo
 
-//1.1 安装程序 sudo ./servertrace06 conf install -cover
+//1.1 安装程序 ./servertrace06 conf install -cover
 //1.2 使用默认端口监听 ./servertrace06 run
 
 //以下请求使用postman调用

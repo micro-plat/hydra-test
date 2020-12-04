@@ -23,7 +23,7 @@ func init() {
 
 //apiserver 命令-n覆盖代码配置demo
 
-//1.1 安装程序 sudo ./servercode04 conf install -n /hydratest1/apiservercode1/web/taosytest1 -cover
+//1.1 安装程序 ./servercode04 conf install -n /hydratest1/apiservercode1/web/taosytest1 -cover
 //1.2 使用 ./servercode04 run -n /hydratest1/apiservercode1/web/taosytest1
 //1.3 调用接口：http://localhost:8089/hydratest/apiserver/cmdweb 判定配置是否正确  正常返回
 //1.4 调用接口：http://localhost:8089/hydratest/apiserver/cmd 判定配置是否正确  notfund 404
