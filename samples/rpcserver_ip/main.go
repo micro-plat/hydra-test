@@ -5,7 +5,6 @@ import (
 
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra/components"
-	_ "github.com/micro-plat/hydra/components/caches/cache/redis"
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 	"github.com/micro-plat/hydra/hydra/servers/rpc"
@@ -46,7 +45,7 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 	input := map[string]interface{}{
 		"taosytest": "123456",
 	}
-	respones, err := components.Def.RPC().GetRegularRPC().Request(ctx.Context(), url, input)
+	respones, err := components.Def.RPC().GetRegularRPC().Request(url, input)
 	if err != nil {
 		ctx.Log().Errorf("rpc 请求异常：%v", err)
 		return
@@ -73,7 +72,7 @@ var funcAPI1 = func(ctx hydra.IContext) (r interface{}) {
 		"taosytest": "654321",
 	}
 
-	respones, err := components.Def.RPC().GetRegularRPC().Request(ctx.Context(), url, input)
+	respones, err := components.Def.RPC().GetRegularRPC().Request(url, input)
 	if err != nil {
 		ctx.Log().Errorf("rpc 请求异常：%v", err)
 		return

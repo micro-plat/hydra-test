@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"sync"
 	"time"
 
@@ -35,57 +34,40 @@ func main() {
 	app.Start()
 }
 
-var uuidMap cmap.ConcurrentMap
+var uuidMap = cmap.New(1)
 
 var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("apiserver_uuid 静态加载队列后，手动修改注册配置demo")
-	defer func() {
-		e := recover()
-		if e != nil {
-			ctx.Log().Errorf("uuid测试失败,%v", e)
-		}
-	}()
-	if uuidMap == nil {
-		uuidMap = cmap.New(1)
-	}
 	uuidMap.Clear()
 	clusterID := ctx.APPConf().GetServerConf().GetClusterName()
 	wg := &sync.WaitGroup{}
 	for i := 0; i < 10; i++ {
-		a := time.Now()
+		start := time.Now()
 		for j := 0; j < 1000; j++ {
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
-				uid := uuid.Get(clusterID).ToString()
-				if err := compare(uid); err != nil {
-					panic(err)
-				}
+				compare(clusterID)
 			}()
 			// wg.Add(1)
 			// go func() {
 			// 	defer wg.Done()
-			// 	uid := uuid.Get("123456").ToString()
-			// 	if err := compare(uid); err != nil {
-			// 		panic(err)
-			// 	}
+			// 	compare("123456")
 			// }()
 		}
-
 		wg.Wait()
-		b := time.Now()
-		c := b.Sub(a)
+		end := time.Now()
+		c := end.Sub(start)
 		ctx.Log().Info("两个集群同时1000并发获取uuid耗时:", c.Seconds())
 		time.Sleep(time.Second)
 	}
-	uuidMap.Clear()
 	return
 }
 
-func compare(uid string) error {
+func compare(clusterID string) {
+	uid := uuid.Get(clusterID).ToString()
 	if uuidMap.Has(uid) {
-		return fmt.Errorf("uuid重复")
+		panic("uuid重复")
 	}
 	uuidMap.Set(uid, "1")
-	return nil
 }

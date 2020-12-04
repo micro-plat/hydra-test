@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 
 	"github.com/micro-plat/hydra"
@@ -27,6 +28,7 @@ func init() {
 	hydra.Conf.Vars().Redis("redis", redis.New([]string{"192.168.5.79:6379"}))
 	hydra.Conf.Vars().Queue().Redis("redis", queueredis.New(queueredis.WithConfigName("redis")))
 	app.API("/hydratest/mqcserver/apijson", funcAPI)
+	app.API("/hydratest/mqcserver/apijson1", funcAPI1)
 	app.MQC("/hydratest/mqcserver/jsonqueue", funcMQC1, "mqcserver::json:queue")
 }
 
@@ -34,7 +36,8 @@ func init() {
 //1.1 安装程序 sudo ./mqcserver_json conf install -cover
 //1.2 使用 ./mqcserver_json run
 
-//1.3 调用错误返回结果接口：http://localhost:8070/hydratest/mqcserver/apijson 观察日志是否与api中初始化数据相同
+//1.3 调用返回结果接口：http://localhost:8070/hydratest/mqcserver/apijson 观察日志是否与api中初始化数据相同
+//1.4 调用返回结果接口：http://localhost:8070/hydratest/mqcserver/apijson1 数据类型不同数据解析
 func main() {
 	app.Start()
 }
@@ -71,6 +74,19 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 	return
 }
 
+var funcAPI1 = func(ctx hydra.IContext) (r interface{}) {
+	ctx.Log().Info("mqcserver-json-api1 json内容在mqcserver中解析demo")
+	queue := "mqcserver::json:queue"
+	value := fmt.Sprint(`{"param1":"@#$%^&*()_+~锅饭都是","param2":"true","param3":"1024","param4":"10.24","param5":"1,2","param6":"2020/11/12 11:12:59","param7":"{}"}`)
+	ctx.Log().Info("-------------:", value)
+	queueObj := components.Def.Queue().GetRegularQueue("redis")
+	if err := queueObj.Push(queue, value); err != nil {
+		ctx.Log().Errorf("发送消息队列异常：%s", queue)
+		return
+	}
+	return
+}
+
 var funcMQC1 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("mqcserver-json-mqc json内容在mqcserver中解析demo")
 	if err := ctx.Request().Check(); err != nil {
@@ -80,37 +96,38 @@ var funcMQC1 = func(ctx hydra.IContext) (r interface{}) {
 	param := &Param{}
 	if err := ctx.Request().Bind(param); err != nil {
 		ctx.Log().Errorf("ctx.Request().Bind()异常：%s", err)
-		return
 	}
 	ctx.Log().Info("----bind data:", param)
 
 	body, err := ctx.Request().GetBody()
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetBody()异常：%s", err)
-		return
 	}
 	ctx.Log().Info("----body data:", string(body))
 
 	_, raw, err := ctx.Request().GetFullRaw()
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetFullRaw()异常：%s", err)
-		return
 	}
 	ctx.Log().Info("----GetFullRaw data:", raw)
 
 	jsonD, err := ctx.Request().GetJSON("param7")
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetJSON()异常：%s", err)
-		return
 	}
 	ctx.Log().Info("----GetJSON data:", string(jsonD))
 
 	xmap, err := ctx.Request().GetMap()
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-		return
 	}
 	ctx.Log().Info("----GetMap()：", xmap)
+
+	tm, err := ctx.Request().GetDatetime("param6")
+	if err != nil {
+		ctx.Log().Errorf("ctx.Request().GetDatetime()异常：%s", err)
+	}
+	ctx.Log().Info("----GetDatetime()：", tm)
 	ctx.Log().Info("----Keys data:", ctx.Request().Keys())
 	ctx.Log().Info("----Len data:", ctx.Request().Len())
 	ctx.Log().Info("----GetArray data:", ctx.Request().GetArray("param5"))
