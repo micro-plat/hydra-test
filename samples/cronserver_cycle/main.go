@@ -41,7 +41,7 @@ func init() {
 }
 
 // cronserver_cycle 对于不同cron配置循环执行次数测试demo
-//1.1 安装程序 sudo ./cronserver_cycle conf install -cover
+//1.1 安装程序 ./cronserver_cycle conf install -cover
 //1.2 使用 ./cronserver_cycle run
 
 //1.3 调用接口：http://localhost:8070/hydratest/cronserverCycle/show  查看当前的执行次数情况
