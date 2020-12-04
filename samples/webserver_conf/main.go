@@ -19,8 +19,18 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	vueconfig("conf")
 	hydra.Conf.Web(":50003").Static(static.WithArchive("dist.zip"), static.WithRoot("./"))
+	hydra.Conf.Vars().Custom("config", "vue", map[string]interface{}{
+		"api_addr":         fmt.Sprintf("//%s:50002", global.LocalIP()),
+		"version":          time.Now().Format("20060102150405"),
+		"currentComponent": "conf",
+	})
+	app.Web("/vue/config", func(ctx hydra.IContext) interface{} {
+		data := map[string]interface{}{}
+		ctx.APPConf().GetVarConf().GetObject("config", "vue", &data)
+		return data
+	})
+
 }
 
 //提供api接口，该接口从注册中心拉取配置返回给前端
@@ -28,19 +38,4 @@ func init() {
 //2.浏览器访问： http://localhost:50003 查看控制台输出服务器配置信息
 func main() {
 	app.Start()
-}
-
-func vueconfig(cur string) {
-	hydra.Conf.Vars()["config"] = map[string]interface{}{
-		"vue": map[string]interface{}{
-			"api_addr":         fmt.Sprintf("//%s:50002", global.LocalIP()),
-			"version":          time.Now().Format("20060102150405"),
-			"currentComponent": cur,
-		},
-	}
-	app.Web("/vue/config", func(ctx hydra.IContext) interface{} {
-		data := map[string]interface{}{}
-		ctx.APPConf().GetVarConf().GetObject("config", "vue", &data)
-		return data
-	})
 }
