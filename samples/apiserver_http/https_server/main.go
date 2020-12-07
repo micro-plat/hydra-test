@@ -10,13 +10,13 @@ import (
 var app = hydra.NewApp(
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydra_test"),
-	hydra.WithSystemName("http_server"),
+	hydra.WithSystemName("https_server"),
 	hydra.WithClusterName("t"),
 	hydra.WithRegistry("lm://./"),
 )
 
 func init() {
-	hydra.Conf.API(":8099")
+	hydra.Conf.API(":8098")
 	app.API("/api", func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Info("log_session_id:", ctx.Log().GetSessionID())
 		ctx.Log().Info("api_user_id:", ctx.User().GetRequestID())
@@ -38,7 +38,7 @@ func init() {
 
 }
 
-//启动服务  ./http_server run
+//启动服务  ./https_server run
 func main() {
 	app.Start()
 }

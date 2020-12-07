@@ -19,7 +19,7 @@ var app = hydra.NewApp(
 
 func init() {
 	hydra.Conf.API(":8070")
-	hydra.Conf.Vars().HTTP("http", httpopt.WithConnTimeout(30), httpopt.WithRequestTimeout(10))
+	hydra.Conf.Vars().HTTP("http", httpopt.WithConnTimeout(30), httpopt.WithRequestTimeout(10)) //设置超时时间
 
 	app.API("/client/api", func(ctx hydra.IContext) (r interface{}) {
 		c := components.Def.HTTP().GetRegularClient("http")
@@ -44,10 +44,10 @@ func init() {
 }
 
 //queue组件是否正确工作,修改配置是否自动生效(redis,mqtt)
-//启动服务  ./http_server run
+//启动服务端  ../http_server run
 //启动客户端服务  ./apiserver_http run
-//访问  /client/api 查看服务器打印的session_id,body,method,header,encoding等信息
-//访问  /client/timeout 超过请求时间.返回400 i/o timeout
+//访问  /client/api     [访问正常,返回200]    查看服务器打印的session_id,body,method,header,encoding等信息正确
+//访问  /client/timeout [超过请求时间.返回400] i/o timeout
 
 func main() {
 	app.Start()
