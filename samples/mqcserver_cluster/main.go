@@ -14,7 +14,6 @@ import (
 
 var app = hydra.NewApp(
 	hydra.WithServerTypes(mqc.MQC, http.API),
-	hydra.WithServerTypes(mqc.MQC),
 	hydra.WithPlatName("hydra_test"),
 	hydra.WithSystemName("mqc_cluster"),
 	hydra.WithClusterName("t"),
@@ -36,7 +35,7 @@ func init() {
 	})
 
 	app.API("/mqc/sharding", func(ctx context.IContext) (r interface{}) {
-		return reg.Update(confPath, `{"status":"start","sharding":3,"addr":"redis://xxx"}`)
+		return reg.Update(confPath, `{"status":"start","sharding":2,"addr":"redis://xxx"}`)
 	})
 
 	app.API("/mqc/p2p", func(ctx context.IContext) (r interface{}) {
@@ -46,7 +45,7 @@ func init() {
 
 //消息队列服务器异常关闭后正常启动，服务是否自动恢复
 //启动服务 ./cluster_master run 启动3个mqc服务(仅一个服务开启api服务)
-//反复调用/mqc/master,mqc/stopsharding,mqc/p2p 查看服务器在模式相互切换时是否正常
+//反复调用/mqc/master,mqc/sharding,mqc/p2p 查看服务器在模式相互切换时是否正常
 func main() {
 	app.Start()
 }
