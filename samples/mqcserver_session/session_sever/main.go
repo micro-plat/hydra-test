@@ -27,6 +27,12 @@ func init() {
 			return err
 		}
 		ctx.Log().Info("mqc-map:", m)
+		s, q, err := ctx.Request().GetFullRaw()
+		if err != nil {
+			return err
+		}
+		ctx.Log().Info("mqc-body:", string(s))
+		ctx.Log().Info("mqc-query:", q)
 		return
 	})
 }
