@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/micro-plat/hydra/conf/app"
@@ -75,13 +76,19 @@ func (w *Responsive) getServer(cnf app.IAPPConf) (*CusServer, error) {
 	srvCnf := cnf.GetServerConf()
 	data := types.XMap{}
 	srvCnf.GetMainObject(&data)
-	routerconf, err := CusRouters.GetRouters()
+
+	rawConf, err := srvCnf.GetSubConf("router")
+	rawBytes := rawConf.GetRaw()
+	fmt.Println("rawBytes:", string(rawBytes))
+	routers := &RouterList{}
+	json.Unmarshal(rawBytes, routers)
+
 	if err != nil {
 		return nil, err
 	}
 	return NewServer(tp,
 		data.GetString("address"),
-		routerconf.GetRouters(),
+		routers,
 	)
 
 }

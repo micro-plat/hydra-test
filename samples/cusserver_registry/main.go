@@ -23,9 +23,9 @@ func init() {
 	hydra.Conf.API(":50019")
 
 	hydraApp.API("/custom/registry/api", func(ctx hydra.IContext) interface{} {
-		regist, err := registry.NewRegistry(global.Def.GetRegistryAddr(), ctx.Log())
+		regist, err := registry.GetRegistry(global.Def.GetRegistryAddr(), ctx.Log())
 		if err != nil {
-			ctx.Log().Error("registry.NewRegistry:", err)
+			ctx.Log().Error("registry.GetRegistry:", err)
 		}
 		data, version, err := regist.GetValue("/hydratest/cusserve_registry/api/test/conf")
 		if err != nil {

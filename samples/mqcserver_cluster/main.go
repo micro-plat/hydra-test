@@ -20,7 +20,7 @@ var app = hydra.NewApp(
 	hydra.WithRegistry("zk://192.168.0.101"),
 )
 var confPath = "/hydra_test/mqc_cluster/mqc/t/conf"
-var reg, _ = registry.NewRegistry("zk://192.168.0.101", logger.New("hydra"))
+var reg, _ = registry.GetRegistry("zk://192.168.0.101", logger.New("hydra"))
 
 func init() {
 	hydra.Conf.API(":8070")

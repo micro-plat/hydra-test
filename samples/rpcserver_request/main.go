@@ -156,6 +156,38 @@ var rpcProc = func(ctx hydra.IContext) (r interface{}) {
 		input = map[string]string{
 			"order": "78910",
 		}
+	case "mapintjson":
+		ctx.Response().ContentType("appliction/json")
+		input = map[string]int{
+			"order": 12345678910123456,
+		}
+	case "mapintxml": //不支持map 转xml
+		ctx.Response().ContentType("appliction/xml")
+		input = map[string]int{
+			"order": 12345678910123456,
+		}
+	case "mapfloatjson":
+		ctx.Response().ContentType("appliction/json")
+		input = map[string]float64{
+			"order": 12345678910123456.1,
+		}
+	case "mapfloatxml": //不支持map 转xml
+		ctx.Response().ContentType("appliction/xml")
+		input = map[string]float64{
+			"order": 12345678910123456.2,
+		}
+	case "mapstringxmlarray": //不支持Array和Slice 类型
+		ctx.Response().ContentType("appliction/xml")
+		input = []map[string]string{
+			map[string]string{"order": "78911"},
+			map[string]string{"order": "78912"},
+		}
+	case "mapstringjsonarray": 
+		ctx.Response().ContentType("appliction/json")
+		input = []map[string]string{
+			map[string]string{"order": "78911"},
+			map[string]string{"order": "78912"},
+		}
 	case "mapinterfacejson":
 		ctx.Response().ContentType("appliction/json")
 
