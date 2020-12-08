@@ -67,7 +67,7 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 	ver, _ := json.Marshal(input)
 	value := string(ver)
 	queueObj := components.Def.Queue().GetRegularQueue("redis")
-	if err := queueObj.Push(queue, value); err != nil {
+	if err := queueObj.Send(queue, value); err != nil {
 		ctx.Log().Errorf("发送消息队列异常：%s", queue)
 		return
 	}
@@ -80,7 +80,7 @@ var funcAPI1 = func(ctx hydra.IContext) (r interface{}) {
 	value := fmt.Sprint(`{"param1":"@#$%^&*()_+~锅饭都是","param2":"true","param3":"1024","param4":"10.24","param5":"1,2","param6":"2020/11/12 11:12:59","param7":"{}"}`)
 	ctx.Log().Info("-------------:", value)
 	queueObj := components.Def.Queue().GetRegularQueue("redis")
-	if err := queueObj.Push(queue, value); err != nil {
+	if err := queueObj.Send(queue, value); err != nil {
 		ctx.Log().Errorf("发送消息队列异常：%s", queue)
 		return
 	}

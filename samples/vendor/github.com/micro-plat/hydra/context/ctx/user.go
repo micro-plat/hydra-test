@@ -5,10 +5,7 @@ import (
 	"github.com/micro-plat/hydra/context"
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/lib4go/types"
-	"github.com/micro-plat/lib4go/utility"
 )
-
-var xRequestID = "X-Request-Id"
 
 var _ context.IUser = &user{}
 
@@ -32,10 +29,10 @@ func NewUser(ctx context.IInnerContext, gid string, meta conf.IMeta) *user {
 
 //GetRequestID 获取请求编号
 func (c *user) GetRequestID() string {
-	ids := c.ctx.GetHeaders()[xRequestID]
+	ids := c.ctx.GetHeaders()[context.XRequestID]
 	c.requestID = types.GetStringByIndex(ids, 0, c.requestID)
 	if c.requestID == "" {
-		c.requestID = utility.GetGUID()[0:9]
+		c.requestID = context.NewRequestID()
 	}
 	return c.requestID
 }

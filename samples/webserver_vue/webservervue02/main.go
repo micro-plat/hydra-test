@@ -25,7 +25,7 @@ func init() {
 		static.WithArchive("staticfile"),
 		static.WithExts(".so", ".exe", ".pdf", ".txt", ".zip", ".gz", ".7z", ".tar", ".war", ".html", ".js", ".css", ".htm", ".ico", ".png", ".jpg", ".jpeg", ".md"),
 		static.WithExclude(".png", ".exe", "/press/file7.gz", "/press/"),
-		static.WithFirstPage("index.htm"),
+		static.WithHomePage("index.htm"),
 		static.WithPrefix("/taosytest"),
 		static.WithRewriters("/file5", "/"))
 

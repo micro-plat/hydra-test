@@ -10,9 +10,12 @@ import (
 	"github.com/micro-plat/hydra/conf/server/router"
 	"github.com/micro-plat/lib4go/logger"
 	"github.com/micro-plat/lib4go/types"
+	"github.com/micro-plat/lib4go/utility"
 )
 
 const (
+	XRequestID = "X-Request-Id"
+
 	JSONF  = "application/json; charset=%s"
 	XMLF   = "application/xml; charset=%s"
 	YAMLF  = "text/yaml; charset=%s"
@@ -80,6 +83,9 @@ type IPath interface {
 	//GetMethod 获取服务请求方法GET POST PUT DELETE 等
 	GetMethod() string
 
+	//Param 路由参数
+	Params() types.XMap
+
 	//GetRouter 获取当前请求对应的路由信息
 	GetRouter() (*router.Router, error)
 
@@ -117,9 +123,6 @@ type IFile interface {
 type IRequest interface {
 	//Path 地址、头、cookie相关信息
 	Path() IPath
-
-	//Param 路由参数
-	Param(string) string
 
 	//Bind 将请求的参数绑定到对象
 	Bind(obj interface{}) error
@@ -250,4 +253,9 @@ type IContext interface {
 
 	//Close 关闭并释放资源
 	Close()
+}
+
+//NewRequestID 获取请求编号
+func NewRequestID() string {
+	return utility.GetGUID()[0:9]
 }

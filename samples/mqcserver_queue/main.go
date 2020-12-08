@@ -73,7 +73,7 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 		return
 	}
 	queueObj := components.Def.Queue().GetRegularQueue("redis")
-	if err := queueObj.Push(queue, value); err != nil {
+	if err := queueObj.Send(queue, value); err != nil {
 		ctx.Log().Errorf("发送消息队列异常：%s", queue)
 		return
 	}
