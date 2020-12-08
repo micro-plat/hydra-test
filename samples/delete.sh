@@ -22,7 +22,16 @@ delete_go_app() {
                 rm -f $project_name
                 cd $BASE_DIR
                 sleep 0.1
-            fi            
+            fi
+            if [ "$file" = "logger.toml" ] 
+            then
+                cd $1
+                project_name="${1##*/}"
+                echo "remove file $1/logger.toml"
+                rm -f logger.toml
+                cd $BASE_DIR
+                sleep 0.1
+            fi             
         fi
     done
 }

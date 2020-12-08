@@ -5,6 +5,7 @@ import (
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
 	"github.com/micro-plat/hydra/conf/vars/redis"
 	"github.com/micro-plat/hydra/context"
+	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 	"github.com/micro-plat/hydra/hydra/servers/mqc"
 	"github.com/micro-plat/hydra/registry"
@@ -13,14 +14,14 @@ import (
 
 var app = hydra.NewApp(
 	hydra.WithServerTypes(mqc.MQC, http.API),
-	hydra.WithPlatName("hydra_test"),
+	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("mqcserver_exp"),
 	hydra.WithClusterName("t"),
-	hydra.WithRegistry("lm://./"),
+	hydra.WithRegistry("lm://."),
 )
 
-var confPath = "/hydra_test/mqcserver_exp/mqc/t/conf"
-var reg, _ = registry.GetRegistry("lm://./", logger.New("hydra"))
+var confPath = "/hydratest/mqcserver_exp/mqc/t/conf"
+var reg, _ = registry.GetRegistry(global.Def.RegistryAddr, logger.New("hydra"))
 
 func init() {
 	hydra.Conf.API(":8070")

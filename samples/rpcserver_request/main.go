@@ -39,7 +39,33 @@ func init() {
 
 //1.1 安装程序 ./rpcserver_request conf install -cover
 //1.2 使用 ./rpcserver_request run
-//1.4 调用接口执行循环访问rpc：http://localhost:8070/hydratest/rpcserbalance/apiip 观察两台服务器的执行日志，轮流访问两台服务器
+//1.1.1 http://localhost:50026/api/request/xml 调用xml 格式输出
+//1.1.2 http://localhost:50026/api/request/json 调用json 格式输出
+//1.1.3 http://localhost:50026/api/request/int 调用int 格式输出
+//1.1.4 http://localhost:50026/api/request/int32 调用int32 格式输出
+//1.1.5 http://localhost:50026/api/request/int64 调用int64 格式输出
+//1.1.6 http://localhost:50026/api/request/float 调用float 格式输出
+//1.1.7 http://localhost:50026/api/request/float32 调用float32 格式输出
+//1.1.8 http://localhost:50026/api/request/float64 调用float64 格式输出
+//1.1.9 http://localhost:50026/api/request/string 调用string 格式输出
+//1.1.10 http://localhost:50026/api/request/time 调用time 格式输出
+//1.1.11 http://localhost:50026/api/request/bool 调用bool 格式输出
+//1.1.12 http://localhost:50026/api/request/structjson 调用structjson 格式输出
+//1.1.13 http://localhost:50026/api/request/structxml 调用structxml 格式输出
+//1.1.14 http://localhost:50026/api/request/structptrjson 调用structptrjson 格式输出
+//1.1.15 http://localhost:50026/api/request/structptrxml 调用structptrxml 格式输出
+//1.1.16 http://localhost:50026/api/request/mapintjson 调用mapintjson 格式输出
+//1.1.17 http://localhost:50026/api/request/mapintxml 调用mapintxml格式输出
+//1.1.18 http://localhost:50026/api/request/mapfloatjson 调用mapfloatjson格式输出
+//1.1.19 http://localhost:50026/api/request/mapfloatxml 调用mapfloatxml格式输出
+//1.1.20 http://localhost:50026/api/request/mapstringxmlarray 调用mapstringxmlarray格式输出
+//1.1.21 http://localhost:50026/api/request/mapstringjsonarray 调用mapstringjsonarray格式输出
+//1.1.22 http://localhost:50026/api/request/mapinterfacejson 调用mapinterfacejson格式输出
+//1.1.23 http://localhost:50026/api/request/mapinterfacexml 调用mapinterfacexml格式输出
+//1.1.24 http://localhost:50026/api/request/error 调用error 格式输出,状态码：400
+//1.1.25 http://localhost:50026/api/request/errorcustom 调用errorcustom格式输出，状态码：400
+//1.1.27 http://localhost:50026/api/request/body 调用xml 格式输出
+
 func main() {
 	app.Start()
 }
@@ -182,7 +208,7 @@ var rpcProc = func(ctx hydra.IContext) (r interface{}) {
 			map[string]string{"order": "78911"},
 			map[string]string{"order": "78912"},
 		}
-	case "mapstringjsonarray": 
+	case "mapstringjsonarray":
 		ctx.Response().ContentType("appliction/json")
 		input = []map[string]string{
 			map[string]string{"order": "78911"},
