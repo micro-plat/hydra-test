@@ -22,7 +22,7 @@ func ExecuteHandler(service string) Handler {
 		}
 		//处理RPC服务调用
 		if addr, ok := global.IsProto(service, global.ProtoRPC); ok {
-			response, err := components.Def.RPC().GetRegularRPC().RequestByCtx(addr, ctx)
+			response, err := components.Def.RPC().GetRegularRPC().Swap(addr, ctx)
 			if err != nil {
 				ctx.Response().Write(response.Status, err)
 				return
@@ -35,7 +35,7 @@ func ExecuteHandler(service string) Handler {
 		h, ok := services.Def.GetHandler(ctx.APPConf().GetServerConf().GetServerType(), service)
 		if !ok {
 			ctx.Response().AddSpecial("handler")
-			ctx.Response().Abort(http.StatusNotFound, fmt.Errorf("未找到服务%s", service))
+			ctx.Response().Abort(http.StatusNotFound, fmt.Errorf("未找到服务:%s", service))
 			return
 		}
 

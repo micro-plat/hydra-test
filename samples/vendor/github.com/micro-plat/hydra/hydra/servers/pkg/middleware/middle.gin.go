@@ -26,8 +26,15 @@ func (g *ginCtx) load() {
 		}
 	})
 }
-
+func (g *ginCtx) GetParams() map[string]interface{} {
+	params := make(map[string]interface{})
+	for _, v := range g.Context.Params {
+		params[v.Key] = v.Value
+	}
+	return params
+}
 func (g *ginCtx) GetRouterPath() string {
+
 	return g.Context.FullPath()
 }
 func (g *ginCtx) GetBody() io.ReadCloser {
@@ -43,6 +50,7 @@ func (g *ginCtx) GetURL() *url.URL {
 func (g *ginCtx) GetHeaders() http.Header {
 	return g.Request.Header
 }
+
 func (g *ginCtx) GetCookies() []*http.Cookie {
 	return g.Request.Cookies()
 }
@@ -60,6 +68,11 @@ func (g *ginCtx) Status() int {
 func (g *ginCtx) Written() bool {
 	return g.Writer.Written()
 }
+
+func (g *ginCtx) WHeaders() http.Header {
+	return g.Writer.Header()
+}
+
 func (g *ginCtx) WHeader(k string) string {
 	return g.Writer.Header().Get(k)
 }

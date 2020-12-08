@@ -94,7 +94,6 @@ func (m *Metric) Handle() Handler {
 		statusCode, _, _ := ctx.Response().GetRawResponse()
 		responseName := metrics.MakeName(ctx.APPConf().GetServerConf().GetServerType()+".server.response", metrics.METER, "server", ctx.APPConf().GetServerConf().GetServerName(), "host", m.ip,
 			"url", url, "status", fmt.Sprintf("%d", statusCode)) //完成数
-
 		//7. 对服务处理结果的状态码进行上报
 		metrics.GetOrRegisterMeter(responseName, m.currentRegistry).Mark(1)
 	}
