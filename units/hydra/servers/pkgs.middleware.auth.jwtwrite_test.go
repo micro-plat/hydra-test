@@ -8,10 +8,10 @@ import (
 	"github.com/micro-plat/hydra/conf"
 	octx "github.com/micro-plat/hydra/context/ctx"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/server/auth/jwt"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 	wjwt "github.com/micro-plat/lib4go/security/jwt"
 	"github.com/micro-plat/lib4go/utility"
 )

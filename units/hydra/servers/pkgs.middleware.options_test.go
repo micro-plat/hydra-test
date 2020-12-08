@@ -3,9 +3,9 @@ package servers
 import (
 	"testing"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestOptions(t *testing.T) {

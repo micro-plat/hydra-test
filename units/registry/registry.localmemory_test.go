@@ -8,7 +8,7 @@ import (
 
 	"github.com/micro-plat/hydra/registry"
 	"github.com/micro-plat/hydra/registry/registry/localmemory"
-	"github.com/micro-plat/hydra/test/assert"
+	"github.com/micro-plat/lib4go/assert"
 	r "github.com/micro-plat/lib4go/registry"
 	"github.com/micro-plat/lib4go/types"
 )

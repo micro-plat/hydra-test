@@ -20,14 +20,14 @@ import (
 
 	varredis "github.com/micro-plat/hydra/conf/vars/redis"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	_ "github.com/micro-plat/hydra/components/caches/cache/redis"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/hydra/servers/mqc"
 	"github.com/micro-plat/hydra/registry"
 	"github.com/micro-plat/hydra/services"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 	"github.com/micro-plat/lib4go/logger"
 )
 

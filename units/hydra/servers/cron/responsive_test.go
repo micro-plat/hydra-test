@@ -9,13 +9,13 @@ import (
 	"testing"
 	"time"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/conf/server/task"
 	"github.com/micro-plat/hydra/hydra/servers/cron"
 	"github.com/micro-plat/hydra/registry"
 	"github.com/micro-plat/hydra/services"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 	"github.com/micro-plat/lib4go/logger"
 )
 

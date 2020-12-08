@@ -3,10 +3,10 @@ package servers
 import (
 	"testing"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 // tag中间件只有在websocket在使用    现在websocket服务暂时不开放

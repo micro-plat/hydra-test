@@ -8,6 +8,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	xrpc "github.com/micro-plat/hydra/components/rpcs/rpc"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/conf/server/router"
@@ -16,8 +17,7 @@ import (
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/hydra/servers/rpc"
 	"github.com/micro-plat/hydra/services"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 	"github.com/micro-plat/lib4go/errs"
 	"github.com/micro-plat/lib4go/types"
 )

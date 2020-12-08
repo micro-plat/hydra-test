@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"testing"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/components/queues/mq/redis"
 	"github.com/micro-plat/hydra/conf/server/queue"
 	"github.com/micro-plat/hydra/conf/server/task"
@@ -15,8 +16,7 @@ import (
 	"github.com/micro-plat/hydra/hydra/servers/mqc"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/dispatcher"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 // It accepts

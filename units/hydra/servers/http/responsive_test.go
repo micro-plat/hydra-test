@@ -10,12 +10,12 @@ import (
 	"testing"
 	"time"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 	"github.com/micro-plat/hydra/services"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestNewResponsive(t *testing.T) {

@@ -3,6 +3,7 @@ package context
 import (
 	"testing"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/conf/server/api"
@@ -13,8 +14,7 @@ import (
 	varredis "github.com/micro-plat/hydra/conf/vars/redis"
 	"github.com/micro-plat/hydra/context"
 	"github.com/micro-plat/hydra/context/ctx"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func Test_rpath_GetRouter_WithPanic(t *testing.T) {
