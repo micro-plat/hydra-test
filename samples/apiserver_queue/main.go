@@ -40,34 +40,23 @@ func init() {
 
 	app.API("/add/redisqueue", func(ctx hydra.IContext) (r interface{}) {
 		c := components.Def.Queue().GetRegularQueue("xxx")
-		c.Push("mqc_apiserver", `{"key":"value"}`)
+		c.Send("mqc_apiserver", `{"key":"value"}`)
 		return
 	})
 	app.API("/add/mqttqueue", func(ctx hydra.IContext) (r interface{}) {
 		c := components.Def.Queue().GetRegularQueue("mqtt")
-		c.Push("mqc_apiserver", `{"key":"value"}`)
+		c.Send("mqc_apiserver", `{"key":"value"}`)
 		return
 	})
 
 	app.API("/test/redisqueue", func(ctx hydra.IContext) (r interface{}) {
 		c := components.Def.Queue().GetRegularQueue("mqtt")
-		err := c.Push("mqc_apiserver_test", `{"key":"value"}`)
+		err := c.Send("mqc_apiserver_test", `{"key":"value"}`)
 		if err != nil {
 			return err
 		}
-		count, err := c.Count("mqc_apiserver_test")
-		if err != nil {
-			return err
-		}
-		ctx.Log().Info("queue.Count:", count)
 
-		p, err := c.Pop("mqc_apiserver_test")
-		if err != nil {
-			return err
-		}
-		ctx.Log().Info("queue.Pop:", p)
-
-		return c.Close()
+		return nil
 	})
 
 }

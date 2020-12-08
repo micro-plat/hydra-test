@@ -10,6 +10,11 @@ import (
 func getFlags() []cli.Flag {
 	flags := pkgs.GetBaseFlags()
 	flags = append(flags, cli.StringFlag{
+		Name:        "debug,d",
+		Destination: &global.FlagVal.IsDebug,
+		Usage:       `-调试模式，打印更详细的系统运行日志，避免将详细的错误信息返回给调用方`,
+	})
+	flags = append(flags, cli.StringFlag{
 		Name:        "trace,t",
 		Destination: &global.Def.Trace,
 		Usage:       `-性能分析。支持:cpu,mem,block,mutex,web`,
