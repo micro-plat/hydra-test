@@ -21,7 +21,7 @@ func init() {
 
 // apiserver-header中间件设置空配置demo
 
-//1.1 安装程序 sudo ./headerserver01 conf install -cover
+//1.1 安装程序 ./headerserver01 conf install -cover
 //1.2 使用 ./headerserver01 run
 //1.3 调用接口：http://localhost:8070/hydratest/apiserver/header 判定配置是否正确
 func main() {

@@ -23,7 +23,7 @@ func init() {
 
 //apiserver 命令覆盖代码配置demo
 
-//1.1 安装程序 sudo ./servercode02 conf install -p hydratest1 -c taosytest1 -s apiservercode1 -S web -cover
+//1.1 安装程序 ./servercode02 conf install -p hydratest1 -c taosytest1 -s apiservercode1 -S web -cover
 //1.2 使用 ./servercode02 run -p hydratest1 -c taosytest1 -s apiservercode1 -S web
 //1.3 调用接口：http://localhost:8089/hydratest/apiserver/codeweb 判定配置是否正确
 func main() {

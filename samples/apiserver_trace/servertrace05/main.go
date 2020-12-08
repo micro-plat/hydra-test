@@ -25,7 +25,7 @@ func init() {
 
 // 代码安装开启trace配置，跟踪web性能demo
 
-//1.1 安装程序 sudo ./servertrace05 conf install -cover
+//1.1 安装程序 ./servertrace05 conf install -cover
 //1.2 使用默认端口监听 ./servertrace05 run -t web
 //1.3 调用接口：http://localhost:8070/hydratest/apiserver/trace 判定配置是否正确
 //1.4 调用性能跟踪web：http://0.0.0.0:19999/debug/pprof/ 判定配置是否开启

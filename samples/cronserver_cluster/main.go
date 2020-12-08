@@ -29,7 +29,7 @@ func init() {
 
 // cronserver_cluster 集群模式：对等、主从、分片，变更后自动切换模式测试demo
 //因为是集群情况测试，所以需要运行多台服务器，分别复制cronserver_cluster1和cronserver_cluster2两个执行文件
-//1.1 安装程序：sudo ./cronserver_cluster conf install -cover
+//1.1 安装程序：./cronserver_cluster conf install -cover
 //1.2 运行cronserver_cluster： ./cronserver_cluster run
 //1.3 运行cronserver_cluster1： ./cronserver_cluster1 run
 //1.4 运行cronserver_cluster2： ./cronserver_cluster2 run

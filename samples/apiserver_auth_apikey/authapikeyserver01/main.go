@@ -21,7 +21,7 @@ func init() {
 
 //apiserver_apikey 中间件被禁用demo
 
-//1.1  sudo ./authapikeyserver01 conf install -cover
+//1.1 ./authapikeyserver01 conf install -cover
 //1.2 使用 ./authapikeyserver01 run
 //1.3 不签名请求：http://localhost:8071/hydratest/apiserver/apikey  返回 200/success
 //1.4 随意签名请求：http://localhost:8071/hydratest/apiserver/apikey?sign=34fvfefg45sdf  返回 200/success

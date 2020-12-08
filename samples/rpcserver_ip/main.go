@@ -31,7 +31,7 @@ func init() {
 
 // rpcserver-ip访问demo
 
-//1.1 安装程序 sudo ./rpcserver_ip conf install -cover
+//1.1 安装程序 ./rpcserver_ip conf install -cover
 //1.2 使用 ./rpcserver_ip run
 //1.3 调用错误返回结果接口：http://localhost:8070/hydratest/rpcserver/apiip/fail 观察日志中rpc如参是否正确 返回值： 666/rpc服务返回异常
 //1.4 调用正确返回结果接口：http://localhost:8070/hydratest/rpcserver/apiip/succ 观察日志中rpc如参是否正确 返回值： 200/rpcsuccess

@@ -21,7 +21,7 @@ func init() {
 
 //apiserver 黑名单中间件配置启用*模糊匹配demo
 
-//1.1  sudo ./blacklistserver03 conf install -cover
+//1.1  ./blacklistserver03 conf install -cover
 //1.2 使用 ./blacklistserver03 run
 //1.3 调用接口：http://localhost:8071/hydratest/apiserver/blacklist 通过机器192.168.5.107访问 可正常返回403/黑名单限制[%s]不允许访问
 //1.4 调用接口：http://localhost:8071/hydratest/apiserver/blacklist 通过机器192.168.5.94访问 可正常返回403/黑名单限制[%s]不允许访问

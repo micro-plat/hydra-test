@@ -26,8 +26,8 @@ func init() {
 
 // 代码安装开启trace配置，跟踪cpu性能demo
 
-//1.1 安装程序 sudo ./servertrace01 conf install -cover
-//1.2 使用 ./servertrace01 run -t cpu
+//1.1 安装程序 ./servertrace01 conf install -cover
+//1.2 使用 ./servertrace01 run
 //1.3 调用接口：http://localhost:8070/hydratest/apiserver/trace 判定配置是否正确
 
 //正确业务逻辑

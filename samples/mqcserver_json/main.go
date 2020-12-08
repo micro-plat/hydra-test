@@ -33,7 +33,7 @@ func init() {
 }
 
 // mqcserver-json json内容在mqcserver中解析demo
-//1.1 安装程序 sudo ./mqcserver_json conf install -cover
+//1.1 安装程序 ./mqcserver_json conf install -cover
 //1.2 使用 ./mqcserver_json run
 
 //1.3 调用返回结果接口：http://localhost:8070/hydratest/mqcserver/apijson 观察日志是否与api中初始化数据相同

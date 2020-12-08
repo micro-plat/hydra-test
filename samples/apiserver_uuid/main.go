@@ -26,7 +26,7 @@ func init() {
 }
 
 // apiserver_uuid uuid同集群下并发获取demo
-//1.1 安装程序 sudo ./apiserver_uuid conf install -cover
+//1.1 安装程序 ./apiserver_uuid conf install -cover
 //1.2 使用 ./apiserver_uuid run
 
 //1.3 调用接口：http://localhost:8070/hydratest/apiserverUUID/get  观察日志是否有异常,1000并发的耗时情况
