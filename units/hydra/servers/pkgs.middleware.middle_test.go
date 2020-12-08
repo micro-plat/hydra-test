@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/global"
 	shttp "github.com/micro-plat/hydra/hydra/servers/http"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestHandler_GinFunc(t *testing.T) {

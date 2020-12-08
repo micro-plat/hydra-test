@@ -7,7 +7,7 @@ import (
 
 	"github.com/micro-plat/hydra/components/rpcs/rpc/pb"
 	"github.com/micro-plat/hydra/hydra/servers/rpc"
-	"github.com/micro-plat/hydra/test/assert"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestNewRequest(t *testing.T) {

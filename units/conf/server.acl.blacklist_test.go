@@ -9,10 +9,10 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/server/acl/blacklist"
 	_ "github.com/micro-plat/hydra/registry/registry/localmemory"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestBlackListNew(t *testing.T) {

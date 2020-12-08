@@ -6,11 +6,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/server/api"
 	"github.com/micro-plat/hydra/registry"
 	"github.com/micro-plat/hydra/registry/pub"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 	"github.com/micro-plat/lib4go/jsons"
 )
 

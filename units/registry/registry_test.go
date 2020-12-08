@@ -14,8 +14,8 @@ import (
 	_ "github.com/micro-plat/hydra/registry/registry/zookeeper"
 	"github.com/micro-plat/lib4go/logger"
 
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/hydra-test/units/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 // 私有变量的测试
