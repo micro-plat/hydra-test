@@ -35,8 +35,9 @@ func init() {
 	app.API("/api/request", rpcRequest)
 
 	app.API("/api/remoterpc", "rpc:///rpc/localrpc@hydratest")
-	app.API("/api/remoterpcip", fmt.Sprintf("rpc://%s:50009/rpc/localrpc", localIP))
-
+	rpcSrv:=fmt.Sprintf("rpc:///rpc/localrpc@%s:50009", localIP)
+	
+ 	app.API("/api/remoterpcip", rpcSrv) 
 	app.RPC("/rpc/localrpc", func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Info("/rpc/localrpc:RequestID:", ctx.User().GetRequestID(), ctx.Request().GetString("name"))
 		return ctx.User().GetRequestID()
