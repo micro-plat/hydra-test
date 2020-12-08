@@ -26,18 +26,17 @@ func init() {
 		task.NewTask("@now", "/hydratest/cronserverCycle/cron2"),
 		task.NewTask("@every 5m", "/hydratest/cronserverCycle/cron4"),
 		task.NewTask("@every 24h", "/hydratest/cronserverCycle/cron6"),
-		// task.NewTask("0 30 * * * *", "/hydratest/cronserverCycle/cron8"),
+		task.NewTask("30 6 * * 5", "/hydratest/cronserverCycle/cron8"),
 	)
 	app.API("/hydratest/cronserverCycle/show", funcAPI)
-	app.CRON("/hydratest/cronserverCycle/cron1", funcCycle1, "@once")
 	app.CRON("/hydratest/cronserverCycle/cron2", funcCycle2)
 	app.CRON("/hydratest/cronserverCycle/cron3", funcCycle3, "@every 10s")
 	app.CRON("/hydratest/cronserverCycle/cron4", funcCycle4)
 	app.CRON("/hydratest/cronserverCycle/cron5", funcCycle5, "@every 2h")
 	app.CRON("/hydratest/cronserverCycle/cron6", funcCycle6)
-	app.CRON("/hydratest/cronserverCycle/cron7", funcCycle7)
+	app.CRON("/hydratest/cronserverCycle/cron7", funcCycle7, "30 6 * * *")
 	app.CRON("/hydratest/cronserverCycle/cron8", funcCycle8)
-	app.CRON("/hydratest/cronserverCycle/cron9", funcCycle9)
+	app.CRON("/hydratest/cronserverCycle/cron9", funcCycle9, "30 6 * 5,6 *")
 }
 
 // cronserver_cycle 对于不同cron配置循环执行次数测试demo
@@ -57,18 +56,6 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 	uuidMap.Set("nowTime", time.Now().Format("2006-01-02 15:04:05"))
 	res := uuidMap.Items()
 	return res
-}
-
-var funcCycle1 = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("cronserver_cycle once单次执行次数")
-	c, e := uuidMap.Get("once")
-	if !e {
-		uuidMap.Set("once", 1)
-	} else {
-		count := types.GetInt(c) + 1
-		uuidMap.Set("once", count)
-	}
-	return
 }
 
 var funcCycle2 = func(ctx hydra.IContext) (r interface{}) {
@@ -133,7 +120,7 @@ var funcCycle6 = func(ctx hydra.IContext) (r interface{}) {
 
 var funcCycle7 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("cronserver_cycle 每天上午6:30执行一次")
-	c, e := uuidMap.Get("Week6-30")
+	c, e := uuidMap.Get("EveryDay6-30")
 	if !e {
 		uuidMap.Set("EveryDay6-30", 1)
 	} else {

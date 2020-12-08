@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"sync"
 	"time"
 
@@ -49,11 +50,11 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 				defer wg.Done()
 				compare(clusterID)
 			}()
-			// wg.Add(1)
-			// go func() {
-			// 	defer wg.Done()
-			// 	compare("123456")
-			// }()
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				compare("123456")
+			}()
 		}
 		wg.Wait()
 		end := time.Now()
@@ -65,9 +66,9 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 }
 
 func compare(clusterID string) {
-	uid := uuid.Get(clusterID).ToString()
+	uid := uuid.GetSUUID(clusterID).Get().ToString()
 	if uuidMap.Has(uid) {
-		panic("uuid重复")
+		panic(fmt.Sprintf("uuid重复:%s:%D", uid, uuidMap.Count()))
 	}
 	uuidMap.Set(uid, "1")
 }
