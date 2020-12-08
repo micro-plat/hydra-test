@@ -7,7 +7,7 @@ import (
 )
 
 var addCron1 = func(ctx hydra.IContext) (r interface{}) {
-	reg, err := registry.NewRegistry("lm://./", logger.New("hydra"))
+	reg, err := registry.GetRegistry("lm://./", logger.New("hydra"))
 	if err != nil {
 		return err
 	}
@@ -20,7 +20,7 @@ var addCron1 = func(ctx hydra.IContext) (r interface{}) {
 }
 
 var deleteCron1 = func(ctx hydra.IContext) (r interface{}) {
-	reg, err := registry.NewRegistry("lm://./", logger.New("hydra"))
+	reg, err := registry.GetRegistry("lm://./", logger.New("hydra"))
 	if err != nil {
 		return err
 	}
@@ -33,7 +33,7 @@ var deleteCron1 = func(ctx hydra.IContext) (r interface{}) {
 }
 
 var updateCron2 = func(ctx hydra.IContext) (r interface{}) {
-	reg, err := registry.NewRegistry("lm://./", logger.New("hydra"))
+	reg, err := registry.GetRegistry("lm://./", logger.New("hydra"))
 	if err != nil {
 		return err
 	}

@@ -10,7 +10,7 @@ import (
 )
 
 var getCron = func(ctx hydra.IContext) (r interface{}) {
-	reg, err := registry.NewRegistry("lm://./", logger.New("hydra"))
+	reg, err := registry.GetRegistry("lm://./", logger.New("hydra"))
 	if err != nil {
 		return err
 	}

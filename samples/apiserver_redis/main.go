@@ -190,7 +190,7 @@ var getsHandler = func(ctx hydra.IContext) (r interface{}) {
 
 var config = func(ctx hydra.IContext) (r interface{}) {
 	fmt.Println("0")
-	regst, err := registry.NewRegistry(global.Def.RegistryAddr, global.Def.Log())
+	regst, err := registry.GetRegistry(global.Def.RegistryAddr, global.Def.Log())
 	if err != nil {
 		return fmt.Errorf("NewRegistry:%v", err)
 	}

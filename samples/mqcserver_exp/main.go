@@ -20,7 +20,7 @@ var app = hydra.NewApp(
 )
 
 var confPath = "/hydra_test/mqcserver_exp/mqc/t/conf"
-var reg, _ = registry.NewRegistry("lm://./", logger.New("hydra"))
+var reg, _ = registry.GetRegistry("lm://./", logger.New("hydra"))
 
 func init() {
 	hydra.Conf.API(":8070")

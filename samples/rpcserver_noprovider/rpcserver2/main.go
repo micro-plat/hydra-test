@@ -137,7 +137,7 @@ func rpcLocal(ctx hydra.IContext) interface{} {
 }
 
 func rpcStart(ctx hydra.IContext) interface{} {
-	regst, err := registry.NewRegistry(global.Def.RegistryAddr, global.Def.Log())
+	regst, err := registry.GetRegistry(global.Def.RegistryAddr, global.Def.Log())
 	if err != nil {
 		return err
 	}
@@ -150,7 +150,7 @@ func rpcStart(ctx hydra.IContext) interface{} {
 }
 
 func rpcStop(ctx hydra.IContext) interface{} {
-	regst, err := registry.NewRegistry(global.Def.RegistryAddr, global.Def.Log())
+	regst, err := registry.GetRegistry(global.Def.RegistryAddr, global.Def.Log())
 	if err != nil {
 		return err
 	}
