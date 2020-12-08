@@ -10,6 +10,7 @@ import (
 	"github.com/micro-plat/hydra/components/dlock"
 	"github.com/micro-plat/hydra/conf/server/api"
 	"github.com/micro-plat/hydra/hydra/servers/http"
+	"github.com/micro-plat/hydra/registry"
 )
 
 var app = hydra.NewApp(
@@ -43,15 +44,19 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("apiserver_dlock 高并发下调用偿试获取分布式锁测试demo")
 	count = 0
 	atomicCount = 0
-	registry := ctx.APPConf().GetServerConf().GetRegistry()
 	wg := &sync.WaitGroup{}
-	for i := 0; i < 3; i++ {
+	for i := 0; i < 1; i++ {
 		start := time.Now()
-		for j := 0; j < 1000; j++ {
+		for j := 0; j < 10; j++ {
 			wg.Add(1)
 			go func(count *int, atomicCount *int64) {
 				defer wg.Done()
-				dlockObj := dlock.NewLockByRegistry("tasoytest", registry)
+				regst, err := registry.CreateRegistry("zk://192.168.0.101", ctx.Log())
+				if err != nil {
+					ctx.Log().Errorf("获取注册中心异常，err:%v", err)
+					return
+				}
+				dlockObj := dlock.NewLockByRegistry("tasoytest", regst)
 				if err := dlockObj.TryLock(); err == nil {
 					defer dlockObj.Unlock()
 					*count++

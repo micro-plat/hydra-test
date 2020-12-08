@@ -12,10 +12,11 @@ var app = hydra.NewApp(
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserverras"),
 	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("lm://."),
+	hydra.WithRegistry("zk://192.168.0.101"),
 )
 
 func init() {
+	hydra.Conf.Vars().RPC("rpc")
 	hydra.Conf.API(":8070").Ras(ras.WithDisable(),
 		ras.WithAuths(
 			ras.New("/single/hydra/newversion/md5/auth@authserver.sas_debug",
@@ -43,14 +44,15 @@ func init() {
 			),
 		),
 	)
-	app.API("/hydratest/apiserverras/test", funcAPI)
 
+	app.API("/hydratest/apiserverras/test", funcAPI)
 }
 
 // apiserver_ras ras签名验证禁用测试demo
-//1.1 使用 ./cronserver_cycle run
+//1.1 使用 ./rasserver01 conf install -cover
+//1.2 使用 ./rasserver01 run
 
-//1.2 调用接口：http://localhost:8070/hydratest/apiserverras/test  禁用情况下，无任何签名参数也可以正常返回
+//1.3 调用接口：http://localhost:8070/hydratest/apiserverras/test  禁用情况下，无任何签名参数也可以正常返回
 func main() {
 	app.Start()
 }
