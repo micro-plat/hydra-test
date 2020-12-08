@@ -4,11 +4,11 @@ import (
 	"time"
 
 	"github.com/micro-plat/hydra"
+ 
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.Web),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("webserverstatic"),
