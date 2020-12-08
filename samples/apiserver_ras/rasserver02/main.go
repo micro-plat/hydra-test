@@ -12,13 +12,14 @@ var app = hydra.NewApp(
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserverras"),
 	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("lm://."),
+	hydra.WithRegistry("zk://192.168.0.101"),
 )
 
 func init() {
+	hydra.Conf.Vars().RPC("rpc")
 	hydra.Conf.API(":8070").Ras(ras.WithAuths(
 		ras.New("/single/hydra/newversion/md5/auth@authserver.sas_debug",
-			ras.WithRequest("/hydratest/apiserverras/test"), //需要验证的路由
+			ras.WithRequest("/hydratest/apiserverras/test2"), //需要验证的路由
 			// ras.WithRequired("test"),                        //设置必传字段
 			// ras.WithSignAlias("newsign"),                    //设置新的签名字段名（默认为：sign）
 			// ras.WithTimestampAlias("newtimestamp"),          //设置新的时间戳字段名（默认为：timestamp）
@@ -41,20 +42,51 @@ func init() {
 			),
 		),
 	))
-	app.API("/hydratest/apiserverras/test", nil) //不加入签名验证，通过该接口发起间接调用
-	app.API("/hydratest/apiserverras/test1", funcAPI)
-
+	app.API("/hydratest/apiserverras/test1", funcAPI1) //不加入签名验证,可直接返回成功
+	app.API("/hydratest/apiserverras/test2", funcAPI2)
 }
 
 // apiserver_ras ras签名验证默认配置测试demo
-//1.1 使用 ./cronserver_cycle run
+//1.1 使用 ./rasserver02 conf install -cover
+//1.1 使用 ./rasserver02 run
 
-//1.2 调用接口：http://localhost:8070/hydratest/apiserverras/test  禁用情况下，无任何签名参数也可以正常返回
+//1.2 调用不验签接口：http://localhost:8070/hydratest/apiserverras/test1  直接返回成功
+//1.2 调用验签接口，sign不存在：http://localhost:8070/hydratest/apiserverras/test2?timestamp=131214152&euid=121213  403/远程认证失败:"{\"err\":\"sign值不能为空\"}"
+//1.2 调用验签接口，timestamp不存在：http://localhost:8070/hydratest/apiserverras/test2?sign=131214152&euid=121213  返回参数错误
+//1.2 调用验签接口，euid不存在：http://localhost:8070/hydratest/apiserverras/test  返回参数错误
+//1.2 调用验签接口，延迟请求：http://localhost:8070/hydratest/apiserverras/test  请求过期
+//1.2 调用验签接口，正常请求：http://localhost:8070/hydratest/apiserverras/test  返回成功
 func main() {
 	app.Start()
 }
 
-var funcAPI = func(ctx hydra.IContext) (r interface{}) {
+var funcAPI1 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("apiserver_ras ras签名验证默认配置测试demo")
 	return "success"
 }
+
+var funcAPI2 = func(ctx hydra.IContext) (r interface{}) {
+	ctx.Log().Info("apiserver_ras ras签名验证默认配置测试demo")
+	return "success"
+}
+
+// var funcAPI2 = func(ctx hydra.IContext) (r interface{}) {
+// 	ctx.Log().Info("apiserver_ras ras签名验证默认配置测试demo")
+// 	input, err := ctx.Request().GetMap()
+// 	if err != nil {
+// 		ctx.Log().Errorf("参数获取失败:", err)
+// 		ctx.Response().Abort(500, "参数获取失败")
+// 		return
+// 	}
+
+// 	bt, _ := json.Marshal(input)
+// 	content, status, err := components.Def.HTTP().GetRegularClient().Post("http://localhost:8070/hydratest/apiserverras/test1", string(bt))
+// 	if err != nil {
+// 		ctx.Log().Errorf("远程调用异常:", err)
+// 		ctx.Response().Abort(500, "远程调用异常")
+// 		return
+// 	}
+
+// 	ctx.Response().Abort(status, content)
+// 	return
+// }

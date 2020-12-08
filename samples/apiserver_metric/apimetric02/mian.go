@@ -23,7 +23,7 @@ func init() {
 
 // apiserver_metric 配置被启用，根据配置统计信息保存demo
 
-//1.1 运行程序 ./apimetric01 run
+//1.1 运行程序 ./apimetric02 run
 //1.2 随机的访问下面两个接口，查看influxdb中统计数据是否正确;定时上报时间是否生效;
 //1.3 调用接口：http://localhost:8070/hydratest/apiservermetric/metric/succ
 //1.4 调用接口：http://localhost:8070/hydratest/apiservermetric/metric/fail
