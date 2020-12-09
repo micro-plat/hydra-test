@@ -68,9 +68,14 @@ var exists = func(ctx hydra.IContext) (r interface{}) {
 	if err != nil {
 		return err
 	}
+	b2, err := a.Exists("/hydra_test/var")
+	if err != nil {
+		return err
+	}
 	return map[string]bool{
 		"conf":  b,
 		"conf1": b1,
+		"var":   b2,
 	}
 
 }
@@ -97,7 +102,7 @@ var getchildren = func(ctx hydra.IContext) (r interface{}) {
 	if err != nil {
 		return err
 	}
-	v, ver, err := a.GetChildren("/hydra_test/registry_redis/api/t/conf")
+	v, ver, err := a.GetChildren("/hydra_test/var")
 	if err != nil {
 		return err
 	}
