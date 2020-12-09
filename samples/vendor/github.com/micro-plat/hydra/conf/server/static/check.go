@@ -1,7 +1,6 @@
 package static
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -19,19 +18,15 @@ func (s *Static) IsStatic(rPath string, method string) (b bool, xname string) {
 	if s.IsExclude(rPath) {
 		return false, ""
 	}
-	fmt.Println("1.0", rPath)
 	if s.HasPrefix(rPath) {
 		return true, filepath.Join(s.Dir, strings.TrimPrefix(rPath, s.Prefix))
 	}
-	fmt.Println("2.0")
 	if s.NeedRewrite(rPath) {
 		return true, filepath.Join(s.Dir, s.HomePage)
 	}
-	fmt.Println("3.0")
 	if s.IsContainExt(rPath) {
 		return true, filepath.Join(s.Dir, rPath)
 	}
-	fmt.Println("4.0")
 	if s.IsContainExt(rPath) {
 		return true, filepath.Join(s.Dir, rPath)
 	}

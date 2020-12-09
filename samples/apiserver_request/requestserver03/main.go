@@ -1,6 +1,7 @@
 package main
 
 import (
+	"reflect"
 	"time"
 
 	"github.com/micro-plat/hydra"
@@ -25,11 +26,25 @@ func init() {
 	app.API("/hydratest/apiserver/request/utf8", funcRequest3, router.WithEncoding("utf-8"))
 }
 
-// apiserver-request-xml数据处理demo
+// apiserver-request-yaml数据处理demo
+//1.1 使用 ./requestserver03 run
+/*1.2 请求的数据：
+param1: 34ddf#$*@大!@#$%^&*()_+~锅饭都是
+param2: true
+param3: 1024
+param4: 10.24
+param5:
+- "1"
+- "2"
+param6: 2020-12-09T10:59:37.979315945+08:00
+param7:
+  t1: 123
+  t2: sdfs@@###
+  t3: 12.2
+param8:
+- 1
+- 2
 
-//1.1 使用 ./requestserver02 run
-//1.2 请求的数据：<xml><param1>34ddf#$*@大!@#$%^&amp;*()_+~锅饭都是</param1><param2>true</param2><param3>1024</param3><param4>10.24</param4><param5>1</param5><param5>2</param5><param6>2020-12-08T19:51:49.39880659+08:00</param6><param8>1</param8><param8>2</param8></xml>
-/*
 通过postman构建如下请求：
 1.1 请求路由无编码格式接口-Post-body-gbk-与头编码相同         返回正确的数据
 1.2 请求路由无编码格式接口-Post-body-gbk-与头编码不同         返回错误的数据
@@ -78,37 +93,39 @@ func init() {
 
 func main() {
 	app.Start()
+	// bodyRaw, _ := yamlM.Marshal(&defaultData)
+	// fmt.Println("bodyRaw:", string(bodyRaw))
 }
 
-type xml struct {
-	Param1 string    `xml:"param1"`
-	Param2 bool      `xml:"param2"`
-	Param3 int32     `xml:"param3"`
-	Param4 float32   `xml:"param4"`
-	Param5 []string  `xml:"param5"`
-	Param6 time.Time `xml:"param6" time_format:"2006/01/02 15:04:05"`
-	// Param7 map[string]interface{} `xml:"param7"`
-	Param8 []int `xml:"param8"`
+type ymal struct {
+	Param1 string                 `yaml:"param1"`
+	Param2 bool                   `yaml:"param2"`
+	Param3 int32                  `yaml:"param3"`
+	Param4 float32                `yaml:"param4"`
+	Param5 []string               `yaml:"param5"`
+	Param6 time.Time              `yaml:"param6" time_format:"2006/01/02 15:04:05"`
+	Param7 map[string]interface{} `yaml:"param7"`
+	Param8 []int                  `yaml:"param8"`
 }
 
-var defaultData = xml{
+var defaultData = ymal{
 	Param1: "34ddf#$*@大!@#$%^&*()_+~锅饭都是",
 	Param2: true,
 	Param3: 1024,
 	Param4: 10.24,
 	Param5: []string{"1", "2"},
 	Param6: time.Now(),
-	// Param7: map[string]interface{}{"t1": 123, "t2": "sdfs@@###", "t3": 12.2},
+	Param7: map[string]interface{}{"t1": 123, "t2": "sdfs@@###", "t3": 12.2},
 	Param8: []int{1, 2},
 }
 
 //路由不设置编码
 var funcRequest = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("apiserver-request-json,路由不设置编码数据处理demo")
+	ctx.Log().Info("apiserver-request-yaml,路由不设置编码数据处理demo")
 	if err := ctx.Request().Check(); err != nil {
 		ctx.Log().Errorf("ctx.Request().Check()异常：%s", err)
 	}
-	param := &xml{}
+	param := &ymal{}
 	if err := ctx.Request().Bind(param); err != nil {
 		ctx.Log().Errorf("ctx.Request().Bind()异常：%s", err)
 	}
@@ -118,42 +135,50 @@ var funcRequest = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("ctx.Request().GetBody()异常：%s", err)
 	}
 	ctx.Log().Info("----body data:", string(body))
-	bodyRaw, raw, err := ctx.Request().GetFullRaw()
+	bodyMap, raw, err := ctx.Request().GetFullRaw()
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetFullRaw()异常：%s", err)
 	}
-	ctx.Log().Info("----GetFullRaw data:", string(bodyRaw), raw)
+	ctx.Log().Info("----GetFullRaw data:", string(bodyMap), raw)
+	jsonD, err := ctx.Request().GetJSON("param7")
+	if err != nil {
+		ctx.Log().Errorf("ctx.Request().GetJSON()异常：%s", err)
+	}
+	ctx.Log().Info("----GetJSON data:", string(jsonD))
+
+	v, _ := ctx.Request().Get("param7")
+	ctx.Log().Info("----Get data:", v, reflect.TypeOf(v).String())
+	jsonM, err := ctx.Request().GetXMap("param7")
+	if err != nil {
+		ctx.Log().Errorf("ctx.Request().GetXMap()异常：%s", err)
+	}
+	ctx.Log().Info("----GetJSON data:", jsonM)
 	xmap, err := ctx.Request().GetMap()
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
 	}
 	ctx.Log().Info("----GetMap()：", xmap)
-	newMap, err := ctx.Request().GetXMap("xml")
+	tm, err := ctx.Request().GetDatetime("param6")
 	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-	}
-	ctx.Log().Info("----XML GetMap()：", newMap)
-	tm, err := newMap.GetDatetime("param6")
-	if err != nil {
-		ctx.Log().Errorf("newMap.GetDatetime()异常：%s", err)
+		ctx.Log().Errorf("ctx.Request().GetDatetime()异常：%s", err)
 	}
 	ctx.Log().Info("----GetDatetime()：", tm)
-	ctx.Log().Info("----Keys data:", newMap.Keys())
-	ctx.Log().Info("----Len data:", newMap.Len())
-	ctx.Log().Info("----GetArray data:", newMap.GetArray("param5"))
-	ctx.Log().Info("----GetInt32 data:", newMap.GetInt32("param3"))
-	ctx.Log().Info("----GetFloat32 data:", newMap.GetFloat32("param4"))
-	ctx.Log().Info("----GetBool data:", newMap.GetBool("param2"))
+	ctx.Log().Info("----Keys data:", ctx.Request().Keys())
+	ctx.Log().Info("----Len data:", ctx.Request().Len())
+	ctx.Log().Info("----GetArray data:", ctx.Request().GetArray("param5"))
+	ctx.Log().Info("----GetInt32 data:", ctx.Request().GetInt32("param3"))
+	ctx.Log().Info("----GetFloat32 data:", ctx.Request().GetFloat32("param4"))
+	ctx.Log().Info("----GetBool data:", ctx.Request().GetBool("param2"))
 	return "success"
 }
 
 //路由设置编码 gbk
 var funcRequest1 = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("apiserver-request-json,路由设置gbk编码数据处理demo")
+	ctx.Log().Info("apiserver-request-yaml,路由设置gbk编码数据处理demo")
 	if err := ctx.Request().Check(); err != nil {
 		ctx.Log().Errorf("ctx.Request().Check()异常：%s", err)
 	}
-	param := &xml{}
+	param := &ymal{}
 	if err := ctx.Request().Bind(param); err != nil {
 		ctx.Log().Errorf("ctx.Request().Bind()异常：%s", err)
 	}
@@ -163,21 +188,29 @@ var funcRequest1 = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("ctx.Request().GetBody()异常：%s", err)
 	}
 	ctx.Log().Info("----body data:", string(body))
-	bodyRaw, raw, err := ctx.Request().GetFullRaw()
+	bodyMap, raw, err := ctx.Request().GetFullRaw()
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetFullRaw()异常：%s", err)
 	}
-	ctx.Log().Info("----GetFullRaw data:", string(bodyRaw), raw)
+	ctx.Log().Info("----GetFullRaw data:", string(bodyMap), raw)
+	jsonD, err := ctx.Request().GetJSON("param7")
+	if err != nil {
+		ctx.Log().Errorf("ctx.Request().GetJSON()异常：%s", err)
+	}
+	ctx.Log().Info("----GetJSON data:", string(jsonD))
+
+	v, _ := ctx.Request().Get("param7")
+	ctx.Log().Info("----Get data:", v, reflect.TypeOf(v).String())
+	jsonM, err := ctx.Request().GetXMap("param7")
+	if err != nil {
+		ctx.Log().Errorf("ctx.Request().GetXMap()异常：%s", err)
+	}
+	ctx.Log().Info("----GetJSON data:", jsonM)
 	xmap, err := ctx.Request().GetMap()
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
 	}
 	ctx.Log().Info("----GetMap()：", xmap)
-	newMap, err := ctx.Request().GetXMap("xml")
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-	}
-	ctx.Log().Info("----XML GetMap()：", newMap)
 	tm, err := ctx.Request().GetDatetime("param6")
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetDatetime()异常：%s", err)
@@ -194,11 +227,11 @@ var funcRequest1 = func(ctx hydra.IContext) (r interface{}) {
 
 //路由设置编码 gb2312
 var funcRequest2 = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("apiserver-request-json,路由设置gb2312编码数据处理demo")
+	ctx.Log().Info("apiserver-request-yaml,路由设置gb2312编码数据处理demo")
 	if err := ctx.Request().Check(); err != nil {
 		ctx.Log().Errorf("ctx.Request().Check()异常：%s", err)
 	}
-	param := &xml{}
+	param := &ymal{}
 	if err := ctx.Request().Bind(param); err != nil {
 		ctx.Log().Errorf("ctx.Request().Bind()异常：%s", err)
 	}
@@ -208,21 +241,29 @@ var funcRequest2 = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("ctx.Request().GetBody()异常：%s", err)
 	}
 	ctx.Log().Info("----body data:", string(body))
-	bodyRaw, raw, err := ctx.Request().GetFullRaw()
+	bodyMap, raw, err := ctx.Request().GetFullRaw()
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetFullRaw()异常：%s", err)
 	}
-	ctx.Log().Info("----GetFullRaw data:", string(bodyRaw), raw)
+	ctx.Log().Info("----GetFullRaw data:", string(bodyMap), raw)
+	jsonD, err := ctx.Request().GetJSON("param7")
+	if err != nil {
+		ctx.Log().Errorf("ctx.Request().GetJSON()异常：%s", err)
+	}
+	ctx.Log().Info("----GetJSON data:", string(jsonD))
+
+	v, _ := ctx.Request().Get("param7")
+	ctx.Log().Info("----Get data:", v, reflect.TypeOf(v).String())
+	jsonM, err := ctx.Request().GetXMap("param7")
+	if err != nil {
+		ctx.Log().Errorf("ctx.Request().GetXMap()异常：%s", err)
+	}
+	ctx.Log().Info("----GetJSON data:", jsonM)
 	xmap, err := ctx.Request().GetMap()
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
 	}
 	ctx.Log().Info("----GetMap()：", xmap)
-	newMap, err := ctx.Request().GetXMap("xml")
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-	}
-	ctx.Log().Info("----XML GetMap()：", newMap)
 	tm, err := ctx.Request().GetDatetime("param6")
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetDatetime()异常：%s", err)
@@ -239,11 +280,11 @@ var funcRequest2 = func(ctx hydra.IContext) (r interface{}) {
 
 //路由设置编码 utf8
 var funcRequest3 = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("apiserver-request-json,路由设置utf8编码数据处理demo")
+	ctx.Log().Info("apiserver-request-yaml,路由设置utf8编码数据处理demo")
 	if err := ctx.Request().Check(); err != nil {
 		ctx.Log().Errorf("ctx.Request().Check()异常：%s", err)
 	}
-	param := &xml{}
+	param := &ymal{}
 	if err := ctx.Request().Bind(param); err != nil {
 		ctx.Log().Errorf("ctx.Request().Bind()异常：%s", err)
 	}
@@ -253,21 +294,29 @@ var funcRequest3 = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("ctx.Request().GetBody()异常：%s", err)
 	}
 	ctx.Log().Info("----body data:", string(body))
-	bodyRaw, raw, err := ctx.Request().GetFullRaw()
+	bodyMap, raw, err := ctx.Request().GetFullRaw()
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetFullRaw()异常：%s", err)
 	}
-	ctx.Log().Info("----GetFullRaw data:", string(bodyRaw), raw)
+	ctx.Log().Info("----GetFullRaw data:", string(bodyMap), raw)
+	jsonD, err := ctx.Request().GetJSON("param7")
+	if err != nil {
+		ctx.Log().Errorf("ctx.Request().GetJSON()异常：%s", err)
+	}
+	ctx.Log().Info("----GetJSON data:", string(jsonD))
+
+	v, _ := ctx.Request().Get("param7")
+	ctx.Log().Info("----Get data:", v, reflect.TypeOf(v).String())
+	jsonM, err := ctx.Request().GetXMap("param7")
+	if err != nil {
+		ctx.Log().Errorf("ctx.Request().GetXMap()异常：%s", err)
+	}
+	ctx.Log().Info("----GetJSON data:", jsonM)
 	xmap, err := ctx.Request().GetMap()
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
 	}
 	ctx.Log().Info("----GetMap()：", xmap)
-	newMap, err := ctx.Request().GetXMap("xml")
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-	}
-	ctx.Log().Info("----XML GetMap()：", newMap)
 	tm, err := ctx.Request().GetDatetime("param6")
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetDatetime()异常：%s", err)
