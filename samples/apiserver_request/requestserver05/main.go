@@ -1,6 +1,8 @@
 package main
 
 import (
+	xmlM "encoding/xml"
+	"fmt"
 	"time"
 
 	"github.com/micro-plat/hydra"
@@ -25,90 +27,78 @@ func init() {
 	app.API("/hydratest/apiserver/request/utf8", funcRequest3, router.WithEncoding("utf-8"))
 }
 
-// apiserver-request-json数据处理demo
-
-//1.1 使用 ./requestserver01 run
-//1.2 请求的数据：{"param1":"34ddf#$*@大!@#$%^\u0026*()_+~锅饭都是","param2":true,"param3":1024,"param4":10.24,"param5":["1","2"],"param6":"2020-12-08T16:57:43.187670336+08:00","param7":{"t1":123,"t2":"sdfs@@###","t3":12.2}}
+// apiserver-request-混合数据参数提交处理demo
+//1.2 使用 ./requestserver05 run
+//1.4 请求的数据：
 /*
 通过postman构建如下请求：
-1.1 请求路由无编码格式接口-Post-body-gbk-与头编码相同         返回正确的数据
-1.2 请求路由无编码格式接口-Post-body-gbk-与头编码不同         返回错误的数据
-1.3 请求路由无编码格式接口-Post-body-gb2312-与头编码相同      返回正确的数据
-1.4 请求路由无编码格式接口-Post-body-gb2312-与头编码不同      返回错误的数据
-1.5 请求路由无编码格式接口-Post-body-utf8-与头编码相同        返回正确的数据
-1.6 请求路由无编码格式接口-Post-body-utf8-与头编码不同        返回错误的数据
-1.7 请求路由无编码格式接口-Get-body-gbk-与头编码相同         返回正确的数据
-1.8 请求路由无编码格式接口-Get-body-gbk-与头编码不同         返回错误的数据
-1.9 请求路由无编码格式接口-Get-body-gb2312-与头编码相同      返回正确的数据
-1.10 请求路由无编码格式接口-Get-body-gb2312-与头编码不同      返回错误的数据
-1.11 请求路由无编码格式接口-Get-body-utf8-与头编码相同        返回正确的数据
-1.12 请求路由无编码格式接口-Get-body-utf8-与头编码不同        返回错误的数据
+1.1 请求路由无编码格式接口-Get-body+urlEncode-gbk-与头编码相同         返回正确的数据
+1.2 请求路由无编码格式接口-Get-body+urlEncode-gbk-与头编码不同         返回正确的数据
+1.3 请求路由无编码格式接口-Get-body+urlEncode-gb2312-与头编码相同         返回正确的数据
+1.4 请求路由无编码格式接口-Get-body+urlEncode-gb2312-与头编码不同         返回正确的数据
+1.5 请求路由无编码格式接口-Get-body+urlEncode-utf8-与头编码相同         返回正确的数据
+1.6 请求路由无编码格式接口-Get-body+urlEncode-utf8-与头编码不同         返回正确的数据
+1.7 请求路由无编码格式接口-Post-body+urlEncode+FormData-gbk-与头编码相同         返回正确的数据
+1.8 请求路由无编码格式接口-Post-body+urlEncode+FormData-gbk-与头编码不同         返回正确的数据
+1.9 请求路由无编码格式接口-Post-body+urlEncode+FormData-gb2312-与头编码相同         返回正确的数据
+1.10 请求路由无编码格式接口-Post-body+urlEncode+FormData-gb2312-与头编码不同         返回正确的数据
+1.11 请求路由无编码格式接口-Post-body+urlEncode+FormData-utf8-与头编码相同         返回正确的数据
+1.12 请求路由无编码格式接口-Post-body+urlEncode+FormData-utf8-与头编码不同         返回正确的数据
 
-2.1 请求路由有编码格式接口-Post-body-gbk-与路由编码相同         返回正确的数据
-2.2 请求路由有编码格式接口-Post-body-gbk-与路由编码不同         返回错误的数据
-2.3 请求路由有编码格式接口-Post-body-gb2312-与路由编码相同      返回正确的数据
-2.4 请求路由有编码格式接口-Post-body-gb2312-与路由编码不同      返回错误的数据
-2.5 请求路由有编码格式接口-Post-body-utf8-与路由编码相同        返回正确的数据
-2.6 请求路由有编码格式接口-Post-body-utf8-与路由编码不同        返回错误的数据
-2.7 请求路由有编码格式接口-Get-body-gbk-与路由编码相同         返回正确的数据
-2.8 请求路由有编码格式接口-Get-body-gbk-与路由编码不同         返回错误的数据
-2.9 请求路由有编码格式接口-Get-body-gb2312-与路由编码相同      返回正确的数据
-2.10 请求路由有编码格式接口-Get-body-gb2312-与路由编码不同      返回错误的数据
-2.11 请求路由有编码格式接口-Get-body-utf8-与路由编码相同        返回正确的数据
-2.12 请求路由有编码格式接口-Get-body-utf8-与路由编码不同        返回错误的数据
+2.1 请求路由有编码格式接口-Get-body+urlEncode-gbk-与路由编码相同         返回正确的数据
+2.2 请求路由有编码格式接口-Get-body+urlEncode-gbk-与路由编码不同         返回正确的数据
+2.3 请求路由有编码格式接口-Get-body+urlEncode-gb2312-与路由编码相同         返回正确的数据
+2.4 请求路由有编码格式接口-Get-body+urlEncode-gb2312-与路由编码不同         返回正确的数据
+2.5 请求路由有编码格式接口-Get-body+urlEncode-utf8-与路由编码相同         返回正确的数据
+2.6 请求路由有编码格式接口-Get-body+urlEncode-utf8-与路由编码不同         返回正确的数据
+2.7 请求路由有编码格式接口-Post-body+urlEncode+FormData-gbk-与路由编码相同         返回正确的数据
+2.8 请求路由有编码格式接口-Post-body+urlEncode+FormData-gbk-与路由编码不同         返回正确的数据
+2.9 请求路由有编码格式接口-Post-body+urlEncode+FormData-gb2312-与路由编码相同         返回正确的数据
+2.10 请求路由有编码格式接口-Post-body+urlEncode+FormData-gb2312-与路由编码不同         返回正确的数据
+2.11 请求路由有编码格式接口-Post-body+urlEncode+FormData-utf8-与路由编码相同         返回正确的数据
+2.12 请求路由有编码格式接口-Post-body+urlEncode+FormData-utf8-与路由编码不同         返回正确的数据
 
-3.1 头和路由都有编码-编码相同-Post-body-gbk-编码相同        返回正确的数据
-3.2 头和路由都有编码-编码相同-Post-body-gbk-编码不同        返回错误的数据
-3.3 头和路由都有编码-编码相同-Post-body-gb2312-编码相同     返回正确的数据
-3.4 头和路由都有编码-编码相同-Post-body-gb2312-编码不同     返回错误的数据
-3.5 头和路由都有编码-编码相同-Post-body-utf8-编码相同       返回正确的数据
-3.6 头和路由都有编码-编码相同-Post-body-utf8-编码不同       返回错误的数据
-3.7 头和路由都有编码-编码相同-Get-body-gbk-编码相同        返回正确的数据
-3.8 头和路由都有编码-编码相同-Get-body-gbk-编码不同        返回错误的数据
-3.9 头和路由都有编码-编码相同-Get-body-gb2312-编码相同     返回正确的数据
-3.10 头和路由都有编码-编码相同-Get-body-gb2312-编码不同     返回错误的数据
-3.11 头和路由都有编码-编码相同-Get-body-utf8-编码相同       返回正确的数据
-3.12 头和路由都有编码-编码相同-Get-body-utf8-编码不同       返回错误的数据
-
-4.1 头和路由都有编码-编码不同-Post-body-gbk-utf8-与头编码相同        无法获取数据
-4.2 头和路由都有编码-编码不同-Post-body-gbk-utf8-与路由编码相同      返回正确的数据
-4.3 头和路由都有编码-编码不同-Get-body-gbk-utf8-与头编码相同        无法获取数据
-4.4 头和路由都有编码-编码不同-Get-body-gbk-utf8-与路由编码相同      返回正确的数据
+3.1 头和路由都有编码-编码不同-Get-body+urlEncode-gbk-utf8-与头编码相同        无法获取数据
+3.2 头和路由都有编码-编码不同-Get-body+urlEncode-gbk-utf8-与路由编码相同      返回正确的数据
+3.3 头和路由都有编码-编码不同-Post-body+urlEncode+FormData-gbk-utf8-与头编码相同    无法获取数据
+3.4 头和路由都有编码-编码不同-Post-body+urlEncode+FormData-gbk-utf8-与路由编码相同  返回正确的数据
 */
 
 func main() {
-	app.Start()
+	// app.Start()
+	bodyRaw, _ := xmlM.Marshal(&defaultData)
+	fmt.Println("bodyRaw:", string(bodyRaw))
 }
 
-type Param struct {
-	Param1 string                 `json:"param1"`
-	Param2 bool                   `json:"param2"`
-	Param3 int32                  `json:"param3"`
-	Param4 float32                `json:"param4"`
-	Param5 []string               `json:"param5"`
-	Param6 time.Time              `json:"param6" time_format:"2006/01/02 15:04:05"`
-	Param7 map[string]interface{} `json:"param7"`
-	Param8 []int                  `json:"param8"`
+type xml struct {
+	Param1 string    `xml:"param1"`
+	Param2 bool      `xml:"param2"`
+	Param3 int32     `xml:"param3"`
+	Param4 float32   `xml:"param4"`
+	Param5 []string  `xml:"param5"`
+	Param6 time.Time `xml:"param6" time_format:"2006/01/02 15:04:05"`
+	// Param7 map[string]interface{} `xml:"param7"`
+	Param8 []int `xml:"param8"`
 }
 
-var defaultData = Param{
+var defaultData = xml{
 	Param1: "34ddf#$*@大!@#$%^&*()_+~锅饭都是",
 	Param2: true,
 	Param3: 1024,
 	Param4: 10.24,
 	Param5: []string{"1", "2"},
 	Param6: time.Now(),
-	Param7: map[string]interface{}{"t1": 123, "t2": "sdfs@@###", "t3": 12.2},
+	// Param7: map[string]interface{}{"t1": 123, "t2": "sdfs@@###", "t3": 12.2},
 	Param8: []int{1, 2},
 }
 
 //路由不设置编码
 var funcRequest = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("apiserver-request-json,路由不设置编码数据处理demo")
+	ctx.Log().Info("apiserver-request-yaml,路由不设置编码数据处理demo")
 	if err := ctx.Request().Check(); err != nil {
 		ctx.Log().Errorf("ctx.Request().Check()异常：%s", err)
 	}
-	param := &Param{}
+	param := &xml{}
 	if err := ctx.Request().Bind(param); err != nil {
 		ctx.Log().Errorf("ctx.Request().Bind()异常：%s", err)
 	}
@@ -149,11 +139,11 @@ var funcRequest = func(ctx hydra.IContext) (r interface{}) {
 
 //路由设置编码 gbk
 var funcRequest1 = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("apiserver-request-json,路由设置gbk编码数据处理demo")
+	ctx.Log().Info("apiserver-request-yaml,路由设置gbk编码数据处理demo")
 	if err := ctx.Request().Check(); err != nil {
 		ctx.Log().Errorf("ctx.Request().Check()异常：%s", err)
 	}
-	param := &Param{}
+	param := &xml{}
 	if err := ctx.Request().Bind(param); err != nil {
 		ctx.Log().Errorf("ctx.Request().Bind()异常：%s", err)
 	}
@@ -194,11 +184,11 @@ var funcRequest1 = func(ctx hydra.IContext) (r interface{}) {
 
 //路由设置编码 gb2312
 var funcRequest2 = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("apiserver-request-json,路由设置gb2312编码数据处理demo")
+	ctx.Log().Info("apiserver-request-yaml,路由设置gb2312编码数据处理demo")
 	if err := ctx.Request().Check(); err != nil {
 		ctx.Log().Errorf("ctx.Request().Check()异常：%s", err)
 	}
-	param := &Param{}
+	param := &xml{}
 	if err := ctx.Request().Bind(param); err != nil {
 		ctx.Log().Errorf("ctx.Request().Bind()异常：%s", err)
 	}
@@ -239,11 +229,11 @@ var funcRequest2 = func(ctx hydra.IContext) (r interface{}) {
 
 //路由设置编码 utf8
 var funcRequest3 = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("apiserver-request-json,路由设置utf8编码数据处理demo")
+	ctx.Log().Info("apiserver-request-yaml,路由设置utf8编码数据处理demo")
 	if err := ctx.Request().Check(); err != nil {
 		ctx.Log().Errorf("ctx.Request().Check()异常：%s", err)
 	}
-	param := &Param{}
+	param := &xml{}
 	if err := ctx.Request().Bind(param); err != nil {
 		ctx.Log().Errorf("ctx.Request().Bind()异常：%s", err)
 	}
