@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra/components"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
@@ -16,6 +18,10 @@ var app = hydra.NewApp(
 	hydra.WithRegistry("lm://./"),
 )
 
+type param struct {
+	Data string `json:"data"`
+}
+
 func init() {
 	hydra.Conf.API(":8070")
 	hydra.Conf.Vars().Redis("5.79", redis.New([]string{"192.168.5.79:6379"}))
@@ -24,7 +30,9 @@ func init() {
 	app.API("/mqc/http", func(ctx hydra.IContext) (r interface{}) {
 		c := components.Def.Queue().GetRegularQueue("xxx")
 		ctx.Log().Info("request.sessiom_id:", ctx.Log().GetSessionID())
-		err := c.Send("mqc_session_t", `{"key":"value"}`)
+		param := param{Data: `中文~!@#$%^&*()_+{}:"<>L?|\`}
+		s, _ := json.Marshal(param)
+		err := c.Send("mqc_session_t", string(s))
 		if err != nil {
 			return
 		}

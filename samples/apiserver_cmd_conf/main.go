@@ -18,7 +18,7 @@ var app = hydra.NewApp(
 
 // 通过代码为run命令模式下指定参数，并在程序中获得cli输入的值
 // go build
-// ./apiserver_cmd_conf conf -flag flagvalue 查看打印的flag对应的值
+// ./apiserver_cmd_conf conf show -flag flagvalue 查看打印的flag对应的值
 func main() {
 	app.Cli.Conf.OnStarting(func(cli global.ICli) error {
 		fmt.Println("IsSet:", cli.IsSet("flag"))
