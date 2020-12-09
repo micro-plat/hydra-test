@@ -44,12 +44,6 @@ func init() {
 1.10 请求路由无编码格式接口-Post-urlEncode-gb2312-与头编码不同  中文数据无法获取
 1.11 请求路由无编码格式接口-Post-urlEncode-utf8-与头编码相同  中文数据无法获取
 1.12 请求路由无编码格式接口-Post-urlEncode-utf8-与头编码不同  中文数据无法获取
-1.13 请求路由无编码格式接口-Post-fromData-gbk-与头编码相同  中文数据无法获取
-1.14 请求路由无编码格式接口-Post-fromData-gbk-与头编码不同  中文数据无法获取
-1.15 请求路由无编码格式接口-Post-fromData-gb2312-与头编码相同  中文数据无法获取
-1.16 请求路由无编码格式接口-Post-fromData-gb2312-与头编码不同  中文数据无法获取
-1.17 请求路由无编码格式接口-Post-fromData-utf8-与头编码相同  中文数据无法获取
-1.18 请求路由无编码格式接口-Post-fromData-utf8-与头编码不同  中文数据无法获取
 
 2.1 请求路由有编码格式接口-Get-urlEncode-gbk-与路由编码相同  中文数据无法获取
 2.2 请求路由有编码格式接口-Get-urlEncode-gbk-与路由编码不同  中文数据无法获取
@@ -63,19 +57,11 @@ func init() {
 2.10 请求路由有编码格式接口-Post-urlEncode-gb2312-与路由编码不同  中文数据无法获取
 2.11 请求路由有编码格式接口-Post-urlEncode-utf8-与路由编码相同  中文数据无法获取
 2.12 请求路由有编码格式接口-Post-urlEncode-utf8-与路由编码不同  中文数据无法获取
-2.13 请求路由有编码格式接口-Post-fromData-gbk-与路由编码相同  中文数据无法获取
-2.14 请求路由有编码格式接口-Post-fromData-gbk-与路由编码不同  中文数据无法获取
-2.15 请求路由有编码格式接口-Post-fromData-gb2312-与路由编码相同  中文数据无法获取
-2.16 请求路由有编码格式接口-Post-fromData-gb2312-与路由编码不同  中文数据无法获取
-2.17 请求路由有编码格式接口-Post-fromData-utf8-与路由编码相同  中文数据无法获取
-2.18 请求路由有编码格式接口-Post-fromData-utf8-与路由编码不同  中文数据无法获取
 
 3.1 请求路由有编码格式接口-Get-urlEncode-gbk-utf8-与头编码相同  中文数据无法获取
 3.2 请求路由有编码格式接口-Get-urlEncode-gbk-utf8-与路由编码相同  中文数据无法获取
 3.3 请求路由有编码格式接口-Post-urlEncode-gbk-utf8--与头编码相同  中文数据无法获取
 3.4 请求路由有编码格式接口-Post-urlEncode-gbk-utf8--与路由编码相同  中文数据无法获取
-3.5 请求路由有编码格式接口-Post-fromData-gbk-utf8--与头编码相同  中文数据无法获取
-3.6 请求路由有编码格式接口-Post-fromData-gbk-utf8--与路由编码相同  中文数据无法获取
 */
 
 func main() {
@@ -83,14 +69,14 @@ func main() {
 }
 
 type xml struct {
-	Param1 string                 `xml:"param1"`
-	Param2 bool                   `xml:"param2"`
-	Param3 int32                  `xml:"param3"`
-	Param4 float32                `xml:"param4"`
-	Param5 []string               `xml:"param5"`
-	Param6 time.Time              `xml:"param6" time_format:"2006/01/02 15:04:05"`
-	Param7 map[string]interface{} `xml:"param7"`
-	Param8 []int                  `xml:"param8"`
+	Param1 string                 `json:"param1"`
+	Param2 bool                   `json:"param2"`
+	Param3 int32                  `json:"param3"`
+	Param4 float32                `json:"param4"`
+	Param5 []string               `json:"param5 Array"`
+	Param6 time.Time              `json:"param6" time_format:"2006/01/02 15:04:05"`
+	Param7 map[string]interface{} `json:"param7"`
+	Param8 []int                  `json:"param8 Array"`
 }
 
 var defaultData = xml{
@@ -143,6 +129,7 @@ var funcRequest = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("----Keys data:", ctx.Request().Keys())
 	ctx.Log().Info("----Len data:", ctx.Request().Len())
 	ctx.Log().Info("----GetArray data:", ctx.Request().GetArray("param5"))
+	ctx.Log().Info("----GetArray1 data:", ctx.Request().GetArray("param8"))
 	ctx.Log().Info("----GetInt32 data:", ctx.Request().GetInt32("param3"))
 	ctx.Log().Info("----GetFloat32 data:", ctx.Request().GetFloat32("param4"))
 	ctx.Log().Info("----GetBool data:", ctx.Request().GetBool("param2"))
@@ -188,6 +175,7 @@ var funcRequest1 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("----Keys data:", ctx.Request().Keys())
 	ctx.Log().Info("----Len data:", ctx.Request().Len())
 	ctx.Log().Info("----GetArray data:", ctx.Request().GetArray("param5"))
+	ctx.Log().Info("----GetArray1 data:", ctx.Request().GetArray("param8"))
 	ctx.Log().Info("----GetInt32 data:", ctx.Request().GetInt32("param3"))
 	ctx.Log().Info("----GetFloat32 data:", ctx.Request().GetFloat32("param4"))
 	ctx.Log().Info("----GetBool data:", ctx.Request().GetBool("param2"))
@@ -233,6 +221,7 @@ var funcRequest2 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("----Keys data:", ctx.Request().Keys())
 	ctx.Log().Info("----Len data:", ctx.Request().Len())
 	ctx.Log().Info("----GetArray data:", ctx.Request().GetArray("param5"))
+	ctx.Log().Info("----GetArray1 data:", ctx.Request().GetArray("param8"))
 	ctx.Log().Info("----GetInt32 data:", ctx.Request().GetInt32("param3"))
 	ctx.Log().Info("----GetFloat32 data:", ctx.Request().GetFloat32("param4"))
 	ctx.Log().Info("----GetBool data:", ctx.Request().GetBool("param2"))
@@ -278,6 +267,7 @@ var funcRequest3 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("----Keys data:", ctx.Request().Keys())
 	ctx.Log().Info("----Len data:", ctx.Request().Len())
 	ctx.Log().Info("----GetArray data:", ctx.Request().GetArray("param5"))
+	ctx.Log().Info("----GetArray1 data:", ctx.Request().GetArray("param8"))
 	ctx.Log().Info("----GetInt32 data:", ctx.Request().GetInt32("param3"))
 	ctx.Log().Info("----GetFloat32 data:", ctx.Request().GetFloat32("param4"))
 	ctx.Log().Info("----GetBool data:", ctx.Request().GetBool("param2"))
