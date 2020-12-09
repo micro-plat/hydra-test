@@ -19,7 +19,7 @@ var app = hydra.NewApp(
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("mqcserver"),
 	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+	hydra.WithRegistry("lm://."),
 )
 
 func init() {
@@ -42,13 +42,29 @@ func main() {
 	app.Start()
 }
 
+type DateTime time.Time
+
+func (d DateTime) MarshalJSON() (bytes []byte, err error) {
+	fmt.Println("marshal")
+	val := time.Time(d)
+	tmpV := fmt.Sprintf("\"%s\"", val.Format("2006-01-02 15:04:05"))
+	fmt.Println("marshal:", string(bytes))
+	return []byte(tmpV), nil
+}
+func (d DateTime) UnmarshalJSON(bytes []byte) error {
+	fmt.Println("unmarshal:", string(bytes))
+	val, err := time.Parse("\"2006-01-02 15:04:05\"", string(bytes))
+	d = DateTime(val)
+	return err
+}
+
 type Param struct {
 	Param1 string                 `json:"param1"`
 	Param2 bool                   `json:"param2"`
 	Param3 int32                  `json:"param3"`
 	Param4 float32                `json:"param4"`
 	Param5 []string               `json:"param5"`
-	Param6 time.Time              `json:"param6"`
+	Param6 DateTime               `json:"param6" time_format:"2006-01-02 15:04:05"`
 	Param7 map[string]interface{} `json:"param7"`
 }
 
@@ -61,11 +77,12 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 		Param3: 1024,
 		Param4: 10.24,
 		Param5: []string{"1", "2"},
-		Param6: time.Now(),
+		Param6: DateTime(time.Now()),
 		Param7: map[string]interface{}{"t1": 123, "t2": "sdfs@@###", "t3": 12.2},
 	}
-	ver, _ := json.Marshal(input)
+	ver, err := json.Marshal(input)
 	value := string(ver)
+	fmt.Println("value:", value, err)
 	queueObj := components.Def.Queue().GetRegularQueue("redis")
 	if err := queueObj.Send(queue, value); err != nil {
 		ctx.Log().Errorf("发送消息队列异常：%s", queue)
@@ -97,7 +114,7 @@ var funcMQC1 = func(ctx hydra.IContext) (r interface{}) {
 	if err := ctx.Request().Bind(param); err != nil {
 		ctx.Log().Errorf("ctx.Request().Bind()异常：%s", err)
 	}
-	ctx.Log().Info("----bind data:", param)
+	ctx.Log().Info("----bind data:", param, param.Param6)
 
 	body, err := ctx.Request().GetBody()
 	if err != nil {
@@ -105,11 +122,11 @@ var funcMQC1 = func(ctx hydra.IContext) (r interface{}) {
 	}
 	ctx.Log().Info("----body data:", string(body))
 
-	_, raw, err := ctx.Request().GetFullRaw()
+	bodyBytes, raw, err := ctx.Request().GetFullRaw()
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetFullRaw()异常：%s", err)
 	}
-	ctx.Log().Info("----GetFullRaw data:", raw)
+	ctx.Log().Info("----GetFullRaw data:", string(bodyBytes), raw)
 
 	jsonD, err := ctx.Request().GetJSON("param7")
 	if err != nil {
@@ -123,7 +140,7 @@ var funcMQC1 = func(ctx hydra.IContext) (r interface{}) {
 	}
 	ctx.Log().Info("----GetMap()：", xmap)
 
-	tm, err := ctx.Request().GetDatetime("param6")
+	tm, err := ctx.Request().GetDatetime("param6", "2006-01-02 15:04:05")
 	if err != nil {
 		ctx.Log().Errorf("ctx.Request().GetDatetime()异常：%s", err)
 	}
