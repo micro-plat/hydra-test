@@ -32,6 +32,10 @@ func init() {
 	app.RPC("/rpc/proc", rpcProc)
 	app.RPC("/rpc/bindmap", rpcBindMap)
 	app.RPC("/rpc/bindstruct", rpcBindStruct)
+	app.API("/xrpc/bindstruct", rpcBindStruct)
+	app.API("/api/map/str", apiMapStr)
+	app.API("/api/map/struct", apiMapStruct)
+	app.API("/api/array/struct", apiArrayStruct)
 
 }
 
@@ -71,13 +75,31 @@ func main() {
 }
 
 type demoStrcutParent struct {
-	Name     string             `json:"name" xml:"name" form:"name"`
-	Age      int                `json:"age" xml:"age"  form:"age"`
-	Children []*demoStrcutChild `json:"children" xml:"children"`
+	Name     string             `json:"name" xml:"name" form:"name" m2s:"name"`
+	Age      int                `json:"age" xml:"age"  form:"age"  m2s:"age"`
+	Children []*demoStrcutChild `json:"children" xml:"children"  m2s:"children"`
 }
 
 type demoStrcutChild struct {
-	ID string `json:"id" xml:"id"`
+	ID string `json:"id" xml:"id"  m2s:"id" `
+}
+
+var apiMapStr = func(ctx hydra.IContext) (r interface{}) {
+	return map[string]string{
+		"a": "b",
+	}
+}
+var apiArrayStruct = func(ctx hydra.IContext) (r interface{}) {
+	return []*demoStrcutChild{
+		&demoStrcutChild{ID: "1"},
+		&demoStrcutChild{ID: "2"},
+	}
+}
+var apiMapStruct = func(ctx hydra.IContext) (r interface{}) {
+	return map[string]*demoStrcutChild{
+		"1": &demoStrcutChild{ID: "1"},
+		"2": &demoStrcutChild{ID: "2"},
+	}
 }
 
 var apiRequest = func(ctx hydra.IContext) (r interface{}) {
@@ -121,7 +143,8 @@ var apiBind = func(ctx hydra.IContext) (r interface{}) {
 		contentType = "application/json"
 	}
 	opts = append(opts, componentrpc.WithContentType(contentType))
-	//fmt.Println("content-type:", contentType)
+	fmt.Println("content-type:", contentType, input)
+
 	respones, err := hydra.C.RPC().GetRegularRPC().Request(rpcURL, input, opts...)
 	if err != nil {
 		ctx.Log().Errorf("rpc 请求异常：%v", err)
@@ -258,6 +281,9 @@ var rpcBindMap = func(ctx hydra.IContext) (r interface{}) {
 }
 
 var rpcBindStruct = func(ctx hydra.IContext) (r interface{}) {
+	fmt.Println("ctx.Request().GetBody()")
+	body, err := ctx.Request().GetBody()
+	fmt.Println(string(body))
 
 	result := &demoStrcutParent{}
 	m, err := ctx.Request().GetMap()
