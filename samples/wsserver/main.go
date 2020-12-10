@@ -24,8 +24,8 @@ func init() {
 		return "success"
 	})
 	app.WS("/ws/timeout", func(ctx context.IContext) (r interface{}) {
-		ctx.Log().Info("ws-Handle")
-		time.Sleep(time.Second * 2)
+		ctx.Log().Info("ws-timeout-Handle")
+		time.Sleep(time.Second * 3)
 		return "success"
 	})
 
