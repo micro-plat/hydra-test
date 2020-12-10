@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/micro-plat/hydra"
-	"github.com/micro-plat/hydra/conf/server/api"
 	"github.com/micro-plat/hydra/conf/server/router"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
@@ -15,11 +14,11 @@ var app = hydra.NewApp(
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserverresponse"),
 	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+	hydra.WithRegistry("lm://."),
 )
 
 func init() {
-	hydra.Conf.API(":8070", api.WithTrace())
+	hydra.Conf.API(":8070")
 	app.API("/hydratest/apiserver/response", funcResponse)
 	app.API("/hydratest/apiserver/response1", funcResponse1)
 	app.API("/hydratest/apiserver/response2", funcResponse2)

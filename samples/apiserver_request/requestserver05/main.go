@@ -1,8 +1,6 @@
 package main
 
 import (
-	xmlM "encoding/xml"
-	"fmt"
 	"time"
 
 	"github.com/micro-plat/hydra"
@@ -38,12 +36,12 @@ func init() {
 1.4 请求路由无编码格式接口-Get-body+urlEncode-gb2312-与头编码不同         返回正确的数据
 1.5 请求路由无编码格式接口-Get-body+urlEncode-utf8-与头编码相同         返回正确的数据
 1.6 请求路由无编码格式接口-Get-body+urlEncode-utf8-与头编码不同         返回正确的数据
-1.7 请求路由无编码格式接口-Post-body+urlEncode+FormData-gbk-与头编码相同         返回正确的数据
-1.8 请求路由无编码格式接口-Post-body+urlEncode+FormData-gbk-与头编码不同         返回正确的数据
-1.9 请求路由无编码格式接口-Post-body+urlEncode+FormData-gb2312-与头编码相同         返回正确的数据
-1.10 请求路由无编码格式接口-Post-body+urlEncode+FormData-gb2312-与头编码不同         返回正确的数据
-1.11 请求路由无编码格式接口-Post-body+urlEncode+FormData-utf8-与头编码相同         返回正确的数据
-1.12 请求路由无编码格式接口-Post-body+urlEncode+FormData-utf8-与头编码不同         返回正确的数据
+1.7 请求路由无编码格式接口-Post-body+urlEncode-gbk-与头编码相同         返回正确的数据
+1.8 请求路由无编码格式接口-Post-body+urlEncode-gbk-与头编码不同         返回正确的数据
+1.9 请求路由无编码格式接口-Post-body+urlEncode-gb2312-与头编码相同         返回正确的数据
+1.10 请求路由无编码格式接口-Post-body+urlEncode-gb2312-与头编码不同         返回正确的数据
+1.11 请求路由无编码格式接口-Post-body+urlEncode-utf8-与头编码相同         返回正确的数据
+1.12 请求路由无编码格式接口-Post-body+urlEncode-utf8-与头编码不同         返回正确的数据
 
 2.1 请求路由有编码格式接口-Get-body+urlEncode-gbk-与路由编码相同         返回正确的数据
 2.2 请求路由有编码格式接口-Get-body+urlEncode-gbk-与路由编码不同         返回正确的数据
@@ -51,34 +49,34 @@ func init() {
 2.4 请求路由有编码格式接口-Get-body+urlEncode-gb2312-与路由编码不同         返回正确的数据
 2.5 请求路由有编码格式接口-Get-body+urlEncode-utf8-与路由编码相同         返回正确的数据
 2.6 请求路由有编码格式接口-Get-body+urlEncode-utf8-与路由编码不同         返回正确的数据
-2.7 请求路由有编码格式接口-Post-body+urlEncode+FormData-gbk-与路由编码相同         返回正确的数据
-2.8 请求路由有编码格式接口-Post-body+urlEncode+FormData-gbk-与路由编码不同         返回正确的数据
-2.9 请求路由有编码格式接口-Post-body+urlEncode+FormData-gb2312-与路由编码相同         返回正确的数据
-2.10 请求路由有编码格式接口-Post-body+urlEncode+FormData-gb2312-与路由编码不同         返回正确的数据
-2.11 请求路由有编码格式接口-Post-body+urlEncode+FormData-utf8-与路由编码相同         返回正确的数据
-2.12 请求路由有编码格式接口-Post-body+urlEncode+FormData-utf8-与路由编码不同         返回正确的数据
+2.7 请求路由有编码格式接口-Post-body+urlEncode-gbk-与路由编码相同         返回正确的数据
+2.8 请求路由有编码格式接口-Post-body+urlEncode-gbk-与路由编码不同         返回正确的数据
+2.9 请求路由有编码格式接口-Post-body+urlEncode-gb2312-与路由编码相同         返回正确的数据
+2.10 请求路由有编码格式接口-Post-body+urlEncode-gb2312-与路由编码不同         返回正确的数据
+2.11 请求路由有编码格式接口-Post-body+urlEncode-utf8-与路由编码相同         返回正确的数据
+2.12 请求路由有编码格式接口-Post-body+urlEncode-utf8-与路由编码不同         返回正确的数据
 
 3.1 头和路由都有编码-编码不同-Get-body+urlEncode-gbk-utf8-与头编码相同        无法获取数据
 3.2 头和路由都有编码-编码不同-Get-body+urlEncode-gbk-utf8-与路由编码相同      返回正确的数据
-3.3 头和路由都有编码-编码不同-Post-body+urlEncode+FormData-gbk-utf8-与头编码相同    无法获取数据
-3.4 头和路由都有编码-编码不同-Post-body+urlEncode+FormData-gbk-utf8-与路由编码相同  返回正确的数据
+3.3 头和路由都有编码-编码不同-Post-body+urlEncode-gbk-utf8-与头编码相同    无法获取数据
+3.4 头和路由都有编码-编码不同-Post-body+urlEncode-gbk-utf8-与路由编码相同  返回正确的数据
 */
 
 func main() {
-	// app.Start()
-	bodyRaw, _ := xmlM.Marshal(&defaultData)
-	fmt.Println("bodyRaw:", string(bodyRaw))
+	app.Start()
+	// bodyRaw, _ := xmlM.Marshal(&defaultData)
+	// fmt.Println("bodyRaw:", string(bodyRaw))
 }
 
 type xml struct {
-	Param1 string    `xml:"param1"`
-	Param2 bool      `xml:"param2"`
-	Param3 int32     `xml:"param3"`
-	Param4 float32   `xml:"param4"`
-	Param5 []string  `xml:"param5"`
-	Param6 time.Time `xml:"param6" time_format:"2006/01/02 15:04:05"`
-	// Param7 map[string]interface{} `xml:"param7"`
-	Param8 []int `xml:"param8"`
+	Param1 string                 `json:"param1"`
+	Param2 bool                   `json:"param2"`
+	Param3 int32                  `json:"param3"`
+	Param4 float32                `json:"param4"`
+	Param5 []string               `json:"param5"`
+	Param6 time.Time              `json:"param6" time_format:"2006/01/02 15:04:05"`
+	Param7 map[string]interface{} `json:"param7"`
+	Param8 []int                  `json:"param8"`
 }
 
 var defaultData = xml{
@@ -88,7 +86,7 @@ var defaultData = xml{
 	Param4: 10.24,
 	Param5: []string{"1", "2"},
 	Param6: time.Now(),
-	// Param7: map[string]interface{}{"t1": 123, "t2": "sdfs@@###", "t3": 12.2},
+	Param7: map[string]interface{}{"t1": 123, "t2": "sdfs@@###", "t3": 12.2},
 	Param8: []int{1, 2},
 }
 
