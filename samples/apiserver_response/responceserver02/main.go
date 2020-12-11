@@ -19,7 +19,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API(":8072")
 	app.API("/hydratest/apiserver/response", funcResponse)
 	app.API("/hydratest/apiserver/response1", funcResponse1)
 	app.API("/hydratest/apiserver/response2", funcResponse2)
@@ -31,7 +31,7 @@ func init() {
 }
 
 //apiserver_response-xml 不同请求方式responce的数据编码demo
-//1.2 使用 ./apiserver_response run
+//1.2 使用 ./responceserver02 run
 
 /*
 1.1 请求路由无编码格式接口-Post-body-gbk-设置xml头，返回struct         返回数据是gbk编码
@@ -51,13 +51,14 @@ func main() {
 }
 
 type xml struct {
-	Param1 string    `xml:"param1"`
-	Param2 bool      `xml:"param2"`
-	Param3 int32     `xml:"param3"`
-	Param4 float32   `xml:"param4"`
-	Param5 []string  `xml:"param5"`
-	Param6 time.Time `xml:"param6" time_format:"2006/01/02 15:04:05"`
-	Param8 []int     `xml:"param8"`
+	Param1 string                 `xml:"param1"`
+	Param2 bool                   `xml:"param2"`
+	Param3 int32                  `xml:"param3"`
+	Param4 float32                `xml:"param4"`
+	Param5 []string               `xml:"param5"`
+	Param6 time.Time              `xml:"param6" time_format:"2006/01/02 15:04:05"`
+	Param7 map[string]interface{} `xml:"param7"`
+	Param8 []int                  `xml:"param8"`
 }
 
 var defaultData = xml{
@@ -67,6 +68,7 @@ var defaultData = xml{
 	Param4: 10.24,
 	Param5: []string{"1", "2"},
 	Param6: time.Now(),
+	Param7: map[string]interface{}{"t1": 123, "t2": "sdfs@@###", "t3": 12.2},
 	Param8: []int{1, 2},
 }
 
@@ -86,6 +88,7 @@ var funcResponse1 = func(ctx hydra.IContext) (r interface{}) {
 		"param4": 10.24,
 		"param5": []string{"1", "2"},
 		"param6": time.Now(),
+		"param7": map[string]interface{}{"t1": 123, "t2": "sdfs@@###", "t3": 12.2},
 		"param8": []int{1, 2},
 	}
 	return input
@@ -102,7 +105,7 @@ var funcResponse2 = func(ctx hydra.IContext) (r interface{}) {
 var funcResponse3 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("apiserver-response-xml,路由设置utf8编码数据处理demo")
 	ctx.Response().Header("Content-Type", "application/xml")
-	return `{"param1":"34ddf#$*@大!@#$%^\u0026*()_+~锅饭都是","param2":true,"param3":1024,"param4":10.24,"param5":["1","2"],"param6":"2020-12-08T16:57:43.187670336+08:00","param8":[1,2]}`
+	return `{"param1":"34ddf#$*@大!@#$%^\u0026*()_+~锅饭都是","param2":true,"param3":1024,"param4":10.24,"param5":["1","2"],"param6":"2020-12-08T16:57:43.187670336+08:00","param7":{"t1":123,"t2":"sdfs@@###","t3":12.2},"param8":[1,2]}`
 }
 
 //路由设置编码 gb2312

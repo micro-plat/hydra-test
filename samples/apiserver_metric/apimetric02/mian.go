@@ -7,7 +7,6 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiservermetric"),
@@ -16,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070").Metric("http://192.168.106.219:8086", "testserver", "@every 10s", metric.WithUPName("", ""))
+	hydra.Conf.API(":8072").Metric("http://192.168.106.219:8086", "hydratest", "@every 5s", metric.WithUPName("", ""))
 	app.API("/hydratest/apiservermetric/metric/succ", funcAPI1)
 	app.API("/hydratest/apiservermetric/metric/fail", funcAPI2)
 }
@@ -25,8 +24,8 @@ func init() {
 
 //1.1 运行程序 ./apimetric02 run
 //1.2 随机的访问下面两个接口，查看influxdb中统计数据是否正确;定时上报时间是否生效;
-//1.3 调用接口：http://localhost:8070/hydratest/apiservermetric/metric/succ
-//1.4 调用接口：http://localhost:8070/hydratest/apiservermetric/metric/fail
+//1.3 调用接口：http://localhost:8072/hydratest/apiservermetric/metric/succ
+//1.4 调用接口：http://localhost:8072/hydratest/apiservermetric/metric/fail
 func main() {
 	app.Start()
 }

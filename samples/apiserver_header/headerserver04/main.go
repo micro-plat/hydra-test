@@ -7,24 +7,22 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserverheader"),
 	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+	hydra.WithRegistry("lm://."),
 )
 
 func init() {
-	hydra.Conf.API(":8070").Header(header.WithCrossDomain(), header.WithHeader("taosy-header", "testx"))
+	hydra.Conf.API(":8072").Header(header.WithCrossDomain(), header.WithHeader("taosy-header", "testx"))
 	app.API("/hydratest/apiserver/header", funcHeader)
 }
 
 // apiserver-header中间件头信息覆盖demo
 
-//1.1 安装程序 ./headerserver04 conf install -cover
-//1.2 使用 ./headerserver04 run
-//1.3 请求头：http://localhost:8070/hydratest/apiserver/header 返回：返回的taosy-header=test
+//1.1 使用 ./headerserver04 run
+//1.2 请求头：http://localhost:8072/hydratest/apiserver/header 返回：返回的taosy-header=test
 func main() {
 	app.Start()
 }

@@ -7,7 +7,6 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiservercode"),
@@ -16,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API(":8072")
 	app.API("/hydratest/apiserver/cmd", funcCode)
 	app.Web("/hydratest/apiserver/cmdweb", funcCode)
 }

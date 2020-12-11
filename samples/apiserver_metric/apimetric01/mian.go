@@ -7,23 +7,22 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiservermetric"),
 	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("lm://./"),
+	hydra.WithRegistry("lm://."),
 )
 
 func init() {
-	hydra.Conf.API(":8070").Metric("http://192.168.106.219:8086", "testserver", "@every 10s", metric.WithDisable())
+	hydra.Conf.API(":8072").Metric("http://192.168.106.219:8086", "hydratest", "@every 5s", metric.WithDisable())
 	app.API("/hydratest/apiservermetric/metric", funcAPI)
 }
 
 // apiserver_metric 配置被禁用，统计信息保存demo
 
-//1.2 运行程序 ./apimetric01 run
-//1.4 调用接口：http://localhost:8070/hydratest/apiservermetric/metric 查看influxdb中数据是否正确
+//1.1 运行程序 ./apimetric01 run
+//1.2 调用接口：http://localhost:8072/hydratest/apiservermetric/metric 查看influxdb中数据是否正确
 func main() {
 	app.Start()
 }

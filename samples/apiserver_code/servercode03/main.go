@@ -7,7 +7,6 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiservercode"),
@@ -16,14 +15,14 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API(":8072")
 	app.API("/hydratest/apiserver/cmd", funcCode)
 }
 
 // apiserver命令重新指定注册中心类型demo
 
 //1.1 使用 ./servercode03 run -r lm://. -p hydratest1 -c taosytest1 -s apiservercode1
-//1.2 调用接口：http://localhost:8070/hydratest/apiserver/cmd 判定配置是否正确
+//1.2 调用接口：http://localhost:8072/hydratest/apiserver/cmd 判定配置是否正确
 func main() {
 	app.Start()
 }
