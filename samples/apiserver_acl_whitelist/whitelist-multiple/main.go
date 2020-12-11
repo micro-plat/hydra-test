@@ -8,7 +8,7 @@ import (
 
 var app = hydra.NewApp(
 	hydra.WithServerTypes(http.API),
-	hydra.WithPlatName("hydratest"),
+	hydra.WithPlatName("hydra_test"),
 	hydra.WithSystemName("whitelist-multiple"),
 	hydra.WithClusterName("t"),
 	hydra.WithRegistry("lm://./"),
