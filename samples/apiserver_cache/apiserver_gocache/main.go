@@ -116,9 +116,8 @@ var decrementHandler = func(ctx hydra.IContext) (r interface{}) {
 
 var incrementIntHandler = func(ctx hydra.IContext) (r interface{}) {
 	newcachekey := "hydra:apiserver:gocache-int"
-	newval, err := cacheObj.Set(newcachekey, 100,-1)
-
 	cacheObj := hydra.C.Cache().GetRegularCache(cacheName)
+
 	newval, err := cacheObj.Increment(newcachekey, 100)
 	if err != nil {
 		ctx.Log().Errorf("Cache.Increment:%v", err)
@@ -131,7 +130,6 @@ var incrementIntHandler = func(ctx hydra.IContext) (r interface{}) {
 
 var decrementIntHandler = func(ctx hydra.IContext) (r interface{}) {
 	newcachekey := "hydra:apiserver:gocache-int"
-
 	cacheObj := hydra.C.Cache().GetRegularCache(cacheName)
 	newval, err := cacheObj.Decrement(newcachekey, 50)
 	if err != nil {
