@@ -14,24 +14,22 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserverDlock"),
 	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+	hydra.WithRegistry("lm://."),
 )
 
 func init() {
-	hydra.Conf.API(":8070", api.WithTimeout(100, 100))
+	hydra.Conf.API(":8072", api.WithTimeout(100, 100))
 	app.API("/hydratest/apiserverDlock/get", funcAPI)
 }
 
 // apiserver_dlock 高并发下调用偿试获取分布式锁测试demo
-//1.1 安装程序 ./apiserverdlock01 conf install -cover
-//1.2 使用 ./apiserverdlock01 run
+//1.1 使用 ./apiserverdlock01 run
 
-//1.3 调用接口：http://localhost:8070/hydratest/apiserverDlock/get  观察日志是否有异常,1000并发的耗时情况
+//1.2 调用接口：http://localhost:8072/hydratest/apiserverDlock/get  观察日志是否有异常,1000并发的耗时情况
 // 预期说明：因为count计数器不是线程安全的,atomicCount计数器是线程安全的，所以如果atomicCount=count 说明分布式锁在高并发情况下运行正常
 func main() {
 	app.Start()

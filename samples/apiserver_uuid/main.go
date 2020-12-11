@@ -13,24 +13,22 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserverUUID"),
 	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+	hydra.WithRegistry("lm://."),
 )
 
 func init() {
-	hydra.Conf.API(":8070", api.WithTimeout(100, 100))
+	hydra.Conf.API(":8072", api.WithTimeout(100, 100))
 	app.API("/hydratest/apiserverUUID/get", funcAPI)
 }
 
 // apiserver_uuid uuid同集群下并发获取demo
-//1.1 安装程序 ./apiserver_uuid conf install -cover
-//1.2 使用 ./apiserver_uuid run
+//1.1 使用 ./apiserver_uuid run
 
-//1.3 调用接口：http://localhost:8070/hydratest/apiserverUUID/get  观察日志是否有异常,1000并发的耗时情况
+//1.2 调用接口：http://localhost:8072/hydratest/apiserverUUID/get  观察日志是否有异常,1000并发的耗时情况
 func main() {
 	app.Start()
 }
