@@ -93,8 +93,6 @@ param8:
 
 func main() {
 	app.Start()
-	// bodyRaw, _ := yamlM.Marshal(&defaultData)
-	// fmt.Println("bodyRaw:", string(bodyRaw))
 }
 
 type ymal struct {

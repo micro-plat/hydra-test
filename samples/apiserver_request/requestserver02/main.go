@@ -183,12 +183,12 @@ var funcRequest1 = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("ctx.Request().GetDatetime()异常：%s", err)
 	}
 	ctx.Log().Info("----GetDatetime()：", tm)
-	ctx.Log().Info("----Keys data:", ctx.Request().Keys())
-	ctx.Log().Info("----Len data:", ctx.Request().Len())
-	ctx.Log().Info("----GetArray data:", ctx.Request().GetArray("param5"))
-	ctx.Log().Info("----GetInt32 data:", ctx.Request().GetInt32("param3"))
-	ctx.Log().Info("----GetFloat32 data:", ctx.Request().GetFloat32("param4"))
-	ctx.Log().Info("----GetBool data:", ctx.Request().GetBool("param2"))
+	ctx.Log().Info("----Keys data:", newMap.Keys())
+	ctx.Log().Info("----Len data:", newMap.Len())
+	ctx.Log().Info("----GetArray data:", newMap.GetArray("param5"))
+	ctx.Log().Info("----GetInt32 data:", newMap.GetInt32("param3"))
+	ctx.Log().Info("----GetFloat32 data:", newMap.GetFloat32("param4"))
+	ctx.Log().Info("----GetBool data:", newMap.GetBool("param2"))
 	return "success"
 }
 
@@ -228,12 +228,12 @@ var funcRequest2 = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("ctx.Request().GetDatetime()异常：%s", err)
 	}
 	ctx.Log().Info("----GetDatetime()：", tm)
-	ctx.Log().Info("----Keys data:", ctx.Request().Keys())
-	ctx.Log().Info("----Len data:", ctx.Request().Len())
-	ctx.Log().Info("----GetArray data:", ctx.Request().GetArray("param5"))
-	ctx.Log().Info("----GetInt32 data:", ctx.Request().GetInt32("param3"))
-	ctx.Log().Info("----GetFloat32 data:", ctx.Request().GetFloat32("param4"))
-	ctx.Log().Info("----GetBool data:", ctx.Request().GetBool("param2"))
+	ctx.Log().Info("----Keys data:", newMap.Keys())
+	ctx.Log().Info("----Len data:", newMap.Len())
+	ctx.Log().Info("----GetArray data:", newMap.GetArray("param5"))
+	ctx.Log().Info("----GetInt32 data:", newMap.GetInt32("param3"))
+	ctx.Log().Info("----GetFloat32 data:", newMap.GetFloat32("param4"))
+	ctx.Log().Info("----GetBool data:", newMap.GetBool("param2"))
 	return "success"
 }
 
@@ -273,11 +273,11 @@ var funcRequest3 = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("ctx.Request().GetDatetime()异常：%s", err)
 	}
 	ctx.Log().Info("----GetDatetime()：", tm)
-	ctx.Log().Info("----Keys data:", ctx.Request().Keys())
-	ctx.Log().Info("----Len data:", ctx.Request().Len())
-	ctx.Log().Info("----GetArray data:", ctx.Request().GetArray("param5"))
-	ctx.Log().Info("----GetInt32 data:", ctx.Request().GetInt32("param3"))
-	ctx.Log().Info("----GetFloat32 data:", ctx.Request().GetFloat32("param4"))
-	ctx.Log().Info("----GetBool data:", ctx.Request().GetBool("param2"))
+	ctx.Log().Info("----Keys data:", newMap.Keys())
+	ctx.Log().Info("----Len data:", newMap.Len())
+	ctx.Log().Info("----GetArray data:", newMap.GetArray("param5"))
+	ctx.Log().Info("----GetInt32 data:", newMap.GetInt32("param3"))
+	ctx.Log().Info("----GetFloat32 data:", newMap.GetFloat32("param4"))
+	ctx.Log().Info("----GetBool data:", newMap.GetBool("param2"))
 	return "success"
 }

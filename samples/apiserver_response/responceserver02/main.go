@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserverresponse"),
 	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+	hydra.WithRegistry("lm://."),
 )
 
 func init() {
