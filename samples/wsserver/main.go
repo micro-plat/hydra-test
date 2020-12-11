@@ -36,14 +36,14 @@ func init() {
 //安装配置 ./wsserver conf install
 //启动服务 ./wsserver run [成功]
 
-//更新zk节点 /hydra_test/wsserver/ws/t/conf 的address值为8070 [服务器重启.配置更新完成]
-//更新zk节点 /hydra_test/wsserver/ws/t/conf 的status值为空,start 服务器进行重启成功
-//更新zk节点 /hydra_test/wsserver/ws/t/conf 的status值为stop 服务器关闭api服务,不进行重启
-//更新zk节点 /hydra_test/wsserver/ws/t/conf 的trace值为false 服务器重启
+//更新zk节点 /hydratest/wsserver/ws/t/conf 的address值为8070 [服务器重启.配置更新完成]
+//更新zk节点 /hydratest/wsserver/ws/t/conf 的status值为空,start 服务器进行重启成功
+//更新zk节点 /hydratest/wsserver/ws/t/conf 的status值为stop 服务器关闭api服务,不进行重启
+//更新zk节点 /hydratest/wsserver/ws/t/conf 的trace值为false 服务器重启
 
-//更新zk节点 /hydra_test/wsserver/ws/t/auth/jwt   的disbale值为true [服务器重启.配置更新完成]
-//更新zk节点 /hydra_test/wsserver/ws/t/auth/basic 的disbale值为true [服务器重启.配置更新完成]
-//更新zk节点 /hydra_test/wsserver/ws/t/acl/limit  的disbale值为true [服务器重启.配置更新完成]
+//更新zk节点 /hydratest/wsserver/ws/t/auth/jwt   的disbale值为true [服务器重启.配置更新完成]
+//更新zk节点 /hydratest/wsserver/ws/t/auth/basic 的disbale值为true [服务器重启.配置更新完成]
+//更新zk节点 /hydratest/wsserver/ws/t/acl/limit  的disbale值为true [服务器重启.配置更新完成]
 func main() {
 	app.Start()
 }

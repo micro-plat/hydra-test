@@ -16,15 +16,15 @@ var create = func(ctx hydra.IContext) (r interface{}) {
 	if err != nil {
 		return err
 	}
-	err = a.CreatePersistentNode("hydra_test/node/persistent", "test")
+	err = a.CreatePersistentNode("hydratest/node/persistent", "test")
 	if err != nil {
 		return err
 	}
-	err = a.CreateTempNode("hydra_test/node/temp", "test")
+	err = a.CreateTempNode("hydratest/node/temp", "test")
 	if err != nil {
 		return err
 	}
-	rpath, err := a.CreateSeqNode("hydra_test/node/seq", "test")
+	rpath, err := a.CreateSeqNode("hydratest/node/seq", "test")
 	if err != nil {
 		return err
 	}
@@ -38,7 +38,7 @@ var update = func(ctx hydra.IContext) (r interface{}) {
 	if err != nil {
 		return err
 	}
-	err = a.Update("/hydra_test/registry_redis/api/t/conf", `{"address":":18080","status":"start"}`)
+	err = a.Update("/hydratest/registry_redis/api/t/conf", `{"address":":18080","status":"start"}`)
 	if err != nil {
 		return err
 	}
@@ -51,7 +51,7 @@ var delete = func(ctx hydra.IContext) (r interface{}) {
 	if err != nil {
 		return err
 	}
-	err = a.Delete("hydra_test/node/persistent")
+	err = a.Delete("hydratest/node/persistent")
 	if err != nil {
 		return err
 	}
@@ -64,15 +64,15 @@ var exists = func(ctx hydra.IContext) (r interface{}) {
 	if err != nil {
 		return err
 	}
-	b, err := a.Exists("/hydra_test/registry_redis/api/t/conf")
+	b, err := a.Exists("/hydratest/registry_redis/api/t/conf")
 	if err != nil {
 		return err
 	}
-	b1, err := a.Exists("/hydra_test/registry_redis/api/t/conf1")
+	b1, err := a.Exists("/hydratest/registry_redis/api/t/conf1")
 	if err != nil {
 		return err
 	}
-	b2, err := a.Exists("/hydra_test/var")
+	b2, err := a.Exists("/hydratest/var")
 	if err != nil {
 		return err
 	}
@@ -90,7 +90,7 @@ var getvalue = func(ctx hydra.IContext) (r interface{}) {
 	if err != nil {
 		return err
 	}
-	v, ver, err := a.GetValue("/hydra_test/registry_redis/api/t/conf")
+	v, ver, err := a.GetValue("/hydratest/registry_redis/api/t/conf")
 	if err != nil {
 		return err
 	}
@@ -106,7 +106,7 @@ var getchildren = func(ctx hydra.IContext) (r interface{}) {
 	if err != nil {
 		return err
 	}
-	v, ver, err := a.GetChildren("/hydra_test/var")
+	v, ver, err := a.GetChildren("/hydratest/var")
 	if err != nil {
 		return err
 	}

@@ -45,14 +45,14 @@ func init() {
 //关闭服务
 //安装配置 ./apiserver_run conf install [安装配置成功]
 //启动服务 ./apiserver_run run [成功]
-//更新zk节点 /hydra_test/run/api/t/conf 的address值为8070 [服务器重新.配置更新完成]
-//更新zk节点 /hydra_test/run/api/t/conf 的status值为空,start 服务器进行重启成功
-//更新zk节点 /hydra_test/run/api/t/conf 的status值为stop 服务器关闭api服务,不进行重启
-//更新zk节点 /hydra_test/run/api/t/conf 的wTimeout值为1, 无法访问/api
-//更新zk节点 /hydra_test/run/api/t/conf 的wTimeout值为0, 正常访问/api
-//更新zk节点 /hydra_test/run/api/t/conf 的wTimeout值为3, 正常访问/api
-//更新zk节点 /hydra_test/run/api/t/conf 的rTimeout值为1, 上传的大文件(1.3G) 访问/file [i/o timeout 返回400]
-//更新zk节点 /hydra_test/run/api/t/conf 的rTimeout值为0, 上传的大文件(1.3G) 访问/file [正常]
+//更新zk节点 /hydratest/run/api/t/conf 的address值为8070 [服务器重新.配置更新完成]
+//更新zk节点 /hydratest/run/api/t/conf 的status值为空,start 服务器进行重启成功
+//更新zk节点 /hydratest/run/api/t/conf 的status值为stop 服务器关闭api服务,不进行重启
+//更新zk节点 /hydratest/run/api/t/conf 的wTimeout值为1, 无法访问/api
+//更新zk节点 /hydratest/run/api/t/conf 的wTimeout值为0, 正常访问/api
+//更新zk节点 /hydratest/run/api/t/conf 的wTimeout值为3, 正常访问/api
+//更新zk节点 /hydratest/run/api/t/conf 的rTimeout值为1, 上传的大文件(1.3G) 访问/file [i/o timeout 返回400]
+//更新zk节点 /hydratest/run/api/t/conf 的rTimeout值为0, 上传的大文件(1.3G) 访问/file [正常]
 func main() {
 	app.Start()
 }
