@@ -27,7 +27,7 @@ func init() {
 
 //测试cron_task静态注册,重复注册
 //启动服务  ./cronserver_task run
-//访问 /getcorn  打印任务配置[3个]  [{@every 20s /cron},{@every 20s /cron},{@every 20s /cron2}]
+//访问 /getcron  打印任务配置[3个]  [{@every 20s /cron},{@every 20s /cron},{@every 20s /cron2}]
 //查看 /cron和cron2 执行频率[每20s执行一次],静态注册的重复对执行没有影响
 func main() {
 	app.Start()

@@ -3,6 +3,8 @@ package main
 import (
 	"encoding/json"
 
+	"github.com/micro-plat/hydra/global"
+
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra/conf/server/task"
 	"github.com/micro-plat/hydra/registry"
@@ -10,11 +12,11 @@ import (
 )
 
 var getCron = func(ctx hydra.IContext) (r interface{}) {
-	reg, err := registry.GetRegistry("lm://./", logger.New("hydra"))
+	reg, err := registry.GetRegistry(global.Def.RegistryAddr, logger.New("hydra"))
 	if err != nil {
 		return err
 	}
-	value, _, err := reg.GetValue("/hydra_test/task_repeat/cron/t/conf/task")
+	value, _, err := reg.GetValue("/hydratest/task_repeat/cron/t/conf/task")
 	if err != nil {
 		return err
 	}

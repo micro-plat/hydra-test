@@ -1,12 +1,11 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra/hydra/servers/cron"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 	"github.com/micro-plat/hydra/services"
+	"github.com/micro-plat/lib4go/logger"
 )
 
 var app = hydra.NewApp(
@@ -19,9 +18,9 @@ var app = hydra.NewApp(
 
 var cronName = "@every 20s"
 var cronService = "/cron"
-var printTasks = func() {
+var printTasks = func(log logger.ILogger) {
 	for k, v := range services.CRON.GetTasks().Tasks {
-		fmt.Println(k, v.Cron, v.Service, v.Disable)
+		log.Debug(k, v.Cron, v.Service, v.Disable)
 	}
 }
 
@@ -33,13 +32,13 @@ func init() {
 
 	app.API("/cron/add", func(ctx hydra.IContext) (r interface{}) {
 		hydra.CRON.Add(cronName, cronService)
-		printTasks()
+		printTasks(ctx.Log())
 		return
 	})
 
 	app.API("/cron/remove", func(ctx hydra.IContext) (r interface{}) {
 		hydra.CRON.Remove(cronName, cronService)
-		printTasks()
+		printTasks(ctx.Log())
 		return
 	})
 
@@ -53,6 +52,5 @@ func init() {
 func main() {
 	hydra.CRON.Add(cronName, cronService)
 	hydra.CRON.Remove(cronName, cronService)
-	printTasks()
 	app.Start()
 }

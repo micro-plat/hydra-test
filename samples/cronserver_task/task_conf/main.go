@@ -26,7 +26,7 @@ var printTasks = func() {
 
 func init() {
 	hydra.Conf.API(":8070")
-	hydra.Conf.CRON().Task(task.NewTask("@every 10s", "/cron"), task.NewTask("@every 10s", "/cron2"))
+	hydra.Conf.CRON().Task(task.NewTask("@every 5s", "/cron"), task.NewTask("@every 10s", "/cron2"))
 
 	app.CRON("/cron", func(ctx hydra.IContext) (r interface{}) { return })
 	app.CRON("/cron2", func(ctx hydra.IContext) (r interface{}) { return })
