@@ -11,7 +11,7 @@ import (
 
 var app = hydra.NewApp(
 	hydra.WithServerTypes(cron.CRON, http.API),
-	hydra.WithPlatName("hydra_test"),
+	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("cron_registry_repeat"),
 	hydra.WithClusterName("t"),
 	hydra.WithRegistry("lm://./"),

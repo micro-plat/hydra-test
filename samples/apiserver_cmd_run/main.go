@@ -10,10 +10,9 @@ import (
 
 var app = hydra.NewApp(
 	hydra.WithServerTypes(http.API),
-	hydra.WithPlatName("hydra_test"),
+	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("cmd_conf"),
 	hydra.WithClusterName("t"),
-	hydra.WithRegistry("lm://./"),
 	hydra.WithRunFlag("flag", "-测试添加的run命令扩展参数"), // 添加run命令扩展参数
 )
 

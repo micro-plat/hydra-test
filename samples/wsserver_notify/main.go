@@ -12,7 +12,7 @@ import (
 
 var app = hydra.NewApp(
 	hydra.WithServerTypes(http.WS, http.API, mqc.MQC),
-	hydra.WithPlatName("hydra_test"),
+	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("wsserver_notify"),
 	hydra.WithClusterName("t"),
 	hydra.WithRegistry("lm://./"),
