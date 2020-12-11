@@ -8,7 +8,6 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.Web),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("webserverstatic"),

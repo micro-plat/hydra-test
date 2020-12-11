@@ -5,12 +5,10 @@ import (
 	"time"
 
 	_ "github.com/mattn/go-oci8"
-	"gopkg.in/yaml.v2"
-
+ 
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/registry"
-	"github.com/micro-plat/lib4go/types"
-
+ 
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/samples/apiserver_db/apiserver_oracle/sqls"
 	"github.com/micro-plat/hydra/conf/app"
@@ -52,26 +50,7 @@ func init() {
 // 6. 请求 http://localhost:50021/api/oracle/sp 调用存储过错添加一条 10002数据
 // 7. 请求 http://localhost:50021/api/oracle/delete 删除所有数据
 // 8. 请求 http://localhost:50021/api/oracle/config 修改数据库配置，并重启
-func main() {
-
-	datarows := []types.XMap{
-		types.XMap{
-			"a1": "a1",
-			"a2": "a2",
-		},
-		types.XMap{
-			"b1": "b1",
-			"b2": "b2",
-		},
-	}
-
-	bytes, err := yaml.Marshal(datarows)
-	if err != nil {
-		fmt.Println("marshal:", err)
-		return
-	}
-	fmt.Println(string(bytes))
-
+func main() { 
 	hydraApp.OnStarting(func(cnf app.IAPPConf) (err error) {
 		oracleDB := hydra.C.DB().GetRegularDB("0.136")
 
