@@ -37,7 +37,24 @@ func init() {
 	})
 
 	app.API("/options", func(ctx context.IContext) (r interface{}) {
-		return "success"
+		return struct {
+			Name  string
+			Value string
+		}{
+			Name:  "name",
+			Value: "value",
+		}
+	})
+	type S struct {
+		Name  string
+		Value string
+	}
+
+	app.API("/struct", func(ctx context.IContext) (r interface{}) {
+		return S{
+			Name:  "name",
+			Value: "value",
+		}
 	})
 }
 
