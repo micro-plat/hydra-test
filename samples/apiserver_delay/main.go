@@ -7,26 +7,24 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserverdelay"),
 	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+	hydra.WithRegistry("lm://."),
 )
 
 func init() {
-	hydra.Conf.API(":8070", api.WithTimeout(10, 10))
+	hydra.Conf.API(":8072", api.WithTimeout(10, 10))
 	app.API("/hydratest/apiserver/delay", funcHeader)
 }
 
 // apiserver-delay延迟中间件测试demo
 
-//1.1 安装程序 ./apiserver_delay conf install -cover
-//1.2 使用 ./apiserver_delay run
-//1.3 不设置X-Add-Delay：http://localhost:8070/hydratest/apiserver/delay 观察日志X-Add-Delay的值和响应时间是否正常
-//1.4 设置X-Add-Delay=3s：http://localhost:8070/hydratest/apiserver/delay 观察日志X-Add-Delay的值和响应时间是否正常>3s
-//1.6 设置X-Add-Delay=11s：http://localhost:8070/hydratest/apiserver/delay 大于了链接超市时间，应该返回链接超时
+//1.1 使用 ./apiserver_delay run
+//1.2 不设置X-Add-Delay：http://localhost:8072/hydratest/apiserver/delay 观察日志X-Add-Delay的值和响应时间是否正常
+//1.3 设置X-Add-Delay=3s：http://localhost:8072/hydratest/apiserver/delay 观察日志X-Add-Delay的值和响应时间是否正常>3s
+//1.4 设置X-Add-Delay=11s：http://localhost:8072/hydratest/apiserver/delay 大于了链接超市时间，应该返回链接超时
 func main() {
 	app.Start()
 }

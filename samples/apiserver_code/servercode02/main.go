@@ -7,7 +7,6 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiservercode"),
@@ -16,15 +15,15 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API(":8072")
 	app.API("/hydratest/apiserver/cmd", funcCode)
 	app.Web("/hydratest/apiserver/codeweb", funcCode1)
 }
 
 //apiserver 命令覆盖代码配置demo
 
-//1.1 安装程序 ./servercode02 conf install -p hydratest1 -c taosytest1 -s apiservercode1 -S web -cover
-//1.2 使用 ./servercode02 run -p hydratest1 -c taosytest1 -s apiservercode1 -S web
+//1.1 安装程序 ./servercode02 conf install -p hydratest1 -c taosytest1 -s apiservercode1 -S web -d -cover
+//1.2 使用 ./servercode02 run -p hydratest1 -c taosytest1 -s apiservercode1 -S web -d
 //1.3 调用接口：http://localhost:8089/hydratest/apiserver/codeweb 判定配置是否正确
 func main() {
 	app.Start()
