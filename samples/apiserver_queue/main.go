@@ -17,7 +17,7 @@ var app = hydra.NewApp(
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserver_queue"),
 	hydra.WithClusterName("t"),
-	hydra.WithRegistry("lm://."),
+	hydra.WithRegistry("zk://192.168.0.101"),
 )
 
 func init() {
@@ -64,8 +64,8 @@ func init() {
 //queue组件是否正确工作,修改配置是否自动生效(redis,mqtt)
 //启动服务  ./apiserver_queue run
 //1. 访问  /add/redisqueue 添加消息队列, /mqc主动的消费消息队列,打印Message: map[key:value]
-//2. 访问  /test/redisqueue 查看组件各个功能是否正常,查看数量[1个],取出值[{"key":"value"}]以及关闭[正常]等情况
-//3. 修改zk节点 /hydra_test/apiserver_queue/mqc-api/t/conf 的addr值为"mqtt://mqtt"
+//2. 访问  /test/redisqueue 查看组件各个功能是否正常
+//3. 修改zk节点 /hydratest/apiserver_queue/mqc-api/t/conf 的addr值为"mqtt://mqtt"
 //4. 重启服务,连接mqtt
 //5. 访问  /add/mqttqueue 添加消息队列, /mqc主动的消费消息队列,打印Message: map[key:value]
 func main() {

@@ -5,24 +5,23 @@ import (
 	mqcconf "github.com/micro-plat/hydra/conf/server/mqc"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
 	"github.com/micro-plat/hydra/context"
-	"github.com/micro-plat/hydra/hydra/servers/http"
 	"github.com/micro-plat/hydra/hydra/servers/mqc"
 	"github.com/micro-plat/hydra/registry"
 	"github.com/micro-plat/lib4go/logger"
 )
 
+var registryAddr = "zk://192.168.0.101"
 var app = hydra.NewApp(
-	hydra.WithServerTypes(mqc.MQC, http.API),
+	hydra.WithServerTypes(mqc.MQC),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("mqc_cluster"),
 	hydra.WithClusterName("t"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+	hydra.WithRegistry(registryAddr),
 )
-var confPath = "/hydra_test/mqc_cluster/mqc/t/conf"
-var reg, _ = registry.GetRegistry("zk://192.168.0.101", logger.New("hydra"))
+var confPath = "/hydratest/mqc_cluster/mqc/t/conf"
+var reg, _ = registry.GetRegistry(registryAddr, logger.New("hydra"))
 
 func init() {
-	hydra.Conf.API(":8070")
 	hydra.Conf.Vars().Redis("5.79", "192.168.5.79:6379")
 	hydra.Conf.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	hydra.Conf.MQC("redis://xxx", mqcconf.WithMasterSlave()) //设置为主从模式
@@ -44,7 +43,7 @@ func init() {
 
 //消息队列服务器异常关闭后正常启动，服务是否自动恢复
 //启动服务 ./cluster_master run 启动3个mqc服务(仅一个服务开启api服务)
-//反复调用/mqc/master,mqc/sharding,mqc/p2p 查看服务器在模式相互切换时是否正常
+//反复调用/mqc/master,mqc/sharding,mqc/p2p 查看3个服务器在模式相互切换时是否正常
 func main() {
 	app.Start()
 }

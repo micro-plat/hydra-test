@@ -33,12 +33,13 @@ func init() {
 	hydra.Conf.MQC("redis://xxx")
 
 	app.MQC("/mqc", func(ctx context.IContext) (r interface{}) { return }, mqcName)
-	app.MQC("/mqc2", func(ctx context.IContext) (r interface{}) { return }, mqcName)
+	app.MQC("/mqc2", func(ctx context.IContext) (r interface{}) { return }, mqcName) //指定同一个消息队列名
 }
 
 //测试mqc服务注册时指定队列名
 //启动服务  ./registry_assign run
-//查看的服务启动前的消息队列数量[0]和启动后的消息队列信息
+//服务启动前的消息队列数量[0]
+//启动后的消息队列信息[hydratest:mqcName /mqc]
 func main() {
 	fmt.Println("服务启动前的队列:", services.MQC.GetQueues().Queues)
 	hydra.OnReady(func() {

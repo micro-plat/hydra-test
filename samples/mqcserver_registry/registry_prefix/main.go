@@ -24,19 +24,15 @@ func init() {
 	hydra.Conf.Vars().Redis("5.79", "192.168.5.79:6379")
 	hydra.Conf.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	hydra.Conf.MQC("redis://xxx")
-	app.MQC("/mqc", func(ctx context.IContext) (r interface{}) {
-		ctx.Log().Info("mqc")
-		return
-	}, "mqcName")
-	app.MQC("/mqc2", func(ctx context.IContext) (r interface{}) {
-		ctx.Log().Info("mqc")
-		return
-	}, "mqcName2")
+
+	app.MQC("/mqc", func(ctx context.IContext) (r interface{}) { ctx.Log().Info("mqc"); return }, "mqcName")
+	app.MQC("/mqc2", func(ctx context.IContext) (r interface{}) { ctx.Log().Info("mqc"); return }, "mqcName2")
 }
 
 //测试mqc服务注册时队列名不拼接平台名为前缀
 //启动服务  ./registry_assign run
-//查看的服务启动前的消息队列数量[mqcName,mqcName2]和启动后的消息队列信息
+//服务启动前的消息队列[mqcName,mqcName2]
+//启动后的消息队列信息[mqcName,mqcName2]
 func main() {
 	fmt.Println("服务启动前的队列")
 	for k, v := range services.MQC.GetQueues().Queues {
