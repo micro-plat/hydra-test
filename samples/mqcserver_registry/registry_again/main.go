@@ -15,7 +15,7 @@ import (
 
 var app = hydra.NewApp(
 	hydra.WithServerTypes(mqc.MQC, http.API),
-	hydra.WithPlatName("hydra_test"),
+	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("mqc_registry_again"),
 	hydra.WithClusterName("t"),
 	hydra.WithRegistry("lm://./"),

@@ -12,7 +12,7 @@ import (
 
 var app = hydra.NewApp(
 	hydra.WithServerTypes(http.WS),
-	hydra.WithPlatName("hydra_test"),
+	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("ws_establish"),
 	hydra.WithClusterName("t"),
 	hydra.WithRegistry("zk://192.168.0.101"),

@@ -10,7 +10,7 @@ import (
 
 var app = hydra.NewApp(
 	hydra.WithServerTypes(http.WS),
-	hydra.WithPlatName("hydra_test"),
+	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("wsserver_request"),
 	hydra.WithClusterName("t"),
 	hydra.WithRegistry("lm://./"),
