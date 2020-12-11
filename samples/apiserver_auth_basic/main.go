@@ -17,7 +17,8 @@ var app = hydra.NewApp(
 func init() {
 	hydra.Conf.API(":8080").Basic(basic.WithExcludes("/api/exclude"), basic.WithEnable(), basic.WithUP("user", "pwd"))
 	app.API("/api", func(ctx hydra.IContext) (r interface{}) {
-		ctx.Log().Info("api")
+		header := ctx.Request().Headers()
+		ctx.Log().Info("api:", header)
 		return
 	})
 	app.API("/api/exclude", func(ctx hydra.IContext) (r interface{}) {
@@ -36,7 +37,7 @@ func init() {
 //使用谷歌浏览器(版本 86.0.4240.198) 访问 /api/exclude  [正常,返回200]
 //使用谷歌浏览器(版本 86.0.4240.198) 访问 /api          [返回错误码401,弹出登录框]
 //在登录输入框中输入err_user和serr_pwd 访问/api  [返回错误码401,弹出登录框]
-//在登录输入框中输入user和pwd 访问/api  [正常,返回200]
+//在登录输入框中输入user和pwd 访问/api  [正常,header中设置了Authorization,返回200]
 func main() {
 	app.Start()
 }

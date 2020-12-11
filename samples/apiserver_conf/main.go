@@ -13,7 +13,7 @@ import (
 var app = hydra.NewApp(
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
-	hydra.WithSystemName("conf"),
+	hydra.WithSystemName("apiserver_conf"),
 	hydra.WithClusterName("t"),
 	hydra.WithRegistry("zk://192.168.0.101"),
 )
@@ -25,7 +25,7 @@ func init() {
 		return "success"
 	})
 	app.API("/api2", func(ctx context.IContext) (r interface{}) {
-		ctx.Log().Info("api3-Handle")
+		ctx.Log().Info("api2-Handle")
 		time.Sleep(time.Second * 2)
 		return "success"
 	})

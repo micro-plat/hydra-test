@@ -21,13 +21,13 @@ getContent := func(){
     input:={status:response.getStatus(),content:response.getRaw()["msg"]}
 
     if text.has_prefix(request.getPath(),"/xml"){
-        return [200,types.translate(rc_xml,input)]
+        return [200,types.translate(rc_xml,input),"application/xml"]
     }
      if text.has_prefix(request.getPath(),"/json"){
         return [200,types.translate(rc_json,input)]
     }
     if text.has_prefix(request.getPath(),"/plain"){
-        return [200,input.content,"text/plain"]
+        return [200,response.getRaw(),"text/plain"]
     }
 }
 
