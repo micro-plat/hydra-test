@@ -32,17 +32,8 @@ func init() {
 	hydra.Conf.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	hydra.Conf.MQC("redis://xxx")
 
-	app.API("/mqc/add", func(ctx hydra.IContext) (r interface{}) {
-		hydra.MQC.Add(mqcName, mqcService)
-		printQueues()
-		return
-	})
-
-	app.API("/mqc/remove", func(ctx hydra.IContext) (r interface{}) {
-		hydra.MQC.Remove(mqcName, mqcService)
-		printQueues()
-		return
-	})
+	app.API("/mqc/add", func(ctx hydra.IContext) (r interface{}) { hydra.MQC.Add(mqcName, mqcService); printQueues(); return })
+	app.API("/mqc/remove", func(ctx hydra.IContext) (r interface{}) { hydra.MQC.Remove(mqcName, mqcService); printQueues(); return })
 
 }
 

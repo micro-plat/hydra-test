@@ -12,7 +12,6 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(cron.CRON),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("cronservercluster"),
@@ -23,17 +22,13 @@ var app = hydra.NewApp(
 func init() {
 	hydra.Conf.CRON(confcron.WithMasterSlave())
 	app.CRON("/hydratest/cronservercluster/cron1", funcCycle1, "@now")
-	app.CRON("/hydratest/cronservercluster/cron2", funcCycle2, "@once")
+	app.CRON("/hydratest/cronservercluster/cron2", funcCycle2, "@immediately")
 	app.CRON("/hydratest/cronservercluster/cron3", funcCycle3, "@every 10s")
 }
 
 // cronserver_cluster 集群模式：对等、主从、分片，变更后自动切换模式测试demo
-//因为是集群情况测试，所以需要运行多台服务器，分别复制cronserver_cluster1和cronserver_cluster2两个执行文件
-//1.1 安装程序：./cronserver_cluster conf install -cover
-//1.2 运行cronserver_cluster： ./cronserver_cluster run
-//1.3 运行cronserver_cluster1： ./cronserver_cluster1 run
-//1.4 运行cronserver_cluster2： ./cronserver_cluster2 run
-//1.5 直接观察服务器运行的日志了解运行情况是否符合预期
+//1.1 运行  sh run.sh
+//1.2 直接观察服务器运行的日志了解运行情况是否符合预期
 
 /*
 1. 初始化为主备用模式,预期结果:（一台master，两台slave）
@@ -83,13 +78,13 @@ var funcCycle1 = func(ctx hydra.IContext) (r interface{}) {
 }
 
 var funcCycle2 = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("cronserver_cluster once单次执行次数")
-	c, e := uuidMap.Get("once")
+	ctx.Log().Info("cronserver_cluster immediately单次执行次数")
+	c, e := uuidMap.Get("immediately")
 	if !e {
-		uuidMap.Set("once", 1)
+		uuidMap.Set("immediately", 1)
 	} else {
 		count := types.GetInt(c) + 1
-		uuidMap.Set("once", count)
+		uuidMap.Set("immediately", count)
 	}
 
 	res := uuidMap.Items()

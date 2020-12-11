@@ -15,9 +15,9 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":58080").Jwt(
+	hydra.Conf.API(":8080").Jwt(
 		jwt.WithEnable(), jwt.WithHeader(), jwt.WithSecret("123456"),
-		jwt.WithName("__jwt_"), jwt.WithMode(jwt.ModeHS512), jwt.WithExcludes("/api/getjwt"))
+		jwt.WithName("__jwt_"), jwt.WithMode(jwt.ModeHS512), jwt.WithExpireAt(120), jwt.WithExcludes("/api/getjwt"))
 
 	app.API("/api/", func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Info("api")
@@ -40,10 +40,10 @@ func init() {
 //header设置__jwt_值为正确验证串 访问 /api [返回200]  超过2分钟,再次访问 [Token is expired,返回403]
 
 //访问 /api/getjwt 获取一个新的jwt
-//使用新的jwt 访问/api,查看用户认证信息,查看响应的header中jwt的过期时间是否延长
+//使用新的jwt 访问/api,查看用户认证信息,响应的header中jwt的过期时间为当前时间延后2分钟
 
-//通过秘钥123456,加密模式的HS512,在线生成新的jwt
-//使用新的jwt 访问/api,查看用户认证信息是否更新
+//通过秘钥123456,加密模式的HS512,认证信息为data,在线生成新的jwt
+//使用新的jwt 访问/api,用户认证信息更新正确
 func main() {
 	app.Start()
 }

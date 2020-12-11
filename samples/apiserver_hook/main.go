@@ -6,6 +6,8 @@ import (
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
+var index int64 = 0
+
 var app = hydra.NewApp(
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
@@ -25,10 +27,10 @@ func init() {
 
 // 使用zookeeper作为注册中心，验证系统勾子函数、handle勾子函数、对象关闭函数是否正确执行
 // go build
-// ./apiserver_hook run -r "zk://192.168.0.101" -c t 打印server-starting
-// 访问/api 顺序打印 api-handleExectuting,api-Handling,api-Handle,api-Handled,api-handleExecuted
-// 访问/api/query 顺序打印 api-handleExectuting,api-Handling,api-query-Handling,api-query-Handle,api-query-Handled,api-Handled,api-query-handleExecuted
-// 关闭服务 顺序打印  server-closing service-Close
+// ./apiserver_hook run 打印server-starting
+// 访问/api 顺序执行 api-handleExectuting,api-Handling,api-Handle,api-Handled,api-handleExecuted
+// 访问/api/query 顺序执行 api-handleExectuting,api-Handling,api-query-Handling,api-query-Handle,api-query-Handled,api-Handled,api-query-handleExecuted
+// 关闭服务 顺序执行  server-closing service-Close
 func main() {
 	app.Start()
 }

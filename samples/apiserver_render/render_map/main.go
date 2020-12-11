@@ -26,7 +26,7 @@ func main() {
 }
 
 func request(ctx hydra.IContext) interface{} {
-	return map[string]string{
+	return map[string]interface{}{
 		"msg": "success",
 	}
 }

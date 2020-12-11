@@ -11,7 +11,6 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.Web),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("webservervue"),
@@ -45,9 +44,10 @@ func init() {
 
 //1.1 运行程序 ./webservervue02 run
 
-//1. http://192.168.5.94:8072/ 直接跳转道index.htm首页
+//0. http://localhost:8072/vue/config 查看自定义配置config是否正确
+//1. http://192.168.5.94:8072/ 直接跳转道index.html首页
 //2. http://192.168.5.94:8072/file5 直接跳转道index.html首页
-//3. http://192.168.5.94:8072/index.htm 直接跳转道index.html首页
+//3. http://192.168.5.94:8072/index.htm 正常返回文件信息
 //4. http://192.168.5.94:8072/index.html 直接返回index.html首页
 //4. http://192.168.5.94:8072/default.html 直接返回default.html首页
 //5. http://192.168.5.94:8072/default.htm 直接返回default.htm首页
@@ -56,13 +56,13 @@ func init() {
 //8. http://192.168.5.94:8072/file4.txt 直接获取文件信息
 //9. http://192.168.5.94:8072/views/file1.html 正常返回文件信息
 //10. http://192.168.5.94:8072/views/file2.txt 正常返回文件信息
-//11. http://192.168.5.94:8072/views/file3.html 正常返回文件信息
+//11. http://192.168.5.94:8072/views/file3.htm 正常返回文件信息
 //12. http://192.168.5.94:8072/view/file1.html 正常返回文件信息
 //13. http://192.168.5.94:8072/view/file2.txt 正常返回文件信息
-//14. http://192.168.5.94:8072/view/file3.html 正常返回文件信息
+//14. http://192.168.5.94:8072/view/file3.htm 正常返回文件信息
 //15. http://192.168.5.94:8072/web/file1.html 正常返回文件信息
 //16. http://192.168.5.94:8072/web/file2.txt 正常返回文件信息
-//17. http://192.168.5.94:8072/web/file3.html 正常返回文件信息
+//17. http://192.168.5.94:8072/web/file3.htm 正常返回文件信息
 //18. http://192.168.5.94:8072/press/file6.zip 直接下载压缩文件信息
 //19. http://192.168.5.94:8072/press/file7.gz 直接下载压缩文件信息
 //20. http://192.168.5.94:8072/press/file8.7z 直接下载压缩文件信息

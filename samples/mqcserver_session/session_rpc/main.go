@@ -33,7 +33,7 @@ func init() {
 	})
 
 	app.API("/mqc/rpc", func(ctx hydra.IContext) (r interface{}) {
-		respones, err := hydra.C.RPC().GetRegularRPC().Request("/rpc/proc@hydra_test", map[string]interface{}{
+		respones, err := hydra.C.RPC().GetRegularRPC().Request("/rpc/proc@hydratest", map[string]interface{}{
 			"data": `{"key":"value"}`,
 		})
 		if err != nil {

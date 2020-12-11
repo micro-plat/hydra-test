@@ -10,7 +10,6 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API, mqc.MQC),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("mqcserver"),
@@ -19,36 +18,36 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API(":8072")
 	hydra.Conf.MQC("redis://redis").Queue(queue.NewQueue("mqcserver:queue2", "/hydratest/mqcserver/queue2"))
 	hydra.Conf.Vars().Redis("redis", "192.168.5.79:6379")
 	hydra.Conf.Vars().Queue().Redis("redis", "", queueredis.WithConfigName("redis"))
 	app.API("/hydratest/mqcserver/:queue", funcAPI)
-	// app.MQC("/hydratest/mqcserver/queue1", funcMQC1, "mqcserver:queue1")
+	app.MQC("/hydratest/mqcserver/queue1", funcMQC1, "mqcserver:queue1")
 	app.MQC("/hydratest/mqcserver/queue2", funcMQC2)
 }
 
 // mqcserver-queue 静态加载队列后，手动修改注册配置demo
-//1.1 安装程序 ./mqcserver_queue conf install -cover
+//1.1 安装程序 ./mqcserver_queue conf install -v
 //1.2 使用 ./mqcserver_queue run
 
-//1.3 调用错误返回结果接口：http://localhost:8070/hydratest/mqcserver/queue1 都能执行指定的消息队列和mqc接受参数为：taosytest=queue1
-//1.4 调用错误返回结果接口：http://localhost:8070/hydratest/mqcserver/queue2 都能执行指定的消息队列和mqc接受参数为：taosytest=queue2
+//1.3 调用错误返回结果接口：http://localhost:8072/hydratest/mqcserver/queue1 都能执行指定的消息队列和mqc接受参数为：taosytest=queue1
+//1.4 调用错误返回结果接口：http://localhost:8072/hydratest/mqcserver/queue2 都能执行指定的消息队列和mqc接受参数为：taosytest=queue2
 
 //1.5 删除注册中心监听队列queue2  保存主节点，mqc服务自动重新启动
-//1.6 调用错误返回结果接口：http://localhost:8070/hydratest/mqcserver/queue1 都能执行指定的消息队列和mqc接受参数为：taosytest=queue1
-//1.7 调用错误返回结果接口：http://localhost:8070/hydratest/mqcserver/queue2 mqc-queue2队列不能执行，没有执行日志，在redis中查看消息存在
+//1.6 调用错误返回结果接口：http://localhost:8072/hydratest/mqcserver/queue1 都能执行指定的消息队列和mqc接受参数为：taosytest=queue1
+//1.7 调用错误返回结果接口：http://localhost:8072/hydratest/mqcserver/queue2 mqc-queue2队列不能执行，没有执行日志，在redis中查看消息存在
 
 //1.8 添加注册中心监听队列queue2  保存主节点，mqc服务自动重新启动--mqc-queue2队列直接执行消费上面遗留的消息，接受参数：taosytest=queue2
-//1.9 调用错误返回结果接口：http://localhost:8070/hydratest/mqcserver/queue1 都能执行指定的消息队列和mqc接受参数为：taosytest=queue1
+//1.9 调用错误返回结果接口：http://localhost:8072/hydratest/mqcserver/queue1 都能执行指定的消息队列和mqc接受参数为：taosytest=queue1
 
 //1.10 修改注册中心监听队列queue1-->queue3  保存主节点，mqc服务自动重启
-//1.11 调用错误返回结果接口：http://localhost:8070/hydratest/mqcserver/queue1 mqc-queue1队列不能执行，没有执行日志，在redis中查看消息存在
-//1.12 调用错误返回结果接口：http://localhost:8070/hydratest/mqcserver/queue2 都能执行指定的消息队列和mqc接受参数为：taosytest=queue2
+//1.11 调用错误返回结果接口：http://localhost:8072/hydratest/mqcserver/queue1 mqc-queue1队列不能执行，没有执行日志，在redis中查看消息存在
+//1.12 调用错误返回结果接口：http://localhost:8072/hydratest/mqcserver/queue2 都能执行指定的消息队列和mqc接受参数为：taosytest=queue2
 
 //1.13 添加注册中心监听队列queue3-->queue1  保存主节点，mqc服务自动重新启动
-//1.14 调用错误返回结果接口：http://localhost:8070/hydratest/mqcserver/queue1 都能执行指定的消息队列和mqc接受参数为：taosytest=queue1
-//1.15 调用错误返回结果接口：http://localhost:8070/hydratest/mqcserver/queue2 都能执行指定的消息队列和mqc接受参数为：taosytest=queue2
+//1.14 调用错误返回结果接口：http://localhost:8072/hydratest/mqcserver/queue1 都能执行指定的消息队列和mqc接受参数为：taosytest=queue1
+//1.15 调用错误返回结果接口：http://localhost:8072/hydratest/mqcserver/queue2 都能执行指定的消息队列和mqc接受参数为：taosytest=queue2
 
 //1.16 重复上面 1.3--1.15 数10次
 func main() {

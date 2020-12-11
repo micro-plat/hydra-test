@@ -24,9 +24,9 @@ func init() {
 
 //  测试限流启动，降级、非降级时的处理流程
 //  启动服务  ./limiter-enable run
-//  访问 /api [GET] 降级[service-get-fallback],返回200,fallback
-//  访问 /api [POST] 降级[service-fallback],返回200,fallback
-//  访问 /api/query [GET.POST] 降级[service-get-fallback],返回200,fallback
+//  访问 /api [GET] 降级[service-get-fallback],返回200,fallback-handle
+//  访问 /api [POST] 降级[service-fallback],返回200,fallback-handle
+//  访问 /api/query [GET.POST] 降级[service-query-fallback],返回200,fallback-handle
 //  访问 /api/order [GET.POST] 不进行降级处理,返回200,succes
 func main() {
 	app.Start()

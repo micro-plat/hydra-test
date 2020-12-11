@@ -35,25 +35,25 @@ func (s *Service) GetHandle(ctx hydra.IContext) (r interface{}) {
 //Fallback 业务处理降级函数
 func (s *Service) Fallback(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("Service-FallBack")
-	return "fallback"
+	return "fallback-handle"
 }
 
 //QueryFallback 业务处理降级函数
 func (s *Service) QueryFallback(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("Service-query-FallBack")
 	time.Sleep(time.Second * 2)
-	return "fallback"
+	return "fallback-handle"
 }
 
 //OrderFallback 业务处理降级函数
 func (s *Service) OrderFallback(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("Service-order-FallBack")
 	time.Sleep(time.Second * 2)
-	return "fallback"
+	return "fallback-handle"
 }
 
 //GetFallback 业务处理降级函数
 func (s *Service) GetFallback(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("Service-get-FallBack")
-	return "fallback"
+	return "fallback-handle"
 }
