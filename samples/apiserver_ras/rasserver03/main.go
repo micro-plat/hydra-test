@@ -12,7 +12,7 @@ var app = hydra.NewApp(
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserverras"),
 	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("lm://."),
+	hydra.WithRegistry("zk://192.168.0.101"),
 )
 
 func init() {
@@ -64,22 +64,23 @@ func init() {
 			),
 		),
 	))
-	app.API("/hydratest/apiserverras/test", nil) //不加入签名验证，通过该接口发起间接调用
+	app.API("/hydratest/apiserverras/test", funcAPI) //不加入签名验证，通过该接口发起间接调用
 	app.API("/hydratest/apiserverras/test1", funcAPI)
 
 }
 
 // apiserver_ras ras签名验证自定义配置测试demo1
+//1.1 使用 ./rasserver03 conf install -cover
 //1.1 使用 ./rasserver03 run
 
 //1.2 调用签名配置被禁用接口：http://localhost:8070/hydratest/apiserverras/test  直接返回成功
-//1.2 调用验签接口，newsign不存在：http://localhost:8070/hydratest/apiserverras/test  返回参数错误
-//1.2 调用验签接口，newtimestamp不存在：http://localhost:8070/hydratest/apiserverras/test  返回参数错误
-//1.2 调用验签接口，neweuid不存在：http://localhost:8070/hydratest/apiserverras/test  返回参数错误
-//1.2 调用验签接口，必传字段不存在：http://localhost:8070/hydratest/apiserverras/test  返回参数错误
-//1.2 调用验签接口，按照配置进行错误签名请求：http://localhost:8070/hydratest/apiserverras/test  返回签名失败
-//1.2 调用验签接口，正常签名延迟请求：http://localhost:8070/hydratest/apiserverras/test  请求过期
-//1.2 调用验签接口，按照配置进行正常签名请求：http://localhost:8070/hydratest/apiserverras/test  返回成功
+//1.2 调用验签接口，newsign不存在：http://localhost:8070/hydratest/apiserverras/test1?test1=1&neweuid=test1  没有检测新的sign字段
+//1.2 调用验签接口，newtimestamp不存在：http://localhost:8070/hydratest/apiserverras/test1?test1=1&neweuid=test1&sign=123456  返回参数错误
+//1.2 调用验签接口，neweuid不存在：http://localhost:8070/hydratest/apiserverras/test1?test1=1&sign=123456  远程认证失败:"{\"err\":\"neweuid值不能为空\"}",(400)
+//1.2 调用验签接口，必传字段不存在：http://localhost:8070/hydratest/apiserverras/test1?neweuid=test1  远程认证失败:"{\"err\":\"test1值不能为空\"}",(400)
+//1.2 调用验签接口，按照配置进行错误签名请求：http://localhost:8070/hydratest/apiserverras/test1  返回签名失败
+//1.2 调用验签接口，正常签名延迟请求：http://localhost:8070/hydratest/apiserverras/test1  请求过期
+//1.2 调用验签接口，按照配置进行正常签名请求：http://localhost:8070/hydratest/apiserverras/test1  返回成功
 func main() {
 	app.Start()
 }

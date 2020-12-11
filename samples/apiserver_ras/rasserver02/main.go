@@ -20,12 +20,12 @@ func init() {
 	hydra.Conf.API(":8070").Ras(ras.WithAuths(
 		ras.New("/single/hydra/newversion/md5/auth@authserver.sas_debug",
 			ras.WithRequest("/hydratest/apiserverras/test2"), //需要验证的路由
-			// ras.WithRequired("test"),                        //设置必传字段
+			// ras.WithRequired("test1"),                    //设置必传字段,不设置只有sign必须传
 			// ras.WithSignAlias("newsign"),                    //设置新的签名字段名（默认为：sign）
 			// ras.WithTimestampAlias("newtimestamp"),          //设置新的时间戳字段名（默认为：timestamp）
 			// ras.WithUIDAlias("neweuid"), //设置新的签名配置id字段名（默认为：euid）
 			// ras.WithDecryptName(""),                         //设置需要解密的字段（不设默认：全部）
-			// ras.WithCheckTimestamp(true),   //设置是否需要时间戳校验（不设默认：true）
+			// ras.WithCheckTimestamp(true), //设置是否需要时间戳校验（不设默认：false）
 			// ras.WithParam("ext", "123456"), //设置扩展参数
 			// ras.WithAuthDisable(), //该授权配置是否启用
 			ras.WithConnect(
@@ -49,15 +49,18 @@ func init() {
 // apiserver_ras ras签名验证默认配置测试demo
 //1.1 使用 ./rasserver02 conf install -cover
 //1.1 使用 ./rasserver02 run
+//1.3 数据: param1=1012sdf&param2=士大夫$%^dfksdf
 
 //1.2 调用不验签接口：http://localhost:8070/hydratest/apiserverras/test1  直接返回成功
-//1.2 调用验签接口，sign不存在：http://localhost:8070/hydratest/apiserverras/test2?timestamp=131214152&euid=121213  403/远程认证失败:"{\"err\":\"sign值不能为空\"}"
-//1.2 调用验签接口，timestamp不存在：http://localhost:8070/hydratest/apiserverras/test2?sign=131214152&euid=121213  返回参数错误
-//1.2 调用验签接口，euid不存在：http://localhost:8070/hydratest/apiserverras/test  返回参数错误
-//1.2 调用验签接口，延迟请求：http://localhost:8070/hydratest/apiserverras/test  请求过期
-//1.2 调用验签接口，正常请求：http://localhost:8070/hydratest/apiserverras/test  返回成功
+//1.2 调用验签接口，sign不存在：http://localhost:8070/hydratest/apiserverras/test2?timestamp=131214152&euid=test1  403/远程认证失败:"{\"err\":\"sign值不能为空\"}"
+//1.2 调用验签接口，timestamp不存在：http://localhost:8070/hydratest/apiserverras/test2?sign=131214152&euid=test1  签名认证失败（期望是需要验证timestamp不能为空）
+//1.2 调用验签接口，euid不存在：http://localhost:8070/hydratest/apiserverras/test2?sign=131214152  远程认证失败:"{\"err\":\"euid值不能为空\"}",(400)
+//1.2 调用验签接口，延迟请求：http://localhost:8070/hydratest/apiserverras/test2  请求过期
+//1.2 调用验签接口，正常请求：http://localhost:8070/hydratest/apiserverras/test2  返回成功
 func main() {
 	app.Start()
+
+	raw := "param1=1012sdf&param2=士大夫$%^dfksdf"
 }
 
 var funcAPI1 = func(ctx hydra.IContext) (r interface{}) {
