@@ -1,8 +1,6 @@
 package main
 
 import (
-	"time"
-
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra/conf/server/api"
 	"github.com/micro-plat/hydra/context"
@@ -25,7 +23,6 @@ func init() {
 	})
 	app.WS("/ws/timeout", func(ctx context.IContext) (r interface{}) {
 		ctx.Log().Info("ws-timeout-Handle")
-		time.Sleep(time.Second * 3)
 		return "success"
 	})
 
@@ -43,9 +40,6 @@ func init() {
 //更新zk节点 /hydra_test/wsserver/ws/t/conf 的status值为空,start 服务器进行重启成功
 //更新zk节点 /hydra_test/wsserver/ws/t/conf 的status值为stop 服务器关闭api服务,不进行重启
 //更新zk节点 /hydra_test/wsserver/ws/t/conf 的trace值为false 服务器重启
-//更新zk节点 /hydra_test/wsserver/ws/t/conf 的wTimeout值为1  服务器重启,无法访问/ws/timeout
-//更新zk节点 /hydra_test/wsserver/ws/t/conf 的wTimeout值为0  服务器重启,正常访问/ws/timeout
-//更新zk节点 /hydra_test/wsserver/ws/t/conf 的wTimeout值为3  服务器重启,正常访问/ws/timeout
 
 //更新zk节点 /hydra_test/wsserver/ws/t/auth/jwt   的disbale值为true [服务器重启.配置更新完成]
 //更新zk节点 /hydra_test/wsserver/ws/t/auth/basic 的disbale值为true [服务器重启.配置更新完成]
