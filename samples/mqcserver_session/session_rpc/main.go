@@ -4,7 +4,6 @@ import (
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra/components"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
-	"github.com/micro-plat/hydra/conf/vars/redis"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 	"github.com/micro-plat/hydra/hydra/servers/rpc"
 )
@@ -19,8 +18,8 @@ var app = hydra.NewApp(
 
 func init() {
 	hydra.Conf.API(":8070")
-	hydra.Conf.Vars().Redis("5.79", redis.New([]string{"192.168.5.79:6379"}))
-	hydra.Conf.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
+	hydra.Conf.Vars().Redis("5.79", "192.168.5.79:6379")
+	hydra.Conf.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	hydra.Conf.Vars().RPC("rpc")
 
 	app.RPC("/rpc/proc", func(ctx hydra.IContext) (r interface{}) {

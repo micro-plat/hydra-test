@@ -11,7 +11,6 @@ import (
 	"github.com/micro-plat/hydra/conf/server/api"
 	"github.com/micro-plat/hydra/conf/server/header"
 	"github.com/micro-plat/hydra/conf/vars/cache/cacheredis"
-	"github.com/micro-plat/hydra/conf/vars/redis"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
@@ -29,8 +28,8 @@ const cacheName = "cacheredis"
 
 func init() {
 
-	hydra.Conf.Vars().Redis(redisName, redis.New(nil, redis.WithAddrs(redisAddr)))
-	hydra.Conf.Vars().Cache().Redis(cacheName, cacheredis.New(cacheredis.WithConfigName(redisName)))
+	hydra.Conf.Vars().Redis(redisName, redisAddr)
+	hydra.Conf.Vars().Cache().Redis(cacheName, "", cacheredis.WithConfigName(redisName))
 
 	hydra.Conf.API(":50023", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
 

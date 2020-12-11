@@ -6,16 +6,14 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
-	"github.com/micro-plat/hydra/registry"
 	"github.com/micro-plat/hydra/global"
-
+	"github.com/micro-plat/hydra/registry"
 
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/samples/apiserver_db/apiserver_mysql/sqls"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/conf/server/api"
 	"github.com/micro-plat/hydra/conf/server/header"
-	"github.com/micro-plat/hydra/conf/vars/db/mysql"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
@@ -28,11 +26,11 @@ var hydraApp = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.Vars().DB().MySQL("0.36", mysql.New("test:123456@tcp(192.168.0.36:3306)/test?charset=utf8"))
+	hydra.Conf.Vars().DB().MySQLByConnStr("0.36", "test:123456@tcp(192.168.0.36:3306)/test?charset=utf8")
 
 	hydra.Conf.API(":50022", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
 
-	hydraApp.API("/api/mysql/insert", insert) 
+	hydraApp.API("/api/mysql/insert", insert)
 	hydraApp.API("/api/mysql/update", update)
 	hydraApp.API("/api/mysql/getdata", getdata)
 	hydraApp.API("/api/mysql/sp", sp)
@@ -61,16 +59,16 @@ func main() {
 		if err != nil {
 			fmt.Println(fmt.Errorf("DBTableDrop:%v", err))
 		}
-		
+
 		_, _, _, err = oracleDB.Execute(sqls.DBTableInit1, nil)
 		if err != nil {
 			fmt.Println(fmt.Errorf("DBTableInit1:%v", err))
 		}
-		  
+
 		_, _, _, err = oracleDB.Execute(sqls.DBSPInit, nil)
 		if err != nil {
 			fmt.Println(fmt.Errorf("DBSPInit:%v", err))
- 		}
+		}
 		return nil
 
 	}, http.API)
@@ -83,7 +81,7 @@ var insert = func(ctx hydra.IContext) (r interface{}) {
 
 	effCount, _, _, err := oracleDB.Execute(sqls.InsertData, map[string]interface{}{
 		"record_name": "mysql" + time.Now().Format("20060102150405"),
-	}) 
+	})
 	rows, _, _, err := oracleDB.Query(sqls.Getdata, map[string]interface{}{})
 	if err != nil {
 		return fmt.Errorf("mysql.Query:%v", err)
@@ -157,17 +155,17 @@ var sp = func(ctx hydra.IContext) (r interface{}) {
 var config = func(ctx hydra.IContext) (r interface{}) {
 	regst, err := registry.GetRegistry(global.Def.RegistryAddr, global.Def.Log())
 	if err != nil {
-		return fmt.Errorf("NewRegistry:%v",err )
+		return fmt.Errorf("NewRegistry:%v", err)
 	}
 	dbpath := "/hydratest/var/db/0.36"
-	err = regst.Update(dbpath,`{"provider":"mysql","connString":"test2:123456@tcp(192.168.0.36:3306)/test2?charset=utf8","maxOpen":10,"maxIdle":3,"lifeTime":600}`)
-	if err!=nil{
-		return fmt.Errorf("UpdateDB:%v",err)
+	err = regst.Update(dbpath, `{"provider":"mysql","connString":"test2:123456@tcp(192.168.0.36:3306)/test2?charset=utf8","maxOpen":10,"maxIdle":3,"lifeTime":600}`)
+	if err != nil {
+		return fmt.Errorf("UpdateDB:%v", err)
 	}
 	path := "/hydratest/apiserver_db_mysql/api/test/conf"
-	err = regst.Update(path,`{"status":"start","address":":50021"}`)
-	if err!=nil{
-		return fmt.Errorf("UpdateConf:%v",err)
+	err = regst.Update(path, `{"status":"start","address":":50021"}`)
+	if err != nil {
+		return fmt.Errorf("UpdateConf:%v", err)
 	}
 	return "success"
 }

@@ -6,7 +6,6 @@ import (
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra/conf/server/queue"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
-	"github.com/micro-plat/hydra/conf/vars/redis"
 	"github.com/micro-plat/hydra/context"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 	"github.com/micro-plat/hydra/hydra/servers/mqc"
@@ -31,8 +30,8 @@ var printQueues = func() {
 
 func init() {
 	hydra.Conf.API(":8070")
-	hydra.Conf.Vars().Redis("5.79", redis.New([]string{"192.168.5.79:6379"}))
-	hydra.Conf.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
+	hydra.Conf.Vars().Redis("5.79", "192.168.5.79:6379")
+	hydra.Conf.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	hydra.Conf.MQC("redis://xxx").Queue(queue.NewQueue(mqcName, mqcService))
 
 	app.MQC("/mqc", func(ctx context.IContext) (r interface{}) { return }, mqcName)
