@@ -85,3 +85,11 @@ var ServiceFunc = func(ctx context.IContext) (r interface{}) {
 	ctx.Log().Info("func-Handle")
 	return
 }
+
+type Service4 struct{}
+
+//ApiHandle 业务处理函数
+func (s *Service4) ApiHandle(ctx hydra.IContext) (r interface{}) {
+	ctx.Log().Info("Service4-post-Handle")
+	return
+}
