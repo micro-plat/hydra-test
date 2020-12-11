@@ -12,26 +12,27 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API, cron.CRON),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("cronserverCycle"),
 	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+	hydra.WithRegistry("lm://."),
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API(":8072")
 	hydra.Conf.CRON().Task(
+		task.NewTask("@immediately", "/hydratest/cronserverCycle/cron1"),
 		task.NewTask("@now", "/hydratest/cronserverCycle/cron2"),
 		task.NewTask("@every 5m", "/hydratest/cronserverCycle/cron4"),
 		task.NewTask("@every 24h", "/hydratest/cronserverCycle/cron6"),
 		task.NewTask("30 6 * * 5", "/hydratest/cronserverCycle/cron8"),
 	)
 	app.API("/hydratest/cronserverCycle/show", funcAPI)
+	app.CRON("/hydratest/cronserverCycle/cron1", funcCycle1, "@immediately")
 	app.CRON("/hydratest/cronserverCycle/cron2", funcCycle2)
 	app.CRON("/hydratest/cronserverCycle/cron3", funcCycle3, "@every 10s")
-	app.CRON("/hydratest/cronserverCycle/cron4", funcCycle4)
+	app.CRON("/hydratest/cronserverCycle/cron4", funcCycle4, "@every 20s")
 	app.CRON("/hydratest/cronserverCycle/cron5", funcCycle5, "@every 2h")
 	app.CRON("/hydratest/cronserverCycle/cron6", funcCycle6)
 	app.CRON("/hydratest/cronserverCycle/cron7", funcCycle7, "30 6 * * *")
@@ -40,10 +41,9 @@ func init() {
 }
 
 // cronserver_cycle 对于不同cron配置循环执行次数测试demo
-//1.1 安装程序 ./cronserver_cycle conf install -cover
-//1.2 使用 ./cronserver_cycle run
+//1.1 使用 ./cronserver_cycle run
 
-//1.3 调用接口：http://localhost:8070/hydratest/cronserverCycle/show  查看当前的执行次数情况
+//1.2 调用接口：http://localhost:8072/hydratest/cronserverCycle/show  查看当前的执行次数情况
 func main() {
 	uuidMap.Set("startTime", time.Now().Format("2006-01-02 15:04:05"))
 	app.Start()
@@ -56,6 +56,18 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 	uuidMap.Set("nowTime", time.Now().Format("2006-01-02 15:04:05"))
 	res := uuidMap.Items()
 	return res
+}
+
+var funcCycle1 = func(ctx hydra.IContext) (r interface{}) {
+	ctx.Log().Info("cronserver_cycle immediately立即执行次数")
+	c, e := uuidMap.Get("immediately")
+	if !e {
+		uuidMap.Set("immediately", 1)
+	} else {
+		count := types.GetInt(c) + 1
+		uuidMap.Set("immediately", count)
+	}
+	return
 }
 
 var funcCycle2 = func(ctx hydra.IContext) (r interface{}) {

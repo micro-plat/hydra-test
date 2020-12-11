@@ -11,17 +11,16 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API, rpc.RPC),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("rpcserIP"),
 	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+	hydra.WithRegistry("lm://."),
 )
 
 func init() {
-	hydra.Conf.RPC(":8071")
-	hydra.Conf.API(":8070")
+	hydra.Conf.RPC(":8073")
+	hydra.Conf.API(":8072")
 	hydra.Conf.Vars().RPC("rpc")
 	app.API("/hydratest/rpcserver/apiip/fail", funcAPI)
 	app.RPC("/hydratest/rpcserver/rpcip/fail", funcRPC)
@@ -29,22 +28,22 @@ func init() {
 	app.RPC("/hydratest/rpcserver/rpcip/succ", funcRPC1)
 }
 
-// rpcserver-ip访问demo
+// rpcserver-ip 通过ip地址直接访问rpc服务demo
 
-//1.1 安装程序 ./rpcserver_ip conf install -cover
-//1.2 使用 ./rpcserver_ip run
-//1.3 调用错误返回结果接口：http://localhost:8070/hydratest/rpcserver/apiip/fail 观察日志中rpc如参是否正确 返回值： 666/rpc服务返回异常
-//1.4 调用正确返回结果接口：http://localhost:8070/hydratest/rpcserver/apiip/succ 观察日志中rpc如参是否正确 返回值： 200/rpcsuccess
+//1.1 使用 ./rpcserver_ip run
+//1.2 调用错误返回结果接口：http://localhost:8072/hydratest/rpcserver/apiip/fail 观察日志中rpc如参是否正确 返回值： 666/rpc服务返回异常
+//1.3 调用正确返回结果接口：http://localhost:8072/hydratest/rpcserver/apiip/succ 观察日志中rpc如参是否正确 返回值： 200/rpcsuccess
 func main() {
 	app.Start()
 }
 
 var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("rpcserver-ip-api rpc错返回访问demo")
-	url := fmt.Sprintf("/hydratest/rpcserver/rpcip/fail@%s:8071", global.LocalIP())
+	url := fmt.Sprintf("/hydratest/rpcserver/rpcip/fail@%s:8073", global.LocalIP())
 	input := map[string]interface{}{
 		"taosytest": "123456",
 	}
+	ctx.Log().Info("url:", url)
 	respones, err := components.Def.RPC().GetRegularRPC().Request(url, input)
 	if err != nil {
 		ctx.Log().Errorf("rpc 请求异常：%v", err)
@@ -67,11 +66,11 @@ var funcRPC = func(ctx hydra.IContext) (r interface{}) {
 
 var funcAPI1 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("rpcserver-ip-api rpc正确返回访问demo")
-	url := fmt.Sprintf("/hydratest/rpcserver/rpcip/succ@%s:8071", global.LocalIP())
+	url := fmt.Sprintf("/hydratest/rpcserver/rpcip/succ@%s:8073", global.LocalIP())
 	input := map[string]interface{}{
 		"taosytest": "654321",
 	}
-
+	ctx.Log().Info("url:", url)
 	respones, err := components.Def.RPC().GetRegularRPC().Request(url, input)
 	if err != nil {
 		ctx.Log().Errorf("rpc 请求异常：%v", err)

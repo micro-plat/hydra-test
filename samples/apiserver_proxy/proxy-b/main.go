@@ -9,7 +9,7 @@ import (
 //服务器各种返回结果
 func main() {
 	app := hydra.NewApp(
-		hydra.WithPlatName("hydra-t"),
+		hydra.WithPlatName("hydratest"),
 		hydra.WithSystemName("apiserver"),
 		hydra.WithClusterName("proxy-b"),
 		hydra.WithRegistry("fs://./"),
