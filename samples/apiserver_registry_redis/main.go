@@ -14,8 +14,8 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithServerTypes(http.API, cron.CRON, mqc.MQC, rpc.RPC),
-	hydra.WithPlatName("hydra_test"),
+	hydra.WithServerTypes(http.API, mqc.MQC, cron.CRON, rpc.RPC),
+	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("registry_redis"),
 	hydra.WithClusterName("t"),
 	//hydra.WithRegistry("redis://192.168.0.111:6379,192.168.0.112:6379,192.168.0.113:6379,192.168.0.114:6379,192.168.0.115:6379,192.168.0.116:6379"),

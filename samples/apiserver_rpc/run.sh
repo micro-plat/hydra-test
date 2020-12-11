@@ -2,7 +2,7 @@ BASE_DIR=$(cd -P $(dirname $0);pwd)
  
 cd $BASE_DIR
 
-go build
+go build -mod=mod
 
 sleep 1
 

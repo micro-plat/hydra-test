@@ -6,7 +6,6 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserverrouter"),

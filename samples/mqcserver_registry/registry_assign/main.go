@@ -12,7 +12,7 @@ import (
 
 var app = hydra.NewApp(
 	hydra.WithServerTypes(mqc.MQC),
-	hydra.WithPlatName("hydra_test"),
+	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("mqc_registry_assign"),
 	hydra.WithClusterName("t"),
 	hydra.WithRegistry("lm://./"),

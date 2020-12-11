@@ -12,7 +12,7 @@ import (
 
 var app = hydra.NewApp(
 	hydra.WithServerTypes(cron.CRON, http.API),
-	hydra.WithPlatName("hydra_test"),
+	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("task_conf"),
 	hydra.WithClusterName("t"),
 	hydra.WithRegistry("lm://./"),

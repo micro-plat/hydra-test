@@ -11,7 +11,7 @@ import (
 
 var app = hydra.NewApp(
 	hydra.WithServerTypes(http.API),
-	hydra.WithPlatName("hydra_test"),
+	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("http_client_proxy"),
 	hydra.WithClusterName("t"),
 	hydra.WithRegistry("lm://./"),
