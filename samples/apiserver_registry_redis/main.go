@@ -3,30 +3,35 @@ package main
 import (
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
+
 	"github.com/micro-plat/hydra/conf/vars/redis"
 	"github.com/micro-plat/hydra/context"
-	"github.com/micro-plat/hydra/hydra/servers/cron"
 	"github.com/micro-plat/hydra/hydra/servers/http"
+
+	"github.com/micro-plat/hydra/hydra/servers/cron"
 	"github.com/micro-plat/hydra/hydra/servers/mqc"
 	"github.com/micro-plat/hydra/hydra/servers/rpc"
 )
 
 var app = hydra.NewApp(
-	hydra.WithServerTypes(http.API, mqc.MQC, cron.CRON, rpc.RPC),
+	hydra.WithServerTypes(http.API, cron.CRON, mqc.MQC, rpc.RPC),
 	hydra.WithPlatName("hydra_test"),
 	hydra.WithSystemName("registry_redis"),
 	hydra.WithClusterName("t"),
+	//hydra.WithRegistry("redis://192.168.0.111:6379,192.168.0.112:6379,192.168.0.113:6379,192.168.0.114:6379,192.168.0.115:6379,192.168.0.116:6379"),
 	hydra.WithRegistry("redis://192.168.5.79:6379"),
 )
 
 func init() {
-	hydra.Conf.API(":8080")
-	hydra.Conf.Vars().Redis("5.79", redis.New([]string{"192.168.5.79:6379"}))
-	hydra.Conf.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
+	redisAddr := "192.168.5.79:6379"
+
+	hydra.Conf.API(":28080")
+	hydra.Conf.Vars().Redis("5.79", redisAddr, redis.WithPoolSize(100))
+	hydra.Conf.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	hydra.Conf.MQC("redis://xxx")
 
-	app.CRON("/cron", func(ctx context.IContext) (r interface{}) { return })
-	app.MQC("/mqc", create)
+	app.CRON("/cron", func(ctx context.IContext) (r interface{}) { return }, "@every 30s")
+	app.MQC("/mqc", create, "redis:queue1")
 	app.RPC("/rpc", create)
 	app.API("/reg/create", create)
 	app.API("/reg/update", update)
@@ -34,6 +39,8 @@ func init() {
 	app.API("/reg/exists", exists)
 	app.API("/reg/getvalue", getvalue)
 	app.API("/reg/getchildren", getchildren)
+
+	app.API("/redis/opts", redisopts)
 }
 
 //编译并进行服务配置安装 ./apiserver_registry_redis conf install

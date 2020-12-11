@@ -17,16 +17,16 @@ var app = hydra.NewApp(
 	hydra.WithPlatName("hydra_test"),
 	hydra.WithSystemName("apiserver_queue"),
 	hydra.WithClusterName("t"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+	hydra.WithRegistry("lm://."),
 )
 
 func init() {
 	hydra.Conf.API(":8070")
 
-	hydra.Conf.Vars().Redis("5.79", redis.New([]string{"192.168.5.79:6379"}))
-	hydra.Conf.Vars().Queue().MQTT("mqtt", mqtt.New("192.168.0.219:8883", mqtt.WithDialTimeout(500), mqtt.WithUP("mqtt", "abc123$"), mqtt.WithCert("./ca.pem")))
-	hydra.Conf.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
-	hydra.Conf.Vars().Cache().Redis("xxx", cacheredis.New(cacheredis.WithConfigName("5.79")))
+	hydra.Conf.Vars().Redis("5.79", "192.168.5.79:6379", redis.WithPoolSize(10))
+	hydra.Conf.Vars().Queue().MQTT("mqtt", "192.168.0.219:8883", mqtt.WithDialTimeout(500), mqtt.WithUP("mqtt", "abc123$"), mqtt.WithCert("./ca.pem"))
+	hydra.Conf.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
+	hydra.Conf.Vars().Cache().Redis("xxx", "", cacheredis.WithConfigName("5.79"))
 	hydra.Conf.MQC("redis://xxx")
 
 	app.MQC("/mqc", func(ctx context.IContext) (r interface{}) {

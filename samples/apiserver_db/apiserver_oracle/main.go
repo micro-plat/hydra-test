@@ -16,7 +16,6 @@ import (
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/conf/server/api"
 	"github.com/micro-plat/hydra/conf/server/header"
-	"github.com/micro-plat/hydra/conf/vars/db/oracle"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
@@ -29,7 +28,7 @@ var hydraApp = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.Vars().DB().MySQL("0.136", oracle.New("test/123456@orcl136"))
+	hydra.Conf.Vars().DB().OracleByConnStr("0.136", "test/123456@orcl136")
 
 	hydra.Conf.API(":50021", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
 
