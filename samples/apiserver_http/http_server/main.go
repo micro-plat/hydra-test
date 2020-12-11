@@ -8,7 +8,7 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithServerTypes(http.API),
+ 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("http_server"),
 	hydra.WithClusterName("t"),
@@ -20,14 +20,22 @@ func init() {
 	app.API("/api", func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Info("log_session_id:", ctx.Log().GetSessionID())
 		ctx.Log().Info("api_user_id:", ctx.User().GetRequestID())
+
+		bytes, err := ctx.Request().GetBody()
+		ctx.Log().Debug("GetBody:", string(bytes), err)
+
 		m, err := ctx.Request().GetMap()
 		if err != nil {
 			return err
 		}
-		ctx.Log().Info("api_body_map:", m)
-		ctx.Log().Info("api_method:", ctx.Request().Path().GetMethod())
-		ctx.Log().Info("api_encoding:", ctx.Request().Path().GetEncoding())
-		ctx.Log().Info("api_headers:", ctx.Request().Headers())
+		for k, v := range m {
+			ctx.Log().Debugf("Map: %s=%s", k, v)
+		}
+
+		ctx.Log().Debug("api_body_map:", m)
+		ctx.Log().Debug("api_method:", ctx.Request().Path().GetMethod())
+		ctx.Log().Debug("api_encoding:", ctx.Request().Path().GetEncoding())
+		ctx.Log().Debug("api_headers:", ctx.Request().Headers())
 		return
 	})
 

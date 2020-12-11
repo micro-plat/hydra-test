@@ -16,7 +16,11 @@ var app = hydra.NewApp(
 
 func init() {
 	hydra.Conf.API(":8070").Static(
-		static.WithArchive("../root/archive"), static.WithRoot("../root"), static.WithEnable())
+		static.WithArchive("../root/archive"),
+		//static.WithArchive("../root/archive.tar"),
+		//static.WithArchive("../root/archive.tar.gz"),
+		static.WithRoot("../root"),
+		static.WithEnable())
 
 	app.API("/api", func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Info("api_static")

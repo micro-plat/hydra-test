@@ -26,7 +26,7 @@ func init() {
 		ctx.Log().Info("request.sessiom_id:", ctx.Log().GetSessionID())
 		content, status, err := c.Request(
 			"POST", "http://127.0.0.1:8099/api", `{"key":"value"}`, "UTF-8",
-			httpx.Header{"Content-type": []string{"application/json"}, "X-Request-Id": []string{ctx.Log().GetSessionID()}},
+			httpx.Header{"Content-Type": []string{"application/json"}, "X-Request-Id": []string{ctx.Log().GetSessionID()}},
 			&httpx.Cookie{Name: "key", Value: "value"})
 		ctx.Log().Info("request.content:", string(content))
 		ctx.Log().Info("request.status:", status)
