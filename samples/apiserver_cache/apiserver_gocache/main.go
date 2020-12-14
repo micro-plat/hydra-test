@@ -74,13 +74,15 @@ var addHandler = func(ctx hydra.IContext) (r interface{}) {
 }
 
 var setHandler = func(ctx hydra.IContext) (r interface{}) {
+	key := ctx.Request().GetString("key", cachekey)
+	val := ctx.Request().GetString("val", "10")
 	cacheObj := hydra.C.Cache().GetRegularCache(cacheName)
-	err := cacheObj.Set(cachekey, "10", -1)
-	if err != nil {
+	err := cacheObj.Set(key, val, -1)
+	if err != nil { 
 		ctx.Log().Errorf("Cache.Set:%v", err)
 		return err
 	}
-	val, err := cacheObj.Get(cachekey)
+	val, err = cacheObj.Get(key)
 	if err != nil {
 		ctx.Log().Errorf("Cache.Get:%v", err)
 		return err
