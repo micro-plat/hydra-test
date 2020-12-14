@@ -44,10 +44,10 @@ func init() {
 }
 
 //编译并进行服务配置安装 ./apiserver_registry_redis conf install
-//查看redis中key为hydra_test:registry_redis:api:t:conf的值,以及conf下router和中间件的配置的值
+//查看redis中key为hydratest:registry_redis:api:t:conf的值,以及conf下router和中间件的配置的值
 //启动服务./apiserver_registry_redis run
-//查看redis中key为hydra_test:registry_redis:api:t:servers的值,以及conf下router和中间件的配置的值
-//查看redis中key为hydra_test:services:api:providers下的值
+//查看redis中key为hydratest:registry_redis:api:t:servers的值,以及conf下router和中间件的配置的值
+//查看redis中key为hydratest:services:api:providers下的值
 
 //多次调用/reg/create   [创建永久节点,临时节点,顺序节点的创建的值,顺序节点的顺序,过期时间正确]
 //调用/reg/delete      [创建的的永久节点被正确删除]

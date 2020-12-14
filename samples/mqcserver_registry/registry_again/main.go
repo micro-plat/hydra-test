@@ -46,8 +46,8 @@ func init() {
 //测试mqc服务注册重复注册
 //启动服务  ./registry_assign run
 //服务启动前的消息队列数量[0]
-//启动后的消息队列信息[hydra_test:mqcName /mqc]
-//反复请求 /mqc/add 查看消息队列数量和信息[hydra_test:mqcName /mqc]
+//启动后的消息队列信息[hydratest:mqcName /mqc]
+//反复请求 /mqc/add 查看消息队列数量和信息[hydratest:mqcName /mqc]
 func main() {
 	fmt.Println("服务启动前的队列:", services.MQC.GetQueues().Queues)
 	hydra.OnReady(func() {

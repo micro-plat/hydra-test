@@ -30,7 +30,7 @@ import (
 // 		{name: "延迟发布过程中 服务未关闭", p: "/path", want: "/path"},
 // 		{name: "延迟发布过程中 服务已关闭", p: "/path", done: true},
 // 	}
-// 	r := servers.NewRspServers("lm://./", "hydra_test", "servers", []string{"api"}, "t")
+// 	r := servers.NewRspServers("lm://./", "hydratest", "servers", []string{"api"}, "t")
 // 	for _, tt := range tests {
 // 		r.delayPub(tt.p)
 // 		time.Sleep(time.Second * 1)
@@ -65,7 +65,7 @@ func TestRspServers_Start(t *testing.T) {
 		//{name: "4. 启动rpcServer", serverName: "rpcserver", sysType: "rpc"},
 	}
 
-	platName := "servershydra_test"
+	platName := "servershydratest"
 	clusterName := "serv_test_go"
 	registryAddr := "lm://./"
 
@@ -94,7 +94,7 @@ func TestRspServers_Start(t *testing.T) {
 		time.Sleep(time.Second * 1)
 
 		//注册中心节点值发生变化
-		path := fmt.Sprintf("/servershydra_test/%s/%s/serv_test_go/conf", tt.serverName, tt.sysType)
+		path := fmt.Sprintf("/servershydratest/%s/%s/serv_test_go/conf", tt.serverName, tt.sysType)
 		registry, err := registry.GetRegistry(registryAddr, logger.New("hydra"))
 		assert.Equalf(t, false, err != nil, tt.name)
 
@@ -161,7 +161,7 @@ func TestRspServers_Start_ServerStartErr(t *testing.T) {
 		{name: "启动Server失败,之后延迟启动成功", serverName: "apiserver", sysType: "api"},
 	}
 
-	platName := "servershydra_test1"
+	platName := "servershydratest1"
 	clusterName := "serv_test_go1"
 	registryAddr := "lm://./"
 	for _, tt := range tests {
@@ -202,7 +202,7 @@ func TestRspServers_Start_ServerStartErr(t *testing.T) {
 		os.Stdout = rescueStdout
 
 		// fmt.Println("out:", string(out))
-		path := fmt.Sprintf("/servershydra_test1/%s/%s/serv_test_go1/conf", tt.serverName, tt.sysType)
+		path := fmt.Sprintf("/servershydratest1/%s/%s/serv_test_go1/conf", tt.serverName, tt.sysType)
 		wantLog := fmt.Sprintf("初始化: %s", path)
 		assert.Equalf(t, true, strings.Contains(string(out), wantLog), tt.name+"初始化")
 		wantLog = fmt.Sprintf("启动[%s]服务...", tt.sysType)
