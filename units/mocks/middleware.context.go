@@ -42,17 +42,8 @@ func (ctx *MiddleContext) Meta() conf.IMeta {
 	return ctx.MockMeta
 }
 
-func (ctx *MiddleContext) Find(path string) bool {
-	return false
-}
-
 func (ctx *MiddleContext) Service(string) {
 
-}
-
-//链路跟踪器
-func (ctx *MiddleContext) Tracer() extcontext.ITracer {
-	return nil
 }
 
 //Request 请求信息
@@ -87,9 +78,6 @@ func (ctx *MiddleContext) Log() logger.ILogger {
 
 func (ctx *MiddleContext) Find(path string) bool {
 	return false
-}
-
-func (ctx *MiddleContext) Service(s string) {
 }
 
 //Close 关闭并释放资源
@@ -389,10 +377,6 @@ func (res *MockResponse) ContentType(v string, xmlRoot ...string) {
 	res.Header("Content-Type", v)
 }
 
-func (res *MockResponse) Data(code int, contentType string, data interface{}) interface{} {
-	return nil
-}
-
 //NoNeedWrite 无需写入响应数据到缓存
 func (res *MockResponse) NoNeedWrite(status int) {
 	res.MockStatus = status
@@ -457,31 +441,6 @@ func (res *MockResponse) GetFinalResponse() (int, string, string) {
 
 //Flush 将当前内容写入响应流
 func (res *MockResponse) Flush() {
-}
-
-//JSON json输出响应内容
-func (res *MockResponse) JSON(code int, data interface{}) interface{} {
-	return nil
-}
-
-//XML xml输出响应内容
-func (res *MockResponse) XML(code int, data interface{}, header string, rootNode ...string) interface{} {
-	return nil
-}
-
-//以text/html输出响应内容
-func (res *MockResponse) HTML(code int, data string) interface{} {
-	return nil
-}
-
-//YAML yaml输出响应内容
-func (res *MockResponse) YAML(code int, data interface{}) interface{} {
-	return nil
-}
-
-//以text/plain格式输出响应内容
-func (res *MockResponse) Plain(code int, data string) interface{} {
-	return nil
 }
 
 var _ http.ResponseWriter = &MockResponseWriter{}
