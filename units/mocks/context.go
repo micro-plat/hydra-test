@@ -7,8 +7,11 @@ import (
 	"net/url"
 	"strings"
 
+	"github.com/micro-plat/hydra/context"
 	"github.com/micro-plat/lib4go/types"
 )
+
+var _ context.IInnerContext = &TestContxt{}
 
 type Read struct {
 	*strings.Reader
@@ -131,4 +134,16 @@ func (t *TestContxt) Redirect(s int, u string) {
 
 func (t *TestContxt) GetFile(fileKey string) (string, io.ReadCloser, int64, error) {
 	return "", nil, 0, nil
+}
+
+func (t *TestContxt) GetRawForm() map[string]interface{} {
+	return nil
+}
+
+func (t *TestContxt) GetService() string {
+	return ""
+}
+
+func (t *TestContxt) WHeaders() http.Header {
+	return nil
 }
