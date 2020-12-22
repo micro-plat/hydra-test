@@ -168,14 +168,10 @@ func TestRouters_Match(t *testing.T) {
 		assert.Equal(t, tt.want, got, tt.name)
 	}
 
-	defer func() {
-		e := recover()
-		assert.NotEqual(t, nil, e, "不存在匹配的路由匹配结果不正常")
-	}()
-
 	test1 := test{name: "5. Conf-RoutersMatch-不存在匹配的路由", fields: &router.Routers{Routers: []*router.Router{router.NewRouter("/t1/t2", "s1", []string{http.MethodGet}, router.WithEncoding("gbk2312"))}},
-		args: args{path: "/t1/t2/tt", method: http.MethodGet}, want: router.NewRouter("/t1/t2", "s1", []string{http.MethodGet}, router.WithEncoding("gbk2312"))}
-	got, _ := test1.fields.Match(test1.args.path, test1.args.method)
+		args: args{path: "/t1/t2/tt", method: http.MethodGet}, want: nil}
+	got, err := test1.fields.Match(test1.args.path, test1.args.method)
+	assert.Equal(t, "未找到与[/t1/t2/tt][GET]匹配的路由", err.Error(), test1.name)
 	assert.Equal(t, test1.want, got, test1.name)
 }
 

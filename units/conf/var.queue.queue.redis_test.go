@@ -29,6 +29,13 @@ func TestQueueRedisNew(t *testing.T) {
 	}
 	for _, tt := range tests {
 		got := queueredis.New("", tt.opts...)
-		assert.Equal(t, tt.want, got, tt.name)
+		assert.Equal(t, "redis", got.Queue.Proto, tt.name+",Proto")
+		assert.Equal(t, tt.want.Redis.Addrs, got.Redis.Addrs, tt.name+",Addrs")
+		assert.Equal(t, tt.want.Redis.Password, got.Redis.Password, tt.name+",Password")
+		assert.Equal(t, tt.want.Redis.DbIndex, got.Redis.DbIndex, tt.name+",DbIndex")
+		assert.Equal(t, tt.want.Redis.DialTimeout, got.Redis.DialTimeout, tt.name+",DialTimeout")
+		assert.Equal(t, tt.want.Redis.ReadTimeout, got.Redis.ReadTimeout, tt.name+",ReadTimeout")
+		assert.Equal(t, tt.want.Redis.WriteTimeout, got.Redis.WriteTimeout, tt.name+",WriteTimeout")
+		assert.Equal(t, tt.want.Redis.PoolSize, got.Redis.PoolSize, tt.name+",PoolSize")
 	}
 }

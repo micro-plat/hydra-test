@@ -128,7 +128,7 @@ func Test_httpSub_GetStaticConf(t *testing.T) {
 		wantErr  bool
 		wantConf *static.Static
 	}{
-		{name: "1. Conf-HttpSubGetStaticConf-不设置static节点", opts: []static.Option{}, wantErr: true, wantConf: &static.Static{FileMap: map[string]static.FileInfo{}, Disable: true}},
+		{name: "1. Conf-HttpSubGetStaticConf-不设置static节点", opts: []static.Option{}, wantErr: true, wantConf: &static.Static{Dir: "./static", Archive: "", Prefix: "", Exts: []string{}, Exclude: []string{"/view/", "/views/", "/web/", ".exe", ".so"}, HomePage: "index.html", Rewriters: []string{"/", "/index.htm", "/default.html", "/default.htm"}, Disable: true, FileMap: map[string]static.FileInfo{}}},
 		{name: "2. Conf-HttpSubGetStaticConf-设置错误的static节点", opts: []static.Option{static.WithRoot("错误的数据"), static.WithHomePage("index1.html"), static.WithRewriters("/", "indextest.htm", "defaulttest.html"),
 			static.WithExts(".htm"), static.WithArchive("testsss"), static.AppendExts(".js"), static.WithPrefix("ssss"), static.WithDisable(), static.WithExclude("/views/", ".exe", ".so", ".zip")}, wantErr: false, wantConf: nilstatic},
 		{name: "3. Conf-HttpSubGetStaticConf-设置正确的static节点", opts: []static.Option{static.WithRoot("./test"), static.WithHomePage("index1.html"), static.WithRewriters("/", "indextest.htm", "defaulttest.html"),

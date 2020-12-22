@@ -63,7 +63,7 @@ func TestRLogGetConf(t *testing.T) {
 		}
 
 		got, err := rlog.GetConf(cnf)
-		assert.Equal(t, true, err == nil, tt.name)
+		assert.Equal(t, tt.IsNilErr, err == nil, tt.name)
 		assert.Equal(t, tt.want, got, tt.name)
 	}
 }
