@@ -2,27 +2,37 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/nelsonken/xmltomap-go"
+	"reflect"
+	"time"
 )
 
-func main() {
-	data := []byte(`<xml>
-    <a>1</a>
-    <b>hi hello world</b>
-    <c>xxxx</c>
-    <c>rrr</c>
-    <dd>
-        <ee>rrr</ee>
-        <ff>rrr</ff>
-    </dd>
-</xml>`)
-	strmap, err := xmltomap.Unmarshal(data)
-	if err != nil {
-		if err != nil {
-			panic(err)
+type Stu struct {
+	Str  string
+	Time time.Time
+}
+
+func TestTime() {
+	stu := Stu{Str: "test", Time: time.Now()}
+	print(stu)
+}
+
+func print(t interface{}) {
+	getType := reflect.TypeOf(t)
+	getValue := reflect.ValueOf(t)
+	for i := 0; i < getType.NumField(); i++ {
+		field := getType.Field(i)
+		switch field.Type.String() {
+		case "time.Time":
+			fmt.Printf("%s: %v = %v\n", field.Name, field.Type, getValue.Field(1).Interface().(time.Time))
+			break
+		default:
+			value := getValue.Field(i)
+			fmt.Printf("%s: %v = %v\n", field.Name, field.Type, value.String())
+			break
 		}
 	}
-	fmt.Println(strmap)
+}
 
+func main() {
+	TestTime()
 }

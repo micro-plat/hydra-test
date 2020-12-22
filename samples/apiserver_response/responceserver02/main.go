@@ -1,7 +1,6 @@
 package main
 
 import (
-	xmlM "encoding/xml"
 	"time"
 
 	"github.com/micro-plat/hydra"
@@ -10,7 +9,6 @@ import (
 )
 
 var app = hydra.NewApp(
-	hydra.WithDebug(),
 	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserverresponse"),
@@ -28,6 +26,12 @@ func init() {
 	app.API("/hydratest/apiserver/response5", funcResponse5, router.WithEncoding("utf-8"))
 	app.API("/hydratest/apiserver/response6", funcResponse6, router.WithEncoding("utf-8"))
 	app.API("/hydratest/apiserver/response7", funcResponse7, router.WithEncoding("gbk"))
+	app.API("/hydratest/apiserver/response8", funcResponse8, router.WithEncoding("gbk"))
+	app.API("/hydratest/apiserver/response9", funcResponse9, router.WithEncoding("gbk"))
+	app.API("/hydratest/apiserver/response10", funcResponse10, router.WithEncoding("gbk"))
+	app.API("/hydratest/apiserver/response11", funcResponse11, router.WithEncoding("gbk"))
+	app.API("/hydratest/apiserver/response12", funcResponse12, router.WithEncoding("gbk"))
+
 }
 
 //apiserver_response-xml 不同请求方式responce的数据编码demo
@@ -59,6 +63,12 @@ type xml struct {
 	Param6 time.Time              `xml:"param6" time_format:"2006/01/02 15:04:05"`
 	Param7 map[string]interface{} `xml:"param7"`
 	Param8 []int                  `xml:"param8"`
+	Param9 xmlxx                  `xml:"param9"`
+}
+
+type xmlxx struct {
+	Param10 map[string]interface{} `xml:"param10"`
+	Param11 []int                  `xml:"param11"`
 }
 
 var defaultData = xml{
@@ -70,6 +80,7 @@ var defaultData = xml{
 	Param6: time.Now(),
 	Param7: map[string]interface{}{"t1": 123, "t2": "sdfs@@###", "t3": 12.2},
 	Param8: []int{1, 2},
+	Param9: xmlxx{Param10: map[string]interface{}{"t1": 123, "t2": "sdfs@@###", "t3": 12.2}, Param11: []int{1, 2}},
 }
 
 var funcResponse = func(ctx hydra.IContext) (r interface{}) {
@@ -90,6 +101,7 @@ var funcResponse1 = func(ctx hydra.IContext) (r interface{}) {
 		"param6": time.Now(),
 		"param7": map[string]interface{}{"t1": 123, "t2": "sdfs@@###", "t3": 12.2},
 		"param8": []int{1, 2},
+		"param9": xmlxx{Param10: map[string]interface{}{"t1": 123, "t2": "sdfs@@###", "t3": 12.2}, Param11: []int{1, 2}},
 	}
 	return input
 }
@@ -97,8 +109,7 @@ var funcResponse1 = func(ctx hydra.IContext) (r interface{}) {
 var funcResponse2 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("apiserver-response-xml,路由设置gb2312编码数据处理demo")
 	ctx.Response().Header("Content-Type", "application/xml")
-	bt, _ := xmlM.Marshal(&defaultData)
-	return string(bt)
+	return "<xml><param1>34ddf#$*@大!@#$%^&amp;*()_+~锅饭都是</param1><param2>true</param2><param3>1024</param3><param4>10.24</param4><param5>1</param5><param5>2</param5><param6>2020-12-08T19:51:49.39880659+08:00</param6><param8>1</param8><param8>2</param8></xml>"
 }
 
 //路由设置编码 gbk
@@ -146,6 +157,36 @@ var funcResponse6 = func(ctx hydra.IContext) (r interface{}) {
 //路由设置编码 gbk
 var funcResponse7 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("apiserver-response-xml,路由设置utf8编码数据处理demo")
-	bt, _ := xmlM.Marshal(&defaultData)
-	return string(bt)
+	return "<xml><param1>34ddf#$*@大!@#$%^&amp;*()_+~锅饭都是</param1><param2>true</param2><param3>1024</param3><param4>10.24</param4><param5>1</param5><param5>2</param5><param6>2020-12-08T19:51:49.39880659+08:00</param6><param8>1</param8><param8>2</param8></xml>"
+}
+
+var funcResponse8 = func(ctx hydra.IContext) (r interface{}) {
+	ctx.Log().Info("apiserver-response-xml,路由设置gbk编码数据处理demo")
+	ctx.Response().Header("Content-Type", "application/xml")
+	return 1024
+}
+
+var funcResponse9 = func(ctx hydra.IContext) (r interface{}) {
+	ctx.Log().Info("apiserver-response-xml,路由设置gbk编码数据处理demo")
+	ctx.Response().Header("Content-Type", "application/xml")
+	return true
+}
+
+var funcResponse10 = func(ctx hydra.IContext) (r interface{}) {
+	ctx.Log().Info("apiserver-response-xml,路由设置gbk编码数据处理demo")
+	ctx.Response().Header("Content-Type", "application/xml")
+	return time.Now()
+}
+
+var funcResponse11 = func(ctx hydra.IContext) (r interface{}) {
+	ctx.Log().Info("apiserver-response-xml,路由设置gbk编码数据处理demo")
+	ctx.Response().Header("Content-Type", "application/xml")
+	return []string{"1", "2"}
+}
+
+var funcResponse12 = func(ctx hydra.IContext) (r interface{}) {
+	ctx.Log().Info("apiserver-response-xml,路由设置gbk编码数据处理demo")
+	ctx.Response().Header("Content-Type", "application/xml")
+	arry := []interface{}{"1", "2"}
+	return arry
 }
