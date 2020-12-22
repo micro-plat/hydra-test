@@ -146,15 +146,11 @@ var funcRequest = func(ctx hydra.IContext) (r interface{}) {
 
 	v, _ := ctx.Request().Get("param7")
 	ctx.Log().Info("----Get data:", v, reflect.TypeOf(v).String())
-	jsonM, err := ctx.Request().GetXMap("param7")
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetXMap()异常：%s", err)
-	}
+	jsonM := ctx.Request().GetXMap("param7")
+
 	ctx.Log().Info("----GetJSON data:", jsonM)
-	xmap, err := ctx.Request().GetMap()
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-	}
+	xmap := ctx.Request().GetMap()
+
 	ctx.Log().Info("----GetMap()：", xmap)
 	tm, err := ctx.Request().GetDatetime("param6")
 	if err != nil {
@@ -199,15 +195,11 @@ var funcRequest1 = func(ctx hydra.IContext) (r interface{}) {
 
 	v, _ := ctx.Request().Get("param7")
 	ctx.Log().Info("----Get data:", v, reflect.TypeOf(v).String())
-	jsonM, err := ctx.Request().GetXMap("param7")
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetXMap()异常：%s", err)
-	}
+	jsonM := ctx.Request().GetXMap("param7")
+
 	ctx.Log().Info("----GetJSON data:", jsonM)
-	xmap, err := ctx.Request().GetMap()
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-	}
+	xmap := ctx.Request().GetMap()
+
 	ctx.Log().Info("----GetMap()：", xmap)
 	tm, err := ctx.Request().GetDatetime("param6")
 	if err != nil {
@@ -252,15 +244,11 @@ var funcRequest2 = func(ctx hydra.IContext) (r interface{}) {
 
 	v, _ := ctx.Request().Get("param7")
 	ctx.Log().Info("----Get data:", v, reflect.TypeOf(v).String())
-	jsonM, err := ctx.Request().GetXMap("param7")
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetXMap()异常：%s", err)
-	}
+	jsonM := ctx.Request().GetXMap("param7")
+
 	ctx.Log().Info("----GetJSON data:", jsonM)
-	xmap, err := ctx.Request().GetMap()
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-	}
+	xmap := ctx.Request().GetMap()
+
 	ctx.Log().Info("----GetMap()：", xmap)
 	tm, err := ctx.Request().GetDatetime("param6")
 	if err != nil {
@@ -305,15 +293,11 @@ var funcRequest3 = func(ctx hydra.IContext) (r interface{}) {
 
 	v, _ := ctx.Request().Get("param7")
 	ctx.Log().Info("----Get data:", v, reflect.TypeOf(v).String())
-	jsonM, err := ctx.Request().GetXMap("param7")
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetXMap()异常：%s", err)
-	}
+	jsonM := ctx.Request().GetXMap("param7")
+
 	ctx.Log().Info("----GetJSON data:", jsonM)
-	xmap, err := ctx.Request().GetMap()
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-	}
+	xmap := ctx.Request().GetMap()
+
 	ctx.Log().Info("----GetMap()：", xmap)
 	tm, err := ctx.Request().GetDatetime("param6")
 	if err != nil {

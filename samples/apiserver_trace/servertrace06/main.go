@@ -46,10 +46,8 @@ func main() {
 
 var funcTrace = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("apiserver_trace 检查各种输入和输出的数据demo")
-	xmap, err := ctx.Request().GetMap()
-	if err != nil {
-		ctx.Log().Errorf("errerrerrerr:%v", err)
-	}
+	xmap := ctx.Request().GetMap()
+
 	ctx.Log().Info("trance监控的GetMap：", xmap)
 	return "success"
 }

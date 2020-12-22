@@ -80,14 +80,14 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 
 var funcMQC1 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("mqcserver-queue-mqc1 静态加载队列后，手动修改注册配置demo")
-	xmap, err := ctx.Request().GetMap()
-	ctx.Log().Info("ctx.Request().GetMap()：", xmap, err)
+	xmap := ctx.Request().GetMap()
+	ctx.Log().Info("ctx.Request().GetMap()：", xmap)
 	return
 }
 
 var funcMQC2 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("mqcserver-queue-mqc2 静态加载队列后，手动修改注册配置demo")
-	xmap, err := ctx.Request().GetMap()
-	ctx.Log().Info("ctx.Request().GetMap()：", xmap, err)
+	xmap := ctx.Request().GetMap()
+	ctx.Log().Info("ctx.Request().GetMap()：", xmap)
 	return
 }
