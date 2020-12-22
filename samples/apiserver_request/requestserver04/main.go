@@ -116,10 +116,8 @@ var funcRequest = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("ctx.Request().GetJSON()异常：%s", err)
 	}
 	ctx.Log().Info("----GetJSON data:", string(jsonD))
-	xmap, err := ctx.Request().GetMap()
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-	}
+	xmap := ctx.Request().GetMap()
+
 	ctx.Log().Info("----GetMap()：", xmap)
 	tm, err := ctx.Request().GetDatetime("param6")
 	if err != nil {
@@ -162,10 +160,8 @@ var funcRequest1 = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("ctx.Request().GetJSON()异常：%s", err)
 	}
 	ctx.Log().Info("----GetJSON data:", string(jsonD))
-	xmap, err := ctx.Request().GetMap()
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-	}
+	xmap := ctx.Request().GetMap()
+
 	ctx.Log().Info("----GetMap()：", xmap)
 	tm, err := ctx.Request().GetDatetime("param6")
 	if err != nil {
@@ -208,10 +204,8 @@ var funcRequest2 = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("ctx.Request().GetJSON()异常：%s", err)
 	}
 	ctx.Log().Info("----GetJSON data:", string(jsonD))
-	xmap, err := ctx.Request().GetMap()
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-	}
+	xmap := ctx.Request().GetMap()
+
 	ctx.Log().Info("----GetMap()：", xmap)
 	tm, err := ctx.Request().GetDatetime("param6")
 	if err != nil {
@@ -254,10 +248,8 @@ var funcRequest3 = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("ctx.Request().GetJSON()异常：%s", err)
 	}
 	ctx.Log().Info("----GetJSON data:", string(jsonD))
-	xmap, err := ctx.Request().GetMap()
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-	}
+	xmap := ctx.Request().GetMap()
+
 	ctx.Log().Info("----GetMap()：", xmap)
 	tm, err := ctx.Request().GetDatetime("param6")
 	if err != nil {

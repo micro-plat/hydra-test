@@ -58,8 +58,8 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 
 var funcRPC = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("rpcserver-ip-rpc rpc错返回访问demo")
-	xMap, err := ctx.Request().GetMap()
-	ctx.Log().Info("ctx.Request().GetMap()：", xMap, err)
+	xMap := ctx.Request().GetMap()
+	ctx.Log().Info("ctx.Request().GetMap()：", xMap)
 	ctx.Response().Abort(666, "rpc服务返回异常")
 	return
 }
@@ -84,7 +84,7 @@ var funcAPI1 = func(ctx hydra.IContext) (r interface{}) {
 
 var funcRPC1 = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("rpcserver-ip-rpc rpc正确返回访问demo")
-	xMap, err := ctx.Request().GetMap()
-	ctx.Log().Info("ctx.Request().GetMap()：", xMap, err)
+	xMap := ctx.Request().GetMap()
+	ctx.Log().Info("ctx.Request().GetMap()：", xMap)
 	return "rpcsuccess"
 }

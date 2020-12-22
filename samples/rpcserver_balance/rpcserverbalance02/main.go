@@ -55,7 +55,7 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 
 var funcRPC = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("rpcserver_balance 测试多个provider时默认ip轮寻负载均衡规则执行demo")
-	xMap, err := ctx.Request().GetMap()
-	ctx.Log().Info("ctx.Request().GetMap()：", xMap, err)
+	xMap := ctx.Request().GetMap()
+	ctx.Log().Info("ctx.Request().GetMap()：", xMap)
 	return "success"
 }

@@ -90,10 +90,8 @@ var funcMQC1 = func(ctx hydra.IContext) (r interface{}) {
 	}
 	ctx.Log().Info("----GetJSON data:", string(jsonD))
 
-	xmap, err := ctx.Request().GetMap()
-	if err != nil {
-		ctx.Log().Errorf("ctx.Request().GetMap()异常：%s", err)
-	}
+	xmap := ctx.Request().GetMap()
+
 	ctx.Log().Info("----GetMap()：", xmap)
 
 	tm, err := ctx.Request().GetDatetime("param6", "2006-01-02 15:04:05")

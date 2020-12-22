@@ -60,7 +60,7 @@ func init() {
 func main() {
 	app.Start()
 
-	raw := "param1=1012sdf&param2=士大夫$%^dfksdf"
+	//raw := "param1=1012sdf&param2=士大夫$%^dfksdf"
 }
 
 var funcAPI1 = func(ctx hydra.IContext) (r interface{}) {

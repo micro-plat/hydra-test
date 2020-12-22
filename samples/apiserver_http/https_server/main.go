@@ -20,10 +20,8 @@ func init() {
 	app.API("/api", func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Info("log_session_id:", ctx.Log().GetSessionID())
 		ctx.Log().Info("api_user_id:", ctx.User().GetRequestID())
-		m, err := ctx.Request().GetMap()
-		if err != nil {
-			return err
-		}
+		m := ctx.Request().GetMap()
+		
 		ctx.Log().Info("api_body_map:", m)
 		ctx.Log().Info("api_method:", ctx.Request().Path().GetMethod())
 		ctx.Log().Info("api_encoding:", ctx.Request().Path().GetEncoding())

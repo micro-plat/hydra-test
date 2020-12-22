@@ -8,7 +8,7 @@ import (
 )
 
 var app = hydra.NewApp(
- 	hydra.WithServerTypes(http.API),
+	hydra.WithServerTypes(http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("http_server"),
 	hydra.WithClusterName("t"),
@@ -22,16 +22,15 @@ func init() {
 		ctx.Log().Info("api_user_id:", ctx.User().GetRequestID())
 
 		bytes, err := ctx.Request().GetBody()
-		ctx.Log().Debug("GetBody:", string(bytes), err)
-
-		m, err := ctx.Request().GetMap()
 		if err != nil {
 			return err
 		}
+		ctx.Log().Debug("GetBody:", string(bytes), err)
+
+		m := ctx.Request().GetMap()
 		for k, v := range m {
 			ctx.Log().Debugf("Map: %s=%s", k, v)
 		}
-
 		ctx.Log().Debug("api_body_map:", m)
 		ctx.Log().Debug("api_method:", ctx.Request().Path().GetMethod())
 		ctx.Log().Debug("api_encoding:", ctx.Request().Path().GetEncoding())
