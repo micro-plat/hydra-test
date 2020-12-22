@@ -3,6 +3,7 @@ package conf
 import (
 	"testing"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/conf/server"
@@ -29,8 +30,7 @@ import (
 	"github.com/micro-plat/hydra/conf/vars/rlog"
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/registry"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestNewEmptyServerConf(t *testing.T) {
@@ -356,7 +356,7 @@ func TestNewVARServerConf(t *testing.T) {
 	assert.Equal(t, false, err == nil, "测试conf初始化,没有设置主节点")
 
 	confM.MQC("redis://11").Queue(queue.NewQueue("queue1", "service1"), queue.NewQueue("queue2", "service2"))
-	confM.Vars().Queue().Redis("redis", queueredis.New(queueredis.WithAddrs("192.168.0.1")))
+	confM.Vars().Queue().Redis("redis", "", queueredis.WithAddrs("192.168.0.1"))
 
 	confM.Conf().Pub(platName, sysName, clusterName, "lm://.", true)
 	gotS, err = app.NewAPPConfBy(platName, sysName, serverType, clusterName, rgst)

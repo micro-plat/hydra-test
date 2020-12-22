@@ -6,17 +6,17 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server/static"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestStaticNew(t *testing.T) {
 	defaultObj := &static.Static{
 		FileMap:   map[string]static.FileInfo{},
 		Dir:       static.DefaultSataticDir,
-		HomePage: static.DefaultHomePage,
+		HomePage:  static.DefaultHomePage,
 		Rewriters: static.DefaultRewriters,
 		Exclude:   static.DefaultExclude,
 		Exts:      []string{},
@@ -24,7 +24,7 @@ func TestStaticNew(t *testing.T) {
 	enObj := &static.Static{
 		FileMap:   map[string]static.FileInfo{},
 		Dir:       "./test",
-		HomePage: "index1.html",
+		HomePage:  "index1.html",
 		Rewriters: []string{"/", "indextest.htm", "defaulttest.html"},
 		Exclude:   []string{"/views/", ".exe", ".so", ".zip"},
 		Exts:      []string{".htm", ".js"},

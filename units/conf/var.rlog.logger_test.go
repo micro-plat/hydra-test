@@ -3,10 +3,10 @@ package conf
 import (
 	"testing"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/vars/rlog"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestRLogNew(t *testing.T) {
@@ -63,7 +63,7 @@ func TestRLogGetConf(t *testing.T) {
 		}
 
 		got, err := rlog.GetConf(cnf)
-		assert.IsNil(t, tt.IsNilErr, err, tt.name)
+		assert.Equal(t, true, err == nil, tt.name)
 		assert.Equal(t, tt.want, got, tt.name)
 	}
 }

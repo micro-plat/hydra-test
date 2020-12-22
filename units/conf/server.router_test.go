@@ -7,9 +7,8 @@ import (
 	"testing"
 
 	"github.com/micro-plat/hydra/conf"
-	"github.com/micro-plat/hydra/test/assert"
-
 	"github.com/micro-plat/hydra/conf/server/router"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestGetWSHomeRouter(t *testing.T) {
@@ -165,7 +164,7 @@ func TestRouters_Match(t *testing.T) {
 			args: args{path: "/t1/t2", method: http.MethodGet}, want: router.NewRouter("/t1/t2", "s1", []string{http.MethodGet}, router.WithEncoding("gbk2312"))},
 	}
 	for _, tt := range tests {
-		got := tt.fields.Match(tt.args.path, tt.args.method)
+		got, _ := tt.fields.Match(tt.args.path, tt.args.method)
 		assert.Equal(t, tt.want, got, tt.name)
 	}
 
@@ -176,7 +175,7 @@ func TestRouters_Match(t *testing.T) {
 
 	test1 := test{name: "5. Conf-RoutersMatch-不存在匹配的路由", fields: &router.Routers{Routers: []*router.Router{router.NewRouter("/t1/t2", "s1", []string{http.MethodGet}, router.WithEncoding("gbk2312"))}},
 		args: args{path: "/t1/t2/tt", method: http.MethodGet}, want: router.NewRouter("/t1/t2", "s1", []string{http.MethodGet}, router.WithEncoding("gbk2312"))}
-	got := test1.fields.Match(test1.args.path, test1.args.method)
+	got, _ := test1.fields.Match(test1.args.path, test1.args.method)
 	assert.Equal(t, test1.want, got, test1.name)
 }
 

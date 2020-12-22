@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/micro-plat/hydra/conf/vars/queue/lmq"
-	"github.com/micro-plat/hydra/test/assert"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestQueueLMQNew(t *testing.T) {

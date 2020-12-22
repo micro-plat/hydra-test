@@ -7,7 +7,7 @@ import (
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
 	varredis "github.com/micro-plat/hydra/conf/vars/redis"
 
-	"github.com/micro-plat/hydra/test/assert"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestQueueRedisNew(t *testing.T) {
@@ -28,7 +28,7 @@ func TestQueueRedisNew(t *testing.T) {
 			want: &queueredis.Redis{Queue: &queue.Queue{Proto: "redis"}, Redis: &varredis.Redis{Addrs: []string{"192.168.5.79:6379"}, DbIndex: 2, DialTimeout: 11, ReadTimeout: 22, WriteTimeout: 33, PoolSize: 40}}},
 	}
 	for _, tt := range tests {
-		got := queueredis.New(tt.opts...)
+		got := queueredis.New("", tt.opts...)
 		assert.Equal(t, tt.want, got, tt.name)
 	}
 }

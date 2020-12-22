@@ -3,6 +3,7 @@ package conf
 import (
 	"testing"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/conf/server/acl/blacklist"
@@ -18,8 +19,7 @@ import (
 	"github.com/micro-plat/hydra/conf/server/static"
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/registry"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func newReady(t *testing.T, platName, sysName, serverType, clusterName string) (string, string, string, string, registry.IRegistry) {

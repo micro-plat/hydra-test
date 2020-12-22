@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server"
 	"github.com/micro-plat/hydra/conf/server/api"
@@ -11,8 +12,7 @@ import (
 	"github.com/micro-plat/hydra/conf/server/header"
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/registry"
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestNewMainConf(t *testing.T) {

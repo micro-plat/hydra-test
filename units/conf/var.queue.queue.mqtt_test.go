@@ -5,7 +5,7 @@ import (
 
 	"github.com/micro-plat/hydra/conf/vars/queue"
 	"github.com/micro-plat/hydra/conf/vars/queue/mqtt"
-	"github.com/micro-plat/hydra/test/assert"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestQueueMQTTNew(t *testing.T) {

@@ -4,10 +4,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/micro-plat/hydra/global"
-	"github.com/micro-plat/hydra/test/assert"
-
 	"github.com/micro-plat/hydra/conf/server"
+	"github.com/micro-plat/hydra/global"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestPub_GetServerPath(t *testing.T) {

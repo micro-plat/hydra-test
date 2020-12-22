@@ -3,15 +3,14 @@ package conf
 import (
 	"testing"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/vars"
 	"github.com/micro-plat/hydra/conf/vars/cache/cacheredis"
 	"github.com/micro-plat/hydra/conf/vars/db"
 	"github.com/micro-plat/hydra/conf/vars/db/oracle"
 	"github.com/micro-plat/hydra/registry"
-
-	"github.com/micro-plat/hydra/test/assert"
-	"github.com/micro-plat/hydra/test/mocks"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestNewVarConf(t *testing.T) {
@@ -124,7 +123,7 @@ func TestVarConf_GetVersion(t *testing.T) {
 
 	for _, tt := range tests {
 		confM := mocks.NewConfBy(platName, clusterName)
-		confM.Vars().Cache().Redis("redis", cacheredis.New(cacheredis.WithAddrs("192.168.0.1")))
+		confM.Vars().Cache().Redis("redis", "", cacheredis.WithAddrs("192.168.0.1"))
 		confM.Conf().Pub(platName, systemName, clusterName, "lm://.", true)
 		varConf, err := vars.NewVarConf(platName, confM.Registry)
 		assert.Equal(t, nil, err, tt.name+",err")

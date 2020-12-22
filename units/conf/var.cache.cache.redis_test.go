@@ -6,7 +6,7 @@ import (
 	"github.com/micro-plat/hydra/conf/vars/cache"
 	"github.com/micro-plat/hydra/conf/vars/cache/cacheredis"
 	varredis "github.com/micro-plat/hydra/conf/vars/redis"
-	"github.com/micro-plat/hydra/test/assert"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestCacheRedisNew(t *testing.T) {
@@ -28,7 +28,7 @@ func TestCacheRedisNew(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		got := cacheredis.New(tt.opts...)
+		got := cacheredis.New("", tt.opts...)
 		assert.Equal(t, tt.want, got, tt.name)
 	}
 }

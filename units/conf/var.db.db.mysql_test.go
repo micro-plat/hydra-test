@@ -5,7 +5,7 @@ import (
 
 	"github.com/micro-plat/hydra/conf/vars/db"
 	"github.com/micro-plat/hydra/conf/vars/db/mysql"
-	"github.com/micro-plat/hydra/test/assert"
+	"github.com/micro-plat/lib4go/assert"
 )
 
 var connectStr = "root:xxxxxx@tcp(192.168.0.1:3306)/dbname?charset=utf8"

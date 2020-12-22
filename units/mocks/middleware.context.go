@@ -72,10 +72,22 @@ func (ctx *MiddleContext) Log() logger.ILogger {
 	return logger.GetSession(ctx.MockAPPConf.GetServerConf().GetServerName(), ctx.User().GetRequestID())
 }
 
+func (ctx *MiddleContext) Find(path string) bool {
+	return false
+}
+
+func (ctx *MiddleContext) Service(s string) {
+}
+
 //Close 关闭并释放资源
 func (ctx *MiddleContext) Close() {}
 
 func (ctx *MiddleContext) Trace(...interface{}) {}
+
+//链路跟踪器
+func (ctx *MiddleContext) Tracer() extcontext.ITracer {
+	return nil
+}
 
 //GetHttpReqResp GetHttpReqResp
 func (ctx *MiddleContext) GetHttpReqResp() (*http.Request, http.ResponseWriter) {
@@ -88,6 +100,7 @@ type MockUser struct {
 	MockClientIP  string
 	MockRequestID string
 	MockAuth      extcontext.IAuth
+	MockUserName  string
 }
 
 //GetClientIP 获取客户端请求IP
@@ -105,6 +118,11 @@ func (u *MockUser) GetGID() string {
 	return u.MockRequestID
 }
 
+//GetUserName 获取用户名
+func (u *MockUser) GetUserName() string {
+	return u.MockUserName
+}
+
 //Auth 认证信息
 func (u *MockUser) Auth() extcontext.IAuth {
 	return u.MockAuth
@@ -119,6 +137,7 @@ type MockPath struct {
 	MockIsLimit       bool
 	MockAllowFallback bool
 	MockRouter        *router.Router
+	MockService       string
 }
 
 //GetMethod 获取服务请求方法GET POST PUT DELETE 等
@@ -128,6 +147,10 @@ func (p *MockPath) GetMethod() string {
 
 func (p *MockPath) GetEncoding() string {
 	return ""
+}
+
+func (p *MockPath) GetService() string {
+	return p.MockService
 }
 
 //GetRouter 获取当前请求对应的路由信息
@@ -183,6 +206,10 @@ type MockRequest struct {
 	extcontext.IFile
 }
 
+func (r *MockRequest) GetError() error {
+	return nil
+}
+
 //Path 地址、头、cookie相关信息
 func (r *MockRequest) Path() extcontext.IPath {
 	return r.MockPath
@@ -211,11 +238,8 @@ func (r *MockRequest) Check(field ...string) error {
 }
 
 //GetMap 将当前请求转换为map并返回
-func (r *MockRequest) GetMap() (types.XMap, error) {
-	if r.MockQueryMap == nil {
-		return nil, fmt.Errorf("人工制造错误")
-	}
-	return r.MockQueryMap, nil
+func (r *MockRequest) GetMap() types.XMap {
+	return r.MockQueryMap
 }
 
 //GetFullRaw 获取请求的body参数
@@ -268,12 +292,55 @@ var _ extcontext.IResponse = &MockResponse{}
 
 type MockResponse struct {
 	SpecialList     []string
-	MockHeader      map[string][]string
+	MockHeader      types.XMap
 	MockRaw         interface{}
 	MockStatus      int
 	MockContent     string
 	MockError       error
 	MockContentType string
+}
+
+func (res *MockResponse) JSON(code int, data interface{}) interface{} {
+	res.MockContent = types.GetString(data)
+	res.MockStatus = code
+	return nil
+}
+
+//XML xml输出响应内容
+func (res *MockResponse) XML(code int, data interface{}, header string, rootNode ...string) interface{} {
+	res.MockContent = types.GetString(data)
+	res.MockStatus = code
+	return nil
+}
+
+//以text/html输出响应内容
+func (res *MockResponse) HTML(code int, data string) interface{} {
+	res.MockContent = types.GetString(data)
+	res.MockStatus = code
+	return nil
+}
+
+//YAML yaml输出响应内容
+func (res *MockResponse) YAML(code int, data interface{}) interface{} {
+	res.MockContent = types.GetString(data)
+	res.MockStatus = code
+	return nil
+}
+
+//以text/plain格式输出响应内容
+func (res *MockResponse) Plain(code int, data string) interface{} {
+	res.MockContent = types.GetString(data)
+	res.MockStatus = code
+	return nil
+}
+
+//Data 使用已设置的Content-Type输出内容，未设置时自动根据内容识别输出格式，内容无法识别时(map,struct)使用application/json
+//格式输出内容
+func (res *MockResponse) Data(code int, contentType string, data interface{}) interface{} {
+	res.MockStatus = code
+	res.MockContentType = contentType
+	res.MockContent = types.GetString(data)
+	return nil
 }
 
 //AddSpecial 添加特殊标记，用于在打印响应内容时知道当前请求进行了哪些特殊处理
@@ -292,7 +359,7 @@ func (res *MockResponse) Header(key string, val string) {
 }
 
 //GetHeaders 设置响应头
-func (res *MockResponse) GetHeaders() map[string][]string {
+func (res *MockResponse) GetHeaders() types.XMap {
 	return res.MockHeader
 }
 
@@ -301,8 +368,10 @@ func (res *MockResponse) GetRaw() interface{} {
 	return res.MockRaw
 }
 
-//ContentType 设置Content-Type响应头
-func (res *MockResponse) ContentType(v string) {
+//ContentType 设置Content-Type响应头,自动增加charset或编码值,如指定值为:application/json;或application/json; charset=%s
+//最终输出结果为 application/json; charset=utf-8 或 application/json; charset=gbk
+//具体的charset值与服务配置和请求的Content-Type中指定的charset有关
+func (res *MockResponse) ContentType(v string, xmlRoot ...string) {
 	res.MockContentType = v
 	res.Header("Content-Type", v)
 }

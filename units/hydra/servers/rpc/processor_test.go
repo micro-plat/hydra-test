@@ -8,7 +8,6 @@ import (
 	"testing"
 
 	"github.com/micro-plat/hydra-test/units/mocks"
-
 	"github.com/micro-plat/hydra/components/rpcs/rpc/pb"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/conf/server/router"
