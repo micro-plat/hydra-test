@@ -23,10 +23,8 @@ func init() {
 		headers := ctx.Request().Headers()
 		fmt.Println("h:", headers)
 		ctx.Log().Info("ws-Handle-headers:", headers)
-		m, err := ctx.Request().GetMap()
-		if err != nil {
-			return err
-		}
+		m := ctx.Request().GetMap()
+
 		ctx.Log().Info("ws-Handle-map:", m)
 		ctx.Response().Header("Content-Type", "application/yaml;charset=utf-8")
 		return m

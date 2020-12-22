@@ -5,10 +5,10 @@ import (
 	"time"
 
 	_ "github.com/mattn/go-oci8"
- 
+
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/registry"
- 
+
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/samples/apiserver_db/apiserver_oracle/sqls"
 	"github.com/micro-plat/hydra/conf/app"
@@ -19,8 +19,8 @@ import (
 
 var hydraApp = hydra.NewApp(
 	hydra.WithServerTypes(http.API),
-	hydra.WithPlatName("hydratest"),
-	hydra.WithSystemName("apiserver_db_oracle"),
+	hydra.WithPlatName("hydratest", "Hydra样例"),
+	hydra.WithSystemName("apiserver_db_oracle", "Oracle数据库"),
 	hydra.WithClusterName("test"),
 	hydra.WithRegistry("lm://."),
 )
@@ -50,7 +50,7 @@ func init() {
 // 6. 请求 http://localhost:50021/api/oracle/sp 调用存储过错添加一条 10002数据
 // 7. 请求 http://localhost:50021/api/oracle/delete 删除所有数据
 // 8. 请求 http://localhost:50021/api/oracle/config 修改数据库配置，并重启
-func main() { 
+func main() {
 	hydraApp.OnStarting(func(cnf app.IAPPConf) (err error) {
 		oracleDB := hydra.C.DB().GetRegularDB("0.136")
 

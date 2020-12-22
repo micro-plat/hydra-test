@@ -286,8 +286,8 @@ var rpcBindStruct = func(ctx hydra.IContext) (r interface{}) {
 	fmt.Println(string(body))
 
 	result := &demoStrcutParent{}
-	m, err := ctx.Request().GetMap()
-	ctx.Log().Info("GetMap:", m, err)
+	m := ctx.Request().GetMap()
+	ctx.Log().Info("GetMap:", m)
 	err = ctx.Request().Bind(result)
 	if err != nil {
 		ctx.Log().Errorf("Request.Bind:%v", err)

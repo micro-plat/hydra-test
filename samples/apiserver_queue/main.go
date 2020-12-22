@@ -30,10 +30,7 @@ func init() {
 	hydra.Conf.MQC("redis://xxx")
 
 	app.MQC("/mqc", func(ctx context.IContext) (r interface{}) {
-		m, err := ctx.Request().GetMap()
-		if err != nil {
-			return err
-		}
+		m := ctx.Request().GetMap()
 		ctx.Log().Info("mqc_message:", m)
 		return
 	}, "mqc_apiserver")

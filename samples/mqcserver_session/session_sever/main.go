@@ -21,10 +21,8 @@ func init() {
 	hydra.Conf.MQC("redis://xxx").Queue(queue.NewQueue("mqc_session_t", "/mqc"))
 	app.MQC("/mqc", func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Info("mqc-header:", ctx.Request().Headers())
-		m, err := ctx.Request().GetMap()
-		if err != nil {
-			return err
-		}
+		m := ctx.Request().GetMap()
+
 		ctx.Log().Info("mqc-map:", m)
 		s, q, err := ctx.Request().GetFullRaw()
 		if err != nil {

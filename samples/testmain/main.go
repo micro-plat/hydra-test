@@ -1,28 +1,20 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/nelsonken/xmltomap-go"
-)
+	"fmt" 
+	"path/filepath"
+ )
 
 func main() {
-	data := []byte(`<xml>
-    <a>1</a>
-    <b>hi hello world</b>
-    <c>xxxx</c>
-    <c>rrr</c>
-    <dd>
-        <ee>rrr</ee>
-        <ff>rrr</ff>
-    </dd>
-</xml>`)
-	strmap, err := xmltomap.Unmarshal(data)
-	if err != nil {
-		if err != nil {
-			panic(err)
-		}
-	}
-	fmt.Println(strmap)
+ 
+	path := "../xxx/a/b/c/d/e/f/g"
+	i:= 0
+	for len(path)>0 && i<15 {
+		fmt.Println(path)
+		i++
+		path = filepath.Dir(path)
 
+	}
+
+	fmt.Println("last:",path) 
 }

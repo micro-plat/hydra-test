@@ -19,8 +19,8 @@ import (
 
 var hydraApp = hydra.NewApp(
 	hydra.WithServerTypes(http.API),
-	hydra.WithPlatName("hydratest"),
-	hydra.WithSystemName("apiserver_db_mysql"),
+	hydra.WithPlatName("hydratest", "Hydra样例"),
+	hydra.WithSystemName("apiserver_db_mysql", "Mysql数据库"),
 	hydra.WithClusterName("test"),
 	hydra.WithRegistry("lm://."),
 )
