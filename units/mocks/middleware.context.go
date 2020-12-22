@@ -42,6 +42,19 @@ func (ctx *MiddleContext) Meta() conf.IMeta {
 	return ctx.MockMeta
 }
 
+func (ctx *MiddleContext) Find(path string) bool {
+	return false
+}
+
+func (ctx *MiddleContext) Service(string) {
+
+}
+
+//链路跟踪器
+func (ctx *MiddleContext) Tracer() extcontext.ITracer {
+	return nil
+}
+
 //Request 请求信息
 func (ctx *MiddleContext) Request() extcontext.IRequest {
 	return ctx.MockRequest
@@ -105,6 +118,10 @@ func (u *MockUser) GetGID() string {
 	return u.MockRequestID
 }
 
+func (u *MockUser) GetUserName() string {
+	return "UserName"
+}
+
 //Auth 认证信息
 func (u *MockUser) Auth() extcontext.IAuth {
 	return u.MockAuth
@@ -127,6 +144,11 @@ func (p *MockPath) GetMethod() string {
 }
 
 func (p *MockPath) GetEncoding() string {
+	return ""
+}
+
+//GetService 获取服务名称
+func (p *MockPath) GetService() string {
 	return ""
 }
 
@@ -183,6 +205,11 @@ type MockRequest struct {
 	extcontext.IFile
 }
 
+//GetError 请求解析过程中发生的异常
+func (r *MockRequest) GetError() error {
+	return nil
+}
+
 //Path 地址、头、cookie相关信息
 func (r *MockRequest) Path() extcontext.IPath {
 	return r.MockPath
@@ -211,11 +238,11 @@ func (r *MockRequest) Check(field ...string) error {
 }
 
 //GetMap 将当前请求转换为map并返回
-func (r *MockRequest) GetMap() (types.XMap, error) {
+func (r *MockRequest) GetMap() types.XMap {
 	if r.MockQueryMap == nil {
-		return nil, fmt.Errorf("人工制造错误")
+		return nil
 	}
-	return r.MockQueryMap, nil
+	return r.MockQueryMap
 }
 
 //GetFullRaw 获取请求的body参数
@@ -268,7 +295,7 @@ var _ extcontext.IResponse = &MockResponse{}
 
 type MockResponse struct {
 	SpecialList     []string
-	MockHeader      map[string][]string
+	MockHeader      types.XMap
 	MockRaw         interface{}
 	MockStatus      int
 	MockContent     string
@@ -292,7 +319,7 @@ func (res *MockResponse) Header(key string, val string) {
 }
 
 //GetHeaders 设置响应头
-func (res *MockResponse) GetHeaders() map[string][]string {
+func (res *MockResponse) GetHeaders() types.XMap {
 	return res.MockHeader
 }
 
@@ -302,9 +329,13 @@ func (res *MockResponse) GetRaw() interface{} {
 }
 
 //ContentType 设置Content-Type响应头
-func (res *MockResponse) ContentType(v string) {
+func (res *MockResponse) ContentType(v string, xmlRoot ...string) {
 	res.MockContentType = v
 	res.Header("Content-Type", v)
+}
+
+func (res *MockResponse) Data(code int, contentType string, data interface{}) interface{} {
+	return nil
 }
 
 //NoNeedWrite 无需写入响应数据到缓存
@@ -371,6 +402,31 @@ func (res *MockResponse) GetFinalResponse() (int, string, string) {
 
 //Flush 将当前内容写入响应流
 func (res *MockResponse) Flush() {
+}
+
+//JSON json输出响应内容
+func (res *MockResponse) JSON(code int, data interface{}) interface{} {
+	return nil
+}
+
+//XML xml输出响应内容
+func (res *MockResponse) XML(code int, data interface{}, header string, rootNode ...string) interface{} {
+	return nil
+}
+
+//以text/html输出响应内容
+func (res *MockResponse) HTML(code int, data string) interface{} {
+	return nil
+}
+
+//YAML yaml输出响应内容
+func (res *MockResponse) YAML(code int, data interface{}) interface{} {
+	return nil
+}
+
+//以text/plain格式输出响应内容
+func (res *MockResponse) Plain(code int, data string) interface{} {
+	return nil
 }
 
 var _ http.ResponseWriter = &MockResponseWriter{}
