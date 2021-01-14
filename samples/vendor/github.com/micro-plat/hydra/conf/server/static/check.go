@@ -1,7 +1,6 @@
 package static
 
 import (
-	"os"
 	"path/filepath"
 	"strings"
 )
@@ -23,9 +22,6 @@ func (s *Static) IsStatic(rPath string, method string) (b bool, xname string) {
 	}
 	if s.NeedRewrite(rPath) {
 		return true, filepath.Join(s.Dir, s.HomePage)
-	}
-	if s.IsContainExt(rPath) {
-		return true, filepath.Join(s.Dir, rPath)
 	}
 	if s.IsContainExt(rPath) {
 		return true, filepath.Join(s.Dir, rPath)
@@ -66,7 +62,7 @@ func (s *Static) IsExclude(rPath string) bool {
 		if hasExt && strings.EqualFold(pExt, v) {
 			return true
 		}
-		if strings.EqualFold(rPath, v) {
+		if strings.Contains(rPath, v) {
 			return true
 		}
 	}
@@ -75,13 +71,6 @@ func (s *Static) IsExclude(rPath string) bool {
 
 //IsContainExt 是否是包含在指定的ext中
 func (s *Static) IsContainExt(rPath string) bool {
-
-	if _, err := os.Stat(filepath.Join(s.Dir, rPath)); err != nil {
-		if os.IsNotExist(err) {
-			//文件不存在   直接返回false
-			return false
-		}
-	}
 
 	name := filepath.Base(rPath)
 	pExt := filepath.Ext(name)
@@ -104,10 +93,8 @@ func (s *Static) IsContainExt(rPath string) bool {
 
 //NeedRewrite 是否需要重写请求
 func (s *Static) NeedRewrite(p string) bool {
-	for _, c := range s.Rewriters {
-		if c == p {
-			return true
-		}
+	if b, _ := s.RewritersMatch.Match(p); b {
+		return true
 	}
 	return false
 }

@@ -1,8 +1,8 @@
 package conf
 
 import (
-	"github.com/micro-plat/cli/cmds"
-	"github.com/micro-plat/cli/logs"
+	"github.com/lib4dev/cli/cmds"
+	logs "github.com/lib4dev/cli/logger"
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/global/compatible"
 	"github.com/micro-plat/hydra/hydra/cmds/pkgs"
@@ -36,9 +36,8 @@ func showNow(c *cli.Context) (err error) {
 	//1. 绑定应用程序参数
 	global.Current().Log().Pause()
 	if err := global.Def.Bind(c); err != nil {
-		logs.Log.Error(err)
 		cli.ShowCommandHelp(c, c.Command.Name)
-		return nil
+		return err
 	}
 
 	//2. 处理本地内存作为注册中心的服务发布问题
@@ -60,19 +59,17 @@ func installNow(c *cli.Context) (err error) {
 	//1. 绑定应用程序参数
 	global.Current().Log().Pause()
 	if err := global.Def.Bind(c); err != nil {
-		logs.Log.Error(err)
 		cli.ShowCommandHelp(c, c.Command.Name)
-		return nil
+		return err
 	}
 
-	//fmt.Println("global.Current().GetRegistryAddr()", global.Current().GetRegistryAddr())
 	//2.检查是否安装注册中心配置
 	if registry.GetProto(global.Current().GetRegistryAddr()) != registry.LocalMemory {
 		if err := pkgs.Pub2Registry(coverIfExists); err != nil {
 			logs.Log.Error("安装到配置中心:", compatible.FAILED)
 			return err
 		}
-		logs.Log.Info("安装到配置中心:" + compatible.SUCCESS)
+		logs.Log.Info("安装到配置中心:", compatible.SUCCESS)
 		return
 	}
 	return nil

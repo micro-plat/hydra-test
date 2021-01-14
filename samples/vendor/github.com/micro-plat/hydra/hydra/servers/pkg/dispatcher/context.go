@@ -11,6 +11,7 @@ import (
 const abortIndex int8 = math.MaxInt8 / 2
 
 type IRequest interface {
+	GetName() string
 	GetService() string
 	GetMethod() string
 	GetForm() map[string]interface{}
@@ -62,6 +63,11 @@ func (c *Context) Next() {
 	for s := int8(len(c.handlers)); c.index < s; c.index++ {
 		c.handlers[c.index](c)
 	}
+}
+
+//Find 查找指定的路由是否存在
+func (c *Context) Find(path string) bool {
+	return c.engine.Find(path)
 }
 
 // IsAborted returns true if the current context was aborted.

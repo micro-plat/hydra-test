@@ -1,7 +1,7 @@
 package app
 
 import (
-	"strings"
+	"fmt"
 
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server"
@@ -9,6 +9,7 @@ import (
 	"github.com/micro-plat/hydra/conf/server/acl/limiter"
 	"github.com/micro-plat/hydra/conf/server/acl/proxy"
 	"github.com/micro-plat/hydra/conf/server/acl/whitelist"
+	"github.com/micro-plat/hydra/conf/server/apm"
 	"github.com/micro-plat/hydra/conf/server/auth/apikey"
 	"github.com/micro-plat/hydra/conf/server/auth/basic"
 	"github.com/micro-plat/hydra/conf/server/auth/jwt"
@@ -18,11 +19,11 @@ import (
 	"github.com/micro-plat/hydra/conf/server/mqc"
 	"github.com/micro-plat/hydra/conf/server/queue"
 	"github.com/micro-plat/hydra/conf/server/render"
-	"github.com/micro-plat/hydra/conf/server/router"
 	"github.com/micro-plat/hydra/conf/server/static"
 	"github.com/micro-plat/hydra/conf/server/task"
 	"github.com/micro-plat/hydra/conf/vars"
 	"github.com/micro-plat/hydra/conf/vars/rlog"
+	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/registry"
 )
 
@@ -36,7 +37,6 @@ type IAPPConf interface {
 
 	GetCRONTaskConf() (*task.Tasks, error)
 
-	GetRouterConf() (*router.Routers, error)
 	GetJWTConf() (*jwt.JWTAuth, error)
 	GetHeaderConf() (header.Headers, error)
 	GetMetricConf() (*metric.Metric, error)
@@ -49,6 +49,7 @@ type IAPPConf interface {
 	GetBlackListConf() (*blacklist.BlackList, error)
 	GetLimiterConf() (*limiter.Limiter, error)
 	GetProxyConf() (*proxy.Proxy, error)
+	GetAPMConf() (*apm.APM, error)
 	//获取远程日志配置
 	GetRLogConf() (*rlog.Layout, error)
 	Close() error
@@ -91,10 +92,20 @@ func NewAPPConfBy(platName, sysName, serverType, clusterName string, rgst regist
 
 }
 
-//NewAPPConf 构建服务器配置
+// NewAPPConf 构建服务器配置
 func NewAPPConf(mainConfpath string, rgst registry.IRegistry) (s *APPConf, err error) {
-	sections := strings.Split(strings.Trim(mainConfpath, "/"), "/")
-	return NewAPPConfBy(sections[0], sections[1], sections[2], sections[3], rgst)
+
+	//处理平台名、系统名包含多段问题
+	//获取服务器类型
+	list := registry.Split(registry.Trim(mainConfpath))
+	tp := list[len(list)-3]
+
+	//无法准确获得平台、系统名，只能通过当前应用配置获得，再比较
+	pub := server.NewServerPub(global.Def.PlatName, global.Def.SysName, tp, global.Def.ClusterName)
+	if pub.GetServerPath() != mainConfpath {
+		return nil, fmt.Errorf("非当前平台、系统、集群的服务不支持获取APPConf")
+	}
+	return NewAPPConfBy(global.Def.PlatName, global.Def.SysName, tp, global.Def.ClusterName, rgst)
 
 }
 

@@ -9,7 +9,7 @@ import (
 
 //IQueue 消息队列
 type IQueue interface {
-	Send(key string, value interface{}) error
+	Send(key string, value interface{}, requestID ...string) error
 }
 
 //IComponentQueue Component Queue
@@ -30,10 +30,14 @@ func newQueue(proto string, confRaw string) (q *queue, err error) {
 }
 
 //Send 发送消息
-func (q *queue) Send(key string, value interface{}) error {
+func (q *queue) Send(key string, value interface{}, requestID ...string) error {
 	hd := make([]string, 0, 2)
-	if ctx, ok := context.GetContext(); ok {
-		hd = append(hd, context.XRequestID, ctx.User().GetRequestID())
+	if len(requestID) > 0 {
+		hd = append(hd, context.XRequestID, requestID[0])
+	} else {
+		if ctx, ok := context.GetContext(); ok {
+			hd = append(hd, context.XRequestID, ctx.User().GetTraceID())
+		}
 	}
 	return q.q.Push(global.MQConf.GetQueueName(key), pkgs.GetStringByHeader(value, hd...))
 }

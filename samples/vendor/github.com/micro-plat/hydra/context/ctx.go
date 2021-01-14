@@ -3,17 +3,20 @@ package context
 import (
 	"context"
 	"io"
+	"net/http"
 	"time"
 
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/conf/server/router"
+	"github.com/micro-plat/hydra/pkgs"
 	"github.com/micro-plat/lib4go/logger"
 	"github.com/micro-plat/lib4go/types"
-	"github.com/micro-plat/lib4go/utility"
 )
 
 const (
+	UserName = "UserName"
+
 	XRequestID = "X-Request-Id"
 
 	JSONF  = "application/json; charset=%s"
@@ -29,12 +32,25 @@ const (
 	UTF8PLAIN = "text/plain; charset=utf-8"
 )
 
+var EmptyReponseResult = &EmptyResult{}
+
+type EmptyResult struct{}
+
 //Handler 业务处理Handler
 type Handler func(IContext) interface{}
 
 //Handle 处理业务流程
 func (h Handler) Handle(c IContext) interface{} {
 	return h(c)
+}
+
+//VoidHandler 无返回值的Handler处理
+type VoidHandler func(IContext)
+
+//Handle 处理业务流程
+func (h VoidHandler) Handle(c IContext) interface{} {
+	h(c)
+	return EmptyReponseResult
 }
 
 //IHandler 业务处理接口
@@ -80,8 +96,12 @@ type IGetter interface {
 
 //IPath 请求参数
 type IPath interface {
+
 	//GetMethod 获取服务请求方法GET POST PUT DELETE 等
 	GetMethod() string
+
+	//GetService 获取服务名称
+	GetService() string
 
 	//Param 路由参数
 	Params() types.XMap
@@ -121,6 +141,10 @@ type IFile interface {
 
 //IRequest 请求信息
 type IRequest interface {
+
+	//GetHTTPRequest 获取http request原生对象
+	GetHTTPRequest() *http.Request
+
 	//Path 地址、头、cookie相关信息
 	Path() IPath
 
@@ -131,13 +155,16 @@ type IRequest interface {
 	Check(field ...string) error
 
 	//GetMap 将当前请求转换为map并返回
-	GetMap() (types.XMap, error)
+	GetMap() types.XMap
 
 	//GetFullRaw 获取请求的body参数
-	GetFullRaw() (s []byte, c string, err error)
+	GetFullRaw() (body []byte, query string, err error)
+
+	//GetError 请求解析过程中发生的异常
+	GetError() error
 
 	//GetBody 获取请求的参数
-	GetBody() ([]byte, error)
+	GetBody() (body []byte, err error)
 
 	//GetPlayload
 	GetPlayload() string
@@ -156,6 +183,9 @@ type IRequest interface {
 //IResponse 响应信息
 type IResponse interface {
 
+	//GetHTTPReponse 获取http response原生对象
+	GetHTTPReponse() http.ResponseWriter
+
 	//AddSpecial 添加特殊标记，用于在打印响应内容时知道当前请求进行了哪些特殊处理
 	AddSpecial(t string)
 
@@ -168,17 +198,40 @@ type IResponse interface {
 	//GetRaw 获取未经处理的响应内容
 	GetRaw() interface{}
 
-	//ContentType 设置Content-Type响应头
-	ContentType(v string)
+	//ContentType 设置Content-Type响应头,自动增加charset或编码值,如指定值为:application/json;或application/json; charset=%s
+	//最终输出结果为 application/json; charset=utf-8 或 application/json; charset=gbk
+	//具体的charset值与服务配置和请求的Content-Type中指定的charset有关
+	ContentType(v string, xmlRoot ...string)
 
 	//NoNeedWrite 无需写入响应数据到缓存
 	NoNeedWrite(status int)
 
-	//Write 向响应流中写入状态码与内容(不会立即写入)
-	Write(s int, v ...interface{}) error
+	//JSON json输出响应内容
+	JSON(code int, data interface{}) interface{}
 
-	//WriteAny 向响应流中写入内容,状态码根据内容进行判断(不会立即写入)
+	//XML xml输出响应内容
+	XML(code int, data interface{}, header string, rootNode ...string) interface{}
+
+	//以text/html输出响应内容
+	HTML(code int, data string) interface{}
+
+	//YAML yaml输出响应内容
+	YAML(code int, data interface{}) interface{}
+
+	//以text/plain格式输出响应内容
+	Plain(code int, data string) interface{}
+
+	//Data 使用已设置的Content-Type输出内容，未设置时自动根据内容识别输出格式，内容无法识别时(map,struct)使用application/json
+	//格式输出内容
+	Data(code int, contentType string, data interface{}) interface{}
+
+	//WriteAny 使用已设置的Content-Type输出内容，未设置时自动根据内容识别输出格式，内容无法识别时(map,struct)使用application/json
+	//格式输出内容
 	WriteAny(v interface{}) error
+
+	//Write 使用已设置的Content-Type输出内容，未设置时自动根据内容识别输出格式，内容无法识别时(map,struct)使用application/json
+	//格式输出内容
+	Write(s int, v ...interface{}) error
 
 	//File 向响应流中写入文件(立即写入)
 	File(path string)
@@ -196,7 +249,7 @@ type IResponse interface {
 	Flush()
 
 	//GetHeaders 获取返回数据
-	GetHeaders() map[string][]string
+	GetHeaders() types.XMap
 }
 
 //IAuth 认证信息
@@ -214,14 +267,14 @@ type IAuth interface {
 //IUser 用户相关信息
 type IUser interface {
 
-	//GetGID 获取当前处理的goroutine id
-	GetGID() string
+	//GetUserName 获取用户名
+	GetUserName() string
 
 	//GetClientIP 获取客户端请求IP
 	GetClientIP() string
 
-	//GetRequestID 获取请求编号
-	GetRequestID() string
+	//GetTraceID 获取链路跟踪编号
+	GetTraceID() string
 
 	//Auth 认证信息
 	Auth() IAuth
@@ -251,11 +304,40 @@ type IContext interface {
 	//Log 日志组件
 	Log() logger.ILogger
 
+	//链路跟踪器
+	Tracer() ITracer
+
+	//Invoke 调用本地服务
+	Invoke(service string) *pkgs.Rspns
+
 	//Close 关闭并释放资源
 	Close()
 }
 
-//NewRequestID 获取请求编号
-func NewRequestID() string {
-	return utility.GetGUID()[0:9]
+//ITracer 链路跟踪器
+type ITracer interface {
+	ITraceSpan
+
+	//Root 根结点Tracer
+	Root() ITraceSpan
+}
+
+//ITraceSpan 跟踪处理器
+type ITraceSpan interface {
+	IEnd
+
+	//Available 是否可用
+	Available() bool
+
+	//Start 开发跟踪
+	Start() IEnd
+
+	//NewSpan 新的时间片
+	NewSpan(opertor string) ITraceSpan
+}
+
+//IEnd 关闭
+type IEnd interface {
+	//End 结束跟踪
+	End()
 }

@@ -14,7 +14,7 @@ var (
 	slash     = []byte("/")
 )
 
-//GetGoroutineID 获取goroutine id
+// GetGoroutineID 获取goroutine id
 func GetGoroutineID() string {
 	b := make([]byte, 64)
 	b = b[:32]

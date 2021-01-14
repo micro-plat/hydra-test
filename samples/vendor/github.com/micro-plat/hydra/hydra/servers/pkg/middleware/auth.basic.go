@@ -3,9 +3,9 @@ package middleware
 import (
 	"errors"
 	"net/http"
-)
 
-const authUserKey = "userName"
+	"github.com/micro-plat/hydra/context"
+)
 
 //BasicAuth  http basic认证
 func BasicAuth() Handler {
@@ -34,10 +34,10 @@ func BasicAuthForRealm() Handler {
 
 		//验证当前请求的用户名密码是否有效
 		ctx.Response().AddSpecial("basic")
-		if user, ok := basic.Verify(ctx.Request().Headers().GetString("Authorization")); ok {
-			ctx.Meta().SetValue(authUserKey, user)
+		if user, ok := basic.Verify(ctx.Request().Headers().GetString("Authorization"), ctx.Invoke); ok {
+			ctx.Meta().SetValue(context.UserName, user)
 			ctx.User().Auth().Request(map[string]interface{}{
-				authUserKey: user,
+				context.UserName: user,
 			})
 			ctx.Next()
 			return

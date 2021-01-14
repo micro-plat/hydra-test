@@ -1,9 +1,11 @@
 package redis
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/micro-plat/hydra/conf"
+	"github.com/micro-plat/lib4go/types"
 
 	"github.com/asaskevich/govalidator"
 )
@@ -13,7 +15,7 @@ const TypeNodeName = "redis"
 
 //Redis redis缓存配置
 type Redis struct {
-	Addrs        []string `json:"addrs" toml:"addrs"`
+	Addrs        []string `json:"addrs,omitempty" toml:"addrs,omitempty" valid:"required" label:"集群地址(|分割)"`
 	Password     string   `json:"password,omitempty" toml:"password,omitempty"`
 	DbIndex      int      `json:"db,omitempty" toml:"db,omitempty"`
 	DialTimeout  int      `json:"dial_timeout,omitempty" toml:"dial_timeout,omitempty"`
@@ -23,9 +25,9 @@ type Redis struct {
 }
 
 //New 构建redis消息队列配置
-func New(addrs []string, opts ...Option) *Redis {
+func New(addrs string, opts ...Option) *Redis {
 	r := &Redis{
-		Addrs:        addrs,
+		Addrs:        types.Split(addrs, ","),
 		DbIndex:      0,
 		DialTimeout:  10,
 		ReadTimeout:  10,
@@ -41,7 +43,7 @@ func New(addrs []string, opts ...Option) *Redis {
 //NewByRaw 通过json原串初始化
 func NewByRaw(raw string) *Redis {
 
-	org := New(nil, WithRaw(raw))
+	org := New("", WithRaw(raw))
 
 	if b, err := govalidator.ValidateStruct(org); !b {
 		panic(fmt.Errorf("redis配置数据有误:%v %+v", err, org))
@@ -53,7 +55,7 @@ func NewByRaw(raw string) *Redis {
 //GetConf GetConf
 func GetConf(varConf conf.IVarConf, name string) (redis *Redis, err error) {
 	js, err := varConf.GetConf("redis", name)
-	if err == conf.ErrNoSetting {
+	if errors.Is(err, conf.ErrNoSetting) {
 		return nil, fmt.Errorf("未配置：/var/redis/%s", name)
 	}
 	if err != nil {

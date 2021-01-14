@@ -28,14 +28,19 @@ func NewDispCtx() *dispCtx {
 
 type dispCtx struct {
 	*dispatcher.Context
+	service string
 }
 
 //
 func (g *dispCtx) GetRouterPath() string {
-	return g.Context.Request.GetService()
+	return g.Context.Request.GetName()
 }
 func (g *dispCtx) GetParams() map[string]interface{} {
-	return nil
+	params := make(map[string]interface{})
+	for _, v := range g.Context.Params {
+		params[v.Key] = v.Value
+	}
+	return params
 }
 func (g *dispCtx) GetBody() io.ReadCloser {
 	text := g.Request.GetForm()["__body__"]
@@ -50,7 +55,12 @@ func (g *dispCtx) GetBody() io.ReadCloser {
 		b := bytes.NewBufferString(types.GetString(text))
 		return &buffer{Buffer: b}
 	}
-
+}
+func (g *dispCtx) GetService() string {
+	return g.Context.Request.GetService()
+}
+func (g *dispCtx) Service(service string) {
+	g.service = service
 }
 func (g *dispCtx) GetMethod() string {
 	return g.Context.Request.GetMethod()
@@ -70,6 +80,9 @@ func (g *dispCtx) GetCookies() []*http.Cookie {
 	return nil
 }
 
+func (g *dispCtx) GetRawForm() map[string]interface{} {
+	return g.Context.Request.GetForm()
+}
 func (g *dispCtx) GetPostForm() url.Values {
 	values := url.Values{}
 	for k, v := range g.Context.Request.GetForm() {
@@ -116,4 +129,9 @@ func (g *dispCtx) File(name string) {
 
 func (g *dispCtx) GetFile(fileKey string) (string, io.ReadCloser, int64, error) {
 	return "", nil, 0, nil
+}
+
+//GetHTTPReqResp 获取http请求与响应对象
+func (g *dispCtx) GetHTTPReqResp() (*http.Request, http.ResponseWriter) {
+	return nil, nil
 }

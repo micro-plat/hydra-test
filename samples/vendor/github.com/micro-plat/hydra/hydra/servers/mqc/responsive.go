@@ -83,18 +83,20 @@ func (w *Responsive) Notify(c app.IAPPConf) (change bool, err error) {
 	}
 	if w.comparer.IsValueChanged() || w.comparer.IsSubConfChanged() {
 		w.log.Info("关键配置发生变化，准备重启服务器")
+		server, err := w.getServer(c)
+		if err != nil {
+			return false, err
+		}
+
 		w.Shutdown()
 		w.conf = c
-
 		app.Cache.Save(c)
 		if !c.GetServerConf().IsStarted() {
 			w.log.Info("mqc服务被禁用，不用重启")
 			return true, nil
 		}
-		w.Server, err = w.getServer(c)
-		if err != nil {
-			return false, err
-		}
+
+		w.Server = server
 		if err = w.Start(); err != nil {
 			return false, err
 		}
@@ -149,7 +151,6 @@ func (w *Responsive) getServer(cnf app.IAPPConf) (*Server, error) {
 	if err != nil {
 		return nil, fmt.Errorf("mqc服务器地址有误:%w", err)
 	}
-	// fmt.Println("proto:", proto)
 	queueObj, err := cnf.GetMQCQueueConf()
 	if err != nil {
 		return nil, fmt.Errorf("mqc服务器监听队列配置有误:%w", err)

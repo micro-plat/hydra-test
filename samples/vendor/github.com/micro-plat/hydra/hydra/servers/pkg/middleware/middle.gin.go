@@ -12,7 +12,8 @@ import (
 
 type ginCtx struct {
 	*gin.Context
-	once sync.Once
+	once    sync.Once
+	service string
 }
 
 func NewGinCtx(c *gin.Context) *ginCtx {
@@ -37,6 +38,13 @@ func (g *ginCtx) GetRouterPath() string {
 
 	return g.Context.FullPath()
 }
+
+func (g *ginCtx) GetService() string {
+	return g.service
+}
+func (g *ginCtx) Service(service string) {
+	g.service = service
+}
 func (g *ginCtx) GetBody() io.ReadCloser {
 	g.load()
 	return g.Request.Body
@@ -54,7 +62,22 @@ func (g *ginCtx) GetHeaders() http.Header {
 func (g *ginCtx) GetCookies() []*http.Cookie {
 	return g.Request.Cookies()
 }
+func (g *ginCtx) Find(path string) bool {
+	return true
 
+}
+func (g *ginCtx) Next() {
+	g.Context.Next()
+
+}
+func (g *ginCtx) GetRawForm() map[string]interface{} {
+	g.load()
+	fm := make(map[string]interface{})
+	for k, v := range g.Request.PostForm {
+		fm[k] = v
+	}
+	return fm
+}
 func (g *ginCtx) GetPostForm() url.Values {
 	g.load()
 	return g.Request.PostForm
@@ -89,4 +112,9 @@ func (g *ginCtx) GetFile(fileKey string) (string, io.ReadCloser, int64, error) {
 		return "", nil, 0, err
 	}
 	return header.Filename, f, header.Size, nil
+}
+
+//GetHTTPReqResp 获取GetHttpReqResp请求与响应对象
+func (g *ginCtx) GetHTTPReqResp() (*http.Request, http.ResponseWriter) {
+	return g.Request, g.Writer
 }
