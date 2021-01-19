@@ -4,7 +4,8 @@ import (
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra/components"
 	"github.com/micro-plat/hydra/conf/server/queue"
-	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
+	//"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
+	//"github.com/micro-plat/hydra/conf/vars/queue/lmq"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 	"github.com/micro-plat/hydra/hydra/servers/mqc"
 )
@@ -13,15 +14,18 @@ var app = hydra.NewApp(
 	hydra.WithServerTypes(http.API, mqc.MQC),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("mqcserver"),
-	hydra.WithClusterName("taosytest"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+	hydra.WithClusterName("test"),
+	//hydra.WithRegistry("zk://192.168.0.101"),
 )
 
 func init() {
-	hydra.Conf.API(":8072")
-	hydra.Conf.MQC("redis://redis").Queue(queue.NewQueue("mqcserver:queue2", "/hydratest/mqcserver/queue2"))
-	hydra.Conf.Vars().Redis("redis", "192.168.5.79:6379")
-	hydra.Conf.Vars().Queue().Redis("redis", "", queueredis.WithConfigName("redis"))
+	hydra.Conf.API("8072")
+	hydra.Conf.MQC("redis://queuename").Queue(queue.NewQueue("mqcserver:queue2", "/hydratest/mqcserver/queue2"))
+	//hydra.Conf.Vars().Redis("redis", )
+	hydra.Conf.Vars().Queue().Redis("queuename", "192.168.5.79:6379")
+	//hydra.Conf.MQC(lmq.MQ)
+	//hydra.Conf.Vars().Queue().LMQ("queuename")
+
 	app.API("/hydratest/mqcserver/:queue", funcAPI)
 	app.MQC("/hydratest/mqcserver/queue1", funcMQC1, "mqcserver:queue1")
 	app.MQC("/hydratest/mqcserver/queue2", funcMQC2)
@@ -70,7 +74,7 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("没有[%s]监听的队列", p.GetString("queue"))
 		return
 	}
-	queueObj := components.Def.Queue().GetRegularQueue("redis")
+	queueObj := components.Def.Queue().GetRegularQueue("queuename")
 	if err := queueObj.Send(queue, value); err != nil {
 		ctx.Log().Errorf("发送消息队列异常：%s", queue)
 		return
