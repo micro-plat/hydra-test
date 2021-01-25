@@ -103,7 +103,7 @@ func Test_response_Write_Nil(t *testing.T) {
 	for _, tt := range tests {
 		contx := &mocks.TestContxt{HttpHeader: tt.header}
 
-		log := logger.GetSession(serverConf.GetServerConf().GetServerName(), ctx.NewUser(contx, "", meta).GetRequestID())
+		log := logger.GetSession(serverConf.GetServerConf().GetServerName(), ctx.NewUser(contx, meta).GetTraceID())
 
 		//构建response对象
 		c := ctx.NewResponse(contx, serverConf, log, meta)
