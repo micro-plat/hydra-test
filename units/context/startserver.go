@@ -60,10 +60,7 @@ func startServer() {
 }
 
 func GetBodyMap(ctx hydra.IContext) interface{} {
-	raw, err := ctx.Request().GetMap()
-	if err != nil {
-		return fmt.Errorf("getBody出错")
-	}
+	raw := ctx.Request().GetMap()
 	header := ctx.Request().Headers().GetString("Content-Type")
 	ctx.Response().Header("Content-Type", header)
 	return raw

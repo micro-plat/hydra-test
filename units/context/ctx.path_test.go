@@ -11,7 +11,6 @@ import (
 	"github.com/micro-plat/hydra/conf/server/queue"
 	"github.com/micro-plat/hydra/conf/server/router"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
-	varredis "github.com/micro-plat/hydra/conf/vars/redis"
 	"github.com/micro-plat/hydra/context"
 	"github.com/micro-plat/hydra/context/ctx"
 	"github.com/micro-plat/lib4go/assert"
@@ -43,15 +42,15 @@ func Test_rpath_GetRouter_WithPanic(t *testing.T) {
 
 	for _, tt := range tests {
 		c := ctx.NewRpath(tt.ctx, tt.serverConf, tt.meta)
-		assert.PanicError(t, tt.wantError, func() { c.GetRouter() }, tt.name)
+		assert.PanicsWithErrorf(t, tt.wantError, func() { c.GetRouter() }, tt.name)
 	}
 }
 
 func Test_rpath_GetRouter(t *testing.T) {
 	confObj := mocks.NewConf() //构建对象
 	confObj.API(":8080")
-	confObj.Vars().Redis("5.79", varredis.New([]string{"192.168.5.79:6379"}))
-	confObj.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
+	confObj.Vars().Redis("5.79", "192.168.5.79:6379")
+	confObj.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	confObj.MQC("redis://xxx").Queue(queue.NewQueue("queue1", "/service1")).Queue(queue.NewQueue("queue2", "/service2"))
 	confObj.CRON(c.WithMasterSlave(), c.WithTrace())
 	confObj.Service.API.Add("/api", "/api", []string{"GET"}, api.WithEncoding("utf-8"))
@@ -89,8 +88,8 @@ func Test_rpath_GetRouter(t *testing.T) {
 func Test_rpath_GetEncoding(t *testing.T) {
 	confObj := mocks.NewConf() //构建对象
 	confObj.API(":8080")
-	confObj.Vars().Redis("5.79", varredis.New([]string{"192.168.5.79:6379"}))
-	confObj.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
+	confObj.Vars().Redis("5.79", "192.168.5.79:6379")
+	confObj.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	confObj.MQC("redis://xxx").Queue(queue.NewQueue("queue1", "/service1")).Queue(queue.NewQueue("queue2", "/service2"))
 	confObj.CRON(c.WithMasterSlave(), c.WithTrace())
 	confObj.Service.API.Add("/api", "/api", []string{"GET"}, api.WithEncoding("utf-8"))

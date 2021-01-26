@@ -13,15 +13,15 @@ import (
 )
 
 func Test_user_GetRequestID(t *testing.T) {
-	c := ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta())
-	got1 := c.GetRequestID()
+	c := ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta())
+	got1 := c.GetTraceID()
 	assert.Equal(t, 9, len(got1), "X-Request-Id不存在,requestID不存在,通过uuid生成requestID")
 
-	got2 := c.GetRequestID()
+	got2 := c.GetTraceID()
 	assert.Equal(t, got1, got2, "获取存在的requestID")
 
-	c1 := ctx.NewUser(&mocks.TestContxt{HttpHeader: http.Header{"X-Request-Id": []string{"123456"}}}, "", conf.NewMeta())
-	got := c1.GetRequestID()
+	c1 := ctx.NewUser(&mocks.TestContxt{HttpHeader: http.Header{"X-Request-Id": []string{"123456"}}}, conf.NewMeta())
+	got := c1.GetTraceID()
 	assert.Equal(t, "123456", got, "通过X-Request-Id获取requestID")
 }
 
@@ -36,7 +36,7 @@ func Test_user_GetClientIP(t *testing.T) {
 		{name: "3.上下文中ip非本地ip", ctx: &mocks.TestContxt{ClientIp: "192.168.9.99"}, want: "192.168.9.99"},
 	}
 	for _, tt := range tests {
-		c := ctx.NewUser(tt.ctx, "", conf.NewMeta())
+		c := ctx.NewUser(tt.ctx, conf.NewMeta())
 		got := c.GetClientIP()
 		assert.Equal(t, tt.want, got, tt.name)
 	}
