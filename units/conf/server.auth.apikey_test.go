@@ -68,7 +68,7 @@ func TestAPIKeyAuth_Verify(t *testing.T) {
 	}
 	for _, tt := range tests {
 		a := &apikey.APIKeyAuth{Mode: tt.mode, Secret: tt.secret}
-		err := a.Verify(tt.args.raw, tt.args.sign)
+		err := a.Verify(tt.args.raw, tt.args.sign, nil)
 		assert.Equal(t, tt.wantErr, (err != nil), tt.name)
 		if tt.wantErr {
 			assert.Equal(t, tt.wantErrStr, err.Error()[:len(tt.wantErrStr)], tt.name)

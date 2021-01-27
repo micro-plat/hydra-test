@@ -23,21 +23,21 @@ func TestWhitelistNew(t *testing.T) {
 		allowReq  string
 		wantallow bool
 	}{
-		{name: "1. Conf-WhitelistNew-初始化默认白名单配置", opts: []whitelist.Option{}, want: &whitelist.WhiteList{IPS: make([]*whitelist.IPList, 0, 1)}, allowIP: "192.168.0.101", allowReq: "/t1/t2/t3", wantallow: true},
-		{name: "2. Conf-WhitelistNew-初始化Disable白名单配置", opts: []whitelist.Option{whitelist.WithDisable()}, want: &whitelist.WhiteList{IPS: make([]*whitelist.IPList, 0, 1), Disable: true}, allowIP: "192.168.0.101", allowReq: "/t1/t2/t3", wantallow: true},
-		{name: "3. Conf-WhitelistNew-初始化Enable白名单配置", opts: []whitelist.Option{whitelist.WithEnable()}, want: &whitelist.WhiteList{IPS: make([]*whitelist.IPList, 0, 1), Disable: false}, allowIP: "192.168.0.101", allowReq: "/t1/t2/t3", wantallow: true},
-		{name: "4. Conf-WhitelistNew-初始化自定义ip白名单配置", opts: []whitelist.Option{whitelist.WithIPList(whitelist.NewIPList([]string{"/t1/t2/*"}, []string{"192.168.0.101"}...))}, want: &whitelist.WhiteList{IPS: []*whitelist.IPList{&whitelist.IPList{Requests: []string{"/t1/t2/*"}, IPS: []string{"192.168.0.101"}}}}, allowIP: "192.168.0.101", allowReq: "/t1/t2/t3", wantallow: true},
+		{name: "1. Conf-WhitelistNew-初始化默认白名单配置", opts: []whitelist.Option{}, want: &whitelist.WhiteList{WhiteList: make([]*whitelist.IPList, 0, 1)}, allowIP: "192.168.0.101", allowReq: "/t1/t2/t3", wantallow: true},
+		{name: "2. Conf-WhitelistNew-初始化Disable白名单配置", opts: []whitelist.Option{whitelist.WithDisable()}, want: &whitelist.WhiteList{WhiteList: make([]*whitelist.IPList, 0, 1), Disable: true}, allowIP: "192.168.0.101", allowReq: "/t1/t2/t3", wantallow: true},
+		{name: "3. Conf-WhitelistNew-初始化Enable白名单配置", opts: []whitelist.Option{whitelist.WithEnable()}, want: &whitelist.WhiteList{WhiteList: make([]*whitelist.IPList, 0, 1), Disable: false}, allowIP: "192.168.0.101", allowReq: "/t1/t2/t3", wantallow: true},
+		{name: "4. Conf-WhitelistNew-初始化自定义ip白名单配置", opts: []whitelist.Option{whitelist.WithIPList(whitelist.NewIPList([]string{"/t1/t2/*"}, []string{"192.168.0.101"}...))}, want: &whitelist.WhiteList{WhiteList: []*whitelist.IPList{&whitelist.IPList{Requests: []string{"/t1/t2/*"}, IPS: []string{"192.168.0.101"}}}}, allowIP: "192.168.0.101", allowReq: "/t1/t2/t3", wantallow: true},
 	}
 	for _, tt := range tests {
 		got := whitelist.New(tt.opts...)
 		assert.Equal(t, tt.want.Disable, got.Disable, tt.name+",disable")
 
 		//比对白名单对象长度
-		assert.Equal(t, len(tt.want.IPS), len(got.IPS), tt.name+",ips len")
+		assert.Equal(t, len(tt.want.WhiteList), len(got.WhiteList), tt.name+",ips len")
 
-		for i, item := range got.IPS {
-			assert.Equal(t, tt.want.IPS[i].IPS, item.IPS, tt.name+",ips ips")
-			assert.Equal(t, tt.want.IPS[i].Requests, item.Requests, tt.name+",ips request")
+		for i, item := range got.WhiteList {
+			assert.Equal(t, tt.want.WhiteList[i].IPS, item.IPS, tt.name+",ips ips")
+			assert.Equal(t, tt.want.WhiteList[i].Requests, item.Requests, tt.name+",ips request")
 		}
 
 		//测试私有匹配参数是否成功赋值
@@ -85,7 +85,7 @@ func TestWhiteListGetConf(t *testing.T) {
 		}
 		obj, err := whitelist.GetConf(conf.GetAPIConf().GetServerConf())
 		assert.Equal(t, nil, err, tt.name+",err")
-		assert.Equal(t, len(tt.want.IPS), len(obj.IPS), tt.name)
+		assert.Equal(t, len(tt.want.WhiteList), len(obj.WhiteList), tt.name)
 
 	}
 }

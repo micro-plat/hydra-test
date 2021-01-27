@@ -55,7 +55,7 @@ func TestBasicAuth_Verify(t *testing.T) {
 		{name: "3. Conf-BasicVerify-数据认证通过", fields: basic.NewBasic(basic.WithUP("t1", "123")), args: createAuth("t1", "123"), want: "t1", want1: true},
 	}
 	for _, tt := range tests {
-		got, got1 := tt.fields.Verify(tt.args)
+		got, got1 := tt.fields.Verify(tt.args, nil)
 		assert.Equal(t, tt.want, got, tt.name+",username")
 		assert.Equal(t, tt.want1, got1, tt.name+",bool")
 	}

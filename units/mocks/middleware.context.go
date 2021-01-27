@@ -38,6 +38,10 @@ func (ctx *MiddleContext) Next() {
 	}
 }
 
+func (ctx *MiddleContext) Invoke(service string) interface{} {
+	return nil
+}
+
 func (ctx *MiddleContext) Meta() conf.IMeta {
 	return ctx.MockMeta
 }
