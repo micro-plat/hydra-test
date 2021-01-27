@@ -50,9 +50,9 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 		return
 	}
 	ctx.Log().Info("respones.IsSuccess():", respones.IsSuccess())
-	ctx.Log().Info("respones.Status:", respones.Status)
-	ctx.Log().Info("respones.GetResult():", respones.Result)
-	ctx.Response().Abort(respones.Status, respones.Result)
+	ctx.Log().Info("respones.GetStatus():", respones.GetStatus())
+	ctx.Log().Info("respones.GetResult():", respones.GetResult())
+	ctx.Response().Abort(respones.GetStatus(), respones.GetResult())
 	return
 }
 
@@ -77,9 +77,9 @@ var funcAPI1 = func(ctx hydra.IContext) (r interface{}) {
 		return
 	}
 	ctx.Log().Info("respones.IsSuccess():", respones.IsSuccess())
-	ctx.Log().Info("respones.Status:", respones.Status)
-	ctx.Log().Info("respones.GetResult():", respones.Result)
-	return respones.Result
+	ctx.Log().Info("respones.GetStatus():", respones.GetStatus())
+	ctx.Log().Info("respones.GetResult():", respones.GetResult())
+	return respones.GetResult()
 }
 
 var funcRPC1 = func(ctx hydra.IContext) (r interface{}) {

@@ -35,12 +35,12 @@ func init() {
 	app.API("/api/request", rpcRequest)
 
 	app.API("/api/remoterpc", "rpc:///rpc/localrpc@hydratest")
-	rpcSrv:=fmt.Sprintf("rpc:///rpc/localrpc@%s:50009", localIP)
-	
- 	app.API("/api/remoterpcip", rpcSrv) 
+	rpcSrv := fmt.Sprintf("rpc:///rpc/localrpc@%s:50009", localIP)
+
+	app.API("/api/remoterpcip", rpcSrv)
 	app.RPC("/rpc/localrpc", func(ctx hydra.IContext) (r interface{}) {
-		ctx.Log().Info("/rpc/localrpc:RequestID:", ctx.User().GetRequestID(), ctx.Request().GetString("name"))
-		return ctx.User().GetRequestID()
+		ctx.Log().Info("/rpc/localrpc:RequestID:", ctx.User().GetTraceID(), ctx.Request().GetString("name"))
+		return ctx.User().GetTraceID()
 	})
 
 }
@@ -57,7 +57,7 @@ func main() {
 }
 
 var rpcRequestByCtx = func(ctx hydra.IContext) (r interface{}) {
-	requestID := ctx.User().GetRequestID()
+	requestID := ctx.User().GetTraceID()
 	data := map[string]interface{}{
 		"name": "RequestByCtx",
 	}
@@ -66,7 +66,7 @@ var rpcRequestByCtx = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Error("GetRPC:", err)
 		return
 	}
-	res, err := request.RequestByCtx(ctx.Context(), "/rpc/localrpc@hydratest", data, crpc.WithXRequestID(requestID))
+	res, err := request.RequestByCtx(ctx.Context(), "/rpc/localrpc@hydratest", data, crpc.WithTraceID(requestID))
 	if err != nil {
 		ctx.Log().Error("RequestByCtx:", err)
 		return
@@ -74,7 +74,7 @@ var rpcRequestByCtx = func(ctx hydra.IContext) (r interface{}) {
 
 	return map[string]interface{}{
 		"api": requestID,
-		"rpc": res.Result,
+		"rpc": res.GetResult(),
 	}
 }
 
@@ -92,13 +92,13 @@ var rpcSwap = func(ctx hydra.IContext) (r interface{}) {
 	}
 
 	return map[string]interface{}{
-		"api": ctx.User().GetRequestID(),
-		"rpc": res2.Result,
+		"api": ctx.User().GetTraceID(),
+		"rpc": res2.GetResult(),
 	}
 }
 
 var rpcRequest = func(ctx hydra.IContext) (r interface{}) {
-	requestID := ctx.User().GetRequestID()
+	requestID := ctx.User().GetTraceID()
 	data := map[string]interface{}{
 		"name": "Request",
 	}
@@ -108,14 +108,14 @@ var rpcRequest = func(ctx hydra.IContext) (r interface{}) {
 		return
 	}
 
-	res3, err := request.Request("/rpc/localrpc@hydratest", data, crpc.WithXRequestID(requestID))
+	res3, err := request.Request("/rpc/localrpc@hydratest", data, crpc.WithTraceID(requestID))
 	if err != nil {
 		ctx.Log().Error("Swap:", err)
 		return
 	}
 
 	return map[string]interface{}{
-		"api": ctx.User().GetRequestID(),
-		"rpc": res3.Result,
+		"api": ctx.User().GetTraceID(),
+		"rpc": res3.GetResult(),
 	}
 }

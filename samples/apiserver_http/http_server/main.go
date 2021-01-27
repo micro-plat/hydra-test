@@ -19,7 +19,7 @@ func init() {
 	hydra.Conf.API(":8099")
 	app.API("/api", func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Info("log_session_id:", ctx.Log().GetSessionID())
-		ctx.Log().Info("api_user_id:", ctx.User().GetRequestID())
+		ctx.Log().Info("api_user_id:", ctx.User().GetTraceID())
 
 		bytes, err := ctx.Request().GetBody()
 		if err != nil {

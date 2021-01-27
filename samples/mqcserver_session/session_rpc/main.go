@@ -40,8 +40,8 @@ func init() {
 			ctx.Log().Errorf("rpc 请求异常：%v", err)
 			return
 		}
-		ctx.Log().Info("respones.Status:", respones.Status)
-		return respones.Result
+		ctx.Log().Info("respones.Status:", respones.GetStatus())
+		return respones.GetResult()
 	})
 
 }

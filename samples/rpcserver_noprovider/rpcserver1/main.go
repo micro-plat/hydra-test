@@ -22,7 +22,7 @@ var app = hydra.NewApp(
 	hydra.WithRegistry("lm://."),
 )
 
-type RpcCallMethod func(rpcs.IRequest, hydra.IContext, string, string) (string, error)
+type RpcCallMethod func(rpcs.IRequest, hydra.IContext, string, string) (interface{}, error)
 
 var callmethods = map[string]RpcCallMethod{}
 
@@ -76,7 +76,7 @@ func handleCallback(addr string, requestMethod string) func(hydra.IContext) inte
 			ctx.Log().Error("GetRPC:", err)
 			return
 		}
-		requestID := ctx.User().GetRequestID()
+		requestID := ctx.User().GetTraceID()
 		result, err := callmethod(request, ctx, addr, requestID)
 		if err != nil {
 			ctx.Log().Errorf("%s:%v", requestMethod, err)
@@ -102,33 +102,33 @@ func main() {
 	app.Start()
 }
 
-func requestbyctx(rpcReq rpcs.IRequest, ctx hydra.IContext, addr, requestID string) (result string, err error) {
+func requestbyctx(rpcReq rpcs.IRequest, ctx hydra.IContext, addr, requestID string) (result interface{}, err error) {
 
 	data := map[string]interface{}{}
-	res, err := rpcReq.RequestByCtx(ctx.Context(), addr, data, crpc.WithXRequestID(requestID))
+	res, err := rpcReq.RequestByCtx(ctx.Context(), addr, data, crpc.WithTraceID(requestID))
 	if err != nil {
 		return
 	}
-	result = res.Result
+	result = res.GetResult()
 	return
 }
 
-func request(rpcReq rpcs.IRequest, ctx hydra.IContext, addr, requestID string) (result string, err error) {
+func request(rpcReq rpcs.IRequest, ctx hydra.IContext, addr, requestID string) (result interface{}, err error) {
 	data := map[string]interface{}{}
-	res, err := rpcReq.Request(addr, data, crpc.WithXRequestID(requestID))
+	res, err := rpcReq.Request(addr, data, crpc.WithTraceID(requestID))
 	if err != nil {
 		return
 	}
-	result = res.Result
+	result = res.GetResult()
 	return
 }
 
-func swap(rpcReq rpcs.IRequest, ctx hydra.IContext, addr, requestID string) (result string, err error) {
+func swap(rpcReq rpcs.IRequest, ctx hydra.IContext, addr, requestID string) (result interface{}, err error) {
 	res, err := rpcReq.Swap(addr, ctx)
 	if err != nil {
 		return
 	}
-	result = res.Result
+	result = res.GetResult()
 	return
 }
 

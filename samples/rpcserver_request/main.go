@@ -104,11 +104,11 @@ var apiMapStruct = func(ctx hydra.IContext) (r interface{}) {
 
 var apiRequest = func(ctx hydra.IContext) (r interface{}) {
 	dataType := ctx.Request().Path().Params().GetString("datatype")
-	requestID := ctx.User().GetRequestID()
+	requestID := ctx.User().GetTraceID()
 	ctx.Log().Infof("DataType:%s", dataType)
 
 	opts := []componentrpc.RequestOption{}
-	opts = append(opts, componentrpc.WithXRequestID(requestID))
+	opts = append(opts, componentrpc.WithTraceID(requestID))
 
 	var input = map[string]interface{}{
 		"datatype": dataType,
@@ -119,8 +119,8 @@ var apiRequest = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("rpc 请求异常：%v", err)
 		return
 	}
-	ctx.Log().Info("respones.Status:", respones.Status)
-	return respones.Result
+	ctx.Log().Info("respones.Status:", respones.GetStatus())
+	return respones.GetResult()
 }
 
 var apiBind = func(ctx hydra.IContext) (r interface{}) {
@@ -150,8 +150,8 @@ var apiBind = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Errorf("rpc 请求异常：%v", err)
 		return
 	}
-	ctx.Log().Info("respones.Status:", respones.Status)
-	return respones.Result
+	ctx.Log().Info("respones.Status:", respones.GetStatus())
+	return respones.GetResult()
 }
 
 var rpcProc = func(ctx hydra.IContext) (r interface{}) {
