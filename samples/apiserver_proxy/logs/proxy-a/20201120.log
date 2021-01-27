@@ -1,0 +1,30 @@
+
+--------------------begin------------------------
+
+[2020/11/20 15:15:36.324788][i][42d45025d] Connected to 192.168.0.109:2181
+[2020/11/20 15:15:36.334846][i][42d45025d] authenticated: id=248410042754598630, timeout=4000
+[2020/11/20 15:15:36.334869][i][42d45025d] re-submitting `0` credentials after reconnect
+[2020/11/20 15:15:36.375167][i][4dc55c165] 初始化: /hydra-t/apiserver/api/proxy-a/conf
+[2020/11/20 15:15:36.432407][i][4dc55c165] 启动[api]服务...
+[2020/11/20 15:15:36.968004][i][5f83ab89e] 启动成功(api,http://192.168.4.121:8090,[1])
+[2020/11/20 15:16:06.287212][i][42d45025d] proxy-a 正在退出...
+[2020/11/20 15:16:06.287268][i][5f83ab89e] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/20 15:16:25.865933][i][964f2ceec] 初始化: /hydra-t/apiserver/api/proxy-a/conf
+[2020/11/20 15:16:25.866762][e][964f2ceec] 获取/hydra-t/apiserver/api/proxy-a/conf配置发生错误:获取配置出错 /hydra-t/apiserver/api/proxy-a/conf/acl ./hydra-t/apiserver/api/proxy-a/conf/acl/.init不存在
+[2020/11/20 15:16:25.867179][e][964f2ceec] [Recovery] panic recovered:
+runtime error: invalid memory address or nil pointer dereference
+/usr/local/go/src/runtime/signal_unix.go:720 (0x44f952)
+	sigpanic: panicmem()
+/home/yanglei/work/src/github.com/micro-plat/hydra/conf/app/app.go:108 (0x97f45b)
+	(*APPConf).GetServerConf: return s.serverConf
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/rsp.servers.go:140 (0x97f45e)
+	(*RspServers).checkServer: srvr, ok := r.servers[conf.GetServerConf().GetServerType()]
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/rsp.servers.go:112 (0x97f277)
+	(*RspServers).loopRecvNotify: if err := r.checkServer(u.Path); err != nil {
+/usr/local/go/src/runtime/asm_amd64.s:1374 (0x471ea0)
+	goexit: BYTE	$0x90	// NOP
+
+[2020/11/20 15:16:26.866782][d][964f2ceec] 监听服务器配置...
