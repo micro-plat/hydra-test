@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 	"unsafe"
-
+	"encoding/json"
 	"github.com/shopspring/decimal"
 )
 
@@ -181,6 +181,14 @@ func MustInt(v interface{}) (int, bool) {
 		return value, true
 	}
 	return 0, false
+}
+
+//MustBool 获取bool值，不是有效bool值则返回false
+func MustBool(v interface{}) (bool, bool) {
+	if value, ok := v.(bool); ok {
+		return value, true
+	}
+	return false, false
 }
 
 //MustInt32 获取int32，不是有效的数字则返回false
@@ -403,4 +411,25 @@ func StringToBytes(s string) (b []byte) {
 // BytesToString converts byte slice to string without a memory allocation.
 func BytesToString(b []byte) string {
 	return *(*string)(unsafe.Pointer(&b))
+}
+
+//Split 拆分字符串，当输入字符串为空时返回结果为空
+func Split(s string, sep string) []string {
+	if len(s) == 0 {
+		return nil
+	}
+	return strings.Split(s, sep)
+}
+
+//Struct2Map 将struct 转换成map[string]interface{}
+func Struct2Map(i interface{}) (map[string]interface{}, error) {
+	buff, err := json.Marshal(i)
+	if err != nil {
+		return nil, err
+	}
+	out := make(map[string]interface{})
+	if err := json.Unmarshal(buff, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
 }

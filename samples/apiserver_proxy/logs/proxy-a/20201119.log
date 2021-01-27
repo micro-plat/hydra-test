@@ -1,0 +1,127 @@
+
+--------------------begin------------------------
+
+[2020/11/19 17:03:45.194044][i][9d20b65fe] Connected to 192.168.0.109:2181
+[2020/11/19 17:03:45.209897][i][9d20b65fe] authenticated: id=248410042754598591, timeout=4000
+[2020/11/19 17:03:45.209909][i][9d20b65fe] re-submitting `0` credentials after reconnect
+[2020/11/19 17:03:45.244233][i][d63266a9c] 初始化: /hydra-t/apiserver/api/proxy-a/conf
+[2020/11/19 17:03:45.266439][i][d63266a9c] 启动[api]服务...
+[2020/11/19 17:03:45.806086][i][5167cc402] 启动成功(api,http://192.168.4.121:8090,[1])
+[2020/11/19 17:03:55.166575][i][5427cb2d9] api.request: GET /request from 192.168.4.121
+[2020/11/19 17:03:55.168247][i][5427cb2d9] api.response: GET /request 200  1.670396ms
+
+--------------------begin------------------------
+
+[2020/11/19 17:13:07.305798][i][7efab3390] Connected to 192.168.0.109:2181
+[2020/11/19 17:13:07.319942][i][7efab3390] authenticated: id=248410042754598596, timeout=4000
+[2020/11/19 17:13:07.319955][i][7efab3390] re-submitting `0` credentials after reconnect
+[2020/11/19 17:13:07.356477][i][6e4422b0f] 初始化: /hydra-t/apiserver/api/proxy-a/conf
+[2020/11/19 17:13:07.382124][i][6e4422b0f] 启动[api]服务...
+[2020/11/19 17:13:07.948031][i][ff7a3bf19] 启动成功(api,http://192.168.4.121:8090,[1])
+[2020/11/19 17:13:47.254560][i][7cd4403d6] api.request: GET /request from 192.168.4.121
+[2020/11/19 17:13:47.256248][i][7cd4403d6] api.response: GET /request 200  1.688197ms
+[2020/11/19 17:14:08.711448][i][632875d1e] api.request: GET /request from 192.168.4.121
+[2020/11/19 17:14:08.711867][i][632875d1e] api.response: GET /request 200  423.244µs
+[2020/11/19 17:14:14.798582][i][229cb72d2] api.request: GET /request from 192.168.4.121
+[2020/11/19 17:14:14.799004][i][229cb72d2] api.response: GET /request 200  426.743µs
+[2020/11/19 17:14:15.422602][i][e61e8bec2] api.request: GET /request from 192.168.4.121
+[2020/11/19 17:14:15.422952][i][e61e8bec2] api.response: GET /request 200  351.424µs
+[2020/11/19 17:19:15.806849][i][7efab3390] proxy-a 正在退出...
+[2020/11/19 17:19:15.806863][i][ff7a3bf19] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/19 17:19:49.982416][i][762b83cce] Connected to 192.168.0.109:2181
+[2020/11/19 17:19:49.995948][i][762b83cce] authenticated: id=248410042754598600, timeout=4000
+[2020/11/19 17:19:49.995966][i][762b83cce] re-submitting `0` credentials after reconnect
+[2020/11/19 17:19:50.32251][i][af8e017fd] 初始化: /hydra-t/apiserver/api/proxy-a/conf
+[2020/11/19 17:19:50.61419][e][af8e017fd] 获取/hydra-t/apiserver/api/proxy-a/conf配置发生错误:/hydra-t/apiserver/api/proxy-a/conf/acl/proxy[	
+        request := import("request")
+        app := import("app")
+        text := import("text")
+        types :=import("types")
+        fmt := import("fmt")
+
+        getUpCluster := func(){
+            ip := request.getClientIP()
+            current:= app.getCurrentClusterName()
+            if text.has_prefix(ip,"192.168."){
+                return app.getClusterNameBy("a")
+            }
+            return current
+        }
+        upcluster := getUpCluster()
+		]配置有误:错误的数据格式（非json/xml)
+[2020/11/19 17:19:50.62439][e][af8e017fd] [Recovery] panic recovered:
+runtime error: invalid memory address or nil pointer dereference
+/usr/local/go/src/runtime/signal_unix.go:720 (0x44f952)
+	sigpanic: panicmem()
+/home/yanglei/work/src/github.com/micro-plat/hydra/conf/app/app.go:108 (0x97f4bb)
+	(*APPConf).GetServerConf: return s.serverConf
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/rsp.servers.go:140 (0x97f4be)
+	(*RspServers).checkServer: srvr, ok := r.servers[conf.GetServerConf().GetServerType()]
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/rsp.servers.go:112 (0x97f2d7)
+	(*RspServers).loopRecvNotify: if err := r.checkServer(u.Path); err != nil {
+/usr/local/go/src/runtime/asm_amd64.s:1374 (0x471ea0)
+	goexit: BYTE	$0x90	// NOP
+
+[2020/11/19 17:19:51.33106][d][af8e017fd] 监听服务器配置...
+
+--------------------begin------------------------
+
+[2020/11/19 17:27:46.482502][i][b548cd5db] Connected to 192.168.0.109:2181
+[2020/11/19 17:27:46.494937][i][b548cd5db] authenticated: id=248410042754598603, timeout=4000
+[2020/11/19 17:27:46.494955][i][b548cd5db] re-submitting `0` credentials after reconnect
+[2020/11/19 17:27:46.530903][i][1ed17c17f] 初始化: /hydra-t/apiserver/api/proxy-a/conf
+[2020/11/19 17:27:46.551574][i][1ed17c17f] 启动[api]服务...
+[2020/11/19 17:27:47.89209][i][1afb29a5d] 启动成功(api,http://192.168.4.121:8090,[1])
+[2020/11/19 17:27:52.929486][i][cff78d48c] api.request: GET /request from 192.168.4.121
+[2020/11/19 17:27:52.931073][i][cff78d48c] api.response: GET /request 200  1.592492ms
+
+--------------------begin------------------------
+
+[2020/11/19 17:33:45.726575][i][b145924ee] Connected to 192.168.0.109:2181
+[2020/11/19 17:33:45.738746][i][b145924ee] authenticated: id=248410042754598607, timeout=4000
+[2020/11/19 17:33:45.738755][i][b145924ee] re-submitting `0` credentials after reconnect
+[2020/11/19 17:33:45.777607][i][bc29b0bfc] 初始化: /hydra-t/apiserver/api/proxy-a/conf
+[2020/11/19 17:33:45.801600][i][bc29b0bfc] 启动[api]服务...
+[2020/11/19 17:33:46.340143][i][aa3b3a418] 启动成功(api,http://192.168.4.121:8090,[1])
+[2020/11/19 17:34:04.938848][i][0bd054f50] api.request: GET /request from 192.168.4.121
+[2020/11/19 17:34:04.941846][i][0bd054f50] api.response: GET /request 200  3.003458ms
+[2020/11/19 17:34:05.50976][d][bc29b0bfc] 配置发生变化/hydra-t/apiserver/api/proxy-a/conf
+[2020/11/19 17:34:05.50984][d][bc29b0bfc] 服务配置未发生变化
+
+--------------------begin------------------------
+
+[2020/11/19 17:34:04.319289][i][07ccd65ad] Connected to 192.168.0.109:2181
+[2020/11/19 17:34:04.332028][i][07ccd65ad] authenticated: id=248410042754598611, timeout=4000
+[2020/11/19 17:34:04.332035][i][07ccd65ad] re-submitting `0` credentials after reconnect
+[2020/11/19 17:34:04.370384][i][6622fc251] 初始化: /hydra-t/apiserver/api/proxy-a/conf
+[2020/11/19 17:34:04.395109][i][6622fc251] 启动[api]服务...
+[2020/11/19 17:34:04.395271][e][6622fc251] [api]服务器启动失败:api启动失败 listen tcp 0.0.0.0:8090: bind: address already in use
+[2020/11/19 17:34:05.371235][d][6622fc251] 监听服务器配置...
+[2020/11/19 17:34:13.996457][i][a23762d15] api.request: GET /request from 192.168.4.121
+[2020/11/19 17:34:13.996699][i][a23762d15] api.response: GET /request 200  244.661µs
+[2020/11/19 17:34:14.767069][d][bc29b0bfc] 配置发生变化/hydra-t/apiserver/api/proxy-a/conf
+[2020/11/19 17:34:14.767086][d][bc29b0bfc] 服务配置未发生变化
+[2020/11/19 17:34:14.766096][i][6622fc251] 启动[api]服务...
+[2020/11/19 17:34:14.766281][e][6622fc251] [api]服务器启动失败:api启动失败 listen tcp 0.0.0.0:8090: bind: address already in use
+
+--------------------begin------------------------
+
+[2020/11/19 17:34:14.6145][i][b2253b332] Connected to 192.168.0.109:2181
+[2020/11/19 17:34:14.21484][i][b2253b332] authenticated: id=248410042754598616, timeout=4000
+[2020/11/19 17:34:14.21494][i][b2253b332] re-submitting `0` credentials after reconnect
+[2020/11/19 17:34:14.55251][i][f4e46542f] 初始化: /hydra-t/apiserver/api/proxy-a/conf
+[2020/11/19 17:34:14.77618][i][f4e46542f] 启动[api]服务...
+[2020/11/19 17:34:14.77920][e][f4e46542f] [api]服务器启动失败:api启动失败 listen tcp 0.0.0.0:8090: bind: address already in use
+[2020/11/19 17:34:15.56103][d][f4e46542f] 监听服务器配置...
+
+--------------------begin------------------------
+
+[2020/11/19 17:37:13.841171][i][4f8d2e515] Connected to 192.168.0.109:2181
+[2020/11/19 17:37:13.862484][i][4f8d2e515] authenticated: id=248410042754598618, timeout=4000
+[2020/11/19 17:37:13.862489][i][4f8d2e515] re-submitting `0` credentials after reconnect
+[2020/11/19 17:37:13.891572][i][16d486b65] 初始化: /hydra-t/apiserver/api/proxy-a/conf
+[2020/11/19 17:37:13.916526][i][16d486b65] 启动[api]服务...
+[2020/11/19 17:37:14.452269][i][341ed8413] 启动成功(api,http://192.168.4.121:8090,[1])

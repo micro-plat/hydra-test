@@ -1,0 +1,57 @@
+
+--------------------begin------------------------
+
+[2020/12/03 11:07:29.308642][i][79f883cbf] Connected to 192.168.0.101:2181
+[2020/12/03 11:07:29.324202][i][79f883cbf] authenticated: id=105065945976700515, timeout=4000
+[2020/12/03 11:07:29.324211][i][79f883cbf] re-submitting `0` credentials after reconnect
+[2020/12/03 11:07:29.358509][i][2dee8e01a] 初始化: /hydratest/apiserver_option/api-web/test/conf
+[2020/12/03 11:07:29.379639][i][2dee8e01a] 启动[api]服务...
+[2020/12/03 11:07:29.907323][i][b0635b083] 启动成功(api,http://192.168.4.121:50013,[1])
+[2020/12/03 11:07:29.923310][i][2dee8e01a] 启动[web]服务...
+[2020/12/03 11:07:30.448325][i][f24fd82f3] 启动成功(web,http://192.168.4.121:50014,[1])
+[2020/12/03 11:08:08.903231][i][914a1fa51] api.request: GET / from 192.168.4.121
+[2020/12/03 11:08:08.903296][e][914a1fa51] api.response: GET / 0 hdr 65.326µs
+[2020/12/03 11:08:09.159826][i][804c92d45] api.request: GET /favicon.ico from 192.168.4.121
+[2020/12/03 11:08:09.159847][e][804c92d45] api.response: GET /favicon.ico 0 hdr 22.618µs
+[2020/12/03 11:08:13.709417][i][2e871e741] api.request: GET / from 192.168.4.121
+[2020/12/03 11:08:13.709439][e][2e871e741] api.response: GET / 0 hdr 33.468µs
+[2020/12/03 11:08:25.86939][i][ba4912441] web.request: GET / from 192.168.4.121
+[2020/12/03 11:08:25.313734][i][ba4912441] web.response: GET / 200 static 226.792756ms
+[2020/12/03 11:08:25.318838][i][9942b5b74] web.request: GET /css/app.d40fc157.css from 192.168.4.121
+[2020/12/03 11:08:25.318916][i][9942b5b74] web.response: GET /css/app.d40fc157.css 200 static 79.811µs
+[2020/12/03 11:08:25.319440][i][f014953ae] web.request: GET /js/app.423c5e7b.js from 192.168.4.121
+[2020/12/03 11:08:25.319534][i][c9416c83e] web.request: GET /js/chunk-vendors.c51c2ddd.js from 192.168.4.121
+[2020/12/03 11:08:25.319551][i][f014953ae] web.response: GET /js/app.423c5e7b.js 200 static 110.824µs
+[2020/12/03 11:08:25.319691][i][c9416c83e] web.response: GET /js/chunk-vendors.c51c2ddd.js 200 static 156.933µs
+[2020/12/03 11:08:25.503837][i][6bbe6ecf1] web.request: GET /js/chunk-vendors.c51c2ddd.js.map from 192.168.4.121
+[2020/12/03 11:08:25.504109][i][6bbe6ecf1] web.response: GET /js/chunk-vendors.c51c2ddd.js.map 200 static 275.921µs
+[2020/12/03 11:08:25.504886][i][72697213d] web.request: GET /js/app.423c5e7b.js.map from 192.168.4.121
+[2020/12/03 11:08:25.505003][i][72697213d] web.response: GET /js/app.423c5e7b.js.map 200 static 118.523µs
+[2020/12/03 11:08:25.506430][i][92837fc18] web.request: GET /vue/config from 192.168.4.121
+[2020/12/03 11:08:25.506516][i][92837fc18] web.response: GET /vue/config 200  88.349µs
+[2020/12/03 11:08:25.520083][i][61ce5e6a2] web.request: GET /favicon.ico from 192.168.4.121
+[2020/12/03 11:08:25.520210][i][61ce5e6a2] web.response: GET /favicon.ico 200 static 127.898µs
+[2020/12/03 11:08:25.525404][i][dd3348cfa] web.request: GET /vue/config from 192.168.4.121
+[2020/12/03 11:08:25.525474][i][dd3348cfa] web.response: GET /vue/config 200  71.56µs
+[2020/12/03 11:08:48.71095][i][a92423a90] web.request: GET / from 192.168.4.121
+[2020/12/03 11:08:48.71151][i][a92423a90] web.response: GET / 200 static 57.967µs
+[2020/12/03 11:08:48.79446][i][10b578578] web.request: GET /js/app.423c5e7b.js from 192.168.4.121
+[2020/12/03 11:08:48.79522][i][10b578578] web.response: GET /js/app.423c5e7b.js 200 static 78.287µs
+[2020/12/03 11:08:48.80505][i][4b9795be2] web.request: GET /js/chunk-vendors.c51c2ddd.js from 192.168.4.121
+[2020/12/03 11:08:48.80573][i][4b9795be2] web.response: GET /js/chunk-vendors.c51c2ddd.js 200 static 69.915µs
+[2020/12/03 11:08:48.94635][i][f77b763ba] web.request: GET /css/app.d40fc157.css from 192.168.4.121
+[2020/12/03 11:08:48.94689][i][f77b763ba] web.response: GET /css/app.d40fc157.css 200 static 56.161µs
+[2020/12/03 11:08:48.151120][i][3afc0935b] web.request: GET /js/chunk-vendors.c51c2ddd.js.map from 192.168.4.121
+[2020/12/03 11:08:48.151170][i][3afc0935b] web.response: GET /js/chunk-vendors.c51c2ddd.js.map 200 static 52.503µs
+[2020/12/03 11:08:48.154098][i][9d580bfed] web.request: GET /vue/config from 192.168.4.121
+[2020/12/03 11:08:48.154182][i][9d580bfed] web.response: GET /vue/config 200  86.296µs
+[2020/12/03 11:08:48.157084][i][770b3ace2] web.request: GET /vue/config from 192.168.4.121
+[2020/12/03 11:08:48.157149][i][770b3ace2] web.response: GET /vue/config 200  67.277µs
+[2020/12/03 11:08:48.160684][i][b13ee6314] web.request: GET /js/app.423c5e7b.js.map from 192.168.4.121
+[2020/12/03 11:08:48.160778][i][b13ee6314] web.response: GET /js/app.423c5e7b.js.map 200 static 93.799µs
+[2020/12/03 11:09:39.514365][i][4f2717ee3] web.request: OPTIONS / from 192.168.4.121
+[2020/12/03 11:09:39.514396][i][4f2717ee3] web.response: OPTIONS / 200 opt 34.194µs
+[2020/12/03 11:10:07.956220][i][aebb71f1d] web.request: OPTIONS /options from 192.168.4.121
+[2020/12/03 11:10:07.956253][i][aebb71f1d] web.response: OPTIONS /options 200 opt 34.961µs
+[2020/12/03 11:11:04.613743][i][c4aa130c5] api.request: OPTIONS /options from 192.168.4.121
+[2020/12/03 11:11:04.613772][i][c4aa130c5] api.response: OPTIONS /options 200 hdr|opt 31.01µs

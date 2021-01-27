@@ -6,9 +6,11 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
 
 	extcontext "github.com/micro-plat/hydra/context"
+	"github.com/micro-plat/hydra/pkgs"
 
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/app"
@@ -46,6 +48,11 @@ func (ctx *MiddleContext) Service(string) {
 
 }
 
+//Invoke 调用本地服务
+func (ctx *MiddleContext) Invoke(service string) *pkgs.Rspns {
+	return nil
+}
+
 //Request 请求信息
 func (ctx *MiddleContext) Request() extcontext.IRequest {
 	return ctx.MockRequest
@@ -73,10 +80,14 @@ func (ctx *MiddleContext) User() extcontext.IUser {
 
 //Log 日志组件
 func (ctx *MiddleContext) Log() logger.ILogger {
-	return logger.GetSession(ctx.MockAPPConf.GetServerConf().GetServerName(), ctx.User().GetRequestID())
+	return logger.GetSession(ctx.MockAPPConf.GetServerConf().GetServerName(), ctx.User().GetTraceID())
 }
 
 func (ctx *MiddleContext) Find(path string) bool {
+	return false
+}
+
+func (ctx *MiddleContext) ClearAuth(c ...bool) bool {
 	return false
 }
 
@@ -124,6 +135,11 @@ func (u *MockUser) GetUserName() string {
 	return u.MockUserName
 }
 
+//GetTraceID 获取链路跟踪编号
+func (u *MockUser) GetTraceID() string {
+	return ""
+}
+
 //Auth 认证信息
 func (u *MockUser) Auth() extcontext.IAuth {
 	return u.MockAuth
@@ -134,7 +150,7 @@ var _ extcontext.IPath = &MockPath{}
 type MockPath struct {
 	MockMethod        string
 	MockRequestPath   string
-	MockURL           string
+	MockURL           *url.URL
 	MockIsLimit       bool
 	MockAllowFallback bool
 	MockRouter        *router.Router
@@ -168,7 +184,7 @@ func (p *MockPath) GetRequestPath() string {
 }
 
 //GetURL 获取请求的URL信息
-func (p *MockPath) GetURL() string {
+func (p *MockPath) GetURL() *url.URL {
 	return p.MockURL
 }
 
@@ -193,6 +209,11 @@ func (p *MockPath) AllowFallback() bool {
 	return p.MockAllowFallback
 }
 
+//GetPageAndTag 获取服务对应的页面路径与tag标签(page:静态文件prefix+服务原始注册路径,tag：对象中的函数名)
+func (p *MockPath) GetPageAndTag() (page string, tag string, ok bool) {
+	return
+}
+
 var _ extcontext.IRequest = &MockRequest{}
 
 type MockRequest struct {
@@ -208,6 +229,11 @@ type MockRequest struct {
 }
 
 func (r *MockRequest) GetError() error {
+	return nil
+}
+
+//GetHTTPRequest 获取http request原生对象
+func (r *MockRequest) GetHTTPRequest() *http.Request {
 	return nil
 }
 
@@ -289,6 +315,11 @@ func (r *MockRequest) GetFileBody(fileKey string) (io.ReadCloser, error) {
 	return nil, nil
 }
 
+//CheckMap 传入验证Map[字段名]验证规则，并使用govalidator.ValidateMap进行参数验证
+func (r *MockRequest) CheckMap(vdt map[string]interface{}) error {
+	return nil
+}
+
 var _ extcontext.IResponse = &MockResponse{}
 
 type MockResponse struct {
@@ -299,6 +330,11 @@ type MockResponse struct {
 	MockContent     string
 	MockError       error
 	MockContentType string
+}
+
+//GetHTTPReponse 获取http response原生对象
+func (res *MockResponse) GetHTTPReponse() http.ResponseWriter {
+	return nil
 }
 
 func (res *MockResponse) JSON(code int, data interface{}) interface{} {

@@ -1,6 +1,7 @@
 package cron
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/asaskevich/govalidator"
@@ -23,7 +24,7 @@ var SubConfName = []string{"task"}
 
 //Server 服务嚣配置信息
 type Server struct {
-	Status   string `json:"status,omitempty" valid:"in(start|stop)" toml:"status,omitempty"`
+	Status   string `json:"status,omitempty" valid:"in(start|stop)" toml:"status,omitempty" label:"cron服务状态"`
 	Sharding int    `json:"sharding,omitempty" toml:"sharding,omitempty"`
 	Trace    bool   `json:"trace,omitempty" toml:"trace,omitempty"`
 }
@@ -48,7 +49,7 @@ func GetConf(cnf conf.IServerConf) (s *Server, err error) {
 
 	_, err = cnf.GetMainObject(s)
 
-	if err == conf.ErrNoSetting {
+	if errors.Is(err, conf.ErrNoSetting) {
 		return nil, fmt.Errorf("/%s :%w", cnf.GetServerPath(), err)
 	}
 	if err != nil {

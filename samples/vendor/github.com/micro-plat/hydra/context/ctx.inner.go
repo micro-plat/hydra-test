@@ -17,6 +17,7 @@ type IInnerContext interface {
 	GetParams() map[string]interface{}
 	GetRouterPath() string //Context.FullPath()
 	GetPostForm() url.Values
+	GetRawForm() map[string]interface{}
 	ContentType() string
 
 	Abort()
@@ -28,6 +29,8 @@ type IInnerContext interface {
 	File(string)              //Context.File(path)
 	Data(int, string, []byte) //c.Context.Data(status, tpName, v)
 	Redirect(int, string)
-
+	GetService() string
 	GetFile(fileKey string) (string, io.ReadCloser, int64, error)
+	//GetHTTPReqResp 获取http request,response原生对象
+	GetHTTPReqResp() (*http.Request, http.ResponseWriter)
 }

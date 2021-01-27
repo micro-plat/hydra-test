@@ -31,6 +31,7 @@ func NewResponsive(cnf app.IAPPConf) (h *Responsive, err error) {
 		pub:      pub.New(cnf.GetServerConf()),
 		comparer: conf.NewComparer(cnf.GetServerConf(), api.MainConfName, api.SubConfName...),
 	}
+
 	app.Cache.Save(cnf)
 	h.Server, err = h.getServer(cnf)
 	return h, err
@@ -70,18 +71,20 @@ func (w *Responsive) Notify(c app.IAPPConf) (change bool, err error) {
 	}
 	if w.comparer.IsValueChanged() || w.comparer.IsSubConfChanged() {
 		w.log.Info("关键配置发生变化，准备重启服务器")
+		server, err := w.getServer(c)
+		if err != nil {
+			return false, err
+		}
+
 		w.Shutdown()
 		w.conf = c
-
 		app.Cache.Save(c)
 		if !c.GetServerConf().IsStarted() {
 			w.log.Info("api服务被禁用，不用重启")
 			return true, nil
 		}
-		w.Server, err = w.getServer(c)
-		if err != nil {
-			return false, err
-		}
+
+		w.Server = server
 		if err = w.Start(); err != nil {
 			return false, err
 		}
@@ -135,7 +138,10 @@ func (w *Responsive) getServer(cnf app.IAPPConf) (*Server, error) {
 	if err != nil {
 		return nil, err
 	}
-	routerconf, err := cnf.GetRouterConf()
+
+	//从服务中获取路由
+	sr := services.GetRouter(tp)
+	routerconf, err := sr.GetRouters()
 	if err != nil {
 		return nil, err
 	}
@@ -145,19 +151,22 @@ func (w *Responsive) getServer(cnf app.IAPPConf) (*Server, error) {
 			apiConf.GetWSAddress(),
 			routerconf.GetRouters(),
 			WithServerType(tp),
-			WithTimeout(apiConf.GetRTimeout(), apiConf.GetWTimeout(), apiConf.GetRHTimeout()))
+			WithTimeout(apiConf.GetRTimeout(), apiConf.GetWTimeout(), apiConf.GetRHTimeout()),
+			WithGinTrace(apiConf.Trace))
 	case Web:
 		return NewServer(tp,
 			apiConf.GetWEBAddress(),
 			routerconf.GetRouters(),
 			WithServerType(tp),
-			WithTimeout(apiConf.GetRTimeout(), apiConf.GetWTimeout(), apiConf.GetRHTimeout()))
+			WithTimeout(apiConf.GetRTimeout(), apiConf.GetWTimeout(), apiConf.GetRHTimeout()),
+			WithGinTrace(apiConf.Trace))
 	default:
 		return NewServer(tp,
 			apiConf.GetAPIAddress(),
 			routerconf.GetRouters(),
 			WithServerType(tp),
-			WithTimeout(apiConf.GetRTimeout(), apiConf.GetWTimeout(), apiConf.GetRHTimeout()))
+			WithTimeout(apiConf.GetRTimeout(), apiConf.GetWTimeout(), apiConf.GetRHTimeout()),
+			WithGinTrace(apiConf.Trace))
 	}
 }
 

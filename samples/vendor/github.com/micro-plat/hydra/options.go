@@ -20,16 +20,18 @@ func WithRegistry(addr string) Option {
 }
 
 //WithPlatName 设置平台名称
-func WithPlatName(platName string) Option {
+func WithPlatName(platName string, platCNName ...string) Option {
 	return func() {
 		global.Def.PlatName = platName
+		global.Def.PlatCNName = types.GetStringByIndex(platCNName, 0, platName)
 	}
 }
 
 //WithSystemName 设置系统名称
-func WithSystemName(sysName string) Option {
+func WithSystemName(sysName string, sysCNName ...string) Option {
 	return func() {
 		global.Def.SysName = sysName
+		global.Def.SysCNName = types.GetStringByIndex(sysCNName, 0, sysName)
 	}
 }
 
@@ -48,13 +50,6 @@ func WithServerTypes(serverType ...string) Option {
 func WithClusterName(clusterName string) Option {
 	return func() {
 		global.Def.ClusterName = clusterName
-	}
-}
-
-//WithName 设置系统全名 格式:/[platName]/[sysName]/[typeName]/[clusterName]
-func WithName(name string) Option {
-	return func() {
-		global.Def.Name = name
 	}
 }
 
@@ -80,16 +75,30 @@ func WithUsage(usage string) Option {
 }
 
 //WithRunFlag 添加run命令扩展参数
-func WithRunFlag(name string, usage string) Option {
+func WithRunFlag(flags ...FlagOption) Option {
 	return func() {
-		global.RunCli.AddFlag(name, usage)
+		global.RunCli.AddFlags(flags...)
 	}
 }
 
 //WithConfFlag 添加conf命令扩展参数
-func WithConfFlag(name string, usage string) Option {
+func WithConfFlag(flags ...FlagOption) Option {
 	return func() {
-		global.ConfCli.AddFlag(name, usage)
+		global.ConfCli.AddFlags(flags...)
+	}
+}
+
+//WithDBFlag 添加db命令扩展参数
+func WithDBFlag(flags ...FlagOption) Option {
+	return func() {
+		global.DBCli.AddFlags(flags...)
+	}
+}
+
+//WithInstallFlag 添加install命令扩展参数
+func WithInstallFlag(flags ...FlagOption) Option {
+	return func() {
+		global.InstallCli.AddFlags(flags...)
 	}
 }
 

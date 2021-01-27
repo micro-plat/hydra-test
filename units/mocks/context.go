@@ -147,3 +147,11 @@ func (t *TestContxt) GetService() string {
 func (t *TestContxt) WHeaders() http.Header {
 	return nil
 }
+
+func (t *TestContxt) ClearAuth(c ...bool) bool {
+	return false
+}
+
+func (t *TestContxt) GetHTTPReqResp() (*http.Request, http.ResponseWriter) {
+	return nil, nil
+}

@@ -18,24 +18,24 @@ type Processor struct {
 	*dispatcher.Engine
 	done      bool
 	closeChan chan struct{}
+	metric    *middleware.Metric
 }
 
 //NewProcessor 创建processor
 func NewProcessor(routers ...*router.Router) (p *Processor) {
 	p = &Processor{
 		closeChan: make(chan struct{}),
+		metric:    middleware.NewMetric(),
 	}
 	p.Engine = dispatcher.New()
 	p.Engine.Use(middleware.Recovery().DispFunc(RPC))
 	p.Engine.Use(middleware.Logging().DispFunc())
 	p.Engine.Use(middleware.Recovery().DispFunc())
-	p.Engine.Use(middleware.DispServiceExistsCheck(p.Engine).DispFunc())
 
 	p.Engine.Use(middleware.Trace().DispFunc()) //跟踪信息
 	p.Engine.Use(middleware.Delay().DispFunc())
-	middleware.AddMiddlewareHook(rpcmiddlewares, func(item middleware.Handler) {
-		p.Engine.Use(item.DispFunc())
-	})
+	p.Engine.Use(p.metric.Handle().DispFunc())
+	p.Engine.Use(middlewares.DispFunc()...)
 	p.addRouter(routers...)
 	return p
 }
@@ -82,4 +82,9 @@ func (s *Processor) Request(context context.Context, request *pb.RequestContext)
 	}
 	p.Header = string(h)
 	return p, nil
+}
+
+//Close 关闭处理程序
+func (s *Processor) Close() {
+	s.metric.Stop()
 }

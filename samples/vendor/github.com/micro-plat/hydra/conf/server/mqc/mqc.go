@@ -1,6 +1,7 @@
 package mqc
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/asaskevich/govalidator"
@@ -23,9 +24,9 @@ var SubConfName = []string{"queue"}
 
 //Server mqc服务配置
 type Server struct {
-	Status   string `json:"status,omitempty" valid:"in(start|stop)" toml:"status,omitempty"`
+	Status   string `json:"status,omitempty" valid:"in(start|stop)" toml:"status,omitempty" label:"mqc服务状态"`
 	Sharding int    `json:"sharding,omitempty" toml:"sharding,omitempty"`
-	Addr     string `json:"addr,omitempty" valid:"required"  toml:"addr,omitempty"`
+	Addr     string `json:"addr,omitempty" valid:"required"  toml:"addr,omitempty" label:"mqc服务地址"`
 	Trace    bool   `json:"trace,omitempty" toml:"trace,omitempty"`
 }
 
@@ -50,7 +51,7 @@ func GetConf(cnf conf.IServerConf) (*Server, error) {
 
 	_, err := cnf.GetMainObject(&s)
 
-	if err == conf.ErrNoSetting {
+	if errors.Is(err, conf.ErrNoSetting) {
 		return nil, fmt.Errorf("/%s :%w", cnf.GetServerPath(), err)
 	}
 	if err != nil {

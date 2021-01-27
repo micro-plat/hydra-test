@@ -31,7 +31,8 @@ func RASAuth() Handler {
 		}
 
 		ctx.Response().AddSpecial("ras")
-		input, err := ctx.Request().GetMap()
+		err = ctx.Request().GetError()
+		input := ctx.Request().GetMap()
 		if err != nil {
 			ctx.Response().Abort(http.StatusInternalServerError, err)
 			return
@@ -47,16 +48,16 @@ func RASAuth() Handler {
 			return
 		}
 		if !respones.IsSuccess() {
-			ctx.Response().Abort(types.GetMax(respones.Status, http.StatusForbidden), fmt.Errorf("远程认证失败:%s,(%d)", respones.Result, respones.Status))
+			ctx.Response().Abort(types.GetMax(respones.GetStatus(), http.StatusForbidden), fmt.Errorf("远程认证失败:%s,(%d)", respones.GetResult(), respones.GetStatus()))
 			return
 		}
 
-		result, err := respones.GetResult()
-		if err != nil {
+		result := respones.GetStatus()
+		if result != 200 {
 			ctx.Response().Abort(http.StatusForbidden, fmt.Errorf("远程请求结果解析错误 %w", err))
 			return
 		}
-		ctx.Meta().MergeMap(result)
+		ctx.Meta().MergeMap(respones.GetMap())
 		return
 	}
 }

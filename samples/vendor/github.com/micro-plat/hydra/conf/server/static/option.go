@@ -1,6 +1,10 @@
 package static
 
-import "strings"
+import (
+	"path"
+
+	"github.com/micro-plat/hydra/conf"
+)
 
 //DefaultSataticDir 默认静态文件存放路径
 const DefaultSataticDir = "./static"
@@ -27,6 +31,7 @@ func newStatic() *Static {
 	a.Rewriters = DefaultRewriters
 	a.Exclude = DefaultExclude
 	a.Exts = []string{}
+	a.RewritersMatch = conf.NewPathMatch(a.Rewriters...)
 	return a
 }
 
@@ -42,6 +47,7 @@ func WithImages() Option {
 func WithRewriters(rewriters ...string) Option {
 	return func(s *Static) {
 		s.Rewriters = rewriters
+		s.RewritersMatch = conf.NewPathMatch(s.Rewriters...)
 	}
 }
 
@@ -73,10 +79,19 @@ func WithExts(exts ...string) Option {
 	}
 }
 
+//WithArchiveByEmbed 通过嵌入的方式指定压缩文件
+func WithArchiveByEmbed(a []byte, ext string) Option {
+	return func(s *Static) {
+		embedArchive = a
+		embedExt = ext
+		s.Archive = embedArchiveTag
+	}
+}
+
 //WithArchive 设置静态文件跟目录
 func WithArchive(archive string) Option {
 	return func(s *Static) {
-		if !strings.Contains(archive, ".") {
+		if ext := path.Ext(archive); ext == "" {
 			s.Archive = archive + ".zip"
 			return
 		}

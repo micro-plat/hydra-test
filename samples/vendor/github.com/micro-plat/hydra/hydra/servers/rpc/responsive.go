@@ -71,18 +71,20 @@ func (w *Responsive) Notify(c app.IAPPConf) (change bool, err error) {
 	}
 	if w.comparer.IsValueChanged() || w.comparer.IsSubConfChanged() {
 		w.log.Info("关键配置发生变化，准备重启服务器")
+		server, err := w.getServer(c)
+		if err != nil {
+			return false, err
+		}
+
 		w.Shutdown()
 		w.conf = c
-
 		app.Cache.Save(c)
 		if !c.GetServerConf().IsStarted() {
 			w.log.Info("rpc服务被禁用，不用重启")
 			return true, nil
 		}
-		w.Server, err = w.getServer(c)
-		if err != nil {
-			return false, err
-		}
+
+		w.Server = server
 		if err = w.Start(); err != nil {
 			return false, err
 		}
@@ -109,7 +111,9 @@ func (w *Responsive) Shutdown() {
 func (w *Responsive) publish() (err error) {
 	addr := w.Server.GetAddress()
 	serverName := strings.Split(addr, "://")[1]
-	routerObj, err := w.conf.GetRouterConf()
+
+	sr := services.GetRouter(RPC)
+	routerObj, err := sr.GetRouters()
 	if err != nil {
 		return err
 	}
@@ -146,7 +150,8 @@ func (w *Responsive) update(kv ...string) (err error) {
 
 //根据main.conf创建服务嚣
 func (w *Responsive) getServer(cnf app.IAPPConf) (*Server, error) {
-	router, err := cnf.GetRouterConf()
+	sr := services.GetRouter(RPC)
+	router, err := sr.GetRouters()
 	if err != nil {
 		return nil, err
 	}

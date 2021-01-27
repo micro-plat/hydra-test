@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -568,6 +569,37 @@ func Test_body_GetFullRaw_MIMEMultipartPOSTForm(t *testing.T) {
 type xmlParams struct {
 	XMLName xml.Name `xml:"xml"`
 	Key     string   `xml:"key"`
+}
+
+type xmlBindParams struct {
+	XMLName xml.Name `xml:"xml"`
+	Key     string   `xml:"key"`
+	Number  int      `xml:"number"`
+}
+
+func getTestBindBody(value string, num int, e, ctp string) []byte {
+	var bodyRaw = []byte("")
+	switch ctp {
+	case "xml":
+		bodyRaw, _ = xml.Marshal(&xmlBindParams{
+			Key:    value,
+			Number: num,
+		})
+	case "json":
+		bodyRaw, _ = json.Marshal(map[string]interface{}{
+			"key":    value,
+			"number": num,
+		})
+	case "yaml":
+		bodyRaw = []byte("key: " + value + "\r" + "number: " + strconv.Itoa(num))
+	case "form":
+		buff, _ := encoding.Encode(value, e)
+		v := url.QueryEscape(string(buff))
+		bodyRaw = []byte("key=" + v + "&number=" + strconv.Itoa(num))
+		return bodyRaw
+	}
+	bodyRaw, _ = encoding.EncodeBytes(bodyRaw, e)
+	return bodyRaw
 }
 
 func getTestBody(value, e, ctp string) []byte {

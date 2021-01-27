@@ -14,6 +14,7 @@ import (
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/context/ctx"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 	"github.com/micro-plat/lib4go/types"
 )
@@ -22,11 +23,13 @@ type xmlResult struct {
 	Xml result `m2s:"xml"`
 }
 type result struct {
-	Key string `json:"key" valid:"required" m2s:"key"`
+	Key    string `json:"key" valid:"required" m2s:"key"`
+	Number int    `json:"number" valid:"required" m2s:"number"`
 }
 
 func Test_request_Bind(t *testing.T) {
 	var res string
+	num := 4585455141568261664
 	tests := []struct {
 		name        string
 		contentType string
@@ -37,37 +40,41 @@ func Test_request_Bind(t *testing.T) {
 		wantErrStr  string
 		want        interface{}
 	}{
-		{name: "1.1 参数非指针", out: map[string]string{}, wantErrStr: "输入参数非指针 map"},
-		{name: "1.2 参数类型非struct,map", out: &res, wantErrStr: "输入参数非struct,map string"},
+		{name: "1.1 参数非指针", out: map[string]string{}, wantErrStr: "对象转换有误 输出对象必须为struct:map"},
+		{name: "1.2 参数类型非struct,map", out: &res, wantErrStr: "对象转换有误 输出对象必须为struct:string"},
 
-		{name: "2.1 内容为xml,绑定MAP", contentType: "application/xml", isMap: true, body: getTestBody(value, "UTF-8", "xml"), out: &map[string]interface{}{}, want: &map[string]interface{}{"xml": map[string]interface{}{"key": value}}},
-		{name: "2.2 内容为xml,绑定Struct", contentType: "application/xml", body: getTestBody(value, "UTF-8", "xml"), out: &xmlResult{}, want: &xmlResult{Xml: result{Key: value}}},
-		{name: "3.1 内容为json,绑定MAP", contentType: "application/json", body: getTestBody(value, "UTF-8", "json"), out: &map[string]interface{}{}, want: &map[string]interface{}{"key": value}},
-		{name: "3.2 内容为json,绑定Struct", contentType: "application/json", body: getTestBody(value, "UTF-8", "json"), out: &result{}, want: &result{Key: value}},
-		{name: "4.1 内容为yaml,绑定MAP", contentType: "application/x-yaml", body: getTestBody(value, "UTF-8", "yaml"), out: &map[string]interface{}{}, want: &map[string]interface{}{"key": value}},
-		{name: "4.2 内容为yaml,绑定Struct", contentType: "application/x-yaml", body: getTestBody(value, "UTF-8", "yaml"), out: &result{}, want: &result{Key: value}},
-		{name: "5.1 内容为form,绑定MAP", contentType: "application/x-www-form-urlencoded", body: getTestBody(value, "UTF-8", "form"), out: &map[string]interface{}{}, want: &map[string]interface{}{"key": value}},
-		{name: "5.2 内容为form,绑定Struct", contentType: "application/x-www-form-urlencoded", body: getTestBody(value, "UTF-8", "form"), out: &result{}, want: &result{Key: value}},
+		//	{name: "2.1 内容为xml,绑定MAP", contentType: "application/xml", isMap: true, body: getTestBody(value, "UTF-8", "xml"), out: &map[string]interface{}{}, want: &map[string]interface{}{"xml": map[string]interface{}{"key": value}}},
+		{name: "2.2 内容为xml,绑定Struct", contentType: "application/xml", body: getTestBindBody(value, num, "UTF-8", "xml"), out: &result{}, want: &result{Key: value, Number: num}},
+		//		{name: "3.1 内容为json,绑定MAP", contentType: "application/json", body: getTestBody(value, "UTF-8", "json"), out: &map[string]interface{}{}, want: &map[string]interface{}{"key": value}},
+		{name: "3.2 内容为json,绑定Struct", contentType: "application/json", body: getTestBindBody(value, num, "UTF-8", "json"), out: &result{}, want: &result{Key: value, Number: num}},
+		//	{name: "4.1 内容为yaml,绑定MAP", contentType: "application/x-yaml", body: getTestBody(value, "UTF-8", "yaml"), out: &map[string]interface{}{}, want: &map[string]interface{}{"key": value}},
+		{name: "4.2 内容为yaml,绑定Struct", contentType: "application/x-yaml", body: getTestBindBody(value, num, "UTF-8", "yaml"), out: &result{}, want: &result{Key: value, Number: num}},
+		//	{name: "5.1 内容为form,绑定MAP", contentType: "application/x-www-form-urlencoded", body: getTestBody(value, "UTF-8", "form"), out: &map[string]interface{}{}, want: &map[string]interface{}{"key": value}},
+		{name: "5.2 内容为form,绑定Struct", contentType: "application/x-www-form-urlencoded", body: getTestBindBody(value, num, "UTF-8", "form"), out: &result{}, want: &result{Key: value, Number: num}},
 	}
 
-	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
-	serverConf := confObj.GetAPIConf() //获取配置
-	c, _ := gin.CreateTestContext(httptest.NewRecorder())
-
+	confObj := mocks.NewConf() //构建对象
+	confObj.API("8080")        //初始化参数
+	//serverConf := confObj.GetAPIConf() //获取配置
+	//c, _ := gin.CreateTestContext(httptest.NewRecorder())
 	for _, tt := range tests {
 
 		//构建请求
-		r, err := http.NewRequest("POST", "http://localhost:8080/url?", bytes.NewReader(tt.body))
-		assert.Equal(t, nil, err, "构建请求")
+		//	r, err := http.NewRequest("POST", "http://localhost:8080/url?", bytes.NewReader(tt.body))
+		//	assert.Equal(t, nil, err, "构建请求")
 
 		//设置content-type
-		r.Header.Set("Content-Type", fmt.Sprintf("%s; charset=UTF-8", tt.contentType))
+		//	r.Header.Set("Content-Type", fmt.Sprintf("%s; charset=UTF-8", tt.contentType))
 
-		c.Request = r
-		req := ctx.NewRequest(middleware.NewGinCtx(c), serverConf, conf.NewMeta())
+		//c.Request = r
+		//req := ctx.NewRequest(middleware.NewGinCtx(c), serverConf, conf.NewMeta())
 
-		err = req.Bind(tt.out)
+		//	err = req.Bind(tt.out)
+		mc := mock.NewContext(string(tt.body), "UTF-8")
+		b, q, _ := mc.Request().GetFullRaw()
+		fmt.Println("b:", string(b), "q:", q)
+
+		err := mc.Request().Bind(tt.out)
 		if tt.wantErrStr != "" {
 			assert.Equal(t, tt.wantErrStr, err.Error(), tt.name)
 			continue

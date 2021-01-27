@@ -1,0 +1,1034 @@
+
+--------------------begin------------------------
+
+[2020/11/23 09:06:17.736671][i][c6c024c9d] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 09:06:17.737845][i][c6c024c9d] 启动[api]服务...
+[2020/11/23 09:06:18.238146][i][63c0874f5] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 09:07:58.918978][i][2eb67b167] api.request: POST /request from 192.168.4.121
+[2020/11/23 09:07:58.919219][i][2eb67b167] api.response: POST /request 200  251.817µs
+[2020/11/23 09:09:06.120441][i][3dbab2035] api.request: POST /request from 192.168.4.121
+[2020/11/23 09:09:06.120561][i][3dbab2035] api.response: POST /request 200  122.275µs
+
+--------------------begin------------------------
+
+[2020/11/23 09:09:49.244771][i][62b06778d] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 09:09:49.246141][i][62b06778d] 启动[api]服务...
+[2020/11/23 09:09:49.746660][i][008aa1c2c] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 09:09:53.699982][i][2faa95f5d] api.request: POST /request from 192.168.4.121
+[2020/11/23 09:09:53.700122][i][2faa95f5d] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=CONSUMED <nil>
+[2020/11/23 09:09:53.700172][i][2faa95f5d] api.response: POST /request 200  191.714µs
+
+--------------------begin------------------------
+
+[2020/11/23 09:12:12.176131][i][49e773b72] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 09:12:12.177472][i][49e773b72] 启动[api]服务...
+[2020/11/23 09:12:12.677787][i][a0e86a240] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 09:12:19.542055][i][8ddb65232] api.request: POST /request from 192.168.4.121
+[2020/11/23 09:12:19.542201][i][8ddb65232] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=CONSUMED <nil>
+[2020/11/23 09:12:19.542274][i][8ddb65232] api.response: POST /request 200  221.815µs
+
+--------------------begin------------------------
+
+[2020/11/23 09:12:51.981042][i][37577b175] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 09:12:51.981958][i][37577b175] 启动[api]服务...
+[2020/11/23 09:12:52.482525][i][6bd61416b] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 09:12:58.741228][i][e1fb32a9d] api.request: POST /request from 192.168.4.121
+[2020/11/23 09:12:58.741348][i][e1fb32a9d] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=CONSUMED <nil>
+[2020/11/23 09:12:58.741419][i][e1fb32a9d] api.response: POST /request 200  192.509µs
+[2020/11/23 09:14:00.779603][i][8c70d2855] api.request: POST /request from 192.168.4.121
+[2020/11/23 09:14:00.779761][i][8c70d2855] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=CONSUMED <nil>
+[2020/11/23 09:14:00.779808][i][8c70d2855] api.response: POST /request 200  222.781µs
+
+--------------------begin------------------------
+
+[2020/11/23 09:14:36.539747][i][1ee9772d3] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 09:14:36.541076][i][1ee9772d3] 启动[api]服务...
+[2020/11/23 09:14:37.41620][i][42cc15606] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 09:14:43.631799][i][170bd59f8] api.request: POST /request from 192.168.4.121
+[2020/11/23 09:14:43.632025][i][170bd59f8] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=CONSUMED <nil>
+[2020/11/23 09:14:43.632100][i][170bd59f8] api.response: POST /request 200  306.431µs
+
+--------------------begin------------------------
+
+[2020/11/23 09:15:11.765987][i][8f8560d39] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 09:15:11.767373][i][8f8560d39] 启动[api]服务...
+[2020/11/23 09:15:12.268008][i][96332191b] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 09:15:16.194004][i][4e7f68bca] api.request: POST /request from 192.168.4.121
+[2020/11/23 09:15:16.194191][i][4e7f68bca] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=CONSUMED <nil>
+[2020/11/23 09:15:16.194270][i][4e7f68bca] api.response: POST /request 200  268.145µs
+
+--------------------begin------------------------
+
+[2020/11/23 09:15:49.919209][i][3d03ca35c] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 09:15:49.920627][i][3d03ca35c] 启动[api]服务...
+[2020/11/23 09:15:50.421079][i][e5c297bb6] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 09:15:55.280634][i][d8ef4f198] api.request: POST /request from 192.168.4.121
+[2020/11/23 09:15:55.280799][i][d8ef4f198] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=CONSUMED <nil>
+[2020/11/23 09:15:55.280896][i][d8ef4f198] api.response: POST /request 200  264.648µs
+
+--------------------begin------------------------
+
+[2020/11/23 09:16:36.276627][i][f353e98f4] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 09:16:36.277953][i][f353e98f4] 启动[api]服务...
+[2020/11/23 09:16:36.778464][i][1db30ecfe] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 09:16:41.730738][i][4b9ada4d3] api.request: POST /request from 192.168.4.121
+[2020/11/23 09:16:41.730968][i][4b9ada4d3] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=CONSUMED <nil>
+[2020/11/23 09:16:41.731089][e][4b9ada4d3] json: cannot unmarshal string into Go struct field CouponNotifyInfo.recharge_amount of type float64
+[2020/11/23 09:16:41.731127][e][4b9ada4d3] api.response: POST /request 400  393.478µs
+
+--------------------begin------------------------
+
+[2020/11/23 09:18:07.869325][i][10502ad24] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 09:18:07.870035][i][10502ad24] 启动[api]服务...
+[2020/11/23 09:18:08.370388][i][c77776803] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 09:18:10.353133][i][f7b13f4be] api.request: POST /request from 192.168.4.121
+[2020/11/23 09:18:10.353293][i][f7b13f4be] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=CONSUMED <nil>
+[2020/11/23 09:18:10.353377][e][f7b13f4be] json: cannot unmarshal string into Go struct field CouponNotifyInfo.recharge_amount of type float64
+[2020/11/23 09:18:10.353395][e][f7b13f4be] api.response: POST /request 400  265.601µs
+
+--------------------begin------------------------
+
+[2020/11/23 09:21:06.13255][i][81bf6d8ca] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 09:21:06.14119][i][81bf6d8ca] 启动[api]服务...
+[2020/11/23 09:21:06.514507][i][42d1c6fc0] 启动成功(api,http://192.168.4.121:8080,[1])
+
+--------------------begin------------------------
+
+[2020/11/23 09:21:18.717656][i][cc28a4849] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 09:21:18.719063][i][cc28a4849] 启动[api]服务...
+[2020/11/23 09:21:19.219398][i][d8ba17eae] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 09:21:22.928199][i][02fa61d0a] api.request: POST /request from 192.168.4.121
+[2020/11/23 09:21:22.928370][i][02fa61d0a] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=CONSUMED <nil>
+[2020/11/23 09:21:22.928474][i][02fa61d0a] api.response: POST /request 200  285.57µs
+
+--------------------begin------------------------
+
+[2020/11/23 10:27:00.516097][i][5bf66cc13] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 10:27:00.517144][i][5bf66cc13] 启动[api]服务...
+[2020/11/23 10:27:01.17355][i][b3c729afb] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 10:27:08.718272][i][29e5078f2] api.request: POST /request from 192.168.4.121
+[2020/11/23 10:27:08.718427][i][29e5078f2] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=CONSUMED <nil>
+[2020/11/23 10:27:08.718516][i][29e5078f2] api.response: POST /request 200  257.316µs
+[2020/11/23 10:27:09.586947][i][c205dad9c] api.request: POST /request from 192.168.4.121
+[2020/11/23 10:27:09.587097][i][c205dad9c] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=CONSUMED <nil>
+[2020/11/23 10:27:09.587182][i][c205dad9c] api.response: POST /request 200  230.767µs
+[2020/11/23 10:27:15.757548][i][2e9fb3d41] api.request: POST /request?tp=2 from 192.168.4.121
+[2020/11/23 10:27:15.757639][i][2e9fb3d41] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 10:27:15.757734][i][2e9fb3d41] api.response: POST /request?tp=2 200  189.215µs
+[2020/11/23 10:27:23.323710][i][346e28d53] api.request: POST /request?tp=2 from 192.168.4.121
+[2020/11/23 10:27:23.323801][i][346e28d53] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 10:27:23.323876][i][346e28d53] api.response: POST /request?tp=2 200  169.011µs
+
+--------------------begin------------------------
+
+[2020/11/23 10:54:01.794823][i][3213c3170] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 10:54:01.795891][i][3213c3170] 启动[api]服务...
+[2020/11/23 10:54:02.296303][i][003023fa6] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 10:54:06.890163][i][d3fd71a3c] api.request: POST /request?tp=2 from 192.168.4.121
+[2020/11/23 10:54:06.890241][i][d3fd71a3c] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 10:54:06.890356][i][d3fd71a3c] api.response: POST /request?tp=2 200  194.669µs
+[2020/11/23 10:54:09.828974][i][0b1936192] api.request: POST /request?tp=2 from 192.168.4.121
+[2020/11/23 10:54:09.829015][i][0b1936192] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 10:54:09.829119][i][0b1936192] api.response: POST /request?tp=2 200  147.052µs
+[2020/11/23 10:54:20.702748][i][eefa52a9b] api.request: POST /request?tp=2 from 192.168.4.121
+[2020/11/23 10:54:20.702767][i][eefa52a9b] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sitecode":"GTPBox",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 10:54:20.702824][i][eefa52a9b] api.response: POST /request?tp=2 200  81.348µs
+
+--------------------begin------------------------
+
+[2020/11/23 10:58:46.725957][i][83774ac9c] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 10:58:46.727436][i][83774ac9c] 启动[api]服务...
+[2020/11/23 10:58:47.227982][i][7e5f55e9e] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 10:58:54.37993][i][056f1aedb] api.request: POST /request?tp=2 from 192.168.4.121
+[2020/11/23 10:58:54.38072][i][056f1aedb] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sitecode":"GTPBox",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 10:58:54.38184][i][056f1aedb] api.response: POST /request?tp=2 200  193.588µs
+
+--------------------begin------------------------
+
+[2020/11/23 11:00:28.798434][i][ba2db37a9] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:00:28.799913][i][ba2db37a9] 启动[api]服务...
+[2020/11/23 11:00:29.300285][i][e5a02b5a3] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 11:00:38.59139][i][f8ec61cfb] api.request: POST /request?tp=2 from 192.168.4.121
+[2020/11/23 11:00:38.59226][i][f8ec61cfb] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sitecode":"GTPBox",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 11:00:38.59445][i][f8ec61cfb] api.response: POST /request?tp=2 200  317.656µs
+[2020/11/23 11:00:45.5543][i][4184cc247] api.request: POST /request?tp=2&m=123 from 192.168.4.121
+[2020/11/23 11:00:45.5560][i][4184cc247] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sitecode":"GTPBox",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 11:00:45.5608][i][4184cc247] api.response: POST /request?tp=2&m=123 200  70.814µs
+[2020/11/23 11:01:02.968681][i][78f7b0591] api.request: POST /request?tp=2&sitecode=GTPBox from 192.168.4.121
+[2020/11/23 11:01:02.968700][i][78f7b0591] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+   
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 11:01:02.968751][i][78f7b0591] api.response: POST /request?tp=2&sitecode=GTPBox 200  72.563µs
+[2020/11/23 11:01:25.614998][i][3f932a829] bind 正在退出...
+[2020/11/23 11:01:25.615024][i][e5a02b5a3] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/23 11:01:28.970245][i][936ca4ee3] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:01:28.971644][i][936ca4ee3] 启动[api]服务...
+[2020/11/23 11:01:29.471916][i][7e877dea8] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 11:01:32.250614][i][50626326f] api.request: POST /request?tp=2&sitecode=GTPBox from 192.168.4.121
+[2020/11/23 11:01:32.250685][i][50626326f] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 11:01:32.250791][i][50626326f] api.response: POST /request?tp=2&sitecode=GTPBox 200  166.863µs
+[2020/11/23 11:02:12.961135][i][34c5c6ab5] api.request: POST /request?tp=2&sitecode=GTPBox from 192.168.4.121
+[2020/11/23 11:02:12.961175][i][34c5c6ab5] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=CONSUMED&tp=2 <nil>
+[2020/11/23 11:02:12.961235][i][34c5c6ab5] api.response: POST /request?tp=2&sitecode=GTPBox 200  102.732µs
+[2020/11/23 11:02:18.764128][i][4aae975bd] api.request: POST /request?tp=2&sitecode=GTPBox from 192.168.4.121
+[2020/11/23 11:02:18.764150][i][4aae975bd] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 11:02:18.764219][i][4aae975bd] api.response: POST /request?tp=2&sitecode=GTPBox 200  96.133µs
+[2020/11/23 11:02:23.598831][i][9c54eb704] api.request: POST /request?tp=2&sitecode=GTPBox from 192.168.4.121
+[2020/11/23 11:02:23.598854][i][9c54eb704] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 11:02:23.598915][i][9c54eb704] api.response: POST /request?tp=2&sitecode=GTPBox 200  87.858µs
+[2020/11/23 11:02:29.865266][i][fd952f1e8] api.request: POST /request?tp=2&sitecode=GTPBox from 192.168.4.121
+[2020/11/23 11:02:29.865289][i][fd952f1e8] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 11:02:29.865346][i][fd952f1e8] api.response: POST /request?tp=2&sitecode=GTPBox 200  81.991µs
+[2020/11/23 11:09:58.622500][i][19114c5e4] bind 正在退出...
+[2020/11/23 11:09:58.622517][i][7e877dea8] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/23 11:10:01.440541][i][2691b7b40] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:10:01.441927][i][2691b7b40] 启动[api]服务...
+[2020/11/23 11:10:01.942419][i][151c5a23d] 启动成功(api,http://192.168.4.121:8080,[1])
+
+--------------------begin------------------------
+
+[2020/11/23 11:10:30.733317][i][e8ce6ae83] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:10:30.734638][i][e8ce6ae83] 启动[api]服务...
+[2020/11/23 11:10:31.235182][i][55c762cfe] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 11:10:34.854468][i][14731061d] api.request: POST /request?tp=2&sitecode=GTPBox from 192.168.4.121
+[2020/11/23 11:10:34.854535][i][14731061d] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&time=2020-11-20+16%3A13%3A54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 11:10:34.854629][i][14731061d] api.response: POST /request?tp=2&sitecode=GTPBox 200  162.309µs
+[2020/11/23 11:11:14.492405][i][f41cf88b1] api.request: POST /request?tp=2&sitecode=%e6%9d%a8 from 192.168.4.121
+[2020/11/23 11:11:14.492445][i][f41cf88b1] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%E6%9D%A8&time=2020-11-20+16%3A13%3A54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 11:11:14.492501][i][f41cf88b1] api.response: POST /request?tp=2&sitecode=%e6%9d%a8 200  98.784µs
+[2020/11/23 11:11:30.694941][i][a788d6e3c] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:11:30.694959][i][a788d6e3c] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%25e6%259d%25a8&time=2020-11-20+16%3A13%3A54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 11:11:30.695027][i][a788d6e3c] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  88.654µs
+
+--------------------begin------------------------
+
+[2020/11/23 11:12:05.376399][i][b4a6cb42c] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:12:05.377382][i][b4a6cb42c] 启动[api]服务...
+[2020/11/23 11:12:05.877699][i][fd65b2b28] 启动成功(api,http://192.168.4.121:8080,[1])
+
+--------------------begin------------------------
+
+[2020/11/23 11:13:19.561249][i][7490b040c] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:13:19.562683][i][7490b040c] 启动[api]服务...
+[2020/11/23 11:13:20.62964][i][a2e0ab49f] 启动成功(api,http://192.168.4.121:8080,[1])
+
+--------------------begin------------------------
+
+[2020/11/23 11:14:20.642540][i][3bda1b095] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:14:20.643956][i][3bda1b095] 启动[api]服务...
+[2020/11/23 11:14:21.144313][i][b927f4fda] 启动成功(api,http://192.168.4.121:8080,[1])
+
+--------------------begin------------------------
+
+[2020/11/23 11:15:30.811609][i][1d5d9a61a] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:15:30.813590][i][1d5d9a61a] 启动[api]服务...
+[2020/11/23 11:15:31.313795][i][201177b66] 启动成功(api,http://192.168.4.121:8080,[1])
+
+--------------------begin------------------------
+
+[2020/11/23 11:15:43.77307][i][aaff8d0f8] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:15:43.78986][i][aaff8d0f8] 启动[api]服务...
+[2020/11/23 11:15:43.579340][i][181980c1e] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 11:15:49.630407][i][34ddee63c] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:15:49.630516][i][34ddee63c] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%25e6%259d%25a8&time=2020-11-20+16%3A13%3A54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 11:15:49.630653][i][34ddee63c] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  250.261µs
+[2020/11/23 11:16:15.972729][i][5ec67b1a7] bind 正在退出...
+[2020/11/23 11:16:15.972741][i][181980c1e] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/23 11:16:20.463779][i][c48b8bbdd] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:16:20.464746][i][c48b8bbdd] 启动[api]服务...
+[2020/11/23 11:16:20.964960][i][bfc9caec7] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 11:16:24.839280][i][5555e5d6a] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:16:24.839359][i][5555e5d6a] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%25e6%259d%25a8&time=2020-11-20+16%3A13%3A54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 11:16:24.839490][i][5555e5d6a] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  213.241µs
+[2020/11/23 11:17:11.179868][i][0b9913145] bind 正在退出...
+[2020/11/23 11:17:11.179911][i][bfc9caec7] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/23 11:17:14.520397][i][080919ec1] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:17:14.521315][i][080919ec1] 启动[api]服务...
+[2020/11/23 11:17:15.21772][i][201cc0d0e] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 11:17:38.464926][i][8cc3b64fe] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:17:38.465000][i][8cc3b64fe] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%25e6%259d%25a8&time=2020-11-20+16%3A13%3A54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 11:17:38.465104][i][8cc3b64fe] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  171.72µs
+
+--------------------begin------------------------
+
+[2020/11/23 11:36:48.568718][i][c62d8a1cc] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:36:48.570062][i][c62d8a1cc] 启动[api]服务...
+[2020/11/23 11:36:49.70421][i][730f16b6c] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 11:37:29.553459][i][31d56cde5] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:37:29.553568][i][31d56cde5] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%e6%9d%a8&time=2020-11-20 16:13:54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 11:37:29.553732][i][31d56cde5] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  277.167µs
+[2020/11/23 11:37:36.61201][i][6d06b0e3a] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:37:36.61221][i][6d06b0e3a] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%e6%9d%a8&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 11:37:36.61285][i][6d06b0e3a] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  85.958µs
+[2020/11/23 11:37:39.615375][i][ff084a4f7] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:37:39.615399][i][ff084a4f7] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 11:37:39.615472][i][ff084a4f7] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  100.452µs
+[2020/11/23 11:38:19.673948][i][fa4e47228] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:38:19.673991][i][fa4e47228] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%e6%9d%a8&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 11:38:19.674060][i][fa4e47228] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  117.841µs
+[2020/11/23 11:38:24.951622][i][2ddee316a] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:38:24.951639][i][2ddee316a] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 11:38:24.951697][i][2ddee316a] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  77.232µs
+[2020/11/23 11:38:41.43949][i][4de42da57] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:38:41.43968][i][4de42da57] sitecode=%e6%9d%a8&tp=2 <nil>
+[2020/11/23 11:38:41.44016][e][4de42da57] 输入参数有误 sign: non zero value required
+[2020/11/23 11:38:41.44040][e][4de42da57] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 400  97.263µs
+[2020/11/23 11:38:44.34893][i][a78b29c3b] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:38:44.34930][i][a78b29c3b] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 11:38:44.35023][i][a78b29c3b] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  132.85µs
+[2020/11/23 11:39:09.36067][i][c02c37953] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:39:09.36118][i][c02c37953] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%e6%9d%a8&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 11:39:09.36205][i][c02c37953] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  141.494µs
+[2020/11/23 11:42:42.244672][i][71a412adc] bind 正在退出...
+[2020/11/23 11:42:42.244684][i][730f16b6c] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/23 11:42:46.924409][i][08becef38] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:42:46.926895][i][08becef38] 启动[api]服务...
+[2020/11/23 11:42:47.427327][i][99a1df830] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 11:42:54.421840][i][58fc8a6da] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:42:54.421906][i][58fc8a6da] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%e6%9d%a8&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 11:42:54.421996][i][58fc8a6da] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  158.039µs
+[2020/11/23 11:42:57.350692][i][21db87b01] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:42:57.350729][i][21db87b01] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 11:42:57.351316][e][21db87b01] -----[Recovery] panic recovered:
+输出时进行gbk编码转换错误：编码转换失败:content:{"tp":"2CONSUMED","time":"2020-11-20 16:13:54","code":"QXYPKJ828D22782FBF7809","sitecode":"鏉�","recharge_amount":"0","sign":"7095CE9922E2EDE1A705B1606608A7B"}, err:encoding: rune not supported by encoding. {"tp":"2CONSUMED","time":"2020-11-20 16:13:54","code":"QXYPKJ828D22782FBF7809","sitecode":"鏉�","recharge_amount":"0","sign":"7095CE9922E2EDE1A705B1606608A7B"}
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/logging.go:21 (0xdffe95)
+	Logging.func1: ctx.Response().Flush()
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xe01d99)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/context.go:156 (0xd9223a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/recovery.go:19 (0xe027a1)
+	Recovery.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xe01d99)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/context.go:156 (0xd9223a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/gin.go:409 (0xd9c359)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/gin.go:367 (0xd9ba1d)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/usr/local/go/src/net/http/server.go:2843 (0x8f1422)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/usr/local/go/src/net/http/server.go:1925 (0x8ecb2c)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/usr/local/go/src/runtime/asm_amd64.s:1374 (0x471ea0)
+	goexit: BYTE	$0x90	// NOP
+
+[2020/11/23 11:42:57.351322][e][21db87b01] Server Error
+
+--------------------begin------------------------
+
+[2020/11/23 11:47:13.402498][i][ed8b231a0] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:47:13.403818][i][ed8b231a0] 启动[api]服务...
+[2020/11/23 11:47:13.904341][i][1d384e710] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 11:47:24.618575][i][17149dd60] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:47:24.618750][i][17149dd60]  DecodeBytes.err:%!w(<nil>)
+[2020/11/23 11:47:24.618762][e][17149dd60] DecodeBytes.err:%!w(<nil>)
+[2020/11/23 11:47:24.618795][e][17149dd60] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 400  223.046µs
+
+--------------------begin------------------------
+
+[2020/11/23 11:48:08.904574][i][b80816be2] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:48:08.905996][i][b80816be2] 启动[api]服务...
+[2020/11/23 11:48:09.406285][i][89c2d10ea] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 11:48:36.507561][i][f4695ea3d] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:48:36.507637][i][f4695ea3d] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 11:48:36.508287][e][f4695ea3d] -----[Recovery] panic recovered:
+输出时进行gbk编码转换错误：编码转换失败:content:{"tp":"2CONSUMED","time":"2020-11-20 16:13:54","code":"QXYPKJ828D22782FBF7809","sitecode":"鏉�","recharge_amount":"0","sign":"7095CE9922E2EDE1A705B1606608A7B"}, err:encoding: rune not supported by encoding. {"tp":"2CONSUMED","time":"2020-11-20 16:13:54","code":"QXYPKJ828D22782FBF7809","sitecode":"鏉�","recharge_amount":"0","sign":"7095CE9922E2EDE1A705B1606608A7B"}
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/logging.go:21 (0xdfff95)
+	Logging.func1: ctx.Response().Flush()
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xe01e99)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/context.go:156 (0xd9223a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/recovery.go:19 (0xe028a1)
+	Recovery.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xe01e99)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/context.go:156 (0xd9223a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/gin.go:409 (0xd9c359)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/gin.go:367 (0xd9ba1d)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/usr/local/go/src/net/http/server.go:2843 (0x8f1422)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/usr/local/go/src/net/http/server.go:1925 (0x8ecb2c)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/usr/local/go/src/runtime/asm_amd64.s:1374 (0x471ea0)
+	goexit: BYTE	$0x90	// NOP
+
+[2020/11/23 11:48:36.508295][e][f4695ea3d] Server Error
+
+--------------------begin------------------------
+
+[2020/11/23 11:50:28.32931][i][8db3f5e9a] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:50:28.34326][i][8db3f5e9a] 启动[api]服务...
+[2020/11/23 11:50:28.534746][i][c68e8ff5f] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 11:50:32.481863][i][449f0d8a8] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:50:32.481936][i][449f0d8a8] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 11:50:32.482010][i][449f0d8a8] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:鏉� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 11:50:32.482535][e][449f0d8a8] -----[Recovery] panic recovered:
+输出时进行gbk编码转换错误：编码转换失败:content:{"tp":"2CONSUMED","time":"2020-11-20 16:13:54","code":"QXYPKJ828D22782FBF7809","sitecode":"鏉�","recharge_amount":"0","sign":"7095CE9922E2EDE1A705B1606608A7B"}, err:encoding: rune not supported by encoding. {"tp":"2CONSUMED","time":"2020-11-20 16:13:54","code":"QXYPKJ828D22782FBF7809","sitecode":"鏉�","recharge_amount":"0","sign":"7095CE9922E2EDE1A705B1606608A7B"}
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/logging.go:21 (0xdfff95)
+	Logging.func1: ctx.Response().Flush()
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xe01e99)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/context.go:156 (0xd9223a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/recovery.go:19 (0xe028a1)
+	Recovery.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xe01e99)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/context.go:156 (0xd9223a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/gin.go:409 (0xd9c359)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/gin.go:367 (0xd9ba1d)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/usr/local/go/src/net/http/server.go:2843 (0x8f1422)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/usr/local/go/src/net/http/server.go:1925 (0x8ecb2c)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/usr/local/go/src/runtime/asm_amd64.s:1374 (0x471ea0)
+	goexit: BYTE	$0x90	// NOP
+
+[2020/11/23 11:50:32.482541][e][449f0d8a8] Server Error
+
+--------------------begin------------------------
+
+[2020/11/23 11:52:27.460171][i][f6cb41171] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:52:27.461511][i][f6cb41171] 启动[api]服务...
+[2020/11/23 11:52:27.961950][i][19384a80f] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 11:52:33.593993][i][098e5c008] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:52:33.594144][i][098e5c008] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 11:52:33.594231][i][098e5c008] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:鏉� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 11:52:33.594908][e][098e5c008] -----[Recovery] panic recovered:
+输出时进行gbk编码转换错误：编码转换失败:content:{"tp":"2CONSUMED","time":"2020-11-20 16:13:54","code":"QXYPKJ828D22782FBF7809","sitecode":"鏉�","recharge_amount":"0","sign":"7095CE9922E2EDE1A705B1606608A7B"}, err:encoding: rune not supported by encoding. {"tp":"2CONSUMED","time":"2020-11-20 16:13:54","code":"QXYPKJ828D22782FBF7809","sitecode":"鏉�","recharge_amount":"0","sign":"7095CE9922E2EDE1A705B1606608A7B"}
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/logging.go:21 (0xe000f5)
+	Logging.func1: ctx.Response().Flush()
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xe01ff9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/context.go:156 (0xd9223a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/recovery.go:19 (0xe02a01)
+	Recovery.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xe01ff9)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/context.go:156 (0xd9223a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/gin.go:409 (0xd9c359)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/gin.go:367 (0xd9ba1d)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/usr/local/go/src/net/http/server.go:2843 (0x8f1422)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/usr/local/go/src/net/http/server.go:1925 (0x8ecb2c)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/usr/local/go/src/runtime/asm_amd64.s:1374 (0x471ea0)
+	goexit: BYTE	$0x90	// NOP
+
+[2020/11/23 11:52:33.594918][e][098e5c008] Server Error
+
+--------------------begin------------------------
+
+[2020/11/23 11:54:07.48032][i][546d517db] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 11:54:07.48994][i][546d517db] 启动[api]服务...
+[2020/11/23 11:54:07.549428][i][7d28a50f5] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 11:54:12.194688][i][27abac1ea] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 11:54:12.194772][i][27abac1ea] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 11:54:12.194841][i][27abac1ea] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:鏉� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 11:54:12.195424][e][27abac1ea] -----[Recovery] panic recovered:
+输出时进行gbk编码转换错误：编码转换失败:content:{"tp":"2CONSUMED","time":"2020-11-20 16:13:54","code":"QXYPKJ828D22782FBF7809","sitecode":"鏉�","recharge_amount":"0","sign":"7095CE9922E2EDE1A705B1606608A7B"}, err:encoding: rune not supported by encoding. {"tp":"2CONSUMED","time":"2020-11-20 16:13:54","code":"QXYPKJ828D22782FBF7809","sitecode":"鏉�","recharge_amount":"0","sign":"7095CE9922E2EDE1A705B1606608A7B"}
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/logging.go:21 (0xe00135)
+	Logging.func1: ctx.Response().Flush()
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xe02039)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/context.go:156 (0xd9223a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/recovery.go:19 (0xe02a41)
+	Recovery.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xe02039)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/context.go:156 (0xd9223a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/gin.go:409 (0xd9c359)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/gin.go:367 (0xd9ba1d)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/usr/local/go/src/net/http/server.go:2843 (0x8f1422)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/usr/local/go/src/net/http/server.go:1925 (0x8ecb2c)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/usr/local/go/src/runtime/asm_amd64.s:1374 (0x471ea0)
+	goexit: BYTE	$0x90	// NOP
+
+[2020/11/23 11:54:12.195435][e][27abac1ea] Server Error
+
+--------------------begin------------------------
+
+[2020/11/23 14:03:49.787760][i][af28da7a8] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 14:03:49.790013][i][af28da7a8] 启动[api]服务...
+[2020/11/23 14:03:50.290443][i][99cd67a05] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 14:03:53.935199][i][e48b06828] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 14:03:53.935268][i][e48b06828] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 14:03:53.935319][i][e48b06828] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:%e6%9d%a8 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:03:53.935349][i][e48b06828] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  152.841µs
+[2020/11/23 14:04:00.975709][i][7323d8286] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 14:04:00.975733][i][7323d8286] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%25e6%259d%25a8&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 14:04:00.975798][i][7323d8286] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:%e6%9d%a8 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:04:00.975822][i][7323d8286] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  117.774µs
+[2020/11/23 14:04:10.194206][i][1b67d684a] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 14:04:10.194233][i][1b67d684a] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%25e6%259d%25a8&time=2020-11-20+16%3A13%3A54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 14:04:10.194296][i][1b67d684a] {Type:2,CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:%e6%9d%a8 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:04:10.194325][i][1b67d684a] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  122.136µs
+[2020/11/23 14:04:12.407644][i][436531ae3] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 14:04:12.407744][i][436531ae3] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%25e6%259d%25a8&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 14:04:12.407854][i][436531ae3] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:%e6%9d%a8 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:04:12.407897][i][436531ae3] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  258.079µs
+[2020/11/23 14:04:15.704976][i][3b256b029] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 14:04:15.704994][i][3b256b029] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 14:04:15.705032][i][3b256b029] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:%e6%9d%a8 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:04:15.705078][i][3b256b029] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  105.634µs
+
+--------------------begin------------------------
+
+[2020/11/23 14:04:39.720996][i][fcbb17b35] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 14:04:39.721896][i][fcbb17b35] 启动[api]服务...
+[2020/11/23 14:04:40.222376][i][404f7e57c] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 14:04:52.542504][i][dd7c0bf60] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 14:04:52.542572][i][dd7c0bf60] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%25e6%259d%25a8&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 14:04:52.542636][i][dd7c0bf60] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:%e6%9d%a8 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:04:52.542663][i][dd7c0bf60] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  161.393µs
+[2020/11/23 14:04:59.811799][i][97bb5553e] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 14:04:59.811820][i][97bb5553e] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%25e6%259d%25a8&time=2020-11-20+16%3A13%3A54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 14:04:59.811873][i][97bb5553e] {Type:2,CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:%e6%9d%a8 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:04:59.811894][i][97bb5553e] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  101.026µs
+[2020/11/23 14:05:05.164749][i][68112f1d2] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 14:05:05.164786][i][68112f1d2] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 14:05:05.164826][i][68112f1d2] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:%e6%9d%a8 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:05:05.164863][i][68112f1d2] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  118.513µs
+[2020/11/23 14:05:09.349560][i][36c2d79be] bind 正在退出...
+[2020/11/23 14:05:09.349584][i][404f7e57c] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/23 14:05:46.123843][i][2810ce031] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 14:05:46.124813][i][2810ce031] 启动[api]服务...
+[2020/11/23 14:05:46.625232][i][5039ce4ec] 启动成功(api,http://192.168.4.121:8080,[1])
+
+--------------------begin------------------------
+
+[2020/11/23 14:06:10.588087][i][8215cb5f1] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 14:06:10.589517][i][8215cb5f1] 启动[api]服务...
+[2020/11/23 14:06:11.89798][i][84e67c562] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 14:06:14.284155][i][2253492f0] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 14:06:14.284236][i][2253492f0] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 14:06:14.284334][i][2253492f0] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:鏉� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:06:14.284881][e][2253492f0] -----[Recovery] panic recovered:
+输出时进行gbk编码转换错误：编码转换失败:content:{"tp":"2CONSUMED","time":"2020-11-20 16:13:54","code":"QXYPKJ828D22782FBF7809","sitecode":"鏉�","recharge_amount":"0","sign":"7095CE9922E2EDE1A705B1606608A7B"}, err:encoding: rune not supported by encoding. {"tp":"2CONSUMED","time":"2020-11-20 16:13:54","code":"QXYPKJ828D22782FBF7809","sitecode":"鏉�","recharge_amount":"0","sign":"7095CE9922E2EDE1A705B1606608A7B"}
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/logging.go:21 (0xe00175)
+	Logging.func1: ctx.Response().Flush()
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xe02079)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/context.go:156 (0xd9223a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/recovery.go:19 (0xe02a81)
+	Recovery.func1: ctx.Next()
+/home/yanglei/work/src/github.com/micro-plat/hydra/hydra/servers/pkg/middleware/middle.go:65 (0xe02079)
+	Handler.GinFunc.func1: h(v.(IMiddleContext))
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/context.go:156 (0xd9223a)
+	(*Context).Next: c.handlers[c.index](c)
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/gin.go:409 (0xd9c359)
+	(*Engine).handleHTTPRequest: c.Next()
+/home/yanglei/work/pkg/mod/github.com/gin-gonic/gin@v1.6.2/gin.go:367 (0xd9ba1d)
+	(*Engine).ServeHTTP: engine.handleHTTPRequest(c)
+/usr/local/go/src/net/http/server.go:2843 (0x8f1422)
+	serverHandler.ServeHTTP: handler.ServeHTTP(rw, req)
+/usr/local/go/src/net/http/server.go:1925 (0x8ecb2c)
+	(*conn).serve: serverHandler{c.server}.ServeHTTP(w, w.req)
+/usr/local/go/src/runtime/asm_amd64.s:1374 (0x471ea0)
+	goexit: BYTE	$0x90	// NOP
+
+[2020/11/23 14:06:14.284885][e][2253492f0] Server Error
+[2020/11/23 14:06:17.86566][i][6c79f63ae] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 14:06:17.86624][i][6c79f63ae] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=%e6%9d%a8&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 14:06:17.86704][i][6c79f63ae] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:06:17.86743][i][6c79f63ae] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  170.087µs
+[2020/11/23 14:07:19.440183][i][6c8c347d0] bind 正在退出...
+[2020/11/23 14:07:19.440195][i][84e67c562] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/23 14:07:23.774300][i][113ea7262] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 14:07:23.776120][i][113ea7262] 启动[api]服务...
+[2020/11/23 14:07:24.276561][i][ef5048891] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 14:07:28.101440][i][3263fa451] api.request: POST /request?tp=2&sitecode=%25e6%259d%25a8 from 192.168.4.121
+[2020/11/23 14:07:28.101590][i][3263fa451] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 14:07:28.101679][i][3263fa451] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:鏉� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:07:28.101775][i][3263fa451] api.response: POST /request?tp=2&sitecode=%25e6%259d%25a8 200  281.27µs
+[2020/11/23 14:12:37.469246][i][27a6ef012] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 14:12:37.469327][i][27a6ef012] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 14:12:37.469388][i][27a6ef012] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:12:37.469424][i][27a6ef012] api.response: POST /request?tp=2&sitecode=%d1%ee 200  183.882µs
+[2020/11/23 14:12:48.477035][i][458ed425b] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 14:12:48.477053][i][458ed425b] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 14:12:48.477118][i][458ed425b] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:12:48.477141][i][458ed425b] api.response: POST /request?tp=2&sitecode=%d1%ee 200  108.965µs
+[2020/11/23 14:13:42.139512][i][1a1ea476a] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 14:13:42.139588][i][1a1ea476a] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 14:13:42.139647][i][1a1ea476a] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 14:13:42.139668][i][1a1ea476a] api.response: POST /request?tp=2&sitecode=%d1%ee 200  159.501µs
+
+--------------------begin------------------------
+
+[2020/11/23 14:27:56.100952][i][c962df22c] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 14:27:56.102351][i][c962df22c] 启动[api]服务...
+[2020/11/23 14:27:56.602893][i][28d8150fa] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:02:04.815857][i][59d4bb58a] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:02:04.815939][i][59d4bb58a] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:02:04.816028][i][59d4bb58a] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:02:04.816061][i][59d4bb58a] api.response: POST /request?tp=2&sitecode=%d1%ee 200  206.377µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:02:12.681852][i][50d387493] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:02:12.683245][i][50d387493] 启动[api]服务...
+[2020/11/23 15:02:13.183547][i][9d49fb262] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:02:16.554976][i][79aabb2f0] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:02:16.555044][i][79aabb2f0] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:02:16.555120][i][79aabb2f0] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:02:16.555155][i][79aabb2f0] api.response: POST /request?tp=2&sitecode=%d1%ee 200  182.37µs
+[2020/11/23 15:02:21.200584][i][1c0c03506] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:02:21.200616][i][1c0c03506] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&tp=2 <nil>
+[2020/11/23 15:02:21.200669][i][1c0c03506] {Type:2 Time: Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:02:21.200712][i][1c0c03506] api.response: POST /request?tp=2&sitecode=%d1%ee 200  131.836µs
+[2020/11/23 15:02:24.886229][i][16753ca72] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:02:24.886262][i][16753ca72] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:02:24.886337][i][16753ca72] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:02:24.886493][i][16753ca72] api.response: POST /request?tp=2&sitecode=%d1%ee 200  267µs
+[2020/11/23 15:02:30.93302][i][1f9e0f1a8] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:02:30.93324][i][1f9e0f1a8] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 15:02:30.93367][i][1f9e0f1a8] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:02:30.93392][i][1f9e0f1a8] api.response: POST /request?tp=2&sitecode=%d1%ee 200  93.13µs
+[2020/11/23 15:02:47.353814][i][c27d63bdc] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:02:47.353832][i][c27d63bdc] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=杨&sitecode=GTPBox&time=2020-11-20 16:13:54&tp=2&tp=CONSUMED <nil>
+[2020/11/23 15:02:47.353881][i][c27d63bdc] {Type:2,CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:杨,GTPBox RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:02:47.353903][i][c27d63bdc] api.response: POST /request?tp=2&sitecode=%d1%ee 200  92.305µs
+[2020/11/23 15:02:51.453859][i][fe5f0b372] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:02:51.453882][i][fe5f0b372] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:02:51.453926][i][fe5f0b372] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:02:51.453968][i][fe5f0b372] api.response: POST /request?tp=2&sitecode=%d1%ee 200  112.896µs
+[2020/11/23 15:02:54.220027][i][a04e561d0] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:02:54.220048][i][a04e561d0] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 15:02:54.220082][i][a04e561d0] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:02:54.220106][i][a04e561d0] api.response: POST /request?tp=2&sitecode=%d1%ee 200  81.242µs
+[2020/11/23 15:03:01.103325][i][7a743bb34] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:03:01.103343][i][7a743bb34] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 15:03:01.103386][e][7a743bb34] 输入参数有误 sign: non zero value required
+[2020/11/23 15:03:01.103407][e][7a743bb34] api.response: POST /request?tp=2&sitecode=%d1%ee 400  85.283µs
+[2020/11/23 15:03:35.373011][i][8af7c2dfb] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:03:35.373055][i][8af7c2dfb] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 15:03:35.373093][i][8af7c2dfb] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:03:35.373121][i][8af7c2dfb] api.response: POST /request?tp=2&sitecode=%d1%ee 200  113.304µs
+[2020/11/23 15:04:45.760693][i][a5e9f5e86] api.request: GET /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:04:45.760737][i][a5e9f5e86] sitecode=杨&tp=2 <nil>
+[2020/11/23 15:04:45.760789][e][a5e9f5e86] 输入参数有误 sign: non zero value required
+[2020/11/23 15:04:45.760833][e][a5e9f5e86] api.response: GET /request?tp=2&sitecode=%d1%ee 400  149.229µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:05:03.845176][i][d19060fab] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:05:03.846039][i][d19060fab] 启动[api]服务...
+[2020/11/23 15:05:04.346562][i][a8696d74b] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:05:08.62668][i][b81c3a6fe] api.request: GET /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:05:08.62747][i][b81c3a6fe] sitecode=杨&tp=2 <nil>
+[2020/11/23 15:05:08.62808][i][b81c3a6fe] {Type:2 Time: Code: Sitecode:杨 RechargeAmount:0 Sign:}
+[2020/11/23 15:05:08.62852][i][b81c3a6fe] api.response: GET /request?tp=2&sitecode=%d1%ee 200  185.877µs
+[2020/11/23 15:06:04.164488][i][dba4088bf] api.request: GET /request?tp=2&sitecode=%e6%9d%a8%e7%a3%8a from 192.168.4.121
+[2020/11/23 15:06:04.164526][i][dba4088bf] sitecode=鏉ㄧ�&tp=2 <nil>
+[2020/11/23 15:06:04.164552][i][dba4088bf] {Type:2 Time: Code: Sitecode:鏉ㄧ� RechargeAmount:0 Sign:}
+[2020/11/23 15:06:04.164587][i][dba4088bf] api.response: GET /request?tp=2&sitecode=%e6%9d%a8%e7%a3%8a 200  104.954µs
+[2020/11/23 15:06:24.389213][i][97a9eeab3] bind 正在退出...
+[2020/11/23 15:06:24.389235][i][a8696d74b] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/23 15:06:28.464915][i][e0891a4e6] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:06:28.466361][i][e0891a4e6] 启动[api]服务...
+[2020/11/23 15:06:28.966772][i][0550a54c2] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:06:34.269107][i][a3548f6cf] api.request: GET /request?tp=2&sitecode=%e6%9d%a8%e7%a3%8a from 192.168.4.121
+[2020/11/23 15:06:34.269178][i][a3548f6cf] sitecode=%E6%9D%A8%E7%A3%8A&tp=2 <nil>
+[2020/11/23 15:06:34.269229][i][a3548f6cf] {Type:2 Time: Code: Sitecode:杨磊 RechargeAmount:0 Sign:}
+[2020/11/23 15:06:34.269249][i][a3548f6cf] api.response: GET /request?tp=2&sitecode=%e6%9d%a8%e7%a3%8a 200  144.609µs
+[2020/11/23 15:07:18.802097][i][d0b1105f8] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:07:18.802163][i][d0b1105f8] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 15:07:18.802199][i][d0b1105f8] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:�� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:07:18.802222][i][d0b1105f8] api.response: POST /request?tp=2&sitecode=%d1%ee 200  127.471µs
+[2020/11/23 15:07:29.980685][i][8a3c21f96] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:07:29.980705][i][8a3c21f96] {
+    "tp":"CONSUMED",
+    "time":"2020-11-20 16:13:54",
+    "code":"QXYPKJ828D22782FBF7809",
+    "sign":"7095CE9922E2EDE1A705B1606608A7B"
+} <nil>
+[2020/11/23 15:07:29.980735][i][8a3c21f96] {Type:2CONSUMED Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:�� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:07:29.980755][i][8a3c21f96] api.response: POST /request?tp=2&sitecode=%d1%ee 200  72.192µs
+[2020/11/23 15:08:38.110295][i][0c22aacae] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:08:38.110342][i][0c22aacae] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=%D1%EE&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 15:08:38.110384][i][0c22aacae] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,�� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:08:38.110401][i][0c22aacae] api.response: POST /request?tp=2&sitecode=%d1%ee 200  109.434µs
+[2020/11/23 15:14:55.693331][i][792b03387] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:14:55.693419][i][792b03387] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:14:55.693487][i][792b03387] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:14:55.693543][i][792b03387] api.response: POST /request?tp=2&sitecode=%d1%ee 200  216.279µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:16:59.994943][i][089bb71c4] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:16:59.995016][i][089bb71c4] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:16:59.995076][i][089bb71c4] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:16:59.995118][i][089bb71c4] api.response: POST /request?tp=2&sitecode=%d1%ee 200  179.67µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:19:11.413783][i][49dd652cd] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:19:11.415191][i][49dd652cd] 启动[api]服务...
+[2020/11/23 15:19:11.915610][i][da31bcdf4] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:19:15.775468][i][1d3f71ce8] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:19:15.775575][i][1d3f71ce8] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:19:15.775651][i][1d3f71ce8] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:19:15.775697][i][1d3f71ce8] api.response: POST /request?tp=2&sitecode=%d1%ee 200  231.683µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:21:02.818014][i][c7e8456f6] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:21:02.819768][i][c7e8456f6] 启动[api]服务...
+[2020/11/23 15:21:03.320152][i][1158d44a3] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:21:13.142786][i][ccf9254e1] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:21:13.142924][i][ccf9254e1] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:21:13.143029][i][ccf9254e1] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:21:13.143089][i][ccf9254e1] api.response: POST /request?tp=2&sitecode=%d1%ee 200  305.015µs
+[2020/11/23 15:22:15.486380][i][3d700058d] api.request: GET /request?tp=2&sitecode=%e6%9d%a8%e7%a3%8a from 192.168.4.121
+[2020/11/23 15:22:15.486468][i][3d700058d] sitecode=%E6%9D%A8%E7%A3%8A&tp=2 <nil>
+[2020/11/23 15:22:15.486497][i][3d700058d] {Type:2 Time: Code: Sitecode:杨磊 RechargeAmount:0 Sign:}
+[2020/11/23 15:22:15.486514][i][3d700058d] api.response: GET /request?tp=2&sitecode=%e6%9d%a8%e7%a3%8a 200  152.762µs
+[2020/11/23 15:22:18.193932][i][6c4fd4c84] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:22:18.193951][i][6c4fd4c84] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=%D1%EE&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 15:22:18.193989][i][6c4fd4c84] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,�� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:22:18.194005][i][6c4fd4c84] api.response: POST /request?tp=2&sitecode=%d1%ee 200  76.639µs
+[2020/11/23 15:36:32.203973][i][e0f9f42d0] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:36:32.204013][i][e0f9f42d0] sitecode=杨&tp=2 <nil>
+[2020/11/23 15:36:32.204038][i][e0f9f42d0] {Type:2 Time: Code: Sitecode:杨 RechargeAmount:0 Sign:}
+[2020/11/23 15:36:32.204061][i][e0f9f42d0] api.response: POST /request?tp=2&sitecode=%d1%ee 200  92.339µs
+[2020/11/23 15:37:19.622651][i][55d96653d] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:37:19.622695][i][55d96653d] sitecode=%D1%EE&tp=2 <nil>
+[2020/11/23 15:37:19.622723][i][55d96653d] {Type:2 Time: Code: Sitecode:�� RechargeAmount:0 Sign:}
+[2020/11/23 15:37:19.622740][i][55d96653d] api.response: POST /request?tp=2&sitecode=%d1%ee 200  99.847µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:37:54.63317][i][80dc33776] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:37:54.64288][i][80dc33776] 启动[api]服务...
+[2020/11/23 15:37:54.564680][i][1ce227831] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:37:59.520370][i][ebee12472] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:37:59.520436][i][ebee12472] sitecode=杨&tp=2 <nil>
+[2020/11/23 15:37:59.520478][i][ebee12472] {Type:2 Time: Code: Sitecode:杨 RechargeAmount:0 Sign:}
+[2020/11/23 15:37:59.520508][i][ebee12472] api.response: POST /request?tp=2&sitecode=%d1%ee 200  138.965µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:38:21.797127][i][17b3409a2] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:38:21.798452][i][17b3409a2] 启动[api]服务...
+[2020/11/23 15:38:22.298888][i][a10463950] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:46:20.474860][i][89e44b7cc] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:46:20.474932][i][89e44b7cc] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=%D1%EE&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 15:46:20.475005][i][89e44b7cc] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,�� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:46:20.475025][i][89e44b7cc] api.response: POST /request?tp=2&sitecode=%d1%ee 200  167.467µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:47:04.129385][i][dc237af5a] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:47:04.130753][i][dc237af5a] 启动[api]服务...
+[2020/11/23 15:47:04.631264][i][d7e315701] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:47:07.372362][i][4b0d4e767] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:47:07.372429][i][4b0d4e767] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=%D1%EE&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 15:47:07.372490][i][4b0d4e767] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,�� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}
+[2020/11/23 15:47:07.372512][i][4b0d4e767] api.response: POST /request?tp=2&sitecode=%d1%ee 200  152.334µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:47:34.764376][i][a7a94ba45] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:47:34.765911][i][a7a94ba45] 启动[api]服务...
+[2020/11/23 15:47:35.266392][i][95de0d656] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:47:43.742610][i][5525b03fb] bind 正在退出...
+[2020/11/23 15:47:43.742626][i][95de0d656] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/23 15:47:45.179071][i][ff259e157] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:47:45.180492][i][ff259e157] 启动[api]服务...
+[2020/11/23 15:47:45.680950][i][712f495b5] 启动成功(api,http://192.168.4.121:8080,[1])
+
+--------------------begin------------------------
+
+[2020/11/23 15:47:56.614704][i][f9c1dcc4c] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:47:56.616074][i][f9c1dcc4c] 启动[api]服务...
+[2020/11/23 15:47:57.116687][i][e870b8af1] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:48:00.110673][i][fea45a52f] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:48:00.110752][i][fea45a52f] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=%D1%EE&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 15:48:00.110811][i][fea45a52f] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,�� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}%!(EXTRA string=utf-8)
+[2020/11/23 15:48:00.110832][i][fea45a52f] api.response: POST /request?tp=2&sitecode=%d1%ee 200  161.034µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:48:12.814474][i][b27ba85ad] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:48:12.815796][i][b27ba85ad] 启动[api]服务...
+[2020/11/23 15:48:13.316332][i][409ac3b66] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:48:18.817426][i][023bd4720] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:48:18.817487][i][023bd4720] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=%D1%EE&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 15:48:18.817540][i][023bd4720] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,�� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-utf-8
+[2020/11/23 15:48:18.817560][i][023bd4720] api.response: POST /request?tp=2&sitecode=%d1%ee 200  138.673µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:49:10.938282][i][aa805c21d] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:49:10.939307][i][aa805c21d] 启动[api]服务...
+[2020/11/23 15:49:11.439939][i][a7d514361] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:49:18.32110][i][e75513bd3] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:49:18.32185][i][e75513bd3] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=%D1%EE&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 15:49:18.32249][i][e75513bd3] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,�� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-utf-8
+[2020/11/23 15:49:18.32281][i][e75513bd3] api.response: POST /request?tp=2&sitecode=%d1%ee 200  172.376µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:50:10.188988][i][06b8b9956] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:50:10.189828][i][06b8b9956] 启动[api]服务...
+[2020/11/23 15:50:10.690048][i][60910c4c4] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:50:17.895174][i][d172521c5] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:50:17.895255][i][d172521c5] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=%D1%EE&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 15:50:17.895324][i][d172521c5] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,�� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-utf-8
+[2020/11/23 15:50:17.895353][i][d172521c5] api.response: POST /request?tp=2&sitecode=%d1%ee 200  180.24µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:50:52.785895][i][68db6f5e2] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:50:52.787333][i][68db6f5e2] 启动[api]服务...
+[2020/11/23 15:50:53.287920][i][f9181d426] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:50:56.72937][i][f11399e3b] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:50:56.73000][i][f11399e3b] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:50:56.73053][i][f11399e3b] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-gbk
+[2020/11/23 15:50:56.73090][i][f11399e3b] api.response: POST /request?tp=2&sitecode=%d1%ee 200  154.804µs
+
+--------------------begin------------------------
+
+[2020/11/23 15:51:43.209056][i][bd8966cb4] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:51:43.210378][i][bd8966cb4] 启动[api]服务...
+[2020/11/23 15:51:43.710896][i][cca55ece6] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:51:45.224087][i][fd4ac20b0] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:51:45.224164][i][fd4ac20b0] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:51:45.224222][i][fd4ac20b0] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-gbk
+[2020/11/23 15:51:45.224250][i][fd4ac20b0] api.response: POST /request?tp=2&sitecode=%d1%ee 200  164.944µs
+[2020/11/23 15:51:49.249451][i][0e23067c1] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:51:49.249469][i][0e23067c1] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=%D1%EE&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 15:51:49.249513][i][0e23067c1] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,�� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-utf-8
+[2020/11/23 15:51:49.249531][i][0e23067c1] api.response: POST /request?tp=2&sitecode=%d1%ee 200  82.81µs
+[2020/11/23 15:51:51.624499][i][468da803b] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:51:51.624520][i][468da803b] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:51:51.624576][i][468da803b] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-gbk
+[2020/11/23 15:51:51.624699][i][468da803b] api.response: POST /request?tp=2&sitecode=%d1%ee 200  108.709µs
+[2020/11/23 15:55:28.15271][i][9ee4728ef] bind 正在退出...
+[2020/11/23 15:55:28.15293][i][cca55ece6] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/23 15:55:32.102077][i][7b5ec75e6] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:55:32.103402][i][7b5ec75e6] 启动[api]服务...
+[2020/11/23 15:55:32.603790][i][e4559e626] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:55:39.658778][i][272b53b6f] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:55:39.658869][i][272b53b6f] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:55:39.658933][i][272b53b6f] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-gbk
+[2020/11/23 15:55:39.658966][i][272b53b6f] api.response: POST /request?tp=2&sitecode=%d1%ee 200  201.724µs
+[2020/11/23 15:55:42.353241][i][015b1e58c] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:55:42.353263][i][015b1e58c] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=%D1%EE&time=2020-11-20+16%3A13%3A54&tp=2 <nil>
+[2020/11/23 15:55:42.353303][i][015b1e58c] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,�� RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-utf-8
+[2020/11/23 15:55:42.353322][i][015b1e58c] api.response: POST /request?tp=2&sitecode=%d1%ee 200  84.298µs
+[2020/11/23 15:55:45.571272][i][02ec11aae] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:55:45.571360][i][02ec11aae] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:55:45.571413][i][02ec11aae] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-gbk
+[2020/11/23 15:55:45.571452][i][02ec11aae] api.response: POST /request?tp=2&sitecode=%d1%ee 200  183.598µs
+[2020/11/23 15:56:46.846463][i][2b3e197c3] bind 正在退出...
+[2020/11/23 15:56:46.846493][i][e4559e626] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/23 15:56:55.249233][i][33fe5c8f4] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:56:55.250167][i][33fe5c8f4] 启动[api]服务...
+[2020/11/23 15:56:55.750648][i][7a97a5906] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 15:57:09.656332][i][f7dfe5fbb] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:57:09.656414][i][f7dfe5fbb] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:57:09.656488][i][f7dfe5fbb] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-gbk
+[2020/11/23 15:57:09.656521][i][f7dfe5fbb] api.response: POST /request?tp=2&sitecode=%d1%ee 200  191.385µs
+[2020/11/23 15:57:12.904770][i][08c68e6df] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:57:12.904789][i][08c68e6df] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:57:12.904832][i][08c68e6df] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-gbk
+[2020/11/23 15:57:12.904855][i][08c68e6df] api.response: POST /request?tp=2&sitecode=%d1%ee 200  87.713µs
+[2020/11/23 15:57:19.465044][i][cb42222f6] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 15:57:19.465067][i][cb42222f6] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 15:57:19.465108][i][cb42222f6] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-gbk
+[2020/11/23 15:57:19.465130][i][cb42222f6] api.response: POST /request?tp=2&sitecode=%d1%ee 200  89.255µs
+[2020/11/23 15:59:52.94804][i][8807b628e] bind 正在退出...
+[2020/11/23 15:59:52.94840][i][7a97a5906] 关闭[api]服务...
+
+--------------------begin------------------------
+
+[2020/11/23 15:59:55.486662][i][0066b928f] 初始化: /hydra/bind/api/prod/conf
+[2020/11/23 15:59:55.488049][i][0066b928f] 启动[api]服务...
+[2020/11/23 15:59:55.990651][i][7706a0966] 启动成功(api,http://192.168.4.121:8080,[1])
+[2020/11/23 16:00:09.556738][i][7baa4582d] api.request: POST /request?tp=2&sitecode=%d1%ee from 192.168.4.121
+[2020/11/23 16:00:09.556812][i][7baa4582d] code=QXYPKJ828D22782FBF7809&recharge_amount=0&sign=7095CE9922E2EDE1A705B1606608A7B&sitecode=GTPBox&sitecode=杨&time=2020-11-20 16:13:54&tp=2 <nil>
+[2020/11/23 16:00:09.556872][i][7baa4582d] {Type:2 Time:2020-11-20 16:13:54 Code:QXYPKJ828D22782FBF7809 Sitecode:GTPBox,杨 RechargeAmount:0 Sign:7095CE9922E2EDE1A705B1606608A7B}-gbk
+[2020/11/23 16:00:09.556902][i][7baa4582d] api.response: POST /request?tp=2&sitecode=%d1%ee 200  166.852µs

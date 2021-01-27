@@ -1,0 +1,14 @@
+
+--------------------begin------------------------
+
+[2020/11/20 11:33:30.726982][i][f0f058135] 初始化: /hydra-t/apiserver/api/render/conf
+[2020/11/20 11:33:30.728395][i][f0f058135] 启动[api]服务...
+[2020/11/20 11:33:31.228721][i][69448619f] 启动成功(api,http://192.168.4.121:8070,[3])
+[2020/11/20 11:33:38.67154][i][205a2ae4b] api.request: GET /tx/request from 192.168.4.121
+[2020/11/20 11:33:38.67844][i][205a2ae4b] api.response: GET /tx/request 200 render 693.658µs
+[2020/11/20 11:33:38.105505][i][f0d2b7c2f] api.request: GET /favicon.ico from 192.168.4.121
+[2020/11/20 11:33:38.105908][i][f0d2b7c2f] api.response: GET /favicon.ico 200 render 406.009µs
+[2020/11/20 11:34:47.44966][i][ac08bb8b5] api.request: GET /tx/request from 192.168.4.121
+[2020/11/20 11:34:47.45354][i][ac08bb8b5] api.response: GET /tx/request 200 render 391.091µs
+[2020/11/20 11:34:53.238887][i][4f4a94478] api.request: GET /request from 192.168.4.121
+[2020/11/20 11:34:53.239326][i][4f4a94478] api.response: GET /request 200 render 438.482µs

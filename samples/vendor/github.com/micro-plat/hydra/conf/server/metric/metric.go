@@ -1,6 +1,7 @@
 package metric
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/asaskevich/govalidator"
@@ -16,11 +17,11 @@ type IMetric interface {
 
 //Metric Metric
 type Metric struct {
-	Host     string `json:"host,omitempty" valid:"requrl,required" toml:"host,omitempty"`
-	DataBase string `json:"dataBase,omitempty" valid:"ascii,required" toml:"dataBase,omitempty"`
-	Cron     string `json:"cron,omitempty" valid:"ascii,required" toml:"cron,omitempty"`
-	UserName string `json:"userName,omitempty" valid:"ascii" toml:"userName,omitempty"`
-	Password string `json:"password,omitempty" valid:"ascii" toml:"password,omitempty"`
+	Host     string `json:"host,omitempty" valid:"requrl,required" toml:"host,omitempty" label:"监控主机地址"`
+	DataBase string `json:"dataBase,omitempty" valid:"ascii,required" toml:"dataBase,omitempty" label:"监控主机数据库"`
+	Cron     string `json:"cron,omitempty" valid:"ascii,required" toml:"cron,omitempty" label:"监控主机cron"`
+	UserName string `json:"userName,omitempty" valid:"ascii" toml:"userName,omitempty" label:"监控主机用户名"`
+	Password string `json:"password,omitempty" valid:"ascii" toml:"password,omitempty" label:"监控主机用密码"`
 	Disable  bool   `json:"disable,omitempty" toml:"disable,omitempty"`
 }
 
@@ -41,7 +42,7 @@ func New(host string, db string, cron string, opts ...Option) *Metric {
 func GetConf(cnf conf.IServerConf) (metric *Metric, err error) {
 	metric = &Metric{}
 	_, err = cnf.GetSubObject(TypeNodeName, metric)
-	if err == conf.ErrNoSetting {
+	if errors.Is(err, conf.ErrNoSetting) {
 		metric.Disable = true
 		return metric, nil
 	}

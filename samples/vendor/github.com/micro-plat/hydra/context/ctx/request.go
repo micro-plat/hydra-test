@@ -47,6 +47,12 @@ func NewRequest(c context.IInnerContext, s app.IAPPConf, meta conf.IMeta) *reque
 	return req
 }
 
+//GetHTTPRequest 获取http request原生对象
+func (r *request) GetHTTPRequest() *http.Request {
+	req, _ := r.ctx.GetHTTPReqResp()
+	return req
+}
+
 //Path 获取请求路径信息
 func (r *request) Path() context.IPath {
 	return r.path
@@ -59,8 +65,8 @@ func (r *request) Bind(obj interface{}) error {
 	}
 
 	//处理数据结构转换
-	if err := r.XMap.ToSimpleStruct(obj); err != nil {
-		return errs.NewError(http.StatusNotAcceptable, fmt.Errorf("输入参数有误 %v", err))
+	if err := r.XMap.ToAnyStruct(obj); err != nil {
+		return errs.NewError(http.StatusNotAcceptable, fmt.Errorf("对象转换有误 %v", err))
 	}
 
 	//验证数据格式
@@ -81,16 +87,19 @@ func (r *request) Check(field ...string) error {
 }
 
 //GetMap 获取请求的参数信息
-func (r *request) GetMap() (types.XMap, error) {
-	return r.XMap, r.readMapErr
+func (r *request) GetMap() types.XMap {
+	return r.XMap
+}
+func (r *request) GetError() error {
+	return r.readMapErr
 }
 
 //GetPlayload 获取trace信息
 func (r *request) GetPlayload() string {
-	body, err := r.GetMap()
-	if err != nil {
-		return fmt.Errorf("err:%w", err).Error()
+	if r.readMapErr != nil {
+		return fmt.Errorf("err:%w", r.readMapErr).Error()
 	}
+	body := r.GetMap()
 	return fmt.Sprintf("%+v", body)
 }
 
