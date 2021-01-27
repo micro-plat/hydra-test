@@ -46,7 +46,6 @@ func GetAppNameDesc(vname string) (string, string) {
 func GetBaseFlags() []cli.Flag {
 	flags := make([]cli.Flag, 0, 4)
 	flags = append(flags, registryFlag)
-	flags = append(flags, nameFlag)
 	flags = append(flags, platFlag)
 	flags = append(flags, sysNameFlag)
 	flags = append(flags, serverTypesFlag)
@@ -60,12 +59,7 @@ var registryFlag = cli.StringFlag{
 	EnvVar:      "registry",
 	Usage:       `-注册中心地址。格式：proto://host。如：zk://ip1,ip2  或 fs://../`,
 }
-var nameFlag = cli.StringFlag{
-	Name:        "name,n",
-	EnvVar:      "name",
-	Destination: &global.FlagVal.Name,
-	Usage:       `-服务全名，格式：/平台名称/系统名称/服务器类型/集群名称`,
-}
+
 var platFlag = cli.StringFlag{
 	Name:        "plat,p",
 	Destination: &global.FlagVal.PlatName,
@@ -80,7 +74,7 @@ var sysNameFlag = cli.StringFlag{
 var serverTypesFlag = cli.StringFlag{
 	Name:        "server-types,S",
 	Destination: &global.FlagVal.ServerTypeNames,
-	Usage:       fmt.Sprintf("-服务类型，有api,web,rpc,cron,mqc,ws"),
+	Usage:       fmt.Sprintf("-服务类型，有api,web,rpc,cron,mqc,ws。多个以“-”分割"),
 }
 var clusterFlag = cli.StringFlag{
 	Name:        "cluster,c",

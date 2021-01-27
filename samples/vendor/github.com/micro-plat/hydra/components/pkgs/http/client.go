@@ -38,12 +38,8 @@ func (c *Client) Request(method string, url string, params string, charset strin
 		req.Header.Set(i, strings.Join(v, ","))
 	}
 
-	requestID := context.NewRequestID()
 	if ctx, ok := context.GetContext(); ok {
-		requestID = ctx.User().GetRequestID()
-	}
-	if requestID != "" {
-		req.Header.Set("X-Request-Id", requestID)
+		req.Header.Set(context.XRequestID, ctx.User().GetTraceID())
 	}
 	c.Response, err = c.client.Do(req)
 	if c.Response != nil {

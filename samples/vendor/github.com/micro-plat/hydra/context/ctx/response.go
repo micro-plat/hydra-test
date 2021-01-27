@@ -2,7 +2,6 @@ package ctx
 
 import (
 	"encoding/json"
-	"encoding/xml"
 	"fmt"
 	"net/http"
 	"reflect"
@@ -17,7 +16,7 @@ import (
 	"github.com/micro-plat/lib4go/errs"
 	"github.com/micro-plat/lib4go/logger"
 	"github.com/micro-plat/lib4go/types"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
 var _ context.IResponse = &response{}
@@ -36,6 +35,9 @@ type rspns struct {
 
 type response struct {
 	ctx         context.IInnerContext
+	xmlRoot     string
+	xmlHeader   string
+	headers     types.XMap
 	conf        app.IAPPConf
 	path        *rpath
 	raw         rawrspns
@@ -43,17 +45,19 @@ type response struct {
 	hasWrite    bool
 	noneedWrite bool
 	log         logger.ILogger
-	asyncWrite  func() error
 	specials    []string
 }
 
 //NewResponse 构建响应信息
 func NewResponse(ctx context.IInnerContext, conf app.IAPPConf, log logger.ILogger, meta conf.IMeta) *response {
+	path := NewRpath(ctx, conf, meta)
 	return &response{
-		ctx:  ctx,
-		conf: conf,
-		path: NewRpath(ctx, conf, meta),
-		log:  log,
+		ctx:     ctx,
+		conf:    conf,
+		path:    path,
+		xmlRoot: "xml",
+		final:   rspns{contentType: fmt.Sprintf(context.PLAINF, path.GetEncoding())},
+		log:     log,
 	}
 }
 
@@ -63,12 +67,34 @@ func (c *response) Header(k string, v string) {
 }
 
 //Header 获取头信息
-func (c *response) GetHeaders() map[string][]string {
-	return c.ctx.WHeaders()
+func (c *response) GetHeaders() types.XMap {
+	if c.headers != nil {
+		return c.headers
+	}
+	hds := c.ctx.WHeaders()
+	c.headers = make(map[string]interface{})
+	for k, v := range hds {
+		c.headers[k] = strings.Join(v, ",")
+	}
+	return c.headers
 }
 
 //ContentType 设置contentType
-func (c *response) ContentType(v string) {
+func (c *response) ContentType(v string, xmlRoot ...string) {
+	if v == "" {
+		return
+	}
+
+	c.xmlRoot = types.DecodeString(types.GetStringByIndex(xmlRoot, 0), "", c.xmlRoot)
+
+	//处理编码问题
+	if strings.Contains(v, "%s") {
+		v = fmt.Sprintf(v, c.path.GetEncoding())
+	}
+	//如果返回用户没有设置charset  需要自动给加上
+	if !strings.Contains(strings.ToLower(v), "charset") {
+		v = fmt.Sprint(strings.TrimRight(v, ";"), ";charset=", c.path.GetEncoding())
+	}
 	c.ctx.Header("Content-Type", v)
 }
 
@@ -98,7 +124,53 @@ func (c *response) NoNeedWrite(status int) {
 	c.final.status = status
 }
 
-//Write 检查内容并处理状态码,数据未写入响应流
+//JSON 以application/json输出响应内容
+func (c *response) JSON(code int, data interface{}) interface{} {
+	return c.Data(code, fmt.Sprintf(context.JSONF, c.path.GetEncoding()), data)
+}
+
+//XML 以application/xml输出响应内容
+func (c *response) XML(code int, data interface{}, header string, rootNode ...string) interface{} {
+	c.xmlHeader = header
+	if len(rootNode) > 0 {
+		c.xmlRoot = types.GetStringByIndex(rootNode, 0)
+	}
+	return c.Data(code, fmt.Sprintf(context.XMLF, c.path.GetEncoding()), data)
+}
+
+//YAML 以text/yaml输出响应内容
+func (c *response) YAML(code int, data interface{}) interface{} {
+	return c.Data(code, fmt.Sprintf(context.YAMLF, c.path.GetEncoding()), data)
+}
+
+//HTML 以text/html输出响应内容
+func (c *response) HTML(code int, data string) interface{} {
+	return c.Data(code, fmt.Sprintf(context.YAMLF, c.path.GetEncoding()), data)
+}
+
+//Plain 以text/plain格式输出响应内容
+func (c *response) Plain(code int, data string) interface{} {
+	return c.Data(code, fmt.Sprintf(context.PLAINF, c.path.GetEncoding()), data)
+}
+
+//Data 使用已设置的Content-Type输出内容，未设置时自动根据内容识别输出格式，内容无法识别时(map,struct)使用application/json
+//格式输出内容
+func (c *response) Data(code int, contentType string, data interface{}) interface{} {
+	c.ContentType(contentType)
+	if err := c.Write(code, data); err != nil {
+		return err
+	}
+	return c.final.content
+}
+
+//WriteAny 使用已设置的Content-Type输出内容，未设置时自动根据内容识别输出格式，内容无法识别时(map,struct)使用application/json
+//格式输出内容
+func (c *response) WriteAny(v interface{}) error {
+	return c.Write(http.StatusOK, v)
+}
+
+//Write 使用已设置的Content-Type输出内容，未设置时自动根据内容识别输出格式，内容无法识别时(map,struct)使用application/json
+//格式输出内容
 func (c *response) Write(status int, ct ...interface{}) error {
 	if c.noneedWrite {
 		return fmt.Errorf("不能重复写入到响应流:status:%d 已写入状态:%d", status, c.final.status)
@@ -108,6 +180,12 @@ func (c *response) Write(status int, ct ...interface{}) error {
 	var content interface{}
 	if len(ct) > 0 {
 		content = ct[0]
+	}
+
+	switch content.(type) {
+	case context.EmptyResult:
+		return nil
+
 	}
 
 	//2. 修改当前结果状态码与内容
@@ -124,9 +202,6 @@ func (c *response) Write(status int, ct ...interface{}) error {
 
 	//3. 保存初始状态与结果
 	c.raw.status, c.raw.content, c.hasWrite, c.raw.contentType = status, content, true, c.final.contentType
-	c.asyncWrite = func() error {
-		return c.writeNow(c.final.status, c.final.contentType, c.final.content)
-	}
 	return nil
 }
 
@@ -134,29 +209,35 @@ func (c *response) getContentType() string {
 	if ctp := c.ctx.WHeader("Content-Type"); ctp != "" {
 		return ctp
 	}
-	headerObj, err := c.conf.GetHeaderConf()
+	headers, err := c.conf.GetHeaderConf()
 	if err != nil {
 		return ""
 	}
-	if ct, ok := headerObj["Content-Type"]; ok && ct != "" {
-		return ct
-	}
-	return ""
+	return headers["Content-Type"]
 }
 
 func (c *response) swapBytp(status int, content interface{}) (rs int, rc interface{}) {
 	//处理状态码与响应内容的默认
 	rs, rc = types.DecodeInt(status, 0, http.StatusOK), content
-
 	switch v := content.(type) {
 	case errs.IError:
 		c.log.Error(content)
-		rs, rc = v.GetCode(), types.DecodeString(global.IsDebug, false, "Internal Server Error", v.GetError().Error())
+
+		if global.IsDebug {
+			rs, rc = v.GetCode(), v.GetError().Error()
+		} else {
+			rs, rc = v.GetCode(), types.DecodeString(http.StatusText(v.GetCode()), "", "Internal Server Error")
+		}
 	case error:
 		c.log.Error(content)
-		rc = types.DecodeString(global.IsDebug, false, "Internal Server Error", v.Error())
+
 		if status >= http.StatusOK && status < http.StatusBadRequest {
 			rs = http.StatusBadRequest
+		}
+		if global.IsDebug {
+			rc = v.Error()
+		} else {
+			rc = types.DecodeString(http.StatusText(rs), "", "Internal Server Error")
 		}
 	}
 	if content == nil {
@@ -206,28 +287,17 @@ func (c *response) getStringByCP(ctp string, tpkind reflect.Kind, content interf
 
 	switch {
 	case strings.Contains(ctp, "xml"):
-		if tpkind == reflect.Slice || tpkind == reflect.Array {
-			panic("转化为xml必须是struct或者map,内容格式不正确")
-		}
-		if m := c.toMap(content); m != nil {
-			if str, err := m.Xml(); err != nil {
-				panic(err)
-			} else {
-				return string(str)
-			}
-		}
-		if buff, err := xml.Marshal(content); err != nil {
+		str, err := types.Any2XML(content, c.xmlHeader, c.xmlRoot)
+		if err != nil {
 			panic(err)
-		} else {
-			return string(buff)
 		}
+		return str
 	case strings.Contains(ctp, "yaml"):
 		if buff, err := yaml.Marshal(content); err != nil {
 			panic(err)
 		} else {
 			return string(buff)
 		}
-
 	case strings.Contains(ctp, "json"):
 		if buff, err := json.Marshal(content); err != nil {
 			panic(err)
@@ -239,19 +309,27 @@ func (c *response) getStringByCP(ctp string, tpkind reflect.Kind, content interf
 	}
 }
 
-func (c *response) toMap(content interface{}) mxj.Map {
-	v := reflect.ValueOf(content)
-	r := mxj.Map{}
-	if v.Kind() == reflect.Map {
-		for _, key := range v.MapKeys() {
-			r[types.GetString(key)] = v.MapIndex(key)
-		}
+//Flush 调用异步写入将状态码、内容写入到响应流中
+func (c *response) Flush() {
+	if c.noneedWrite || c.ctx.Written() {
+		c.final.status = types.DecodeInt(c.final.status, 0, c.ctx.Status())
+		//处理外部框架直接写入到流中,且输出日志状态为0的问题
+		return
 	}
-	return r
+	if err := c.writeNow(); err != nil {
+		panic(err)
+	}
+	c.noneedWrite = true
 }
 
 //writeNow 将状态码、内容写入到响应流中
-func (c *response) writeNow(status int, ctyp string, content string) error {
+func (c *response) writeNow() error {
+
+	c.final.status = types.DecodeInt(types.DecodeInt(c.final.status, 0, c.ctx.Status()), 0, http.StatusNoContent)
+
+	status := c.final.status
+	ctyp := c.final.contentType
+	content := c.final.content
 	//301 302 303 307 308 这个地方会强制跳转到content 的路径。
 	if status == http.StatusMovedPermanently || status == http.StatusFound || status == http.StatusSeeOther ||
 		status == http.StatusTemporaryRedirect || status == http.StatusPermanentRedirect {
@@ -276,11 +354,6 @@ func (c *response) writeNow(status int, ctyp string, content string) error {
 	c.ContentType(ctyp)
 	c.ctx.Data(status, ctyp, buff)
 	return nil
-}
-
-//WriteAny 向响应流中写入内容,状态码根据内容进行判断(不会立即写入)
-func (c *response) WriteAny(v interface{}) error {
-	return c.Write(http.StatusOK, v)
 }
 
 //Redirect 转跳g刚才gc
@@ -312,20 +385,15 @@ func (c *response) GetRawResponse() (int, interface{}, string) {
 	return c.raw.status, c.raw.content, c.raw.contentType
 }
 
+//GetHTTPReponse 获取http response原生对象
+func (c *response) GetHTTPReponse() http.ResponseWriter {
+	_, response := c.ctx.GetHTTPReqResp()
+	return response
+}
+
 //GetFinalResponse 获取响应内容信息
 func (c *response) GetFinalResponse() (int, string, string) {
 	return c.final.status, c.final.content, c.final.contentType
-}
-
-//Flush 调用异步写入将状态码、内容写入到响应流中
-func (c *response) Flush() {
-	if c.noneedWrite || c.asyncWrite == nil || c.ctx.Written() {
-		return
-	}
-	if err := c.asyncWrite(); err != nil {
-		panic(err)
-	}
-	c.noneedWrite = true
 }
 
 func getTypeKind(c interface{}) reflect.Kind {

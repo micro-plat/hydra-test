@@ -1,6 +1,7 @@
 package ras
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/asaskevich/govalidator"
@@ -33,7 +34,7 @@ func NewRASAuth(opts ...Option) *RASAuth {
 //Match 检查指定的路径是否有对应的认证服务
 func (a RASAuth) Match(p string) (bool, *Auth) {
 	for _, auth := range a.Auth {
-		if ok, _ := auth.Match(p); ok {
+		if ok, _ := auth.Match(p); ok && !auth.Disable {
 			return true, auth
 		}
 	}
@@ -45,7 +46,7 @@ func GetConf(cnf conf.IServerConf) (auths *RASAuth, err error) {
 	auths = &RASAuth{}
 	//设置Remote安全认证参数
 	_, err = cnf.GetSubObject(registry.Join(ParNodeName, SubNodeName), auths)
-	if err == conf.ErrNoSetting {
+	if errors.Is(err, conf.ErrNoSetting) {
 		auths.Disable = true
 		return auths, nil
 	}

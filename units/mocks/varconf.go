@@ -16,6 +16,10 @@ type MockVarConf struct {
 func (v *MockVarConf) GetVersion() int32 {
 	return v.Version
 }
+
+func (v *MockVarConf) GetCachedObject(tp string, name string, s interface{}) (int32, error) {
+	return 0, nil
+}
 func (v *MockVarConf) GetConf(tp string, name string) (*conf.RawConf, error) {
 	data, ok := v.ConfData[tp][name]
 	if !ok {

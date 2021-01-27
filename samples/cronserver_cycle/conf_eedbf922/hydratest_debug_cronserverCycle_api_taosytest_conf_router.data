@@ -1,0 +1,1 @@
+{"routers":[{"path":"/hydratest/cronserverCycle/show","action":["POST","GET"],"service":"/hydratest/cronserverCycle/show"}]}

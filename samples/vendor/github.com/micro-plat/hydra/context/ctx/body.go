@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/url"
+	"reflect"
 	"strings"
 
-	"github.com/clbanning/mxj"
 	"github.com/micro-plat/hydra/context"
 	"github.com/micro-plat/lib4go/encoding"
 	"github.com/micro-plat/lib4go/types"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
 type params struct {
@@ -40,7 +40,7 @@ func NewBody(c context.IInnerContext, encoding string) *body {
 }
 
 //GetMap 读取并合并请求参数
-func (w *body) GetMap() (map[string]interface{}, error) {
+func (w *body) GetMap() (data map[string]interface{}, err error) {
 
 	//从缓存中读取数据
 	if w.mapBody.hasRead {
@@ -56,7 +56,11 @@ func (w *body) GetMap() (map[string]interface{}, error) {
 	//从body中读取原处理流
 	w.mapBody.hasRead = true
 	var body []byte
+	ctp := strings.ToLower(w.ctx.ContentType())
 
+	if strings.Contains(ctp, "__raw__") {
+		return w.ctx.GetRawForm(), nil
+	}
 	if body, _, w.mapBody.err = w.GetFullRaw(); w.mapBody.err != nil {
 		return nil, w.mapBody.err
 	}
@@ -64,13 +68,14 @@ func (w *body) GetMap() (map[string]interface{}, error) {
 		return nil, w.mapBody.err
 	}
 	//处理body数据
-	data := make(map[string]interface{})
+	data = make(map[string]interface{})
 	if len(body) != 0 {
-		ctp := strings.ToLower(w.ctx.ContentType())
 		switch {
 		case strings.Contains(ctp, "/xml"):
-			mxj.PrependAttrWithHyphen(false) //修改成可以转换成多层map
-			data, w.mapBody.err = mxj.NewMapXml(body)
+			data, err = types.NewXMapByXML(types.BytesToString(body))
+			if err != nil {
+				return nil, fmt.Errorf("xml转换为map失败:%w", err)
+			}
 		case strings.Contains(ctp, "/yaml") || strings.Contains(ctp, "/x-yaml"):
 			w.mapBody.err = yaml.Unmarshal(body, &data)
 		case strings.Contains(ctp, "/json"):
@@ -100,20 +105,36 @@ func (w *body) GetMap() (map[string]interface{}, error) {
 	//处理URL参数
 	values := w.ctx.GetURL().Query()
 	for k, v := range values {
-		vs := make([]byte, 0, 10)
+		vs := make([]string, 0, 1)
 		for _, tp := range v {
 			if x, err := urlDecode([]byte(tp), w.encoding); err == nil {
-				vs = append(vs, x...)
+				vs = append(vs, types.BytesToString(x))
 			} else {
-				vs = append(vs, tp...)
+				vs = append(vs, tp)
 			}
 		}
 
+		//合并body,url参数
 		if x, ok := data[k]; ok {
-			vs = append(vs, []byte(",")...)
-			vs = append(vs, []byte(x.(string))...)
+			s := reflect.ValueOf(x)
+			switch s.Kind() {
+			case reflect.Map, reflect.Struct, reflect.Ptr, reflect.UnsafePointer, reflect.Func:
+				return nil, fmt.Errorf("body与url中存在相同的参数，且类型为map或struct,无法进行参数合并")
+			case reflect.Array, reflect.Slice: //传入数据为数组
+				slice := make([]string, 0, s.Len())
+				for i := 0; i < s.Len(); i++ {
+					slice = append(slice, fmt.Sprint(s.Index(i).Interface()))
+				}
+				vs = append(vs, slice...)
+			default:
+				vs = append(vs, fmt.Sprint(s.Interface()))
+			}
 		}
-		data[k] = types.BytesToString(vs)
+		if len(vs) > 1 {
+			data[k] = vs
+			continue
+		}
+		data[k] = vs[0]
 	}
 	w.mapBody.value = data
 	return data, nil

@@ -1,7 +1,7 @@
 package hydra
 
 import (
-	"github.com/micro-plat/cli"
+	"github.com/lib4dev/cli"
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/global/compatible"
 	"github.com/micro-plat/hydra/services"
@@ -30,14 +30,12 @@ import (
 type MicroApp struct {
 	app *cli.App
 	services.IService
-	Cli *ucli
 }
 
 //NewApp 创建微服务应用
 func NewApp(opts ...Option) (m *MicroApp) {
 	m = &MicroApp{
 		IService: services.Def,
-		Cli:      newUCli(),
 	}
 	for _, opt := range opts {
 		opt()
@@ -54,5 +52,10 @@ func (m *MicroApp) Start() {
 
 //Close 关闭服务器
 func (m *MicroApp) Close() {
+	Close()
+}
+
+//Close 关闭服务器
+func Close() {
 	compatible.AppClose()
 }

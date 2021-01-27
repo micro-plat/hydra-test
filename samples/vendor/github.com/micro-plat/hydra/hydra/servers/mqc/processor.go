@@ -25,6 +25,7 @@ type Processor struct {
 	done      bool
 	closeChan chan struct{}
 	queues    cmap.ConcurrentMap
+	metric    *middleware.Metric
 	startTime time.Time
 	customer  mq.IMQC
 	status    int
@@ -37,6 +38,7 @@ func NewProcessor(proto string, confRaw string) (p *Processor, err error) {
 		closeChan: make(chan struct{}),
 		startTime: time.Now(),
 		queues:    cmap.New(4),
+		metric:    middleware.NewMetric(),
 	}
 
 	p.customer, err = mq.NewMQC(proto, confRaw)
@@ -47,11 +49,9 @@ func NewProcessor(proto string, confRaw string) (p *Processor, err error) {
 	p.Engine.Use(middleware.Recovery().DispFunc(MQC))
 	p.Engine.Use(middleware.Logging().DispFunc())
 	p.Engine.Use(middleware.Recovery().DispFunc())
-	p.Engine.Use(middleware.DispServiceExistsCheck(p.Engine).DispFunc())
 	p.Engine.Use(middleware.Trace().DispFunc()) //跟踪信息
-	middleware.AddMiddlewareHook(mqcmiddlewares, func(item middleware.Handler) {
-		p.Engine.Use(item.DispFunc())
-	})
+	p.Engine.Use(p.metric.Handle().DispFunc())
+	p.Engine.Use(middlewares.DispFunc()...)
 
 	return p, nil
 }
@@ -144,6 +144,7 @@ func (s *Processor) consume(queue *queue.Queue) error {
 
 //Close 退出
 func (s *Processor) Close() {
+	defer s.metric.Stop()
 	s.lock.Lock()
 	defer s.lock.Unlock()
 	if !s.done {

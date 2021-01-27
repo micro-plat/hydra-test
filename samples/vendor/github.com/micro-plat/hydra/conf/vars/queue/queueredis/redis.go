@@ -18,9 +18,10 @@ type Redis struct {
 }
 
 //New 构建redis消息队列配置
-func New(opts ...Option) (org *Redis) {
+func New(address string, opts ...Option) (org *Redis) {
 	org = &Redis{
 		Queue: &queue.Queue{Proto: "redis"},
+		Redis: redis.New(address),
 	}
 	for _, opt := range opts {
 		opt(org)
@@ -37,5 +38,5 @@ func New(opts ...Option) (org *Redis) {
 
 //NewByRaw 通过json原串初始化
 func NewByRaw(raw string) (org *Redis) {
-	return New(WithRaw(raw))
+	return New("", WithRaw(raw))
 }

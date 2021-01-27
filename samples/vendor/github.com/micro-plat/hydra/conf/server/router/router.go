@@ -6,8 +6,6 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/asaskevich/govalidator"
-	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/lib4go/types"
 )
 
@@ -103,20 +101,20 @@ func (h *Routers) Append(path string, service string, action []string, opts ...O
 }
 
 //Match 根据请求路径匹配指定的路由配置
-func (h *Routers) Match(path string, method string) *Router {
+func (h *Routers) Match(path string, method string) (*Router, error) {
 	if path == "" || method == http.MethodOptions || method == http.MethodHead {
 		return &Router{
 			Path:   path,
 			Action: []string{method},
-		}
+		}, nil
 	}
 
 	for _, r := range h.Routers {
 		if r.Path == path && types.StringContains(r.Action, method) {
-			return r
+			return r, nil
 		}
 	}
-	panic(fmt.Sprintf("未找到与[%s][%s]匹配的路由", path, method))
+	return nil, fmt.Errorf("未找到与[%s][%s]匹配的路由", path, method)
 }
 
 //GetPath 获取所有路由信息
@@ -126,20 +124,4 @@ func (h *Routers) GetPath() []string {
 		list = append(list, v.Path)
 	}
 	return list
-}
-
-//GetConf 设置路由
-func GetConf(cnf conf.IServerConf) (router *Routers, err error) {
-	router = new(Routers)
-	_, err = cnf.GetSubObject(TypeNodeName, router)
-	if err == conf.ErrNoSetting || len(router.Routers) == 0 {
-		return NewRouters(), nil
-	}
-	if err != nil {
-		return nil, fmt.Errorf("获取路由(%s)失败:%w", cnf.GetServerPath(), err)
-	}
-	if b, err := govalidator.ValidateStruct(router); !b {
-		return nil, fmt.Errorf("路由(%s)配置有误:%w", cnf.GetServerPath(), err)
-	}
-	return router, nil
 }

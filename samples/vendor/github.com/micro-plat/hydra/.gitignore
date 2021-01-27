@@ -1,4 +1,3 @@
-logs
 !*.go
 *.pyc
 *.exe
@@ -14,5 +13,9 @@ flowserver*
 webserver*
 wsserver*
 jwtserver*
+testserver*
 examples/conf
 logger.toml
+consul*
+mqctestserver*
+rpctestservre*
