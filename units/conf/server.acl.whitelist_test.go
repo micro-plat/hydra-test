@@ -9,6 +9,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/server/acl/whitelist"
 	"github.com/micro-plat/lib4go/assert"
@@ -78,7 +79,9 @@ func TestWhiteListGetConf(t *testing.T) {
 
 	//初始化服务conf配置对象
 	conf := mocks.NewConfBy("hydraconf_whitelist_test", "whitelist")
-	confB := conf.API(":8081")
+	confB := conf.API("8081")
+	hydra.G.SysName = "apiserver"
+
 	for _, tt := range tests {
 		if !strings.EqualFold(tt.name, "节点不存在,获取默认对象") {
 			confB.WhiteList(tt.opts...)

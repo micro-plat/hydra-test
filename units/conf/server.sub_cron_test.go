@@ -20,7 +20,6 @@ func Test_cronSub_GetCRONTaskConf(t *testing.T) {
 	rgst, err := registry.GetRegistry("lm://.", global.Def.Log())
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取注册中心对象失败")
 
-	var nilTask *task.Tasks
 	tests := []struct {
 		name     string
 		opts     []*task.Task
@@ -28,7 +27,6 @@ func Test_cronSub_GetCRONTaskConf(t *testing.T) {
 		wantConf *task.Tasks
 	}{
 		{name: "1. Conf-CronSubGetCRONTaskConf-空task获取对象", opts: []*task.Task{}, wantErr: true, wantConf: &task.Tasks{Tasks: []*task.Task{}}},
-		{name: "2. Conf-CronSubGetCRONTaskConf-设置错误数据的task获取对象", opts: []*task.Task{task.NewTask("错误数据", "service1"), task.NewTask("错误数据1", "service2", task.WithDisable())}, wantErr: false, wantConf: nilTask},
 		{name: "3. Conf-CronSubGetCRONTaskConf-设置正确的task对象", opts: []*task.Task{task.NewTask("cron1", "service1"), task.NewTask("cron2", "service2", task.WithDisable())}, wantErr: true,
 			wantConf: task.NewTasks(task.NewTask("cron1", "service1"), task.NewTask("cron2", "service2", task.WithDisable()))},
 	}

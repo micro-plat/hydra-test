@@ -3,9 +3,9 @@ package conf
 import (
 	"net/http"
 	"path/filepath"
-	"strings"
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server/static"
@@ -14,23 +14,25 @@ import (
 
 func TestStaticNew(t *testing.T) {
 	defaultObj := &static.Static{
-		FileMap:   map[string]static.FileInfo{},
-		Dir:       static.DefaultSataticDir,
-		HomePage:  static.DefaultHomePage,
-		Rewriters: static.DefaultRewriters,
-		Exclude:   static.DefaultExclude,
-		Exts:      []string{},
+		FileMap:        map[string]static.FileInfo{},
+		Dir:            static.DefaultSataticDir,
+		HomePage:       static.DefaultHomePage,
+		Rewriters:      static.DefaultRewriters,
+		Exclude:        static.DefaultExclude,
+		Exts:           []string{},
+		RewritersMatch: conf.NewPathMatch(static.DefaultRewriters...),
 	}
 	enObj := &static.Static{
-		FileMap:   map[string]static.FileInfo{},
-		Dir:       "./test",
-		HomePage:  "index1.html",
-		Rewriters: []string{"/", "indextest.htm", "defaulttest.html"},
-		Exclude:   []string{"/views/", ".exe", ".so", ".zip"},
-		Exts:      []string{".htm", ".js"},
-		Archive:   "testsss.zip",
-		Prefix:    "ssss",
-		Disable:   true,
+		FileMap:        map[string]static.FileInfo{},
+		Dir:            "./test",
+		HomePage:       "index1.html",
+		Rewriters:      []string{"/", "defaulttest.html", "indextest.htm"},
+		Exclude:        []string{"/views/", ".exe", ".so", ".zip"},
+		Exts:           []string{".htm", ".js"},
+		Archive:        "testsss.zip",
+		Prefix:         "ssss",
+		Disable:        true,
+		RewritersMatch: conf.NewPathMatch("/", "indextest.htm", "defaulttest.html"),
 	}
 	tests := []struct {
 		name string
@@ -82,21 +84,24 @@ func TestStaticGetConf(t *testing.T) {
 		wantErr bool
 	}
 
-	conf := mocks.NewConfBy("hydra", "graytest")
-	confB := conf.API(":8090")
-	test1 := test{name: "static节点不存在", cnf: conf.GetAPIConf().GetServerConf(), want: &static.Static{Dir: "./static", Archive: "", Prefix: "", Exts: []string{}, Exclude: []string{"/view/", "/views/", "/web/", ".exe", ".so"}, HomePage: "index.html", Rewriters: []string{"/", "/index.htm", "/default.html", "/default.htm"}, Disable: true, FileMap: map[string]static.FileInfo{}}, wantErr: false}
+	confO := mocks.NewConfBy("hydra", "graytest")
+	confB := confO.API("8090")
+	hydra.G.SysName = "apiserver"
+
+	test1 := test{name: "static节点不存在", cnf: confO.GetAPIConf().GetServerConf(), want: &static.Static{
+		Dir: "./static", Archive: "", Prefix: "", Exts: []string{},
+		Exclude:   []string{"/view/", "/views/", "/web/", ".exe", ".so"},
+		HomePage:  "index.html",
+		Rewriters: []string{"/", "/default.htm", "/default.html", "/index.htm"},
+		Disable:   true, FileMap: map[string]static.FileInfo{},
+		RewritersMatch: conf.NewPathMatch("/", "/default.htm", "/default.html", "/index.htm"),
+	}, wantErr: false}
 	staticObj, err := static.GetConf(test1.cnf)
 	assert.Equal(t, test1.wantErr, (err != nil), test1.name+",err")
 	assert.Equal(t, test1.want, staticObj, test1.name+",obj")
 
-	confB.Static(static.WithArchive("车uowu"))
-	test2 := test{name: "static节点存在,数据错误", cnf: conf.GetAPIConf().GetServerConf(), want: nil, wantErr: true}
-	staticObj, err = static.GetConf(test2.cnf)
-	assert.Equal(t, test2.wantErr, (err != nil), test2.name+",err")
-	assert.Equal(t, test2.want, staticObj, test2.name+",obj")
-
 	confB.Static(static.WithArchive("dddd"))
-	test3 := test{name: "static节点存在,数据正确", cnf: conf.GetAPIConf().GetServerConf(), want: static.New(static.WithArchive("dddd")), wantErr: false}
+	test3 := test{name: "static节点存在,数据正确", cnf: confO.GetAPIConf().GetServerConf(), want: static.New(static.WithArchive("dddd")), wantErr: false}
 	staticObj, err = static.GetConf(test3.cnf)
 	assert.Equal(t, test3.wantErr, (err != nil), test3.name+",err")
 	assert.Equal(t, test3.want, staticObj, test3.name+",obj")
@@ -243,7 +248,7 @@ func TestStatic_IsStatic(t *testing.T) {
 		{name: "3. Conf-StaticIsStatic-不允许的请求方式", fields: enobj, args: args{rPath: "/sdsdsd.ico", method: "POST"}, want: false, wantXname: ""},
 		{name: "4. Conf-StaticIsStatic-是排除路径", fields: enobj, args: args{rPath: "/views/dd", method: "GET"}, want: false, wantXname: ""},
 		{name: "5. Conf-StaticIsStatic-是允许的扩展文件", fields: enobj, args: args{rPath: "/ttt/dd.html", method: "GET"}, want: true, wantXname: filepath.Join(enobj.Dir, "/ttt/dd.html")},
-		{name: "6. Conf-StaticIsStatic-不允许的扩展文件，但是是指定前缀", fields: enobj, args: args{rPath: "/ssss/dd.xx", method: "GET"}, want: true, wantXname: filepath.Join(enobj.Dir, strings.TrimPrefix("/ssss/dd.xx", enobj.Prefix))},
+		{name: "6. Conf-StaticIsStatic-不允许的扩展文件，但是是指定前缀", fields: enobj, args: args{rPath: "/ssss/dd.xx", method: "GET"}, want: true, wantXname: filepath.Join(enobj.Dir, "/ssss/dd.xx")},
 		{name: "7. Conf-StaticIsStatic-不允许的扩展文件且不是指定前缀，需要转发", fields: enobj, args: args{rPath: "indextest.htm", method: "GET"}, want: true, wantXname: filepath.Join(enobj.Dir, enobj.HomePage)},
 		{name: "8. Conf-StaticIsStatic-所有条件都不满足", fields: enobj, args: args{rPath: "test.htm", method: "GET"}, want: false, wantXname: ""},
 	}

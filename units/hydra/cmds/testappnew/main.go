@@ -16,6 +16,6 @@ const newRedisAddr = "192.168.5.79:6379"
 
 func main() {
 	hydra.Conf.Vars().Redis("5.79", varredis.New([]string{newRedisAddr}))
-	hydra.Conf.API(":19003")
+	hydra.Conf.API("19003")
 	app.Start()
 }

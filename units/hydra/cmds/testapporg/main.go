@@ -17,6 +17,6 @@ const ZKRegistryAddr = "zk://192.168.0.101"
 
 func main() {
 	hydra.Conf.Vars().Redis("5.79", varredis.New([]string{OrgRedisAddr}))
-	hydra.Conf.API(":19003")
+	hydra.Conf.API("19003")
 	app.Start()
 }

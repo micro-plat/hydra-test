@@ -111,7 +111,7 @@ func Test_request_Check(t *testing.T) {
 	}
 
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 	c, _ := gin.CreateTestContext(httptest.NewRecorder())
 
@@ -159,7 +159,7 @@ func Test_request_GetKeys(t *testing.T) {
 	}
 
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 	c, _ := gin.CreateTestContext(httptest.NewRecorder())
 
@@ -205,7 +205,7 @@ func Test_request_GetCookies(t *testing.T) {
 	}
 
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 	c, _ := gin.CreateTestContext(httptest.NewRecorder())
 

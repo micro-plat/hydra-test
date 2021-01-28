@@ -19,7 +19,7 @@ import (
 func TestSingleValueWatcher_Close(t *testing.T) {
 	//构建配置对象
 	confObj := mocks.NewConfBy("hydra_rgst_watcher_SingleValue", "rgtwatcMSingleValue")
-	confObj.API(":8080")
+	confObj.API("8080")
 	apiconf := confObj.GetAPIConf()
 	c := apiconf.GetServerConf()
 	log := logger.GetSession("hydra_rgst_watcher_SingleValue", ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
@@ -34,7 +34,7 @@ func TestSingleValueWatcher_Close(t *testing.T) {
 func TestSingleValueWatcher_Start(t *testing.T) {
 	//构建配置对象
 	confObj := mocks.NewConfBy("hydra_rgst_watcher_SingleValue1", "rgtwatcMSingleValue1")
-	confObj.API(":8080")
+	confObj.API("8080")
 	apiconf := confObj.GetAPIConf()
 	c := apiconf.GetServerConf()
 

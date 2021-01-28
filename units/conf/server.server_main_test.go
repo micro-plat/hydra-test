@@ -2,8 +2,11 @@ package conf
 
 import (
 	"encoding/json"
+	"fmt"
+	"strings"
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server"
@@ -18,7 +21,7 @@ import (
 func TestNewMainConf(t *testing.T) {
 	systemName := "sys1"
 	confM := mocks.NewConfBy("hydra1", "cluter1")
-	confM.API(":8080")
+	confM.API("8080")
 	confM.Conf().Pub("hydra1", systemName, "cluter1", "lm://.", true)
 
 	pubObj := server.NewServerPub("hydra1", systemName, global.API, "cluter1")
@@ -39,31 +42,34 @@ func TestNewMainConf(t *testing.T) {
 	vsion, err = mainConf.GetMainObject(&apiObj)
 	assert.Equal(t, true, err == nil, "获取主配置对象反序列化异常")
 	assert.Equal(t, vsion, mainConf.GetVersion(), "配置版本号不相同")
-	assert.Equal(t, ":8080", apiObj.Address, "配置的端口号不相同")
+	assert.Equal(t, "8080", apiObj.Address, "配置的端口号不相同")
 	assert.Equal(t, "start", apiObj.Status, "配置的Status不相同")
 
 	_, err = mainConf.GetSubConf("header")
-	assert.Equal(t, conf.ErrNoSetting, err, "获取header子配置异常")
+	assert.Equal(t, "header "+conf.ErrNoSetting.Error(), err.Error(), "获取header子配置异常")
 
 	_, err = mainConf.GetCluster("cluter1")
 	assert.Equal(t, true, err == nil, "获取集群对象异常")
 
 	_, err = mainConf.GetSubObject("header", &header.Headers{})
-	assert.Equal(t, conf.ErrNoSetting, err, "获取header子配置对象异常")
+	assert.Equal(t, "header "+conf.ErrNoSetting.Error(), err.Error(), "获取header子配置对象异常")
 
-	assert.Equal(t, true, mainConf.Has("router"), "router子配置是否存在判断失败")
 	assert.Equal(t, false, mainConf.Has("/auth/apikey"), "/auth/apikey子配置是否存在判断失败")
 
 	//从新设置完善的节点
 	systemName = "sys2"
 	confN := mocks.NewConfBy("hydra2", "cluter2")
-	confN.API(":8080")
-	subCOnf := confN.API(":8081", api.WithDisable(), api.WithDNS("192.168.0.101"), api.WithTrace(), api.WithTimeout(20, 20), api.WithHeaderReadTimeout(15))
-	subCOnf.APIKEY("111111", apikey.WithSHA256Mode())
-	confN.Conf().Pub("hydra2", systemName, "cluter2", "lm://.", true)
+	confN.API("8080")
+	hydra.G.SysName = systemName
+
+	confN.API("8081", api.WithDisable(), api.WithDNS("www.a.com"), api.WithTrace(), api.WithTimeout(20, 20), api.WithHeaderReadTimeout(15)).
+		APIKEY("123456789", apikey.WithSHA256Mode())
+	err = confN.Conf().Pub("hydra2", systemName, "cluter2", "lm://.", true)
+	fmt.Println("Pub:", err)
 	pubObj = server.NewServerPub("hydra2", systemName, global.API, "cluter2")
 	mainPath = pubObj.GetServerPath()
 	mainConf, err = server.NewServerConf(confN.PlatName, systemName, global.API, confN.ClusterName, confN.Registry)
+	fmt.Println("err:", err)
 	assert.Equal(t, true, err == nil, "获取manconf异常1")
 	assert.Equal(t, true, mainConf.IsTrace(), "IsTrace与配置不匹配1")
 	assert.Equal(t, false, mainConf.IsStarted(), "IsStarted与配置不匹配1")
@@ -77,24 +83,20 @@ func TestNewMainConf(t *testing.T) {
 	vsion, err = mainConf.GetMainObject(&apiObj)
 	assert.Equal(t, true, err == nil, "获取主配置对象反序列化异常1")
 	assert.Equal(t, vsion, mainConf.GetVersion(), "配置版本号不相同1")
-	assert.Equal(t, ":8081", apiObj.Address, "配置的端口号不相同")
+	assert.Equal(t, "8081", apiObj.Address, "配置的端口号不相同")
 	assert.Equal(t, "stop", apiObj.Status, "配置的Status不相同")
 	assert.Equal(t, 20, apiObj.RTimeout, "配置的RTimeout不相同")
 	assert.Equal(t, 20, apiObj.WTimeout, "配置的WTimeout不相同")
 	assert.Equal(t, true, apiObj.Trace, "配置的Trace不相同")
 	assert.Equal(t, 15, apiObj.RHTimeout, "配置的RHTimeout不相同")
-	assert.Equal(t, "192.168.0.101", apiObj.Domain, "配置的Domain不相同")
+	assert.Equal(t, "www.a.com", apiObj.Domain, "配置的Domain不相同")
 
 	subObj, err := mainConf.GetSubConf("/auth/apikey")
+	fmt.Println("err ", err)
 	assert.Equal(t, true, err == nil, "获取apikey子配置异常")
-	assert.Equal(t, "111111", subObj.GetString("secret"), "apikey子配置secret不匹配1")
+	assert.Equal(t, "123456789", subObj.GetString("secret"), "apikey子配置secret不匹配1")
 	assert.Equal(t, "SHA256", subObj.GetString("mode"), "apikey子配置mod不匹配1")
 
-	vsion, err = mainConf.GetSubObject("/auth/apikey", &apikey.APIKeyAuth{})
-	assert.Equal(t, vsion, subObj.GetVersion(), "获取apikey子配置版本号不匹配")
-
-	assert.Equal(t, true, mainConf.Has("router"), "router子配置是否存在判断失败1")
-	assert.Equal(t, true, mainConf.Has("/auth/apikey"), "/auth/apikey子配置是否存在判断失败1")
 }
 
 func TestMainConf_IsTrace(t *testing.T) {
@@ -111,7 +113,7 @@ func TestMainConf_IsTrace(t *testing.T) {
 
 	for _, tt := range tests {
 		confM := mocks.NewConfBy(platName, clusterName)
-		confM.API(":8080", tt.opts...)
+		confM.API("8080", tt.opts...)
 		confM.Conf().Pub(platName, systemName, clusterName, "lm://.", true)
 		mainConf, err := server.NewServerConf(confM.PlatName, systemName, global.API, confM.ClusterName, confM.Registry)
 		assert.Equal(t, tt.wantErr, err == nil, tt.name+",err")
@@ -134,7 +136,7 @@ func TestMainConf_IsStarted(t *testing.T) {
 
 	for _, tt := range tests {
 		confM := mocks.NewConfBy(platName, clusterName)
-		confM.API(":8080", tt.opts...)
+		confM.API("8080", tt.opts...)
 		confM.Conf().Pub(platName, systemName, clusterName, "lm://.", true)
 		mainConf, err := server.NewServerConf(confM.PlatName, systemName, global.API, confM.ClusterName, confM.Registry)
 		assert.Equal(t, tt.wantErr, err == nil, tt.name+",err")
@@ -153,7 +155,7 @@ func TestMainConf_GetRegistry(t *testing.T) {
 	}
 	for _, tt := range tests {
 		confM := mocks.NewConfBy(platName, clusterName)
-		confM.API(":8080")
+		confM.API("8080")
 		confM.Conf().Pub(platName, systemName, clusterName, "lm://.", true)
 		mainConf, err := server.NewServerConf(confM.PlatName, systemName, global.API, confM.ClusterName, confM.Registry)
 		assert.Equal(t, tt.wantErr, err == nil, tt.name+",err")
@@ -173,7 +175,7 @@ func TestMainConf_GetVersion(t *testing.T) {
 	}
 	for _, tt := range tests {
 		confM := mocks.NewConfBy(platName, clusterName)
-		confM.API(":8080")
+		confM.API("8080")
 		confM.Conf().Pub(platName, systemName, clusterName, "lm://.", true)
 		mainConf, err := server.NewServerConf(confM.PlatName, systemName, global.API, confM.ClusterName, confM.Registry)
 		assert.Equal(t, tt.wantErr, err == nil, tt.name+",err")
@@ -197,7 +199,7 @@ func TestMainConf_GetMainConf(t *testing.T) {
 	}
 	for _, tt := range tests {
 		confM := mocks.NewConfBy(platName, clusterName)
-		confM.API(":8080", tt.opts...)
+		confM.API("8080", tt.opts...)
 		confM.Conf().Pub(platName, systemName, clusterName, "lm://.", true)
 		mainConf, err := server.NewServerConf(confM.PlatName, systemName, global.API, confM.ClusterName, confM.Registry)
 		assert.Equal(t, tt.wantErr, err == nil, tt.name+",err")
@@ -221,7 +223,7 @@ func TestMainConf_GetMainObject(t *testing.T) {
 	}
 	for _, tt := range tests {
 		confM := mocks.NewConfBy(platName, clusterName)
-		confM.API(":8080", tt.opts...)
+		confM.API("8080", tt.opts...)
 		confM.Conf().Pub(platName, systemName, clusterName, "lm://.", true)
 		mainConf, err := server.NewServerConf(confM.PlatName, systemName, global.API, confM.ClusterName, confM.Registry)
 		assert.Equal(t, tt.wantErr, err == nil, tt.name+",err")
@@ -248,12 +250,12 @@ func TestMainConf_GetSubConf(t *testing.T) {
 		opts    []apikey.Option
 		wantErr bool
 	}{
-		{name: "1. Conf-MainConfGetSubConf-不设置子节点", isSet: false, secert: "", opts: []apikey.Option{}, wantErr: true},
-		{name: "2. Conf-MainConfGetSubConf-设置好的子节点获取对象", isSet: true, secert: "123456", opts: []apikey.Option{apikey.WithDisable(), apikey.WithExcludes("xxx", "yyy"), apikey.WithSHA1Mode()}, wantErr: true},
+		{name: "1. Conf-MainConfGetSubConf-不设置子节点", isSet: false, secert: "123456789", opts: []apikey.Option{}, wantErr: true},
+		{name: "2. Conf-MainConfGetSubConf-设置好的子节点获取对象", isSet: true, secert: "123456789", opts: []apikey.Option{apikey.WithDisable(), apikey.WithExcludes("xxx", "yyy"), apikey.WithSHA1Mode()}, wantErr: true},
 	}
 	for _, tt := range tests {
 		confM := mocks.NewConfBy(platName, clusterName)
-		confN := confM.API(":8080", api.WithDisable())
+		confN := confM.API("8080", api.WithDisable(), api.WithDNS("www.a.com"))
 		if tt.isSet {
 			confN.APIKEY(tt.secert, tt.opts...)
 		}
@@ -269,7 +271,7 @@ func TestMainConf_GetSubConf(t *testing.T) {
 			assert.Equal(t, apikeykk.Disable, subObj.GetBool("disable"), tt.name+"置disable不匹配")
 			assert.Equal(t, len(apikeykk.Excludes), len(subObj.GetArray("excludes")), tt.name+"excludes不匹配")
 		} else {
-			assert.Equal(t, true, err == conf.ErrNoSetting, tt.name+",err1")
+			assert.Equal(t, true, strings.Contains(err.Error(), conf.ErrNoSetting.Error()), tt.name+",err1")
 		}
 	}
 }
@@ -284,7 +286,7 @@ func TestMainConf_GetCluster(t *testing.T) {
 	}
 	for _, tt := range tests {
 		confM := mocks.NewConfBy(platName, clusterName)
-		confM.API(":8080", api.WithDisable())
+		confM.API("8080", api.WithDisable())
 		confM.Conf().Pub(platName, systemName, clusterName, "lm://.", true)
 		mainConf, err := server.NewServerConf(confM.PlatName, systemName, global.API, confM.ClusterName, confM.Registry)
 		assert.Equal(t, tt.wantErr, err == nil, tt.name+",err")
@@ -302,12 +304,12 @@ func TestMainConf_GetSubObject(t *testing.T) {
 		opts    []apikey.Option
 		wantErr bool
 	}{
-		{name: "1. Conf-MainConfGetSubObject-不设置子节点", isSet: false, secert: "", opts: []apikey.Option{}, wantErr: true},
-		{name: "2. Conf-MainConfGetSubObject-设置好的子节点获取对象", isSet: true, secert: "123456", opts: []apikey.Option{apikey.WithDisable(), apikey.WithExcludes("xxx", "yyy"), apikey.WithSHA1Mode()}, wantErr: true},
+		{name: "1. Conf-MainConfGetSubObject-不设置子节点", isSet: false, secert: "123456789", opts: []apikey.Option{}, wantErr: true},
+		{name: "2. Conf-MainConfGetSubObject-设置好的子节点获取对象", isSet: true, secert: "123456789", opts: []apikey.Option{apikey.WithDisable(), apikey.WithExcludes("xxx", "yyy"), apikey.WithSHA1Mode()}, wantErr: true},
 	}
 	for _, tt := range tests {
 		confM := mocks.NewConfBy(platName, clusterName)
-		confN := confM.API(":8080", api.WithDisable())
+		confN := confM.API("8080", api.WithDisable(), api.WithDNS("www.a.com"))
 		if tt.isSet {
 			confN.APIKEY(tt.secert, tt.opts...)
 		}
@@ -326,7 +328,7 @@ func TestMainConf_GetSubObject(t *testing.T) {
 			assert.Equal(t, vsion1, vsion, tt.name+",vsion")
 			assert.Equal(t, apikeyObj1, apikeyObj, tt.name+"secret不匹配")
 		} else {
-			assert.Equal(t, tt.wantErr, err == conf.ErrNoSetting, tt.name+",err1")
+			assert.Equal(t, tt.wantErr, strings.Contains(err.Error(), conf.ErrNoSetting.Error()), tt.name+",err1")
 			assert.Equal(t, int32(0), vsion, tt.name+",vsion")
 		}
 	}
@@ -345,14 +347,13 @@ func TestMainConf_Has(t *testing.T) {
 	}
 	for _, tt := range tests {
 		confM := mocks.NewConfBy(platName, clusterName)
-		confN := confM.API(":8080", tt.opts...)
+		confN := confM.API("8080", tt.opts...)
 		if len(tt.subOpts) > 0 {
 			confN.APIKEY("123456", tt.subOpts...)
 		}
 		confM.Conf().Pub(platName, systemName, clusterName, "lm://.", true)
 		mainConf, err := server.NewServerConf(confM.PlatName, systemName, global.API, confM.ClusterName, confM.Registry)
 		assert.Equal(t, tt.wantErr, err == nil, tt.name+",err")
-		assert.Equal(t, true, mainConf.Has("router"), "router子配置是否存在判断失败1")
 		if len(tt.subOpts) > 0 {
 			assert.Equal(t, true, mainConf.Has("/auth/apikey"), "/auth/apikey子配置是否存在判断失败1")
 		}

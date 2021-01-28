@@ -20,7 +20,7 @@ func Test_varSub_GetRLogConf(t *testing.T) {
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取注册中心对象失败")
 
 	confM := mocks.NewConfBy(platName, clusterName)
-	confM.API(":8080")
+	confM.API("8080")
 	confM.Conf().Pub(platName, sysName, clusterName, "lm://.", true)
 	gotS, err := app.NewAPPConfBy(platName, sysName, serverType, clusterName, rgst)
 	assert.Equal(t, true, err == nil, "测试conf初始化,设置主节点")

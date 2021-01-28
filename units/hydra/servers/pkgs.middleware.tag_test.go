@@ -12,10 +12,10 @@ import (
 // tag中间件只有在websocket在使用    现在websocket服务暂时不开放
 func TestTag(t *testing.T) {
 	confMock := mocks.NewConfBy("middleware_tag_test1", "tag")
-	confMock.API(":5454")
+	confMock.API("5454")
 	confMock.RPC(":6541")
 	confMock.MQC("redis://redisname")
-	confMock.Web(":8541")
+	confMock.Web("8541")
 	confMock.WS(":5214")
 	confMock.CRON()
 

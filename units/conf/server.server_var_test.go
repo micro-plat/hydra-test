@@ -1,6 +1,7 @@
 package conf
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/micro-plat/hydra-test/units/mocks"
@@ -23,17 +24,17 @@ func TestNewVarConf(t *testing.T) {
 	varConf, err := vars.NewVarConf("varConfPath", confM.Registry)
 	assert.Equal(t, true, err == nil, "初始化varconf失败")
 	dbConf, err := varConf.GetConf("db", "db")
-	assert.Equal(t, conf.ErrNoSetting, err, "获取db节点配置异常")
+	assert.Equal(t, true, strings.Contains(err.Error(), conf.ErrNoSetting.Error()), "获取db节点配置异常")
 	assert.Equal(t, conf.EmptyRawConf, dbConf, "获取db节点配置数据不正确")
 	assert.Equal(t, int32(0), varConf.GetVersion(), "获取的版本号是错误的")
 
 	vsion, err := varConf.GetConfVersion("db", "db")
-	assert.Equal(t, conf.ErrNoSetting, err, "获取db子节点版本号异常")
+	assert.Equal(t, true, strings.Contains(err.Error(), conf.ErrNoSetting.Error()), "获取db子节点版本号异常")
 	assert.Equal(t, int32(0), vsion, "获取db子节点版本号不正确")
 
 	dbObj := db.DB{}
 	vsion, err = varConf.GetObject("db", "db", &dbObj)
-	assert.Equal(t, conf.ErrNoSetting, err, "获取db子节点对象版本号异常")
+	assert.Equal(t, true, strings.Contains(err.Error(), conf.ErrNoSetting.Error()), "获取db子节点对象版本号异常")
 	assert.Equal(t, int32(0), vsion, "获取db子节点对象版本号不正确")
 	assert.Equal(t, db.DB{}, dbObj, "获取db子节点对象失败")
 
@@ -48,16 +49,16 @@ func TestNewVarConf(t *testing.T) {
 	varConf, err = vars.NewVarConf(varConfPath, confM.Registry)
 	assert.Equal(t, true, err == nil, "初始化varconf失败1")
 	dbConf, err = varConf.GetConf("db", "db")
-	assert.Equal(t, conf.ErrNoSetting, err, "获取db节点配置异常1")
+	assert.Equal(t, true, strings.Contains(err.Error(), conf.ErrNoSetting.Error()), "获取db节点配置异常1")
 	assert.Equal(t, conf.EmptyRawConf, dbConf, "获取db节点配置数据不正确1")
 
 	vsion, err = varConf.GetConfVersion("db", "db")
-	assert.Equal(t, conf.ErrNoSetting, err, "获取db子节点版本号异常1")
+	assert.Equal(t, true, strings.Contains(err.Error(), conf.ErrNoSetting.Error()), "获取db子节点版本号异常1")
 	assert.Equal(t, int32(0), vsion, "获取db子节点版本号不正确1")
 
 	dbObj = db.DB{}
 	vsion, err = varConf.GetObject("db", "db", &dbObj)
-	assert.Equal(t, conf.ErrNoSetting, err, "获取db子节点对象版本号异常1")
+	assert.Equal(t, true, strings.Contains(err.Error(), conf.ErrNoSetting.Error()), "获取db子节点对象版本号异常1")
 	assert.Equal(t, int32(0), vsion, "获取db子节点对象版本号不正确1")
 	assert.Equal(t, db.DB{}, dbObj, "获取db子节点对象失败1")
 
@@ -176,7 +177,7 @@ func TestVarConf_GetConf(t *testing.T) {
 			assert.Equal(t, 3, dbConf.GetInt("maxIdle"), "获取db节点maxIdle配置数据不正确")
 			assert.Equal(t, 600, dbConf.GetInt("lifeTime"), "获取db节点lifeTime配置数据不正确")
 		} else {
-			assert.Equal(t, conf.ErrNoSetting, err, "获取db节点配置异常1")
+			assert.Equal(t, true, strings.Contains(err.Error(), conf.ErrNoSetting.Error()), "获取db节点配置异常1")
 			assert.Equal(t, conf.EmptyRawConf, dbConf, "获取db节点配置数据不正确1")
 		}
 	}
@@ -270,7 +271,7 @@ func TestVarConf_GetObject(t *testing.T) {
 			assert.Equal(t, 600, dbObj.LifeTime, "获取db子节点对象失败,LifeTime")
 			assert.Equal(t, "taosy/123456@tnsName", dbObj.ConnString, "获取db子节点对象失败,ConnString")
 		} else {
-			assert.Equal(t, conf.ErrNoSetting, err, "获取db子节点对象版本号异常1")
+			assert.Equal(t, true, strings.Contains(err.Error(), conf.ErrNoSetting.Error()), "获取db子节点对象版本号异常1")
 			assert.Equal(t, int32(0), vsion, "获取db子节点对象版本号不正确1")
 			assert.Equal(t, db.DB{}, dbObj, "获取db子节点对象失败1")
 		}

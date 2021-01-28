@@ -8,6 +8,7 @@ package conf
 import (
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server/auth/ras"
@@ -89,14 +90,15 @@ func TestAuthRASGetConf(t *testing.T) {
 	}
 
 	conf := mocks.NewConfBy("hydraconf_ras_test2", "rastest")
-	confB := conf.API(":8081")
+	confB := conf.API("8081")
+	hydra.G.SysName = "apiserver"
 	test1 := test{name: "1.1. Conf-AuthRASGetConf-未设置ras节点", opts: []ras.Option{}, wantAuths: &ras.RASAuth{Disable: true}, wantErr: false}
 	gotAuths, err := ras.GetConf(conf.GetAPIConf().GetServerConf())
 	assert.Equal(t, (err != nil), test1.wantErr, test1.name+",err")
 	assert.Equal(t, gotAuths, test1.wantAuths, test1.name)
 
 	tests := []test{
-		{name: "2.1. Conf-AuthRASGetConf-设置ras数据格式错误节点", opts: []ras.Option{ras.WithAuths(ras.New(""))}, wantAuths: ras.NewRASAuth(ras.WithAuths(ras.New(""))), wantErr: true, wantErrStr: "RASAuth配置数据有误"},
+		{name: "2.1. Conf-AuthRASGetConf-设置ras数据格式错误节点", opts: []ras.Option{ras.WithAuths(ras.New("a"))}, wantAuths: ras.NewRASAuth(ras.WithAuths(ras.New("a"))), wantErr: false, wantErrStr: "RASAuth配置数据有误"},
 		{name: "2.2. Conf-AuthRASGetConf-设置正确的配置数据", opts: []ras.Option{ras.WithAuths(ras.New("taosy", ras.WithRequest("/t1/t2")))},
 			wantAuths: ras.NewRASAuth(ras.WithAuths(ras.New("taosy", ras.WithRequest("/t1/t2")))), wantErr: false, wantErrStr: ""},
 	}

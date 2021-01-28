@@ -42,7 +42,7 @@ func TestMultiValueWatcher_Start(t *testing.T) {
 
 	//构建配置对象
 	confObj := mocks.NewConfBy("hydra_rgst_watcher_MultiValue2", "rgtwatcMultiValueest2")
-	confObj.API(":8080")
+	confObj.API("8080")
 	apiconf := confObj.GetAPIConf()
 	c := apiconf.GetServerConf()
 

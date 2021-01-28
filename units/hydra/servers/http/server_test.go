@@ -42,7 +42,7 @@ func TestServer_GetAddress(t *testing.T) {
 
 func setAPICacheConf() {
 	confObj := mocks.NewConfBy("hydra_server_test", "servertest") //构建对象
-	confObj.API(":58080")                                         //初始化参数
+	confObj.API("58080")                                          //初始化参数
 	serverConf := confObj.GetAPIConf()                            //获取配置
 	_, _ = http.NewResponsive(serverConf)
 }
@@ -131,7 +131,7 @@ func TestServer_Start_WithSSL(t *testing.T) {
 	}
 
 	confObj := mocks.NewConfBy("hydra_server_test1", "servertest1") //构建对象
-	confObj.API(":58081")                                           //初始化参数
+	confObj.API("58081")                                            //初始化参数
 	serverConf := confObj.GetAPIConf()                              //获取配置
 	_, _ = http.NewResponsive(serverConf)
 
@@ -169,7 +169,7 @@ func (n *okObj) Handle(ctx context.IContext) interface{} { return "success" }
 func BenchmarkHttpServer(b *testing.B) {
 	oncelock.Do(func() {
 		mockConf := mocks.NewConfBy("httpserver", "Benchmarktestserver")
-		mockConf.API(":550010")
+		mockConf.API("550010")
 		serverConf = mockConf.GetAPIConf()
 		app.Cache.Save(serverConf)
 

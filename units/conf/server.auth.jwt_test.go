@@ -9,6 +9,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server/auth/jwt"
@@ -21,9 +22,9 @@ func TestNewJWT(t *testing.T) {
 		opts []jwt.Option
 		want *jwt.JWTAuth
 	}{
-		{name: "1. Conf-NewJWT-设置secert", opts: []jwt.Option{jwt.WithSecret("12345678")}, want: &jwt.JWTAuth{Name: "Authorization-Jwt", Mode: "HS512", Secret: "12345678", ExpireAt: 86400, Source: "COOKIE", PathMatch: conf.NewPathMatch()}},
-		{name: "2. Conf-NewJWT-设置disable", opts: []jwt.Option{jwt.WithSecret("12345678"), jwt.WithDisable()}, want: &jwt.JWTAuth{Name: "Authorization-Jwt", Mode: "HS512", Secret: "12345678", Disable: true, ExpireAt: 86400, Source: "COOKIE", PathMatch: conf.NewPathMatch()}},
-		{name: "3. Conf-NewJWT-设置Enable", opts: []jwt.Option{jwt.WithSecret("12345678"), jwt.WithEnable()}, want: &jwt.JWTAuth{Name: "Authorization-Jwt", Mode: "HS512", Secret: "12345678", Disable: false, ExpireAt: 86400, Source: "COOKIE", PathMatch: conf.NewPathMatch()}},
+		{name: "1. Conf-NewJWT-设置secert", opts: []jwt.Option{jwt.WithSecret("12345678")}, want: &jwt.JWTAuth{Name: "Authorization", Mode: "HS512", Secret: "12345678", ExpireAt: 86400, Source: "COOKIE", PathMatch: conf.NewPathMatch()}},
+		{name: "2. Conf-NewJWT-设置disable", opts: []jwt.Option{jwt.WithSecret("12345678"), jwt.WithDisable()}, want: &jwt.JWTAuth{Name: "Authorization", Mode: "HS512", Secret: "12345678", Disable: true, ExpireAt: 86400, Source: "COOKIE", PathMatch: conf.NewPathMatch()}},
+		{name: "3. Conf-NewJWT-设置Enable", opts: []jwt.Option{jwt.WithSecret("12345678"), jwt.WithEnable()}, want: &jwt.JWTAuth{Name: "Authorization", Mode: "HS512", Secret: "12345678", Disable: false, ExpireAt: 86400, Source: "COOKIE", PathMatch: conf.NewPathMatch()}},
 		{name: "4. Conf-NewJWT-设置自定义对象", opts: []jwt.Option{jwt.WithSecret("12345678"), jwt.WithHeader(), jwt.WithExcludes("/t1/**"), jwt.WithExpireAt(1000), jwt.WithMode("ES256"), jwt.WithName("test"), jwt.WithAuthURL("1111")}, want: &jwt.JWTAuth{Name: "test", AuthURL: "1111", Mode: "ES256", Secret: "12345678", ExpireAt: 1000, Source: "HEADER", Excludes: []string{"/t1/**"}, PathMatch: conf.NewPathMatch("/t1/**")}},
 	}
 	for _, tt := range tests {
@@ -45,7 +46,8 @@ func TestJWTGetConf(t *testing.T) {
 	}
 
 	conf := mocks.NewConfBy("hydraconf_jwt_test2", "jwttest")
-	confB := conf.API(":8081")
+	confB := conf.API("8081")
+	hydra.G.SysName = "apiserver"
 	for _, tt := range tests {
 		if !strings.EqualFold(tt.name, "1. Conf-JWTGetConf-未设置jwt节点") {
 			confB.Jwt(tt.opts...)

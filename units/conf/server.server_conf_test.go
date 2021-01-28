@@ -22,7 +22,6 @@ import (
 	"github.com/micro-plat/hydra/conf/server/mqc"
 	"github.com/micro-plat/hydra/conf/server/queue"
 	"github.com/micro-plat/hydra/conf/server/render"
-	"github.com/micro-plat/hydra/conf/server/router"
 	"github.com/micro-plat/hydra/conf/server/static"
 	"github.com/micro-plat/hydra/conf/server/task"
 	"github.com/micro-plat/hydra/conf/vars"
@@ -42,10 +41,11 @@ func TestNewEmptyServerConf(t *testing.T) {
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取注册中心对象失败")
 
 	confM := mocks.NewConfBy(platName, clusterName)
+	confM.MQC("redis://redis").Queue(queue.NewQueue("a", "b"))
 	gotS, err := app.NewAPPConfBy(platName, sysName, serverType, clusterName, rgst)
 	assert.Equal(t, false, err == nil, "测试conf初始化,没有设置主节点")
 
-	confM.API(":8080")
+	confM.API("8080")
 	confM.Conf().Pub(platName, sysName, clusterName, "lm://.", true)
 	gotS, err = app.NewAPPConfBy(platName, sysName, serverType, clusterName, rgst)
 	assert.Equal(t, true, err == nil, "测试conf初始化,设置主节点")
@@ -76,12 +76,9 @@ func TestNewEmptyServerConf(t *testing.T) {
 
 	staticConf, err := gotS.GetStaticConf()
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取static对象失败")
-	assert.Equal(t, &static.Static{Dir: "./static", Archive: "", Prefix: "", Exts: []string{}, Exclude: []string{"/view/", "/views/", "/web/", ".exe", ".so"}, HomePage: "index.html", Rewriters: []string{"/", "/index.htm", "/default.html", "/default.htm"}, Disable: true, FileMap: map[string]static.FileInfo{}},
+	rwers := []string{"/", "/default.htm", "/default.html", "/index.htm"}
+	assert.Equal(t, &static.Static{Dir: "./static", Archive: "", Prefix: "", Exts: []string{}, Exclude: []string{"/view/", "/views/", "/web/", ".exe", ".so"}, HomePage: "index.html", Rewriters: rwers, Disable: true, FileMap: map[string]static.FileInfo{}, RewritersMatch: conf.NewPathMatch(rwers...)},
 		staticConf, "测试conf初始化,判断static节点对象")
-
-	routerConf, err := gotS.GetRouterConf()
-	assert.Equal(t, true, err == nil, "测试conf初始化,获取router对象失败")
-	assert.Equal(t, router.NewRouters(), routerConf, "测试conf初始化,判断router节点对象")
 
 	apikeyConf, err := gotS.GetAPIKeyConf()
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取apikey对象失败")
@@ -118,9 +115,11 @@ func TestNewEmptyServerConf(t *testing.T) {
 	_, err = gotS.GetMQCMainConf()
 	assert.Equal(t, false, err == nil, "测试conf初始化,获取mqc对象失败")
 
-	queuesObj, err := gotS.GetMQCQueueConf()
-	assert.Equal(t, true, err == nil, "测试conf初始化,获取queues对象失败")
-	assert.Equal(t, &queue.Queues{}, queuesObj, "测试conf初始化,判断queues节点对象")
+	//todo:mqc是在服务onready 之后才发布到注册中心，当前情况下没有队列
+	// queuesObj, err := gotS.GetMQCQueueConf()
+	// fmt.Println("err:", err)
+	// assert.Equal(t, true, err == nil, "测试conf初始化,获取queues对象失败")
+	// assert.Equal(t, &queue.Queues{}, queuesObj, "测试conf初始化,判断queues节点对象")
 
 	layoutObj, err := gotS.GetRLogConf()
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取layout对象失败")
@@ -136,7 +135,7 @@ func TestNewAPIServerConf(t *testing.T) {
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取注册中心对象失败")
 
 	confM := mocks.NewConfBy(platName, clusterName)
-	confN := confM.API(":8080", api.WithDisable(), api.WithTrace(), api.WithDNS("ip1"), api.WithHeaderReadTimeout(10), api.WithTimeout(11, 11))
+	confN := confM.API("8080", api.WithDisable(), api.WithTrace(), api.WithDNS("ip1"), api.WithHeaderReadTimeout(10), api.WithTimeout(11, 11))
 	confN.APIKEY("123456", apikey.WithDisable(), apikey.WithSHA256Mode(), apikey.WithExcludes("/p1/p2"))
 	confN.Basic(basic.WithDisable(), basic.WithUP("basicName", "basicPwd"), basic.WithExcludes("/basic/basic1"))
 	confN.BlackList(blacklist.WithEnable(), blacklist.WithIP("192.168.0.121"))
@@ -187,10 +186,6 @@ func TestNewAPIServerConf(t *testing.T) {
 		static.WithExts(".htm"), static.WithArchive("testsss"), static.AppendExts(".js"), static.WithPrefix("ssss"), static.WithDisable(), static.WithExclude("/views/", ".exe", ".so", ".zip"))
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取static对象失败")
 	assert.Equal(t, staticC, staticConf, "测试conf初始化,判断static节点对象")
-
-	routerConf, err := gotS.GetRouterConf()
-	assert.Equal(t, true, err == nil, "测试conf初始化,获取router对象失败")
-	assert.Equal(t, router.NewRouters(), routerConf, "测试conf初始化,判断router节点对象")
 
 	apikeyConf, err := gotS.GetAPIKeyConf()
 	apikeyC := apikey.New("123456", apikey.WithDisable(), apikey.WithSHA256Mode(), apikey.WithExcludes("/p1/p2"))

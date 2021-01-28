@@ -20,8 +20,8 @@ import (
 
 func TestNewResponsive(t *testing.T) {
 	confObj := mocks.NewConf() //构建对象
-	confObj.API(":55003")      //初始化参数
-	confObj.Web(":55002")      //初始化参数
+	confObj.API("55003")       //初始化参数
+	confObj.Web("55002")       //初始化参数
 	confObj.WS(":55001")       //初始化参数
 	tests := []struct {
 		name    string
@@ -206,7 +206,7 @@ func TestResponsive_StartWS(t *testing.T) {
 
 func TestResponsive_StartWeb(t *testing.T) {
 	confObj := mocks.NewConfBy("serverhttp_test_respince1", "testhttpserver1") //构建对象
-	confObj.Web(":55111")                                                      //初始化参数
+	confObj.Web("55111")                                                       //初始化参数
 	reg := confObj.Registry
 	tests := []struct {
 		name          string
@@ -253,7 +253,7 @@ func TestResponsive_StartWeb(t *testing.T) {
 		//创建节点使服务发布报错
 		if tt.isServerPub {
 			newConfObj := mocks.NewConfBy("serverhttp_test_respince1", "testhttpserver1", "fs://./") //构建对象
-			newConfObj.Web(":55111")
+			newConfObj.Web("55111")
 			tt.cnf = newConfObj.GetWebConf()
 			path := "./serverhttp_test_respince1/webserver/web/testhttpserver1/servers"
 			os.RemoveAll(path) //删除文件夹
@@ -310,7 +310,7 @@ func TestResponsive_StartWeb(t *testing.T) {
 
 func TestResponsive_StartAPI(t *testing.T) {
 	confObj := mocks.NewConfBy("serverhttp_test_respince", "testhttpserver")
-	confObj.API(":55004") //初始化参数
+	confObj.API("55004") //初始化参数
 	reg := confObj.Registry
 	tests := []struct {
 		name          string
@@ -356,7 +356,7 @@ func TestResponsive_StartAPI(t *testing.T) {
 		//创建节点使服务发布报错
 		if tt.isServerPub {
 			newConfObj := mocks.NewConfBy("serverhttp_test_respince", "testhttpserver", "fs://./") //构建对象
-			newConfObj.API(":55004")
+			newConfObj.API("55004")
 			tt.cnf = newConfObj.GetAPIConf()
 			path := "./serverhttp_test_respince/apiserver/api/testhttpserver/servers"
 			os.RemoveAll(path) //删除文件夹
@@ -412,7 +412,7 @@ func TestResponsive_StartAPI(t *testing.T) {
 
 func TestResponsive_Notify(t *testing.T) {
 	confObj := mocks.NewConfBy("hydranotifyddd", "xdfdj") //构建对象
-	confObj.API(":55501")                                 //初始化参数
+	confObj.API("55501")                                  //初始化参数
 	cnf := confObj.GetAPIConf()
 	rsp, err := http.NewResponsive(cnf)
 

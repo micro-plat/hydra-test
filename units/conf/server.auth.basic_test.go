@@ -9,6 +9,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server/auth/basic"
@@ -75,7 +76,8 @@ func TestBasicGetConf(t *testing.T) {
 	}
 
 	conf := mocks.NewConfBy("hydraconf_basic_test2", "basic")
-	confB := conf.API(":8081")
+	confB := conf.API("8081")
+	hydra.G.SysName = "apiserver"
 	for _, tt := range tests {
 		if !strings.EqualFold(tt.name, "basic节点不存在") {
 			confB.Basic(tt.opts...)

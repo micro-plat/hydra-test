@@ -24,39 +24,6 @@ func getTestData(serviceAddr, clusterID string) string {
 	return string(buff)
 }
 
-func TestPublisher_PubRPCServiceNode(t *testing.T) {
-
-	confObj := mocks.NewConfBy("rgst_publish_test", "publishrgt") //构建对象
-	confObj.API(":8080")
-	confObj.Service.API.Add("/api1", "/api1", []string{"GET"})
-	confObj.Service.API.Add("/api2", "/api1", []string{"GET"})
-	confObj.Service.API.Add("/api3", "/api1", []string{"GET"})
-	confObj.Service.API.Add("/api4", "/api1", []string{"GET"})
-	confObj.Service.API.Add("/api5", "/api1", []string{"GET"})
-	s := confObj.GetAPIConf() //初始化参数
-	c := s.GetServerConf()    //获取配置
-	lm := c.GetRegistry()
-
-	p := pub.New(c)
-	i := 1
-	router, _ := s.GetRouterConf()
-	for _, service := range router.GetPath() {
-		got, err := p.PubRPCServiceNode("127.0.0.1:9999", service, getTestData("127.0.0.1:9999", c.GetServerID()))
-		assert.Equal(t, false, err != nil, "rpc服务发布")
-		//验证pubs长度
-		assert.Equal(t, i, len(got), "rpc服务发布")
-		i++
-
-		//验证节点是否发布成功
-		for path, sdata := range got {
-			ldata, v, err := lm.GetValue(path)
-			assert.Equal(t, nil, err, "rpc服务节点发布验证")
-			assert.NotEqual(t, v, int32(0), "rpc服务节点发布验证")
-			assert.Equal(t, string(ldata), sdata, "rpc服务节点发布验证")
-		}
-	}
-}
-
 func TestPublisher_PubAPIServiceNode(t *testing.T) {
 	tests := []struct {
 		name       string
@@ -67,7 +34,7 @@ func TestPublisher_PubAPIServiceNode(t *testing.T) {
 		{name: "3. PublisherPubAPIServiceNode-api服务多次发布", serverName: "127.0.0.1:7799"},
 	}
 	confObj := mocks.NewConfBy("hydra", "test1") //构建对象
-	confObj.API(":8080")
+	confObj.API("8080")
 	s := confObj.GetAPIConf() //初始化参数
 	c := s.GetServerConf()    //获取配置
 	lm := c.GetRegistry()
@@ -102,7 +69,7 @@ func TestPublisher_PubServerNode(t *testing.T) {
 		{name: "3. PublisherPubServerNode-server服务多次发布", serverName: "127.0.0.1:7799"},
 	}
 	confObj := mocks.NewConfBy("hydra", "test2") //构建对象
-	confObj.API(":8080")
+	confObj.API("8080")
 	s := confObj.GetAPIConf() //初始化参数
 	c := s.GetServerConf()    //获取配置
 
@@ -137,7 +104,7 @@ func TestPublisher_PubDNSNode_WithDomain(t *testing.T) {
 	}
 
 	confObj := mocks.NewConfBy("rgst_publish_test1", "publishrgt1") //构建对象
-	confObj.API(":8080", api.WithDNS("127.0.0.101"))
+	confObj.API("8080", api.WithDNS("127.0.0.101"))
 	s := confObj.GetAPIConf() //初始化参数
 	c := s.GetServerConf()    //获取配置
 
@@ -162,7 +129,7 @@ func TestPublisher_PubDNSNode_WithDomain(t *testing.T) {
 func TestPublisher_PubDNSNode_NoDomain(t *testing.T) {
 	//验证节点未设置Domain
 	confObj := mocks.NewConfBy("rgst_publish_test2", "publishrgt2") //构建对象
-	confObj.API(":8080")
+	confObj.API("8080")
 	s := confObj.GetAPIConf() //初始化参数
 	c := s.GetServerConf()    //获取配置
 	got, err := pub.New(c).PubDNSNode("127.0.0.1")
@@ -173,7 +140,7 @@ func TestPublisher_PubDNSNode_NoDomain(t *testing.T) {
 func TestPublisher_Publish_API(t *testing.T) {
 
 	confObj := mocks.NewConfBy("rgst_publish_test3", "publishrgt3") //构建对象
-	confObj.API(":8080", api.WithDNS("127.0.0.101"))
+	confObj.API("8080", api.WithDNS("127.0.0.101"))
 	confObj.RPC(":9377")
 	apiconf := confObj.GetAPIConf() //初始化参数
 	c := apiconf.GetServerConf()    //获取配置
@@ -197,7 +164,7 @@ func TestPublisher_Publish_API(t *testing.T) {
 func TestPublisher_Publish_RPC(t *testing.T) {
 
 	confObj := mocks.NewConfBy("rgst_publish_test4", "publishrgt4") //构建对象
-	confObj.API(":8080", api.WithDNS("127.0.0.101"))
+	confObj.API("8080", api.WithDNS("127.0.0.101"))
 	confObj.Service.API.Add("/api1", "/api1", []string{"GET"})
 	confObj.Service.API.Add("/api2", "/api1", []string{"GET"})
 	confObj.RPC(":9377")
@@ -220,7 +187,7 @@ func TestPublisher_Publish_RPC(t *testing.T) {
 func TestPublisher_Update(t *testing.T) {
 
 	confObj := mocks.NewConfBy("hydra", "test3") //构建对象
-	confObj.API(":8089", api.WithDNS("127.0.0.101"))
+	confObj.API("8089", api.WithDNS("127.0.0.101"))
 	confObj.RPC(":9378")
 	apiconf := confObj.GetAPIConf() //初始化参数
 	c := apiconf.GetServerConf()    //获取配置
@@ -265,7 +232,7 @@ func TestPublisher_Update(t *testing.T) {
 //测试自动恢复节点
 func TestNew(t *testing.T) {
 	confObj := mocks.NewConfBy("hydra", "test4") //构建对象
-	confObj.API(":8090")
+	confObj.API("8090")
 	apiconf := confObj.GetAPIConf() //初始化参数
 	c := apiconf.GetServerConf()    //获取配置
 
@@ -297,7 +264,7 @@ func TestNew(t *testing.T) {
 // func TestPublisher_WatchClusterChange(t *testing.T) {
 
 // 	confObj :=mocks.NewConfBy("rgst_publish_test5", "publishrgt5")//构建对象
-// 	confObj.API(":8080")
+// 	confObj.API("8080")
 // 	apiconf := confObj.GetAPIConf() //初始化参数
 // 	c := apiconf.GetServerConf()    //获取配置
 

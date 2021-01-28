@@ -82,7 +82,7 @@ func TestRender(t *testing.T) {
 
 	for _, tt := range tests {
 		conf := mocks.NewConfBy("middleware_render_test", "render")
-		confN := conf.API(":8080")
+		confN := conf.API("8080")
 		if tt.isSet {
 			confN.Render(tt.script)
 		}
@@ -116,7 +116,7 @@ func TestRender(t *testing.T) {
 
 func BenchmarkRender(b *testing.B) {
 	conf := mocks.NewConfBy("middleware_render1_test", "render1")
-	confN := conf.API(":8080")
+	confN := conf.API("8080")
 	confN.Render(scriptOK)
 	//初始化测试用例参数
 

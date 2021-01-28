@@ -9,6 +9,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/server/acl/blacklist"
 	_ "github.com/micro-plat/hydra/registry/registry/localmemory"
@@ -77,8 +78,10 @@ func TestBlackListGetConf(t *testing.T) {
 	}
 
 	//初始化服务conf配置对象
+
 	conf := mocks.NewConfBy("hydraconf_blacklist_test", "blacklist")
 	confB := conf.API("8081")
+	hydra.G.SysName = "apiserver"
 	for _, tt := range tests {
 		if !strings.EqualFold(tt.name, "1. Conf-BlackListGetConf-节点不存在,获取默认对象") {
 			confB.BlackList(tt.opts...)

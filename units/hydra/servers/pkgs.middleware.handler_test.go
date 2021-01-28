@@ -90,7 +90,7 @@ func TestHandler(t *testing.T) {
 
 		global.Def.ServerTypes = []string{http.API}
 		mockConf := mocks.NewConfBy("middleware_handler_test", "handler")
-		mockConf.API(":51001")
+		mockConf.API("51001")
 		mockConf.GetAPI()
 		app.API(tt.service, tt.handleObj)
 		serverConf := mockConf.GetAPIConf()
@@ -183,7 +183,7 @@ func TestHandler1(t *testing.T) {
 
 		global.Def.ServerTypes = []string{http.API}
 		mockConf := mocks.NewConfBy("middleware_handler1_test", "handler1")
-		mockConf.API(":51001")
+		mockConf.API("51001")
 		mockConf.GetAPI()
 		app.API(tt.service, tt.handleObj)
 		serverConf := mockConf.GetAPIConf()
@@ -276,7 +276,7 @@ func TestHandler2(t *testing.T) {
 
 		global.Def.ServerTypes = []string{http.API}
 		mockConf := mocks.NewConfBy("middleware_handler2_test", "handler2")
-		mockConf.API(":51001")
+		mockConf.API("51001")
 		mockConf.GetAPI()
 		app.API(tt.service, tt.handleObj)
 		serverConf := mockConf.GetAPIConf()
@@ -363,7 +363,7 @@ func TestHandler3(t *testing.T) {
 
 		global.Def.ServerTypes = []string{http.API}
 		mockConf := mocks.NewConfBy("middleware_handler3_test", "handler3")
-		mockConf.API(":51001")
+		mockConf.API("51001")
 		mockConf.GetAPI()
 		app.API(tt.service, tt.handleObj)
 		serverConf := mockConf.GetAPIConf()
@@ -450,7 +450,7 @@ func TestHandler4(t *testing.T) {
 
 		global.Def.ServerTypes = []string{http.API}
 		mockConf := mocks.NewConfBy("middleware_handler4_test", "handler4")
-		mockConf.API(":51001")
+		mockConf.API("51001")
 		mockConf.GetAPI()
 		app.API(tt.service, tt.handleObj)
 		serverConf := mockConf.GetAPIConf()
@@ -537,7 +537,7 @@ func TestHandler5(t *testing.T) {
 
 		global.Def.ServerTypes = []string{http.API}
 		mockConf := mocks.NewConfBy("middleware_handler5_test", "handler5")
-		mockConf.API(":51001")
+		mockConf.API("51001")
 		mockConf.GetAPI()
 		app.API(tt.service, tt.handleObj)
 		serverConf := mockConf.GetAPIConf()
@@ -625,7 +625,7 @@ func TestHandler6(t *testing.T) {
 
 		global.Def.ServerTypes = []string{http.API}
 		mockConf := mocks.NewConfBy("middleware_handler6_test", "handler6")
-		mockConf.API(":51001")
+		mockConf.API("51001")
 		mockConf.GetAPI()
 		app.API(tt.service, tt.handleObj)
 		serverConf := mockConf.GetAPIConf()
@@ -712,7 +712,7 @@ func TestHandler7(t *testing.T) {
 
 		global.Def.ServerTypes = []string{http.API}
 		mockConf := mocks.NewConfBy("middleware_handler7_test", "handler7")
-		mockConf.API(":51001")
+		mockConf.API("51001")
 		mockConf.GetAPI()
 		app.API(tt.service, tt.handleObj)
 		serverConf := mockConf.GetAPIConf()
@@ -799,7 +799,7 @@ func TestHandler8(t *testing.T) {
 
 		global.Def.ServerTypes = []string{http.API}
 		mockConf := mocks.NewConfBy("middleware_handler8_test", "handler8")
-		mockConf.API(":51001")
+		mockConf.API("51001")
 		mockConf.GetAPI()
 		app.API(tt.service, tt.handleObj)
 		serverConf := mockConf.GetAPIConf()

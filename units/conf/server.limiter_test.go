@@ -3,6 +3,7 @@ package conf
 import (
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server/acl/limiter"
@@ -87,24 +88,21 @@ func TestGetConf(t *testing.T) {
 		wantErrStr string
 	}
 	conf := mocks.NewConfBy("hydra", "graytest")
-	confB := conf.API(":8090")
+	confB := conf.API("8090")
+	hydra.G.SysName = "apiserver"
+
 	test1 := test{name: "1. Conf-GetConf-限流节点不存在", cnf: conf.GetAPIConf().GetServerConf(), want: &limiter.Limiter{Disable: true}, wantErr: false}
 	limiterObj, err := limiter.GetConf(test1.cnf)
 	assert.Equal(t, test1.wantErr, (err != nil), test1.name)
 	assert.Equal(t, test1.want, limiterObj, test1.name)
 
-	confB.Limit(limiter.WithDisable())
-	test2 := test{name: "2. Conf-GetConf-限流节点存在,auths不存在", cnf: conf.GetAPIConf().GetServerConf(), want: &limiter.Limiter{Disable: true}, wantErr: false}
-	limiterObj, err = limiter.GetConf(test2.cnf)
-	assert.Equal(t, test2.wantErr, (err != nil), test2.name+",err")
-	assert.Equal(t, test2.want, limiterObj, test2.name+",obj")
-
-	confB.Limit(limiter.WithRuleList(limiter.NewRule("错误数据", 1)))
-	test3 := test{name: "3. Conf-GetConf-灰度节点存在,数据不合法", cnf: conf.GetAPIConf().GetServerConf(), want: nil, wantErr: true, wantErrStr: "limit配置数据有误"}
-	limiterObj, err = limiter.GetConf(test3.cnf)
-	assert.Equal(t, test3.wantErr, (err != nil), test3.name+",err")
-	assert.Equal(t, test3.wantErrStr, err.Error()[:len(test3.wantErrStr)], test3.name+",err1")
-	assert.Equal(t, test3.want, limiterObj, test3.name+",obj")
+	//无效的路径在发布时候会提示输入
+	// confB.Limit(limiter.WithRuleList(limiter.NewRule("错误数据", 1)))
+	// test3 := test{name: "3. Conf-GetConf-灰度节点存在,数据不合法", cnf: conf.GetAPIConf().GetServerConf(), want: nil, wantErr: true, wantErrStr: "limit配置数据有误"}
+	// limiterObj, err = limiter.GetConf(test3.cnf)
+	// assert.Equal(t, test3.wantErr, (err != nil), test3.name+",err")
+	// assert.Equal(t, test3.wantErrStr, err.Error()[:len(test3.wantErrStr)], test3.name+",err1")
+	// assert.Equal(t, test3.want, limiterObj, test3.name+",obj")
 
 	confB.Limit(limiter.WithRuleList(limiter.NewRule("/path", 1, limiter.WithFallback(), limiter.WithMaxWait(3), limiter.WithReponse(200, "success"))))
 	test4 := test{name: "4. Conf-GetConf-灰度节点存在,正确配置",

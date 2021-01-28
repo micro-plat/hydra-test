@@ -6,9 +6,9 @@ time:2020-10-16
 package conf
 
 import (
-	"strings"
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server/auth/apikey"
@@ -33,7 +33,7 @@ func TestAPIKeyNew(t *testing.T) {
 		opts   []apikey.Option
 		want   *apikey.APIKeyAuth
 	}{
-		{name: "1. Conf-APIKeyNew-初始化默认对象", secret: "", opts: []apikey.Option{}, want: &apikey.APIKeyAuth{Mode: "MD5", PathMatch: conf.NewPathMatch()}},
+		{name: "1. Conf-APIKeyNew-初始化默认对象", secret: "", opts: []apikey.Option{}, want: &apikey.APIKeyAuth{Mode: "MD5", PathMatch: conf.NewPathMatch(), Invoker: ""}},
 		{name: "2. Conf-APIKeyNew-设置密钥和路径", secret: "1111", opts: []apikey.Option{apikey.WithSecret("123456"), apikey.WithExcludes("/t/tw", "/t1/t2")}, want: &apikey.APIKeyAuth{Secret: "123456", Excludes: []string{"/t/tw", "/t1/t2"}, Mode: "MD5", PathMatch: conf.NewPathMatch("/t/tw", "/t1/t2")}},
 		{name: "3. Conf-APIKeyNew-设置md5", secret: "1111", opts: []apikey.Option{apikey.WithMD5Mode()}, want: &apikey.APIKeyAuth{Secret: "1111", Mode: "MD5", Disable: false, PathMatch: conf.NewPathMatch()}},
 		{name: "4. Conf-APIKeyNew-设置sha1", secret: "1111", opts: []apikey.Option{apikey.WithSHA1Mode(), apikey.WithDisable()}, want: &apikey.APIKeyAuth{Secret: "1111", Mode: "SHA1", Disable: true, PathMatch: conf.NewPathMatch()}},
@@ -84,35 +84,21 @@ func TestApikeyGetConf(t *testing.T) {
 	}
 
 	apiConf := mocks.NewConfBy("hydraconf_apikey_test", "apikey")
-	confB := apiConf.API(":8081")
+	confB := apiConf.API("8081")
+	hydra.G.SysName = "apiserver"
 	test1 := test{name: "1.1 Conf-APIKeyGetConf-未设置apikey节点", want: &apikey.APIKeyAuth{Disable: true, PathMatch: conf.NewPathMatch()}}
 	got, err := apikey.GetConf(apiConf.GetAPIConf().GetServerConf())
 	assert.Equal(t, nil, err, test1.name+",err")
 	assert.Equal(t, got, test1.want, test1.name)
 
-	test2 := test{name: "2.1 Conf-APIKeyGetConf-配置参数正确", opts: []apikey.Option{apikey.WithMD5Mode(), apikey.WithDisable(), apikey.WithExcludes("/t1/t2"), apikey.WithSecret("123456")},
-		want: apikey.New("123456", apikey.WithMD5Mode(), apikey.WithDisable(), apikey.WithExcludes("/t1/t2"))}
-	confB.APIKEY("", test2.opts...)
+	test2 := test{name: "2.1 Conf-APIKeyGetConf-配置参数正确", opts: []apikey.Option{apikey.WithMD5Mode(), apikey.WithDisable(), apikey.WithExcludes("/t1/t2"), apikey.WithSecret("12345678")},
+		want: apikey.New("12345678", apikey.WithMD5Mode(), apikey.WithDisable(), apikey.WithExcludes("/t1/t2"))}
+	confB.APIKEY("12345678", test2.opts...)
 	got, err = apikey.GetConf(apiConf.GetAPIConf().GetServerConf())
 	assert.Equal(t, nil, err, test2.name+",err")
 	assert.Equal(t, got, test2.want, test2.name)
 }
 
-func TestApikeyGetConf1(t *testing.T) {
-	type test struct {
-		name string
-		opts []apikey.Option
-		want *apikey.APIKeyAuth
-	}
-
-	apiConf := mocks.NewConfBy("hydraconf_apikey_test1", "apikey1")
-	confB := apiConf.API(":8081")
-	test1 := test{name: "3.1 Conf-APIKeyGetConf-节点密钥不存在,验证异常", opts: []apikey.Option{apikey.WithMD5Mode()}, want: nil}
-	confB.APIKEY("", test1.opts...)
-	got, err := apikey.GetConf(apiConf.GetAPIConf().GetServerConf())
-	assert.Equal(t, true, strings.Contains(err.Error(), "apikey配置数据有误"), test1.name)
-	assert.Equal(t, test1.want, got, test1.name)
-}
 func TestApikeyGetConf2(t *testing.T) {
 	type test struct {
 		name string
@@ -121,9 +107,10 @@ func TestApikeyGetConf2(t *testing.T) {
 	}
 
 	apiConf := mocks.NewConfBy("hydraconf_apikey_test2", "apikey2")
-	confB := apiConf.API(":8081")
-	test1 := test{name: "4.1 Conf-APIKeyGetConf-apikey修改为错误json串", opts: []apikey.Option{apikey.WithMD5Mode(), apikey.WithDisable(), apikey.WithExcludes("/t1/t2"), apikey.WithSecret("123456")},
-		want: apikey.New("123456", apikey.WithMD5Mode(), apikey.WithDisable(), apikey.WithExcludes("/t1/t2"))}
+	confB := apiConf.API("8081")
+	hydra.G.SysName = "apiserver"
+	test1 := test{name: "4.1 Conf-APIKeyGetConf-apikey修改为错误json串", opts: []apikey.Option{apikey.WithMD5Mode(), apikey.WithDisable(), apikey.WithExcludes("/t1/t2"), apikey.WithSecret("12345678")},
+		want: apikey.New("12345678", apikey.WithMD5Mode(), apikey.WithDisable(), apikey.WithExcludes("/t1/t2"))}
 	confB.APIKEY("", test1.opts...)
 	// 修改json数据不合法
 	path := apiConf.GetAPIConf().GetServerConf().GetSubConfPath("auth", "apikey")

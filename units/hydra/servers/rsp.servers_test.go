@@ -83,7 +83,7 @@ func TestRspServers_Start(t *testing.T) {
 
 		//初始化注册中心
 		sc := mocks.NewConfBy(platName, clusterName)
-		sc.API(":50001")
+		sc.API("50001")
 		sc.RPC(":54241")
 		sc.GetCronConf()
 		sc.GetAPIConf()
@@ -173,7 +173,7 @@ func TestRspServers_Start_ServerStartErr(t *testing.T) {
 
 		//初始化注册中心
 		sc := mocks.NewConfBy(platName, clusterName)
-		sc.API(":50002")
+		sc.API("50002")
 		sc.GetAPIConf()
 		time.Sleep(time.Second * 2)
 		//占用端口

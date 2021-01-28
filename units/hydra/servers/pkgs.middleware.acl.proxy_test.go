@@ -113,7 +113,7 @@ func TestProxy(t *testing.T) {
 	for _, tt := range tests {
 		global.Def.ServerTypes = []string{http.API}
 		conf := mocks.NewConfBy("middleware_porxy_test", "porxy")
-		confN := conf.API(":5120")
+		confN := conf.API("5120")
 		if tt.isSet {
 			confN.Proxy(tt.script)
 		}
@@ -159,7 +159,7 @@ func BenchmarkRPCServer(b *testing.B) {
 	oncelock1.Do(func() {
 		global.Def.ServerTypes = []string{http.API}
 		conf := mocks.NewConfBy("middleware_porxy_test", "porxy")
-		confN := conf.API(":5120")
+		confN := conf.API("5120")
 		confN.Proxy(script1)
 		serverConf = conf.GetAPIConf()
 		app.Cache.Save(serverConf)

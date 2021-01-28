@@ -39,7 +39,7 @@ func Test_response_Write_ERR(t *testing.T) {
 	}
 
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 
 	global.IsDebug = true
@@ -96,7 +96,7 @@ func Test_response_Write_Nil(t *testing.T) {
 	}
 
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 	meta := conf.NewMeta()
 	global.IsDebug = true
@@ -156,7 +156,7 @@ func Test_response_Write_String(t *testing.T) {
 	}
 
 	confObj := mocks.NewConfBy("context_response_test1", "response1") //构建对象
-	confObj.API(":8080")                                              //初始化参数
+	confObj.API("8080")                                               //初始化参数
 	serverConf := confObj.GetAPIConf()                                //获取配置
 	global.IsDebug = true
 
@@ -213,7 +213,7 @@ func Test_response_Write_JSON(t *testing.T) {
 	}
 
 	confObj := mocks.NewConfBy("context_response_test1", "response1") //构建对象
-	confObj.API(":8080")                                              //初始化参数
+	confObj.API("8080")                                               //初始化参数
 	serverConf := confObj.GetAPIConf()                                //获取配置
 
 	global.IsDebug = true
@@ -269,7 +269,7 @@ func Test_response_Write_XML(t *testing.T) {
 	}
 
 	confObj := mocks.NewConfBy("context_response_test1", "response1") //构建对象
-	confObj.API(":8080")                                              //初始化参数
+	confObj.API("8080")                                               //初始化参数
 	serverConf := confObj.GetAPIConf()                                //获取配置
 	global.IsDebug = true
 
@@ -326,7 +326,7 @@ func Test_response_Write_HTML(t *testing.T) {
 	}
 
 	confObj := mocks.NewConfBy("context_response_test1", "response1") //构建对象
-	confObj.API(":8080")                                              //初始化参数
+	confObj.API("8080")                                               //初始化参数
 	serverConf := confObj.GetAPIConf()
 	global.IsDebug = true
 	for _, tt := range tests {
@@ -383,7 +383,7 @@ func Test_response_Write_MAP(t *testing.T) {
 	}
 
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 	global.IsDebug = true
 	for _, tt := range tests {
@@ -443,7 +443,7 @@ func Test_response_Write_Struct(t *testing.T) {
 	}
 
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 	global.IsDebug = true
 	for _, tt := range tests {
@@ -500,7 +500,7 @@ func Test_response_Write_Int(t *testing.T) {
 	}
 
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 	global.IsDebug = true
 	for _, tt := range tests {
@@ -521,7 +521,7 @@ func Test_response_Write_Int(t *testing.T) {
 
 func Test_response_Header(t *testing.T) {
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 	meta := conf.NewMeta()
 	rc := &mocks.TestContxt{HttpHeader: http.Header{}}
@@ -539,7 +539,7 @@ func Test_response_Header(t *testing.T) {
 
 func Test_response_ContentType(t *testing.T) {
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 	meta := conf.NewMeta()
 	rc := &mocks.TestContxt{HttpHeader: http.Header{}}
@@ -554,7 +554,7 @@ func Test_response_ContentType(t *testing.T) {
 
 func Test_response_Abort(t *testing.T) {
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 
 	context := &mocks.TestContxt{HttpHeader: http.Header{"Content-Type": []string{"text/plain; charset=utf-8"}}}
@@ -573,7 +573,7 @@ func Test_response_Abort(t *testing.T) {
 
 func Test_response_File(t *testing.T) {
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 
 	context := &mocks.TestContxt{HttpHeader: http.Header{}}
@@ -588,7 +588,7 @@ func Test_response_File(t *testing.T) {
 func Test_response_Redirect(t *testing.T) {
 
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 
 	context := &mocks.TestContxt{HttpHeader: http.Header{}}
@@ -603,7 +603,7 @@ func Test_response_Redirect(t *testing.T) {
 func Test_response_Special(t *testing.T) {
 
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 
 	context := &mocks.TestContxt{HttpHeader: http.Header{}}
@@ -621,7 +621,7 @@ func Test_response_Special(t *testing.T) {
 func Test_response_GetRaw(t *testing.T) {
 
 	confObj := mocks.NewConf()         //构建对象
-	confObj.API(":8080")               //初始化参数
+	confObj.API("8080")                //初始化参数
 	serverConf := confObj.GetAPIConf() //获取配置
 
 	context := &mocks.TestContxt{HttpHeader: http.Header{}}
@@ -668,7 +668,7 @@ func Test_response_Flush(t *testing.T) {
 	}
 
 	confObj := mocks.NewConfBy("context", "flush") //构建对象
-	confObj.API(":8080")                           //初始化参数
+	confObj.API("8080")                            //初始化参数
 	serverConf := confObj.GetAPIConf()             //获取配置
 
 	for _, tt := range tests {

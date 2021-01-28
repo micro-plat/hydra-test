@@ -47,7 +47,7 @@ func TestMQCGetConf(t *testing.T) {
 	defer func() {
 		e := recover()
 		if e != nil {
-			assert.Equal(t, "未指定mqc服务器配置", types.GetString(e), "节点不存在,获取默认对象")
+			assert.Equal(t, "未指定mqc服务器配置,请通过hydra.Conf.MQC...指定", types.GetString(e), "节点不存在,获取默认对象")
 		}
 	}()
 	test1 := test{name: "1. Conf-MQCGetConf-节点不存在,获取默认对象", opts: []mqc.Option{}, want: &mqc.Server{}}

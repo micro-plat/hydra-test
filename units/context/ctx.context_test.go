@@ -17,7 +17,7 @@ import (
 func TestNewCtx(t *testing.T) {
 	if _, err := app.Cache.GetAPPConf(h.API); err != nil {
 		confObj := mocks.NewConfBy("context_new_test", "t") //构建对象
-		confObj.API(":8080")                                //初始化参数
+		confObj.API("8080")                                 //初始化参数
 		serverConf := confObj.GetAPIConf()                  //获取配置
 		_, _ = http.NewResponsive(serverConf)
 	}
@@ -28,7 +28,7 @@ func TestNewCtx(t *testing.T) {
 func TestCtx_Close(t *testing.T) {
 	if _, err := app.Cache.GetAPPConf(h.API); err != nil {
 		confObj := mocks.NewConfBy("context_close_test1", "t") //构建对象
-		confObj.API(":8080")                                   //初始化参数
+		confObj.API("8080")                                    //初始化参数
 		serverConf := confObj.GetAPIConf()                     //获取配置
 		_, _ = http.NewResponsive(serverConf)
 	}

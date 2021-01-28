@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/lib4go/assert"
@@ -19,7 +20,9 @@ func Test_cache_GetServerConf(t *testing.T) {
 	assert.Equal(t, nil, obj, "获取不存在的配置对象，res")
 
 	conf := mocks.NewConfBy("hydraconf_servervavhe_test2", "servercache")
-	conf.API(":8080")
+	conf.API("8080")
+	hydra.G.SysName = "apiserver"
+
 	serveC := conf.GetAPIConf()
 	cacheobjPrt.Save(serveC)
 	obj, err = cacheobjPrt.GetAPPConf("api")
@@ -52,7 +55,7 @@ func Test_cache_GetVarConf(t *testing.T) {
 func Test_cache_Clear(t *testing.T) {
 
 	conf := mocks.NewConfBy("hydraconf_servervavhe_clear", "servervavhe_clear")
-	conf.API(":8080")
+	conf.API("8080")
 	serveC := conf.GetAPIConf()
 	app.Cache.Save(serveC)
 	oldVerion := serveC.GetServerConf().GetVersion()

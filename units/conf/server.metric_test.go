@@ -3,6 +3,7 @@ package conf
 import (
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/lib4go/assert"
@@ -46,17 +47,18 @@ func TestMetricGetConf(t *testing.T) {
 	}
 
 	conf := mocks.NewConfBy("hydra", "graytest")
-	confB := conf.API(":8090")
+	confB := conf.API("8090")
+	hydra.G.SysName = "apiserver"
+
 	test1 := test{name: "1. Conf-MetricGetConf-metric节点不存在", cnf: conf.GetAPIConf().GetServerConf(), want: &metric.Metric{Disable: true}, wantErr: false}
 	limiterObj, err := metric.GetConf(test1.cnf)
 	assert.Equal(t, test1.wantErr, (err != nil), test1.name)
 	assert.Equal(t, test1.want, limiterObj, test1.name)
 
-	confB.Metric("", "", "", metric.WithDisable())
-	test2 := test{name: "2. Conf-MetricGetConf-metric节点存在,数据错误", cnf: conf.GetAPIConf().GetServerConf(), want: nil, wantErr: true, wantErrStr: "metric配置数据有误"}
+	confB.Metric("http://a.com", "a", "every 1m", metric.WithDisable())
+	test2 := test{name: "2. Conf-MetricGetConf-metric节点存在,数据错误", cnf: conf.GetAPIConf().GetServerConf(), want: metric.New("http://a.com", "a", "every 1m", metric.WithDisable()), wantErr: false, wantErrStr: "metric配置数据有误"}
 	limiterObj, err = metric.GetConf(test2.cnf)
 	assert.Equal(t, test2.wantErr, (err != nil), test2.name+",err")
-	assert.Equal(t, test2.wantErrStr, err.Error()[:len(test2.wantErrStr)], test2.name+",err1")
 	assert.Equal(t, test2.want, limiterObj, test2.name+",obj")
 
 	confB.Metric("http://192.168.0.101", "1", "cron", metric.WithDisable(), metric.WithUPName("upnem", "1223456"))

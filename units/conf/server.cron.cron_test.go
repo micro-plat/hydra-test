@@ -8,6 +8,7 @@ package conf
 import (
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/server/cron"
 	"github.com/micro-plat/lib4go/assert"
@@ -41,8 +42,10 @@ func TestCronGetConf(t *testing.T) {
 	}
 
 	conf := mocks.NewConfBy("hydraconf_cron_test2", "cronmain")
+	hydra.G.SysName = "cronserver"
 	test1 := test{name: "1.1 Conf-CronGetConf-节点不存在,获取默认对象", opts: []cron.Option{}, want: &cron.Server{Status: "start"}}
 	obj, err := cron.GetConf(conf.GetCronConf().GetServerConf())
+
 	assert.Equal(t, nil, err, test1.name+",err")
 	assert.Equal(t, test1.want, obj, test1.name)
 

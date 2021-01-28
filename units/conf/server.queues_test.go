@@ -3,6 +3,7 @@ package conf
 import (
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server/queue"
@@ -72,6 +73,8 @@ func TestQueuesGetConf(t *testing.T) {
 
 	conf := mocks.NewConfBy("hydra", "queuetest")
 	confB := conf.MQC("redis://192.168.0.101")
+	hydra.G.SysName = "mqcserver"
+
 	test1 := test{name: "1. Conf-QueuesGetConf-queues节点不存在", cnf: conf.GetMQCConf().GetServerConf(), want: queue.NewEmptyQueues(), wantErr: false}
 	queueObj, err := queue.GetConf(test1.cnf)
 	assert.Equal(t, test1.wantErr, (err != nil), test1.name)

@@ -35,7 +35,7 @@ func startServer() {
 			hydra.WithRegistry("lm://."),
 		)
 
-		hydra.Conf.API(":9091")
+		hydra.Conf.API("9091")
 		app.API("/getbodymap", GetBodyMap)
 		app.API("/getbody/encoding", GetBodyEncoding)
 		app.API("/getbody/encoding/gbk", GetBodyEncodingGBK, api.WithEncoding("gbk"))

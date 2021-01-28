@@ -56,7 +56,7 @@ func TestRASAuth(t *testing.T) {
 	for _, tt := range tests {
 		global.Def.ServerTypes = []string{http.API}
 		mockConf := mocks.NewConfBy("middleware_ras_test", "ras")
-		mockConf.API(":51001")
+		mockConf.API("51001")
 		confB := mockConf.GetAPI()
 		if tt.isSet {
 			confB.Ras(tt.opts...)

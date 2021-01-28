@@ -129,7 +129,7 @@ func TestNewRegistry(t *testing.T) {
 	}
 
 	confObj := mocks.NewConfBy("hydra_rgst_test", "rgsttest") //构建对象
-	confObj.API(":8080")                                      //初始化参数
+	confObj.API("8080")                                       //初始化参数
 	serverConf := confObj.GetAPIConf()                        //获取配置
 	meta := conf.NewMeta()
 	log := logger.GetSession(serverConf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, "", meta).GetRequestID())

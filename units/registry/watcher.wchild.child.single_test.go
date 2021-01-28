@@ -18,7 +18,7 @@ import (
 
 func TestChildWatcher_Close(t *testing.T) {
 	confObj := mocks.NewConfBy("hydra_rgst_watcher_close1", "rgtwatchcloseldest1")
-	confObj.API(":8080")
+	confObj.API("8080")
 	apiconf := confObj.GetAPIConf()
 	c := apiconf.GetServerConf()
 	log := logger.GetSession(apiconf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
@@ -37,7 +37,7 @@ func TestChildWatcher_Start(t *testing.T) {
 
 	//构建配置对象
 	confObj := mocks.NewConfBy("TestChildWatcher", "start")
-	confObj.API(":8080")
+	confObj.API("8080")
 	apiconf := confObj.GetAPIConf()
 	c := apiconf.GetServerConf()
 	addr1 := "127.0.0.1:9091"
@@ -113,7 +113,7 @@ func TestChildWatcher_Start_2(t *testing.T) {
 
 	//构建配置对象
 	confObj := mocks.NewConfBy("TestChildWatcher_Start_2", "TestChildWatcher_Start_2Clu")
-	confObj.API(":8080")
+	confObj.API("8080")
 	apiconf := confObj.GetAPIConf()
 	c := apiconf.GetServerConf()
 	addr1 := "192.168.0.1:9091"
@@ -186,7 +186,7 @@ func TestChildWatcher_Start_2(t *testing.T) {
 func TestChildWatcher_deleted(t *testing.T) {
 	//构建配置对象
 	confObj := mocks.NewConfBy("TestChildWatcher_Deleted", "TestChildWatcher_Deleted_Clu")
-	confObj.API(":8080")
+	confObj.API("8080")
 	apiconf := confObj.GetAPIConf()
 	c := apiconf.GetServerConf()
 	addr1 := "192.168.0.1:9091"

@@ -19,7 +19,7 @@ import (
 func Test_rpath_GetRouter_WithPanic(t *testing.T) {
 
 	confObj := mocks.NewConf() //构建对象
-	confObj.API(":8080")       //初始化参数
+	confObj.API("8080")        //初始化参数
 	confObj.CRON(c.WithMasterSlave(), c.WithTrace())
 	confObj.Service.API.Add("/api", "/api", []string{"GET"})
 	httpConf := confObj.GetAPIConf() //获取配置
@@ -48,7 +48,7 @@ func Test_rpath_GetRouter_WithPanic(t *testing.T) {
 
 func Test_rpath_GetRouter(t *testing.T) {
 	confObj := mocks.NewConf() //构建对象
-	confObj.API(":8080")
+	confObj.API("8080")
 	confObj.Vars().Redis("5.79", "192.168.5.79:6379")
 	confObj.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	confObj.MQC("redis://xxx").Queue(queue.NewQueue("queue1", "/service1")).Queue(queue.NewQueue("queue2", "/service2"))
@@ -87,7 +87,7 @@ func Test_rpath_GetRouter(t *testing.T) {
 
 func Test_rpath_GetEncoding(t *testing.T) {
 	confObj := mocks.NewConf() //构建对象
-	confObj.API(":8080")
+	confObj.API("8080")
 	confObj.Vars().Redis("5.79", "192.168.5.79:6379")
 	confObj.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	confObj.MQC("redis://xxx").Queue(queue.NewQueue("queue1", "/service1")).Queue(queue.NewQueue("queue2", "/service2"))

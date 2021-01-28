@@ -22,7 +22,7 @@ func Test_mqcSub_GetMQCMainConf(t *testing.T) {
 
 	//错误的服务类型,获取配置失败
 	confM := mocks.NewConfBy(platName, clusterName)
-	confM.API(":8080")
+	confM.API("8080")
 	confM.Conf().Pub(platName, sysName, clusterName, "lm://.", true)
 	gotS, err := app.NewAPPConfBy(platName, sysName, serverType, clusterName, rgst)
 	assert.Equal(t, true, err == nil, "测试conf初始化,设置主节点")
