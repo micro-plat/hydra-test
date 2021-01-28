@@ -16,7 +16,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.WEB("50005")
+	hydra.Conf.Web("50005")
 
 	hydra.Conf.Vars().Custom("config", "vue", map[string]interface{}{
 		"api_addr":         "",

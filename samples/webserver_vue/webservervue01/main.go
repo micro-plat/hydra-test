@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.WEB("8072").Static(static.WithArchive("staticfile"))
+	hydra.Conf.Web("8072").Static(static.WithArchive("staticfile"))
 }
 
 //webserver_vue 使用默认static配置，使用vue和其他类型静态文件提供纯静态服务器demo

@@ -21,7 +21,7 @@ var app = hydra.NewApp(
 
 func init() {
 	hydra.Conf.API("50011")
-	hydra.Conf.WEB("50012").Static(static.WithArchive("dist.zip"), static.WithRoot("./"))
+	hydra.Conf.Web("50012").Static(static.WithArchive("dist.zip"), static.WithRoot("./"))
 	hydra.Conf.Vars().Custom("config", "vue", map[string]interface{}{
 		"api_addr":         fmt.Sprintf("//%s:50011", global.LocalIP()),
 		"version":          time.Now().Format("20060102150405"),
