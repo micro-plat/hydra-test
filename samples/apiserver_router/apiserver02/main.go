@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":50005")
+	hydra.Conf.API("50005")
 	//同一个对象的Get/Post互斥
 	app.API("/hydratest/apiserver/router", &SrvStruct{})
 }

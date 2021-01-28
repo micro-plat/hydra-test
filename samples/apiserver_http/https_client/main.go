@@ -18,7 +18,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API("8070")
 	hydra.Conf.Vars().HTTP("http", httpopt.WithCa("myssl_root.cer"), httpopt.WithCert("client_cert.pem", "client_private.key")) //设置证书
 
 	app.API("/client/api", func(ctx hydra.IContext) (r interface{}) {

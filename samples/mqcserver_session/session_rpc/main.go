@@ -17,7 +17,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API("8070")
 	hydra.Conf.Vars().Redis("5.79", "192.168.5.79:6379")
 	hydra.Conf.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	hydra.Conf.Vars().RPC("rpc")

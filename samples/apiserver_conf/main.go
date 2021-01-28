@@ -19,7 +19,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8080", api.WithTimeout(10, 10)).Metric("192.168.0.101:8090", "1", "cron", metric.WithDisable(), metric.WithUPName("upnem", "1223456"))
+	hydra.Conf.API("8080", api.WithTimeout(10, 10)).Metric("192.168.0.101:8090", "1", "cron", metric.WithDisable(), metric.WithUPName("upnem", "1223456"))
 	app.API("/api", func(ctx context.IContext) (r interface{}) {
 		ctx.Log().Info("api-Handle")
 		return "success"

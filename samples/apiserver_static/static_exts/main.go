@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070").Static(
+	hydra.Conf.API("8070").Static(
 		static.WithExts(".htm"), static.AppendExts(".js"), static.WithRoot("../root"), static.WithEnable())
 
 	app.API("/api", func(ctx hydra.IContext) (r interface{}) {

@@ -19,8 +19,8 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.RPC(":8073")
-	hydra.Conf.API(":8072")
+	hydra.Conf.RPC("8073")
+	hydra.Conf.API("8072")
 	hydra.Conf.Vars().RPC("rpc", varconf.WithRoundRobin())
 	app.API("/hydratest/rpcserbalance/apiip", funcAPI)
 	app.RPC("/hydratest/rpcserbalance/rpcip", funcRPC)
@@ -47,7 +47,7 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 			ctx.Log().Errorf("rpc 请求异常：%v", err)
 			return
 		}
-		ctx.Log().Info("respones.Status:", respones.Status)
+		ctx.Log().Info("respones.GetResult():", respones.GetStatus())
 		time.Sleep(time.Millisecond * 800)
 	}
 	return "success"

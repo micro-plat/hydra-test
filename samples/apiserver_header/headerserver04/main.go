@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8072").Header(header.WithCrossDomain(), header.WithHeader("taosy-header", "testx"))
+	hydra.Conf.API("8072").Header(header.WithCrossDomain(), header.WithHeader("taosy-header", "testx"))
 	app.API("/hydratest/apiserver/header", funcHeader)
 }
 

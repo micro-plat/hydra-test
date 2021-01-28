@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8080").Jwt(
+	hydra.Conf.API("8080").Jwt(
 		jwt.WithEnable(), jwt.WithHeader(), jwt.WithSecret("123456"),
 		jwt.WithName("__jwt_"), jwt.WithMode(jwt.ModeHS512), jwt.WithExpireAt(120), jwt.WithExcludes("/api/getjwt"))
 

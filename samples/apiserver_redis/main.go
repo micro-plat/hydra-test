@@ -31,7 +31,7 @@ func init() {
 	hydra.Conf.Vars().Redis(redisName, redisAddr)
 	hydra.Conf.Vars().Cache().Redis(cacheName, "", cacheredis.WithConfigName(redisName))
 
-	hydra.Conf.API(":50023", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
+	hydra.Conf.API("50023", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
 
 	hydraApp.API("/api/redis/add", addHandler)
 	hydraApp.API("/api/redis/set", setHandler)

@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070").Limit(limiter.WithEnable(), limiter.WithRuleList(
+	hydra.Conf.API("8070").Limit(limiter.WithEnable(), limiter.WithRuleList(
 		limiter.NewRule("/api/order", 0, limiter.WithMaxWait(1), limiter.WithReponse(200, "success")), //未配置WithFallback()
 		limiter.NewRule("/api/query", 0, limiter.WithMaxWait(1), limiter.WithFallback(), limiter.WithReponse(200, "success")),
 		limiter.NewRule("/api", 0, limiter.WithMaxWait(1), limiter.WithFallback(), limiter.WithReponse(200, "success"))))

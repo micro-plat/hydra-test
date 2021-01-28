@@ -18,7 +18,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":50010", api.WithTimeout(10, 10))
+	hydra.Conf.API("50010", api.WithTimeout(10, 10))
 
 	app.API("/api/panic", func(ctx hydra.IContext) (r interface{}) {
 		panic(fmt.Errorf("主动抛出异常"))

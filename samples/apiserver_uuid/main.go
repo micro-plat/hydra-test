@@ -21,7 +21,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8072", api.WithTimeout(100, 100))
+	hydra.Conf.API("8072", api.WithTimeout(100, 100))
 	app.API("/hydratest/apiserverUUID/get", funcAPI)
 }
 

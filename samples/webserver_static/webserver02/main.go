@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/micro-plat/hydra"
- 
+
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
@@ -17,7 +17,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.Web(":50005")
+	hydra.Conf.WEB("50005")
 	hydra.Conf.Vars().Custom("config", "vue", map[string]interface{}{
 		"api_addr":         "",
 		"version":          time.Now().Format("20060102150405"),

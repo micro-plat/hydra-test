@@ -18,7 +18,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8072")
+	hydra.Conf.API("8072")
 	app.API("/hydratest/apiserver/response", funcResponse)
 	app.API("/hydratest/apiserver/response1", funcResponse1)
 	app.API("/hydratest/apiserver/response2", funcResponse2)

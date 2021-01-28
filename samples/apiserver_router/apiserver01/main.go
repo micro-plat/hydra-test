@@ -14,7 +14,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":50004")
+	hydra.Conf.API("50004")
 	app.API("/hydratest/apiserver/router", &GetStruct{})
 	app.API("/hydratest/apiserver/router", &PostStruct{})
 	app.API("/hydratest/apiserver/router", &PutStruct{})

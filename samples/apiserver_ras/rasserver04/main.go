@@ -16,7 +16,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070").Ras(ras.WithAuths(
+	hydra.Conf.API("8070").Ras(ras.WithAuths(
 		ras.New("/single/hydra/newversion/md5/auth@authserver.sas_debug",
 			ras.WithRequest("/hydratest/apiserverras/test"), //需要验证的路由
 			ras.WithRequired("test1"),                       //设置必传字段

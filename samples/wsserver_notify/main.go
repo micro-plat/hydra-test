@@ -18,7 +18,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API("8070")
 	hydra.Conf.WS(":8080")
 	hydra.Conf.Vars().Redis("5.79", "192.168.5.79:6379")
 	hydra.Conf.Vars().Queue().Redis("queue", "", queueredis.WithConfigName("5.79"))
@@ -37,7 +37,7 @@ func init() {
 	})
 	app.WS("/id/get", func(ctx context.IContext) (r interface{}) {
 		ctx.Log().Info("ws-Handle")
-		reqID := ctx.User().GetRequestID()
+		reqID := ctx.User().GetTraceID()
 		ctx.Log().Info("ws-Handle-reqID:", reqID)
 		return reqID
 	})

@@ -20,7 +20,7 @@ func init() {
 	registry.Register(registrycustom, &customFactory{
 		opts: &registry.Options{},
 	})
-	hydra.Conf.API(":50019")
+	hydra.Conf.API("50019")
 
 	hydraApp.API("/custom/registry/api", func(ctx hydra.IContext) interface{} {
 		regist, err := registry.GetRegistry(global.Def.GetRegistryAddr(), ctx.Log())

@@ -28,8 +28,8 @@ var callmethods = map[string]RpcCallMethod{}
 
 func init() {
 
-	hydra.Conf.API(":50015", api.WithTimeout(10, 10))
-	hydra.Conf.RPC(":50016")
+	hydra.Conf.API("50015", api.WithTimeout(10, 10))
+	hydra.Conf.RPC("50016")
 	hydra.Conf.Vars().RPC("rpc")
 
 	localIP := global.LocalIP()

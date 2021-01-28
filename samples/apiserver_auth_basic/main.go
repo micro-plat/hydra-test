@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8080").Basic(basic.WithExcludes("/api/exclude"), basic.WithEnable(), basic.WithUP("user", "pwd"))
+	hydra.Conf.API("8080").Basic(basic.WithExcludes("/api/exclude"), basic.WithEnable(), basic.WithUP("user", "pwd"))
 	app.API("/api", func(ctx hydra.IContext) (r interface{}) {
 		header := ctx.Request().Headers()
 		ctx.Log().Info("api:", header)

@@ -23,8 +23,8 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.RPC(":50025")
-	hydra.Conf.API(":50026")
+	hydra.Conf.RPC("50025")
+	hydra.Conf.API("50026")
 
 	hydra.Conf.Vars().RPC("rpc", varconf.WithRoundRobin())
 	app.API("/api/request/:datatype", apiRequest)

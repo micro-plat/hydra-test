@@ -19,7 +19,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API("8070")
 	app.API("/hydratest/apiserver/request/nil", funcRequest)
 	app.API("/hydratest/apiserver/request/gbk", funcRequest1, router.WithEncoding("gbk"))
 	app.API("/hydratest/apiserver/request/gb2312", funcRequest2, router.WithEncoding("gb2312"))

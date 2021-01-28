@@ -18,7 +18,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API("8070")
 	hydra.Conf.Vars().HTTP("http", httpopt.WithProxy("http://127.0.0.1:6550")) //设置代理
 
 	app.API("/client/api", func(ctx hydra.IContext) (r interface{}) {

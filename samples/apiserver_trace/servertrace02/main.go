@@ -18,7 +18,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8072", api.WithTrace())
+	hydra.Conf.API("8072", api.WithTrace())
 	app.API("/hydratest/apiserver/trace", funcTrace)
 }
 

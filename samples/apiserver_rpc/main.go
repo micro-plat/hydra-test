@@ -21,8 +21,8 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":50008", api.WithTimeout(10, 10))
-	hydra.Conf.RPC(":50009")
+	hydra.Conf.API("50008", api.WithTimeout(10, 10))
+	hydra.Conf.RPC("50009")
 
 	hydra.Conf.Vars().RPC("rpc")
 	localIP := global.LocalIP()

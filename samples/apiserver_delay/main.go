@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8072", api.WithTimeout(10, 10))
+	hydra.Conf.API("8072", api.WithTimeout(10, 10))
 	app.API("/hydratest/apiserver/delay", funcHeader)
 }
 

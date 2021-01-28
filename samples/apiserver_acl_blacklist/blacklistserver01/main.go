@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8072").BlackList(blacklist.WithDisable(), blacklist.WithIP("192.168.5.107"))
+	hydra.Conf.API("8072").BlackList(blacklist.WithDisable(), blacklist.WithIP("192.168.5.107"))
 	app.API("/hydratest/apiserver/blacklist", funcBlackList)
 }
 

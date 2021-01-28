@@ -25,7 +25,7 @@ var printTasks = func(log logger.ILogger) {
 }
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API("8070")
 	hydra.Conf.CRON()
 
 	app.CRON("/cron", func(ctx hydra.IContext) (r interface{}) { return })

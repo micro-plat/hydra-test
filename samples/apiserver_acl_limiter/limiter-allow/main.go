@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070").Limit(limiter.WithEnable(), limiter.WithRuleList(
+	hydra.Conf.API("8070").Limit(limiter.WithEnable(), limiter.WithRuleList(
 		limiter.NewRule("/api/query", 3, limiter.WithFallback(), limiter.WithReponse(200, "success")),
 		limiter.NewRule("/api", 3, limiter.WithFallback(), limiter.WithReponse(200, "success"))))
 	app.API("/api", &Service{})

@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8072")
+	hydra.Conf.API("8072")
 	app.API("/hydratest/apiserver/cli", funcCli)
 	app.Web("/hydratest/apiserver/cliweb", funcCli)
 }

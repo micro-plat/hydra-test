@@ -4,7 +4,7 @@ import "github.com/micro-plat/hydra"
 
 func init() {
 	hydra.OnReady(func() {
-		hydra.Conf.API(":8091").Proxy(`	
+		hydra.Conf.API("8091").Proxy(`	
         request := import("request")
         app := import("app")
         text := import("text")

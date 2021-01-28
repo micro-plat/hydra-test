@@ -18,7 +18,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API("8070")
 	hydra.Conf.Vars().HTTP("http", httpopt.WithConnTimeout(30), httpopt.WithRequestTimeout(10)) //设置超时时间
 
 	app.API("/client/api", func(ctx hydra.IContext) (r interface{}) {

@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8072").Metric("http://192.168.106.219:8086", "hydratest", "@every 5s", metric.WithDisable())
+	hydra.Conf.API("8072").Metric("http://192.168.106.219:8086", "hydratest", "@every 5s", metric.WithDisable())
 	app.API("/hydratest/apiservermetric/metric", funcAPI)
 }
 

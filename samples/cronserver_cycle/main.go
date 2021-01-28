@@ -20,7 +20,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8072")
+	hydra.Conf.API("8072")
 	hydra.Conf.CRON().Task(
 		task.NewTask("@immediately", "/hydratest/cronserverCycle/cron1"),
 		task.NewTask("@now", "/hydratest/cronserverCycle/cron2"),

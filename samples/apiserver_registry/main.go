@@ -16,7 +16,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8080").Limit(
+	hydra.Conf.API("8080").Limit(
 		limiter.WithRuleList(limiter.NewRule("/api/registry/multiple/query", 1, limiter.WithFallback(), limiter.WithReponse(200, "fallback"))),
 		limiter.WithRuleList(limiter.NewRule("/void/api/registry/multiple/query", 1, limiter.WithFallback(), limiter.WithReponse(200, "fallback"))))
 	//签名有返回值

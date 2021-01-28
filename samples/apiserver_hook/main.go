@@ -17,7 +17,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070", api.WithTimeout(10, 10))
+	hydra.Conf.API("8070", api.WithTimeout(10, 10))
 	app.OnStarting(starting, http.API)               //添加服务启动函数
 	app.OnClosing(closing, http.API)                 //添加服务关闭函数
 	app.OnHandleExecuting(handleExecuting, http.API) //添加业务预处理钩子

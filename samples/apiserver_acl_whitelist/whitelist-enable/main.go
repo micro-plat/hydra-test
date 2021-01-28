@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070").WhiteList(whitelist.WithEnable(), whitelist.WithIPList(whitelist.NewIPList([]string{"/api"}, "192.168.5.115")))
+	hydra.Conf.API("8070").WhiteList(whitelist.WithEnable(), whitelist.WithIPList(whitelist.NewIPList([]string{"/api"}, "192.168.5.115")))
 	app.API("/api", func(ctx hydra.IContext) (r interface{}) { return "success" })
 }
 

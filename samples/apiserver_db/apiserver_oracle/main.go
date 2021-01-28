@@ -28,7 +28,7 @@ var hydraApp = hydra.NewApp(
 func init() {
 	hydra.Conf.Vars().DB().OracleByConnStr("0.136", "test/123456@orcl136")
 
-	hydra.Conf.API(":50021", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
+	hydra.Conf.API("50021", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
 
 	hydraApp.API("/api/oracle/insert", insert)
 	hydraApp.API("/api/oracle/update", update)

@@ -25,7 +25,7 @@ func init() {
 
 	hydra.Conf.Vars().Cache().GoCache(cacheName, gocache.WithCleanupInterval(time.Minute*5))
 
-	hydra.Conf.API(":50023", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
+	hydra.Conf.API("50023", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
 
 	hydraApp.API("/api/gocache/add", addHandler)
 	hydraApp.API("/api/gocache/set", setHandler)
@@ -78,7 +78,7 @@ var setHandler = func(ctx hydra.IContext) (r interface{}) {
 	val := ctx.Request().GetString("val", "10")
 	cacheObj := hydra.C.Cache().GetRegularCache(cacheName)
 	err := cacheObj.Set(key, val, -1)
-	if err != nil { 
+	if err != nil {
 		ctx.Log().Errorf("Cache.Set:%v", err)
 		return err
 	}

@@ -16,7 +16,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API("8070")
 	hydra.Conf.CRON().Task(task.NewTask("@every 20s", "/cron"), task.NewTask("@every 20s", "/cron"))
 
 	app.CRON("/cron", func(ctx hydra.IContext) (r interface{}) { return })

@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8072").Metric("http://192.168.106.219:8086", "hydratest", "@every 5s", metric.WithUPName("", ""))
+	hydra.Conf.API("8072").Metric("http://192.168.106.219:8086", "hydratest", "@every 5s", metric.WithUPName("", ""))
 	app.API("/hydratest/apiservermetric/metric/succ", funcAPI1)
 	app.API("/hydratest/apiservermetric/metric/fail", funcAPI2)
 }

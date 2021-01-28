@@ -18,7 +18,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8080", api.WithTimeout(10, 10))
+	hydra.Conf.API("8080", api.WithTimeout(10, 10))
 
 	app.API("/api", func(ctx context.IContext) (r interface{}) {
 		ctx.Log().Info("api-Handle")

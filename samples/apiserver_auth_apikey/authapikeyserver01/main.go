@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8072").APIKEY("123456", apikey.WithDisable(), apikey.WithMD5Mode())
+	hydra.Conf.API("8072").APIKEY("123456", apikey.WithDisable(), apikey.WithMD5Mode())
 	app.API("/hydratest/apiserver/apikey", funcAPIKey)
 }
 

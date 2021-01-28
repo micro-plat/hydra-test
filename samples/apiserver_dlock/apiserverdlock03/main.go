@@ -16,7 +16,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070")
+	hydra.Conf.API("8070")
 	app.API("/hydratest/apiserverDlock/get", funcAPI)
 }
 

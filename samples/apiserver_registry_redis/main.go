@@ -25,7 +25,7 @@ var app = hydra.NewApp(
 func init() {
 	redisAddr := "192.168.5.79:6379"
 
-	hydra.Conf.API(":28080")
+	hydra.Conf.API("28080")
 	hydra.Conf.Vars().Redis("5.79", redisAddr, redis.WithPoolSize(100))
 	hydra.Conf.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	hydra.Conf.MQC("redis://xxx")

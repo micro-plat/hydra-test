@@ -19,7 +19,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.Web(":8072").Static(
+	hydra.Conf.WEB("8072").Static(
 		static.WithRoot("./src"),
 		static.WithArchive("staticfile"),
 		static.WithExts(".so", ".exe", ".pdf", ".txt", ".zip", ".gz", ".7z", ".tar", ".war", ".html", ".js", ".css", ".htm", ".ico", ".png", ".jpg", ".jpeg", ".md"),

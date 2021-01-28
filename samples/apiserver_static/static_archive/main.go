@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API(":8070").Static(
+	hydra.Conf.API("8070").Static(
 		static.WithArchive("../root/archive"),
 		//static.WithArchive("../root/archive.tar"),
 		//static.WithArchive("../root/archive.tar.gz"),

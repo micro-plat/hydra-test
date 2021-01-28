@@ -28,7 +28,7 @@ var hydraApp = hydra.NewApp(
 func init() {
 	hydra.Conf.Vars().DB().MySQLByConnStr("0.36", "test:123456@tcp(192.168.0.36:3306)/test?charset=utf8")
 
-	hydra.Conf.API(":50022", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
+	hydra.Conf.API("50022", api.WithTimeout(10, 10)).Header(header.WithHeader("content-type", "application/json"))
 
 	hydraApp.API("/api/mysql/insert", insert)
 	hydraApp.API("/api/mysql/update", update)
@@ -60,12 +60,12 @@ func main() {
 			fmt.Println(fmt.Errorf("DBTableDrop:%v", err))
 		}
 
-		_,  err = oracleDB.Execute(sqls.DBTableInit1, nil)
+		_, err = oracleDB.Execute(sqls.DBTableInit1, nil)
 		if err != nil {
 			fmt.Println(fmt.Errorf("DBTableInit1:%v", err))
 		}
 
-		_,  err = oracleDB.Execute(sqls.DBSPInit, nil)
+		_, err = oracleDB.Execute(sqls.DBSPInit, nil)
 		if err != nil {
 			fmt.Println(fmt.Errorf("DBSPInit:%v", err))
 		}
@@ -79,10 +79,10 @@ func main() {
 var insert = func(ctx hydra.IContext) (r interface{}) {
 	oracleDB := hydra.C.DB().GetRegularDB("0.36")
 
-	effCount,  err := oracleDB.Execute(sqls.InsertData, map[string]interface{}{
+	effCount, err := oracleDB.Execute(sqls.InsertData, map[string]interface{}{
 		"record_name": "mysql" + time.Now().Format("20060102150405"),
 	})
-	rows,  err := oracleDB.Query(sqls.Getdata, map[string]interface{}{})
+	rows, err := oracleDB.Query(sqls.Getdata, map[string]interface{}{})
 	if err != nil {
 		return fmt.Errorf("mysql.Query:%v", err)
 
@@ -95,7 +95,7 @@ var insert = func(ctx hydra.IContext) (r interface{}) {
 
 var getdata = func(ctx hydra.IContext) (r interface{}) {
 	oracleDB := hydra.C.DB().GetRegularDB("0.36")
-	rows,  err := oracleDB.Query(sqls.Getdata, map[string]interface{}{})
+	rows, err := oracleDB.Query(sqls.Getdata, map[string]interface{}{})
 	if err != nil {
 		return fmt.Errorf("mysql.Query:%v", err)
 
@@ -106,13 +106,13 @@ var getdata = func(ctx hydra.IContext) (r interface{}) {
 var update = func(ctx hydra.IContext) (r interface{}) {
 	oracleDB := hydra.C.DB().GetRegularDB("0.36")
 
-	effCount,  err := oracleDB.Execute(sqls.Update, map[string]interface{}{
+	effCount, err := oracleDB.Execute(sqls.Update, map[string]interface{}{
 		"record_name": "mysql" + time.Now().Format("20060102150405"),
 	})
 	if err != nil {
 		return fmt.Errorf("mysql.Execute:%v", err)
 	}
-	rows,  err := oracleDB.Query(sqls.Getdata, map[string]interface{}{})
+	rows, err := oracleDB.Query(sqls.Getdata, map[string]interface{}{})
 	if err != nil {
 		return fmt.Errorf("mysql.Query:%v", err)
 
@@ -125,7 +125,7 @@ var update = func(ctx hydra.IContext) (r interface{}) {
 
 var delete = func(ctx hydra.IContext) (r interface{}) {
 	oracleDB := hydra.C.DB().GetRegularDB("0.36")
-	effCount,  err := oracleDB.Execute(sqls.Delete, map[string]interface{}{})
+	effCount, err := oracleDB.Execute(sqls.Delete, map[string]interface{}{})
 	if err != nil {
 		return fmt.Errorf("mysql.Execute:%v", err)
 	}
@@ -136,13 +136,13 @@ var delete = func(ctx hydra.IContext) (r interface{}) {
 
 var sp = func(ctx hydra.IContext) (r interface{}) {
 	oracleDB := hydra.C.DB().GetRegularDB("0.36")
-	effCount,  err := oracleDB.ExecuteSP(sqls.SP, map[string]interface{}{
+	effCount, err := oracleDB.ExecuteSP(sqls.SP, map[string]interface{}{
 		"record_name": "mysql" + time.Now().Format("20060102150405"),
 	})
 	if err != nil {
 		return fmt.Errorf("mysql.ExecuteSP:%v", err)
 	}
-	rows,  err := oracleDB.Query(sqls.Getdata, map[string]interface{}{})
+	rows, err := oracleDB.Query(sqls.Getdata, map[string]interface{}{})
 	if err != nil {
 		return fmt.Errorf("mysql.Query:%v", err)
 

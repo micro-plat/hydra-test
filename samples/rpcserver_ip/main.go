@@ -19,8 +19,8 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.RPC(":8073")
-	hydra.Conf.API(":8072")
+	hydra.Conf.RPC("8073")
+	hydra.Conf.API("8072")
 	hydra.Conf.Vars().RPC("rpc")
 	app.API("/hydratest/rpcserver/apiip/fail", funcAPI)
 	app.RPC("/hydratest/rpcserver/rpcip/fail", funcRPC)
