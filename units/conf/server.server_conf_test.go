@@ -76,7 +76,8 @@ func TestNewEmptyServerConf(t *testing.T) {
 
 	staticConf, err := gotS.GetStaticConf()
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取static对象失败")
-	assert.Equal(t, &static.Static{FileMap: map[string]static.FileInfo{}, Disable: true}, staticConf, "测试conf初始化,判断static节点对象")
+	assert.Equal(t, &static.Static{Dir: "./static", Archive: "", Prefix: "", Exts: []string{}, Exclude: []string{"/view/", "/views/", "/web/", ".exe", ".so"}, HomePage: "index.html", Rewriters: []string{"/", "/index.htm", "/default.html", "/default.htm"}, Disable: true, FileMap: map[string]static.FileInfo{}},
+		staticConf, "测试conf初始化,判断static节点对象")
 
 	routerConf, err := gotS.GetRouterConf()
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取router对象失败")

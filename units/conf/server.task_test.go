@@ -55,7 +55,7 @@ func TestTask_IsOnce(t *testing.T) {
 	}{
 		{name: "1. Conf-TaskIsOnce-空对象执行次数判定", fields: task.NewTask("", ""), want: false},
 		{name: "2. Conf-TaskIsOnce-错误配置,对象执行次数判定", fields: task.NewTask("xxx", "yyy"), want: false},
-		{name: "3. Conf-TaskIsOnce-@once,对象执行次数判定", fields: task.NewTask("@once", "yyy"), want: true},
+		{name: "3. Conf-TaskIsOnce-@once,对象执行次数判定", fields: task.NewTask("@immediately", "yyy"), want: true},
 		{name: "4. Conf-TaskIsOnce-@now,对象执行次数判定", fields: task.NewTask("@now", "yyy"), want: true},
 	}
 	for _, tt := range tests {

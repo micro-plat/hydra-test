@@ -84,7 +84,7 @@ func TestStaticGetConf(t *testing.T) {
 
 	conf := mocks.NewConfBy("hydra", "graytest")
 	confB := conf.API(":8090")
-	test1 := test{name: "static节点不存在", cnf: conf.GetAPIConf().GetServerConf(), want: &static.Static{Disable: true, FileMap: map[string]static.FileInfo{}}, wantErr: false}
+	test1 := test{name: "static节点不存在", cnf: conf.GetAPIConf().GetServerConf(), want: &static.Static{Dir: "./static", Archive: "", Prefix: "", Exts: []string{}, Exclude: []string{"/view/", "/views/", "/web/", ".exe", ".so"}, HomePage: "index.html", Rewriters: []string{"/", "/index.htm", "/default.html", "/default.htm"}, Disable: true, FileMap: map[string]static.FileInfo{}}, wantErr: false}
 	staticObj, err := static.GetConf(test1.cnf)
 	assert.Equal(t, test1.wantErr, (err != nil), test1.name+",err")
 	assert.Equal(t, test1.want, staticObj, test1.name+",obj")
