@@ -121,13 +121,14 @@ func Test_httpSub_GetMetricConf(t *testing.T) {
 func Test_httpSub_GetStaticConf(t *testing.T) {
 	platName, sysName, serverType, clusterName, rgst := newReady(t, "platName4", "sysName4", global.API, "cluster4")
 	//var nilstatic *static.Static
+	normalRewriters := []string{"/", "/default.htm", "/default.html", "/index.htm"}
 	tests := []struct {
 		name     string
 		opts     []static.Option
 		wantErr  bool
 		wantConf *static.Static
 	}{
-		{name: "1. Conf-HttpSubGetStaticConf-不设置static节点", opts: []static.Option{}, wantErr: true, wantConf: &static.Static{Dir: "./static", Archive: "", Prefix: "", Exts: []string{}, Exclude: []string{"/view/", "/views/", "/web/", ".exe", ".so"}, HomePage: "index.html", Rewriters: []string{"/", "/index.htm", "/default.html", "/default.htm"}, Disable: true, FileMap: map[string]static.FileInfo{}}},
+		{name: "1. Conf-HttpSubGetStaticConf-不设置static节点", opts: []static.Option{}, wantErr: true, wantConf: &static.Static{Dir: "./static", Archive: "", Prefix: "", Exts: []string{}, Exclude: []string{"/view/", "/views/", "/web/", ".exe", ".so"}, HomePage: "index.html", Rewriters: normalRewriters, Disable: true, FileMap: map[string]static.FileInfo{}, RewritersMatch: conf.NewPathMatch(normalRewriters...)}},
 		//{name: "2. Conf-HttpSubGetStaticConf-设置错误的static节点", opts: []static.Option{static.WithRoot("错误的数据"), static.WithHomePage("index1.html"), static.WithRewriters("/", "indextest.htm", "defaulttest.html"),
 		//	static.WithExts(".htm"), static.WithArchive("testsss"), static.AppendExts(".js"), static.WithPrefix("ssss"), static.WithDisable(), static.WithExclude("/views/", ".exe", ".so", ".zip")}, wantErr: false, wantConf: nilstatic},
 		{name: "3. Conf-HttpSubGetStaticConf-设置正确的static节点", opts: []static.Option{static.WithRoot("./test"), static.WithHomePage("index1.html"), static.WithRewriters("/", "indextest.htm", "defaulttest.html"),
@@ -153,7 +154,7 @@ func Test_httpSub_GetStaticConf(t *testing.T) {
 
 func Test_httpSub_GetAPIKeyConf(t *testing.T) {
 	platName, sysName, serverType, clusterName, rgst := newReady(t, "platName6", "sysName6", global.API, "cluster6")
-	var nilapikey *apikey.APIKeyAuth
+	//var nilapikey *apikey.APIKeyAuth
 	tests := []struct {
 		name     string
 		secert   string
@@ -162,9 +163,9 @@ func Test_httpSub_GetAPIKeyConf(t *testing.T) {
 		wantConf *apikey.APIKeyAuth
 	}{
 		{name: "1. Conf-HttpSubGetAPIKeyConf-不设置apikey节点", opts: []apikey.Option{}, wantErr: true, wantConf: &apikey.APIKeyAuth{Disable: true, PathMatch: conf.NewPathMatch()}},
-		{name: "2. Conf-HttpSubGetAPIKeyConf-设置错误的apikey节点", secert: "错误的数据", opts: []apikey.Option{apikey.WithDisable(), apikey.WithSHA256Mode(), apikey.WithExcludes("/p1/p2")}, wantErr: false, wantConf: nilapikey},
-		{name: "3. Conf-HttpSubGetAPIKeyConf-设置正确的apikey节点", secert: "123456", opts: []apikey.Option{apikey.WithDisable(), apikey.WithSHA256Mode(), apikey.WithExcludes("/p1/p2")}, wantErr: true,
-			wantConf: apikey.New("123456", apikey.WithDisable(), apikey.WithSHA256Mode(), apikey.WithExcludes("/p1/p2"))},
+		//{name: "2. Conf-HttpSubGetAPIKeyConf-设置错误的apikey节点", secert: "错误的数据", opts: []apikey.Option{apikey.WithDisable(), apikey.WithSHA256Mode(), apikey.WithExcludes("/p1/p2")}, wantErr: false, wantConf: nilapikey},
+		{name: "3. Conf-HttpSubGetAPIKeyConf-设置正确的apikey节点", secert: "123456789", opts: []apikey.Option{apikey.WithDisable(), apikey.WithSHA256Mode(), apikey.WithExcludes("/p1/p2")}, wantErr: true,
+			wantConf: apikey.New("123456789", apikey.WithDisable(), apikey.WithSHA256Mode(), apikey.WithExcludes("/p1/p2"))},
 	}
 
 	for _, tt := range tests {
@@ -184,7 +185,7 @@ func Test_httpSub_GetAPIKeyConf(t *testing.T) {
 
 func Test_httpSub_GetRASConf(t *testing.T) {
 	platName, sysName, serverType, clusterName, rgst := newReady(t, "platName7", "sysName7", global.API, "cluster7")
-	var nilRas *ras.RASAuth
+	//var nilRas *ras.RASAuth
 	tests := []struct {
 		name     string
 		secert   string
@@ -193,8 +194,8 @@ func Test_httpSub_GetRASConf(t *testing.T) {
 		wantConf *ras.RASAuth
 	}{
 		{name: "1. Conf-HttpSubGetRASConf-不设置ras节点", opts: []ras.Option{}, wantErr: true, wantConf: &ras.RASAuth{Disable: true}},
-		{name: "2. Conf-HttpSubGetRASConf-设置错误的ras节点", secert: "错误的数据", opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New("", ras.WithRequest("/t1/t2"), ras.WithRequired("taofield"), ras.WithUIDAlias("userID"), ras.WithTimestampAlias("timespan"), ras.WithSignAlias("signname"),
-			ras.WithCheckTimestamp(false), ras.WithDecryptName("duser"), ras.WithParam("key1", "v1"), ras.WithParam("key2", "v2"), ras.WithAuthDisable()))}, wantErr: false, wantConf: nilRas},
+		//{name: "2. Conf-HttpSubGetRASConf-设置错误的ras节点", secert: "错误的数据", opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New("", ras.WithRequest("/t1/t2"), ras.WithRequired("taofield"), ras.WithUIDAlias("userID"), ras.WithTimestampAlias("timespan"), ras.WithSignAlias("signname"),
+		//	ras.WithCheckTimestamp(false), ras.WithDecryptName("duser"), ras.WithParam("key1", "v1"), ras.WithParam("key2", "v2"), ras.WithAuthDisable()))}, wantErr: false, wantConf: nilRas},
 		{name: "3. Conf-HttpSubGetRASConf-设置正确的ras节点", secert: "123456", opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New("service1", ras.WithRequest("/t1/t2"), ras.WithRequired("taofield"), ras.WithUIDAlias("userID"), ras.WithTimestampAlias("timespan"), ras.WithSignAlias("signname"),
 			ras.WithCheckTimestamp(false), ras.WithDecryptName("duser"), ras.WithParam("key1", "v1"), ras.WithParam("key2", "v2"), ras.WithAuthDisable()))}, wantErr: true,
 			wantConf: ras.NewRASAuth(ras.WithDisable(), ras.WithAuths(ras.New("service1", ras.WithRequest("/t1/t2"), ras.WithRequired("taofield"), ras.WithUIDAlias("userID"), ras.WithTimestampAlias("timespan"), ras.WithSignAlias("signname"),
@@ -344,7 +345,7 @@ func Test_httpSub_GetBlackListConf(t *testing.T) {
 
 func Test_httpSub_GetLimiter(t *testing.T) {
 	platName, sysName, serverType, clusterName, rgst := newReady(t, "platName12", "sysName12", global.API, "cluster12")
-	var nilLImiter *limiter.Limiter
+	//var nilLImiter *limiter.Limiter
 	tests := []struct {
 		name     string
 		opts     []limiter.Option
@@ -352,7 +353,7 @@ func Test_httpSub_GetLimiter(t *testing.T) {
 		wantConf *limiter.Limiter
 	}{
 		{name: "1. Conf-HttpSubGetLimiter-不设置limiter节点", opts: []limiter.Option{}, wantErr: true, wantConf: &limiter.Limiter{Disable: true}},
-		{name: "2. Conf-HttpSubGetLimiter-设置错误的limiter节点", opts: []limiter.Option{limiter.WithEnable(), limiter.WithRuleList(limiter.NewRule("错误数据", 1, limiter.WithMaxWait(3), limiter.WithFallback(), limiter.WithReponse(200, "success")))}, wantErr: false, wantConf: nilLImiter},
+		//{name: "2. Conf-HttpSubGetLimiter-设置错误的limiter节点", opts: []limiter.Option{limiter.WithEnable(), limiter.WithRuleList(limiter.NewRule("错误数据", 1, limiter.WithMaxWait(3), limiter.WithFallback(), limiter.WithReponse(200, "success")))}, wantErr: false, wantConf: nilLImiter},
 		{name: "3. Conf-HttpSubGetLimiter-设置正确的limiter节点", opts: []limiter.Option{limiter.WithEnable(), limiter.WithRuleList(limiter.NewRule("path1", 1, limiter.WithMaxWait(3), limiter.WithFallback(), limiter.WithReponse(200, "success")))}, wantErr: true,
 			wantConf: limiter.New(limiter.WithEnable(), limiter.WithRuleList(limiter.NewRule("path1", 1, limiter.WithMaxWait(3), limiter.WithFallback(), limiter.WithReponse(200, "success"))))},
 	}

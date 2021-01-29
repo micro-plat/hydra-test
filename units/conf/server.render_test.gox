@@ -42,7 +42,7 @@ func TestRenderGetConf(t *testing.T) {
 	}
 
 	conf := mocks.NewConfBy("hydra", "graytest")
-	confB := conf.API(":8090")
+	confB := conf.API("8090")
 	test1 := test{name: "render节点不存在", cnf: conf.GetAPIConf().GetServerConf(), want: &render.Render{Disable: true}, wantErr: false}
 	renderObj, err := render.GetConf(test1.cnf)
 	assert.Equal(t, test1.wantErr, (err != nil), test1.name)

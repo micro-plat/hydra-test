@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server/cron"
@@ -143,18 +144,21 @@ func TestTasksGetConf(t *testing.T) {
 
 	conf := mocks.NewConfBy("hydra", "graytest")
 	confB := conf.CRON(cron.WithTrace())
+	hydra.G.SysName = "cronserver"
+
 	test1 := test{name: "1. Conf-TasksGetConf-task节点不存在", cnf: conf.GetCronConf().GetServerConf(), want: &task.Tasks{Tasks: []*task.Task{}}, wantErr: false}
 	queueObj, err := task.GetConf(test1.cnf)
 	assert.Equal(t, test1.wantErr, (err != nil), test1.name)
 	if err == nil {
 		assert.Equal(t, len(test1.want.Tasks), len(queueObj.Tasks), test1.name)
 	}
-	confB = conf.CRON(cron.WithTrace())
-	confB.Task(task.NewTask("中文错误", "s2"))
-	test2 := test{name: "2. Conf-TasksGetConf-task节点存在,数据错误", cnf: conf.GetCronConf().GetServerConf(), want: nil, wantErr: true}
-	queueObj, err = task.GetConf(test2.cnf)
-	assert.Equal(t, test2.wantErr, (err != nil), test2.name+",err")
-	assert.Equal(t, test2.want, queueObj, test2.name+",obj")
+	//todo:不存在错误的场景
+	// confB = conf.CRON(cron.WithTrace())
+	// confB.Task(task.NewTask("中文错误", "s2"))
+	// test2 := test{name: "2. Conf-TasksGetConf-task节点存在,数据错误", cnf: conf.GetCronConf().GetServerConf(), want: nil, wantErr: true}
+	// queueObj, err = task.GetConf(test2.cnf)
+	// assert.Equal(t, test2.wantErr, (err != nil), test2.name+",err")
+	// assert.Equal(t, test2.want, queueObj, test2.name+",obj")
 
 	confB = conf.CRON(cron.WithTrace())
 	confB.Task(task.NewTask("@once", "s2"))

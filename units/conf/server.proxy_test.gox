@@ -72,7 +72,7 @@ func TestGrayGetConf(t *testing.T) {
 	}
 
 	conf := mocks.NewConfBy("hydra", "graytest")
-	confB := conf.API(":8090")
+	confB := conf.API("8090")
 	test1 := test{name: "灰度节点不存在", cnf: conf.GetAPIConf().GetServerConf(), want: &proxy.Proxy{Disable: true}, wantErr: false}
 	grayObj, err := proxy.GetConf(test1.cnf)
 	assert.Equal(t, test1.wantErr, (err != nil), test1.name)
@@ -117,7 +117,7 @@ func TestGray_Allow(t *testing.T) {
 	assert.Equal(t, test1.want, got, test1.name)
 
 	conf := mocks.NewConfBy("test", "gray1")
-	conf.API(":8090")
+	conf.API("8090")
 	grayObj, _ := proxy.GetConf(conf.GetAPIConf().GetServerConf())
 	test2 := test{name: "api服务集群获取", fields: grayObj, want: false}
 	got = test2.fields.Allow()
@@ -155,7 +155,7 @@ func TestGray_Next(t *testing.T) {
 	}
 
 	conf := mocks.NewConfBy("hydra", "graytest")
-	conf.API(":8090")
+	conf.API("8090")
 	grayObj, err := proxy.GetConf(conf.GetAPIConf().GetServerConf())
 	assert.Equal(t, true, (err == nil), "获取灰度对象失败")
 	test1 := test{name: "nil集群对象", fields: grayObj, wantU: nil, wantErr: true, wantErrStr: "当前配置不可用"}
@@ -165,7 +165,7 @@ func TestGray_Next(t *testing.T) {
 	assert.Equal(t, test1.wantU, gotU, test1.name+",url")
 
 	conf = mocks.NewConfBy("hydra", "graytest")
-	conf.API(":8090").Proxy(proxy.WithFilter("tao"), proxy.WithUPCluster("graytest"))
+	conf.API("8090").Proxy(proxy.WithFilter("tao"), proxy.WithUPCluster("graytest"))
 	nomalObj, _ := proxy.GetConf(conf.GetAPIConf().GetServerConf())
 	test2 := test{name: "无服务器集群对象", fields: nomalObj, wantU: nil, wantErr: true, wantErrStr: "无法获取到集群的下一个服务器"}
 	gotU, err = test2.fields.Next()
@@ -185,7 +185,7 @@ func TestGray_Next(t *testing.T) {
 	//@todo 该用例失败,集群节点变更后,集群对象可能没有实时更新
 	/*
 		conf = mocks.NewConfBy("hydra1", "graytest1")
-		conf.API(":8090").Proxy(proxy.WithFilter("tao"), proxy.WithUPCluster("graytest"))
+		conf.API("8090").Proxy(proxy.WithFilter("tao"), proxy.WithUPCluster("graytest"))
 		nomalObj1, _ := proxy.GetConf(conf.GetAPIConf().GetServerConf())
 		url, _ := url.Parse("http://192.168.5.94:8090")
 		conf.Registry.CreateTempNode(path+":123456", "http://192.168.5.94:8090")
