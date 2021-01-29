@@ -71,7 +71,7 @@ func Test_Auth_Bind(t *testing.T) {
 		{name: "2.6.request为返回空值的函数", request: func() interface{} { return nil }, wantError: true, out: &map[string]string{}, errCode: 401, errStr: "请求中未包含用户信息,用户未登录"},
 
 		{name: "3.1.request为非空指针", request: &result{Key: "1", Value: "1"}, out: &map[string]string{}, want: &map[string]string{"key": "1", "value": "1"}},
-		{name: "3.2.request非json字符串", request: `str`, out: &map[string]string{}, wantError: true, errStr: "将用户信息反序化为对象时失败:invalid character 's' looking for beginning of value"},
+		{name: "3.2.request非json字符串", request: `str`, out: &map[string]string{}, wantError: true, errStr: "将用户信息反序化为对象时失败(string):invalid character 's' looking for beginning of value;str"},
 		{name: "3.3.request为json字符串", request: `{"key":"1","value":"1"}`, out: &result{}, want: &result{Key: "1", Value: "1"}},
 		{name: "3.4.request为map", request: map[string]string{"key": "value"}, out: &map[string]string{}, want: &map[string]string{"key": "value"}},
 		{name: "3.5.request为struct", request: result{Key: "1", Value: "1"}, out: &map[string]string{}, want: &map[string]string{"key": "1", "value": "1"}},

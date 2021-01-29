@@ -642,55 +642,55 @@ func Test_body_GetMap__MIMEXML(t *testing.T) {
 		errStr      string
 		want        map[string]interface{}
 	}{
-		{name: "1.1 content-type为xml,编码为UTF-8,POST,body非正确的xml", method: "POST", encoding: "UTF-8", contentType: "application/xml", body: []byte("<xml>"), errStr: "将<xml>转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
-		{name: "1.2 content-type为xml,编码为UTF-8,POST,body为xml,url参数为空", method: "POST", encoding: "UTF-8", contentType: "application/xml", body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}}},
+		{name: "1.1 content-type为xml,编码为UTF-8,POST,body非正确的xml", method: "POST", encoding: "UTF-8", contentType: "application/xml", body: []byte("<xml>"), errStr: "xml转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
+		{name: "1.2 content-type为xml,编码为UTF-8,POST,body为xml,url参数为空", method: "POST", encoding: "UTF-8", contentType: "application/xml", body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"key": value}},
 		{name: "1.3 content-type为xml,编码为UTF-8,POST,body为空,url带有参数", method: "POST", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.4 content-type为xml,编码为UTF-8,POST,body为xml,url带有参数", method: "POST", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}, "key": value}},
+		{name: "1.4 content-type为xml,编码为UTF-8,POST,body为xml,url带有参数", method: "POST", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"key": []string{value, value}}},
 
-		{name: "1.5 content-type为xml,编码为UTF-8,GET,body非正确的xml", method: "GET", encoding: "UTF-8", contentType: "application/xml", body: []byte("<xml>"), errStr: "将<xml>转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
-		{name: "1.6 content-type为xml,编码为UTF-8,GET,body为xml,url参数为空", method: "GET", encoding: "UTF-8", contentType: "application/xml", body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}}},
+		{name: "1.5 content-type为xml,编码为UTF-8,GET,body非正确的xml", method: "GET", encoding: "UTF-8", contentType: "application/xml", body: []byte("<xml>"), errStr: "xml转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
+		{name: "1.6 content-type为xml,编码为UTF-8,GET,body为xml,url参数为空", method: "GET", encoding: "UTF-8", contentType: "application/xml", body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"key": value}},
 		{name: "1.7 content-type为xml,编码为UTF-8,GET,body为空,url带有参数", method: "GET", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.8 content-type为xml,编码为UTF-8,GET,body为xml,url带有参数", method: "GET", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}, "key": value}},
+		{name: "1.8 content-type为xml,编码为UTF-8,GET,body为xml,url带有参数", method: "GET", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"key": []string{value, value}}},
 
-		{name: "1.9 content-type为xml,编码为UTF-8,DELETE,body非正确的xml", method: "DELETE", encoding: "UTF-8", contentType: "application/xml", body: []byte("<xml>"), errStr: "将<xml>转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
-		{name: "1.10 content-type为xml,编码为UTF-8,DELETE,body为xml,url参数为空", method: "DELETE", encoding: "UTF-8", contentType: "application/xml", body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}}},
+		{name: "1.9 content-type为xml,编码为UTF-8,DELETE,body非正确的xml", method: "DELETE", encoding: "UTF-8", contentType: "application/xml", body: []byte("<xml>"), errStr: "xml转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
+		{name: "1.10 content-type为xml,编码为UTF-8,DELETE,body为xml,url参数为空", method: "DELETE", encoding: "UTF-8", contentType: "application/xml", body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"key": value}},
 		{name: "1.11 content-type为xml,编码为UTF-8,DELETE,body为空,url带有参数", method: "DELETE", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.12 content-type为xml,编码为UTF-8,DELETE,body为xml,url带有参数", method: "DELETE", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}, "key": value}},
+		{name: "1.12 content-type为xml,编码为UTF-8,DELETE,body为xml,url带有参数", method: "DELETE", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"key": []string{value, value}}},
 
-		{name: "1.13 content-type为xml,编码为UTF-8,PUT,body非正确的xml", method: "PUT", encoding: "UTF-8", contentType: "application/xml", body: []byte("<xml>"), errStr: "将<xml>转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
-		{name: "1.14 content-type为xml,编码为UTF-8,PUT,body为xml,url参数为空", method: "PUT", encoding: "UTF-8", contentType: "application/xml", body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}}},
+		{name: "1.13 content-type为xml,编码为UTF-8,PUT,body非正确的xml", method: "PUT", encoding: "UTF-8", contentType: "application/xml", body: []byte("<xml>"), errStr: "xml转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
+		{name: "1.14 content-type为xml,编码为UTF-8,PUT,body为xml,url参数为空", method: "PUT", encoding: "UTF-8", contentType: "application/xml", body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"key": value}},
 		{name: "1.15 content-type为xml,编码为UTF-8,PUT,body为空,url带有参数", method: "PUT", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.16 content-type为xml,编码为UTF-8,PUT,body为xml,url带有参数", method: "PUT", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}, "key": value}},
+		{name: "1.16 content-type为xml,编码为UTF-8,PUT,body为xml,url带有参数", method: "PUT", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"key": []string{value, value}}},
 
-		{name: "1.17 content-type为xml,编码为UTF-8,PATCH,body非正确的xml", method: "PATCH", encoding: "UTF-8", contentType: "application/xml", body: []byte("<xml>"), errStr: "将<xml>转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
-		{name: "1.18 content-type为xml,编码为UTF-8,PATCH,body为xml,url参数为空", method: "PATCH", encoding: "UTF-8", contentType: "application/xml", body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}}},
+		{name: "1.17 content-type为xml,编码为UTF-8,PATCH,body非正确的xml", method: "PATCH", encoding: "UTF-8", contentType: "application/xml", body: []byte("<xml>"), errStr: "xml转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
+		{name: "1.18 content-type为xml,编码为UTF-8,PATCH,body为xml,url参数为空", method: "PATCH", encoding: "UTF-8", contentType: "application/xml", body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"key": value}},
 		{name: "1.19 content-type为xml,编码为UTF-8,PATCH,body为空,url带有参数", method: "PATCH", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.20 content-type为xml,编码为UTF-8,PATCH,body为xml,url带有参数", method: "PATCH", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}, "key": value}},
+		{name: "1.20 content-type为xml,编码为UTF-8,PATCH,body为xml,url带有参数", method: "PATCH", encoding: "UTF-8", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "xml"), want: map[string]interface{}{"key": []string{value, value}}},
 
-		{name: "2.1 content-type为xml,编码为GBK,POST,body非正确的xml", method: "POST", encoding: "GBK", contentType: "application/xml", body: []byte("<xml>"), errStr: "将<xml>转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
-		{name: "2.2 content-type为xml,编码为GBK,POST,body为xml,url参数为空", method: "POST", encoding: "GBK", contentType: "application/xml", body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}}},
+		{name: "2.1 content-type为xml,编码为GBK,POST,body非正确的xml", method: "POST", encoding: "GBK", contentType: "application/xml", body: []byte("<xml>"), errStr: "xml转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
+		{name: "2.2 content-type为xml,编码为GBK,POST,body为xml,url参数为空", method: "POST", encoding: "GBK", contentType: "application/xml", body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"key": value}},
 		{name: "2.3 content-type为xml,编码为GBK,POST,body为空,url带有参数", method: "POST", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.4 content-type为xml,编码为GBK,POST,body为xml,url带有参数", method: "POST", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}, "key": value}},
+		{name: "2.4 content-type为xml,编码为GBK,POST,body为xml,url带有参数", method: "POST", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"key": []string{value, value}}},
 
-		{name: "2.5 content-type为xml,编码为GBK,GET,body非正确的xml", method: "GET", encoding: "GBK", contentType: "application/xml", body: []byte("<xml>"), errStr: "将<xml>转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
-		{name: "2.6 content-type为xml,编码为GBK,GET,body为xml,url参数为空", method: "GET", encoding: "GBK", contentType: "application/xml", body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}}},
+		{name: "2.5 content-type为xml,编码为GBK,GET,body非正确的xml", method: "GET", encoding: "GBK", contentType: "application/xml", body: []byte("<xml>"), errStr: "xml转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
+		{name: "2.6 content-type为xml,编码为GBK,GET,body为xml,url参数为空", method: "GET", encoding: "GBK", contentType: "application/xml", body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"key": value}},
 		{name: "2.7 content-type为xml,编码为GBK,GET,body为空,url带有参数", method: "GET", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.8 content-type为xml,编码为GBK,GET,body为xml,url带有参数", method: "GET", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}, "key": value}},
+		{name: "2.8 content-type为xml,编码为GBK,GET,body为xml,url带有参数", method: "GET", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"key": []string{value, value}}},
 
-		{name: "2.9 content-type为xml,编码为GBK,DELETE,body非正确的xml", method: "DELETE", encoding: "GBK", contentType: "application/xml", body: []byte("<xml>"), errStr: "将<xml>转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
-		{name: "2.10 content-type为xml,编码为GBK,DELETE,body为xml,url参数为空", method: "DELETE", encoding: "GBK", contentType: "application/xml", body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}}},
+		{name: "2.9 content-type为xml,编码为GBK,DELETE,body非正确的xml", method: "DELETE", encoding: "GBK", contentType: "application/xml", body: []byte("<xml>"), errStr: "xml转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
+		{name: "2.10 content-type为xml,编码为GBK,DELETE,body为xml,url参数为空", method: "DELETE", encoding: "GBK", contentType: "application/xml", body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"key": value}},
 		{name: "2.11 content-type为xml,编码为GBK,DELETE,body为空,url带有参数", method: "DELETE", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.12 content-type为xml,编码为GBK,DELETE,body为xml,url带有参数", method: "DELETE", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}, "key": value}},
+		{name: "2.12 content-type为xml,编码为GBK,DELETE,body为xml,url带有参数", method: "DELETE", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"key": []string{value, value}}},
 
-		{name: "2.13 content-type为xml,编码为GBK,PUT,body非正确的xml", method: "PUT", encoding: "GBK", contentType: "application/xml", body: []byte("<xml>"), errStr: "将<xml>转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
-		{name: "2.14 content-type为xml,编码为GBK,PUT,body为xml,url参数为空", method: "PUT", encoding: "GBK", contentType: "application/xml", body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}}},
+		{name: "2.13 content-type为xml,编码为GBK,PUT,body非正确的xml", method: "PUT", encoding: "GBK", contentType: "application/xml", body: []byte("<xml>"), errStr: "xml转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
+		{name: "2.14 content-type为xml,编码为GBK,PUT,body为xml,url参数为空", method: "PUT", encoding: "GBK", contentType: "application/xml", body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"key": value}},
 		{name: "2.15 content-type为xml,编码为GBK,PUT,body为空,url带有参数", method: "PUT", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.16 content-type为xml,编码为GBK,PUT,body为xml,url带有参数", method: "PUT", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}, "key": value}},
+		{name: "2.16 content-type为xml,编码为GBK,PUT,body为xml,url带有参数", method: "PUT", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"key": []string{value, value}}},
 
-		{name: "1.17 content-type为xml,编码为GBK,PATCH,body非正确的xml", method: "PATCH", encoding: "GBK", contentType: "application/xml", body: []byte("<xml>"), errStr: "将<xml>转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
-		{name: "1.18 content-type为xml,编码为GBK,PATCH,body为xml,url参数为空", method: "PATCH", encoding: "GBK", contentType: "application/xml", body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}}},
+		{name: "1.17 content-type为xml,编码为GBK,PATCH,body非正确的xml", method: "PATCH", encoding: "GBK", contentType: "application/xml", body: []byte("<xml>"), errStr: "xml转换为map失败:xml.Decoder.Token() - XML syntax error on line 1: unexpected EOF"},
+		{name: "1.18 content-type为xml,编码为GBK,PATCH,body为xml,url参数为空", method: "PATCH", encoding: "GBK", contentType: "application/xml", body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"key": value}},
 		{name: "1.19 content-type为xml,编码为GBK,PATCH,body为空,url带有参数", method: "PATCH", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "1.20 content-type为xml,编码为GBK,PATCH,body为xml,url带有参数", method: "PATCH", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"xml": map[string]interface{}{"key": value}, "key": value}},
+		{name: "1.20 content-type为xml,编码为GBK,PATCH,body为xml,url带有参数", method: "PATCH", encoding: "GBK", contentType: "application/xml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "xml"), want: map[string]interface{}{"key": []string{value, value}}},
 	}
 
 	for _, tt := range tests {
@@ -735,52 +735,52 @@ func Test_body_GetMap__MIMEJSON(t *testing.T) {
 		{name: "1.1 content-type为json,编码为UTF-8,POST,body非正确的json", method: "POST", encoding: "UTF-8", contentType: "application/json", body: []byte("json"), errStr: "将json转换为map失败:invalid character 'j' looking for beginning of value"},
 		{name: "1.2 content-type为json,编码为UTF-8,POST,body为json,url参数为空", method: "POST", encoding: "UTF-8", contentType: "application/json", body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": value}},
 		{name: "1.3 content-type为json,编码为UTF-8,POST,body为空,url带有参数", method: "POST", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.4 content-type为json,编码为UTF-8,POST,body为json,url带有参数", method: "POST", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "1.4 content-type为json,编码为UTF-8,POST,body为json,url带有参数", method: "POST", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.5 content-type为json,编码为UTF-8,GET,body非正确的json", method: "GET", encoding: "UTF-8", contentType: "application/json", body: []byte("json"), errStr: "将json转换为map失败:invalid character 'j' looking for beginning of value"},
 		{name: "1.6 content-type为json,编码为UTF-8,GET,body为json,url参数为空", method: "GET", encoding: "UTF-8", contentType: "application/json", body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": value}},
 		{name: "1.7 content-type为json,编码为UTF-8,GET,body为空,url带有参数", method: "GET", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.8 content-type为json,编码为UTF-8,GET,body为json,url带有参数", method: "GET", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "1.8 content-type为json,编码为UTF-8,GET,body为json,url带有参数", method: "GET", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.9 content-type为json,编码为UTF-8,DELETE,body非正确的json", method: "DELETE", encoding: "UTF-8", contentType: "application/json", body: []byte("json"), errStr: "将json转换为map失败:invalid character 'j' looking for beginning of value"},
 		{name: "1.10 content-type为json,编码为UTF-8,DELETE,body为json,url参数为空", method: "DELETE", encoding: "UTF-8", contentType: "application/json", body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": value}},
 		{name: "1.11 content-type为json,编码为UTF-8,DELETE,body为空,url带有参数", method: "DELETE", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.12 content-type为json,编码为UTF-8,DELETE,body为json,url带有参数", method: "DELETE", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "1.12 content-type为json,编码为UTF-8,DELETE,body为json,url带有参数", method: "DELETE", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.13 content-type为json,编码为UTF-8,PUT,body非正确的json", method: "PUT", encoding: "UTF-8", contentType: "application/json", body: []byte("json"), errStr: "将json转换为map失败:invalid character 'j' looking for beginning of value"},
 		{name: "1.14 content-type为json,编码为UTF-8,PUT,body为json,url参数为空", method: "PUT", encoding: "UTF-8", contentType: "application/json", body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": value}},
 		{name: "1.15 content-type为json,编码为UTF-8,PUT,body为空,url带有参数", method: "PUT", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.16 content-type为json,编码为UTF-8,PUT,body为json,url带有参数", method: "PUT", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "1.16 content-type为json,编码为UTF-8,PUT,body为json,url带有参数", method: "PUT", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.17 content-type为json,编码为UTF-8,PATCH,body非正确的json", method: "PATCH", encoding: "UTF-8", contentType: "application/json", body: []byte("json"), errStr: "将json转换为map失败:invalid character 'j' looking for beginning of value"},
 		{name: "1.18 content-type为json,编码为UTF-8,PATCH,body为json,url参数为空", method: "PATCH", encoding: "UTF-8", contentType: "application/json", body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": value}},
 		{name: "1.19 content-type为json,编码为UTF-8,PATCH,body为空,url带有参数", method: "PATCH", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.20 content-type为json,编码为UTF-8,PATCH,body为json,url带有参数", method: "PATCH", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "1.20 content-type为json,编码为UTF-8,PATCH,body为json,url带有参数", method: "PATCH", encoding: "UTF-8", contentType: "application/json", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "json"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.1 content-type为json,编码为GBK,POST,body非正确的json", method: "POST", encoding: "GBK", contentType: "application/json", body: []byte("json"), errStr: "将json转换为map失败:invalid character 'j' looking for beginning of value"},
 		{name: "2.2 content-type为json,编码为GBK,POST,body为json,url参数为空", method: "POST", encoding: "GBK", contentType: "application/json", body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": value}},
 		{name: "2.3 content-type为json,编码为GBK,POST,body为空,url带有参数", method: "POST", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.4 content-type为json,编码为GBK,POST,body为json,url带有参数", method: "POST", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "2.4 content-type为json,编码为GBK,POST,body为json,url带有参数", method: "POST", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.5 content-type为json,编码为GBK,GET,body非正确的json", method: "GET", encoding: "GBK", contentType: "application/json", body: []byte("json"), errStr: "将json转换为map失败:invalid character 'j' looking for beginning of value"},
 		{name: "2.6 content-type为json,编码为GBK,GET,body为json,url参数为空", method: "GET", encoding: "GBK", contentType: "application/json", body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": value}},
 		{name: "2.7 content-type为json,编码为GBK,GET,body为空,url带有参数", method: "GET", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.8 content-type为json,编码为GBK,GET,body为json,url带有参数", method: "GET", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "2.8 content-type为json,编码为GBK,GET,body为json,url带有参数", method: "GET", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.9 content-type为json,编码为GBK,DELETE,body非正确的json", method: "DELETE", encoding: "GBK", contentType: "application/json", body: []byte("json"), errStr: "将json转换为map失败:invalid character 'j' looking for beginning of value"},
 		{name: "2.10 content-type为json,编码为GBK,DELETE,body为json,url参数为空", method: "DELETE", encoding: "GBK", contentType: "application/json", body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": value}},
 		{name: "2.11 content-type为json,编码为GBK,DELETE,body为空,url带有参数", method: "DELETE", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.12 content-type为json,编码为GBK,DELETE,body为json,url带有参数", method: "DELETE", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "2.12 content-type为json,编码为GBK,DELETE,body为json,url带有参数", method: "DELETE", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.13 content-type为json,编码为GBK,PUT,body非正确的json", method: "PUT", encoding: "GBK", contentType: "application/json", body: []byte("json"), errStr: "将json转换为map失败:invalid character 'j' looking for beginning of value"},
 		{name: "2.14 content-type为json,编码为GBK,PUT,body为json,url参数为空", method: "PUT", encoding: "GBK", contentType: "application/json", body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": value}},
 		{name: "2.15 content-type为json,编码为GBK,PUT,body为空,url带有参数", method: "PUT", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.16 content-type为json,编码为GBK,PUT,body为json,url带有参数", method: "PUT", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "2.16 content-type为json,编码为GBK,PUT,body为json,url带有参数", method: "PUT", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.17 content-type为json,编码为GBK,PATCH,body非正确的json", method: "PATCH", encoding: "GBK", contentType: "application/json", body: []byte("json"), errStr: "将json转换为map失败:invalid character 'j' looking for beginning of value"},
 		{name: "2.18 content-type为json,编码为GBK,PATCH,body为json,url参数为空", method: "PATCH", encoding: "GBK", contentType: "application/json", body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": value}},
 		{name: "2.19 content-type为json,编码为GBK,PATCH,body为空,url带有参数", method: "PATCH", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.20 content-type为json,编码为GBK,PATCH,body为json,url带有参数", method: "PATCH", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "2.20 content-type为json,编码为GBK,PATCH,body为json,url带有参数", method: "PATCH", encoding: "GBK", contentType: "application/json", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "json"), want: map[string]interface{}{"key": []string{value, value}}},
 	}
 
 	for _, tt := range tests {
@@ -824,43 +824,43 @@ func Test_body_GetMap__MIMEYAML(t *testing.T) {
 	}{
 		{name: "1.2 content-type为yaml,编码为UTF-8,POST,body为yaml,url参数为空", method: "POST", encoding: "UTF-8", contentType: "application/x-yaml", body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": value}},
 		{name: "1.3 content-type为yaml,编码为UTF-8,POST,body为空,url带有参数", method: "POST", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.4 content-type为yaml,编码为UTF-8,POST,body为yaml,url带有参数", method: "POST", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "1.4 content-type为yaml,编码为UTF-8,POST,body为yaml,url带有参数", method: "POST", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.6 content-type为yaml,编码为UTF-8,GET,body为yaml,url参数为空", method: "GET", encoding: "UTF-8", contentType: "application/x-yaml", body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": value}},
 		{name: "1.7 content-type为yaml,编码为UTF-8,GET,body为空,url带有参数", method: "GET", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.8 content-type为yaml,编码为UTF-8,GET,body为yaml,url带有参数", method: "GET", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "1.8 content-type为yaml,编码为UTF-8,GET,body为yaml,url带有参数", method: "GET", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.10 content-type为yaml,编码为UTF-8,DELETE,body为yaml,url参数为空", method: "DELETE", encoding: "UTF-8", contentType: "application/x-yaml", body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": value}},
 		{name: "1.11 content-type为yaml,编码为UTF-8,DELETE,body为空,url带有参数", method: "DELETE", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.12 content-type为yaml,编码为UTF-8,DELETE,body为yaml,url带有参数", method: "DELETE", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "1.12 content-type为yaml,编码为UTF-8,DELETE,body为yaml,url带有参数", method: "DELETE", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.14 content-type为yaml,编码为UTF-8,PUT,body为yaml,url参数为空", method: "PUT", encoding: "UTF-8", contentType: "application/x-yaml", body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": value}},
 		{name: "1.15 content-type为yaml,编码为UTF-8,PUT,body为空,url带有参数", method: "PUT", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.16 content-type为yaml,编码为UTF-8,PUT,body为yaml,url带有参数", method: "PUT", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "1.16 content-type为yaml,编码为UTF-8,PUT,body为yaml,url带有参数", method: "PUT", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.18 content-type为yaml,编码为UTF-8,PATCH,body为yaml,url参数为空", method: "PATCH", encoding: "UTF-8", contentType: "application/x-yaml", body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": value}},
 		{name: "1.19 content-type为yaml,编码为UTF-8,PATCH,body为空,url带有参数", method: "PATCH", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.20 content-type为yaml,编码为UTF-8,PATCH,body为yaml,url带有参数", method: "PATCH", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "1.20 content-type为yaml,编码为UTF-8,PATCH,body为yaml,url带有参数", method: "PATCH", encoding: "UTF-8", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "yaml"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.2 content-type为yaml,编码为GBK,POST,body为yaml,url参数为空", method: "POST", encoding: "GBK", contentType: "application/x-yaml", body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": value}},
 		{name: "2.3 content-type为yaml,编码为GBK,POST,body为空,url带有参数", method: "POST", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.4 content-type为yaml,编码为GBK,POST,body为yaml,url带有参数", method: "POST", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "2.4 content-type为yaml,编码为GBK,POST,body为yaml,url带有参数", method: "POST", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.6 content-type为yaml,编码为GBK,GET,body为yaml,url参数为空", method: "GET", encoding: "GBK", contentType: "application/x-yaml", body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": value}},
 		{name: "2.7 content-type为yaml,编码为GBK,GET,body为空,url带有参数", method: "GET", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.8 content-type为yaml,编码为GBK,GET,body为yaml,url带有参数", method: "GET", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "2.8 content-type为yaml,编码为GBK,GET,body为yaml,url带有参数", method: "GET", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.10 content-type为yaml,编码为GBK,DELETE,body为yaml,url参数为空", method: "DELETE", encoding: "GBK", contentType: "application/x-yaml", body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": value}},
 		{name: "2.11 content-type为yaml,编码为GBK,DELETE,body为空,url带有参数", method: "DELETE", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.12 content-type为yaml,编码为GBK,DELETE,body为yaml,url带有参数", method: "DELETE", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "2.12 content-type为yaml,编码为GBK,DELETE,body为yaml,url带有参数", method: "DELETE", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.14 content-type为yaml,编码为GBK,PUT,body为yaml,url参数为空", method: "PUT", encoding: "GBK", contentType: "application/x-yaml", body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": value}},
 		{name: "2.15 content-type为yaml,编码为GBK,PUT,body为空,url带有参数", method: "PUT", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.16 content-type为yaml,编码为GBK,PUT,body为yaml,url带有参数", method: "PUT", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "2.16 content-type为yaml,编码为GBK,PUT,body为yaml,url带有参数", method: "PUT", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.18 content-type为yaml,编码为GBK,PATCH,body为yaml,url参数为空", method: "PATCH", encoding: "GBK", contentType: "application/x-yaml", body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": value}},
 		{name: "2.19 content-type为yaml,编码为GBK,PATCH,body为空,url带有参数", method: "PATCH", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.20 content-type为yaml,编码为GBK,PATCH,body为yaml,url带有参数", method: "PATCH", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": value + "," + value}},
+		{name: "2.20 content-type为yaml,编码为GBK,PATCH,body为yaml,url带有参数", method: "PATCH", encoding: "GBK", contentType: "application/x-yaml", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "yaml"), want: map[string]interface{}{"key": []string{value, value}}},
 	}
 
 	for _, tt := range tests {
@@ -905,52 +905,52 @@ func Test_body_GetMap__MIMEPOSTForm(t *testing.T) {
 		{name: "1.1 content-type为form,编码为UTF-8,GET,body为空,url为空", method: "POST", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", body: nil, want: map[string]interface{}{}},
 		{name: "1.2 content-type为form,编码为UTF-8,POST,body为form,url参数为空", method: "POST", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": value}},
 		{name: "1.3 content-type为form,编码为UTF-8,POST,body为空,url带有参数", method: "POST", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.4 content-type为form,编码为UTF-8,POST,body为form,url带有参数", method: "POST", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "1.4 content-type为form,编码为UTF-8,POST,body为form,url带有参数", method: "POST", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.5 content-type为form,编码为UTF-8,GET,body为空,url为空", method: "GET", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", body: nil, want: map[string]interface{}{}},
 		{name: "1.6 content-type为form,编码为UTF-8,GET,body为form,url参数为空", method: "GET", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": value}},
 		{name: "1.7 content-type为form,编码为UTF-8,GET,body为空,url带有参数", method: "GET", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.8 content-type为form,编码为UTF-8,GET,body为form,url带有参数", method: "GET", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "1.8 content-type为form,编码为UTF-8,GET,body为form,url带有参数", method: "GET", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.9 content-type为form,编码为UTF-8,DELETE,body为空,url为空", method: "DELETE", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", body: nil, want: map[string]interface{}{}},
 		{name: "1.10 content-type为form,编码为UTF-8,DELETE,body为form,url参数为空", method: "DELETE", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": value}},
 		{name: "1.11 content-type为form,编码为UTF-8,DELETE,body为空,url带有参数", method: "DELETE", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.12 content-type为form,编码为UTF-8,DELETE,body为form,url带有参数", method: "DELETE", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "1.12 content-type为form,编码为UTF-8,DELETE,body为form,url带有参数", method: "DELETE", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.13 content-type为form,编码为UTF-8,PUT,body为空,url为空", method: "PUT", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", body: nil, want: map[string]interface{}{}},
 		{name: "1.14 content-type为form,编码为UTF-8,PUT,body为form,url参数为空", method: "PUT", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": value}},
 		{name: "1.15 content-type为form,编码为UTF-8,PUT,body为空,url带有参数", method: "PUT", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.16 content-type为form,编码为UTF-8,PUT,body为form,url带有参数", method: "PUT", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "1.16 content-type为form,编码为UTF-8,PUT,body为form,url带有参数", method: "PUT", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.17 content-type为form,编码为UTF-8,GET,body为空,url为空", method: "PATCH", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", body: nil, want: map[string]interface{}{}},
 		{name: "1.18 content-type为form,编码为UTF-8,PATCH,body为form,url参数为空", method: "PATCH", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": value}},
 		{name: "1.19 content-type为form,编码为UTF-8,PATCH,body为空,url带有参数", method: "PATCH", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.20 content-type为form,编码为UTF-8,PATCH,body为form,url带有参数", method: "PATCH", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "1.20 content-type为form,编码为UTF-8,PATCH,body为form,url带有参数", method: "PATCH", encoding: "UTF-8", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "UTF-8"), body: getTestBody(value, "UTF-8", "form"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.1 content-type为form,编码为GBK,GET,body为空,url为空", method: "POST", encoding: "GBK", contentType: "application/x-www-form-urlencoded", body: nil, want: map[string]interface{}{}},
 		{name: "2.2 content-type为form,编码为GBK,POST,body为form,url参数为空", method: "POST", encoding: "GBK", contentType: "application/x-www-form-urlencoded", body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": value}},
 		{name: "2.3 content-type为form,编码为GBK,POST,body为空,url带有参数", method: "POST", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.4 content-type为form,编码为GBK,POST,body为form,url带有参数", method: "POST", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "2.4 content-type为form,编码为GBK,POST,body为form,url带有参数", method: "POST", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.5 content-type为form,编码为GBK,GET,body为空,url为空", method: "GET", encoding: "GBK", contentType: "application/x-www-form-urlencoded", body: nil, want: map[string]interface{}{}},
 		{name: "2.6 content-type为form,编码为GBK,GET,body为form,url参数为空", method: "GET", encoding: "GBK", contentType: "application/x-www-form-urlencoded", body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": value}},
 		{name: "2.7 content-type为form,编码为GBK,GET,body为空,url带有参数", method: "GET", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.8 content-type为form,编码为GBK,GET,body为form,url带有参数", method: "GET", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "2.8 content-type为form,编码为GBK,GET,body为form,url带有参数", method: "GET", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.9 content-type为form,编码为GBK,DELETE,body为空,url为空", method: "DELETE", encoding: "GBK", contentType: "application/x-www-form-urlencoded", body: nil, want: map[string]interface{}{}},
 		{name: "2.10 content-type为form,编码为GBK,DELETE,body为form,url参数为空", method: "DELETE", encoding: "GBK", contentType: "application/x-www-form-urlencoded", body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": value}},
 		{name: "2.11 content-type为form,编码为GBK,DELETE,body为空,url带有参数", method: "DELETE", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.12 content-type为form,编码为GBK,DELETE,body为form,url带有参数", method: "DELETE", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "2.12 content-type为form,编码为GBK,DELETE,body为form,url带有参数", method: "DELETE", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.13 content-type为form,编码为GBK,PUT,body为空,url为空", method: "PUT", encoding: "GBK", contentType: "application/x-www-form-urlencoded", body: nil, want: map[string]interface{}{}},
 		{name: "2.14 content-type为form,编码为GBK,PUT,body为form,url参数为空", method: "PUT", encoding: "GBK", contentType: "application/x-www-form-urlencoded", body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": value}},
 		{name: "2.15 content-type为form,编码为GBK,PUT,body为空,url带有参数", method: "PUT", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.16 content-type为form,编码为GBK,PUT,body为form,url带有参数", method: "PUT", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "2.16 content-type为form,编码为GBK,PUT,body为form,url带有参数", method: "PUT", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.17 content-type为form,编码为GBK,PATCH,body为空,url为空", method: "PATCH", encoding: "GBK", contentType: "application/x-www-form-urlencoded", body: nil, want: map[string]interface{}{}},
 		{name: "2.18 content-type为form,编码为GBK,PATCH,body为form,url参数为空", method: "PATCH", encoding: "GBK", contentType: "application/x-www-form-urlencoded", body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": value}},
 		{name: "2.19 content-type为form,编码为GBK,PATCH,body为空,url带有参数", method: "PATCH", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.20 content-type为form,编码为GBK,PATCH,body为form,url带有参数", method: "PATCH", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "2.20 content-type为form,编码为GBK,PATCH,body为form,url带有参数", method: "PATCH", encoding: "GBK", contentType: "application/x-www-form-urlencoded", queryRaw: getTestQueryRaw(value, "GBK"), body: getTestBody(value, "GBK", "form"), want: map[string]interface{}{"key": []string{value, value}}},
 	}
 
 	for _, tt := range tests {
@@ -994,52 +994,52 @@ func Test_body_GetMap__MIMEMultipartPOSTForm(t *testing.T) {
 		{name: "1.1 content-type为form-data,编码为UTF-8,GET,body为空,url为空", method: "POST", encoding: "UTF-8", value: nil, want: map[string]interface{}{}},
 		{name: "1.2 content-type为form-data,编码为UTF-8,POST,body为form,url参数为空", method: "POST", encoding: "UTF-8", value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": value}},
 		{name: "1.3 content-type为form-data,编码为UTF-8,POST,body为空,url带有参数", method: "POST", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.4 content-type为form-data,编码为UTF-8,POST,body为form,url带有参数", method: "POST", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "1.4 content-type为form-data,编码为UTF-8,POST,body为form,url带有参数", method: "POST", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.5 content-type为form-data,编码为UTF-8,GET,body为空,url为空", method: "GET", encoding: "UTF-8", value: nil, want: map[string]interface{}{}},
 		{name: "1.6 content-type为form-data,编码为UTF-8,GET,body为form,url参数为空", method: "GET", encoding: "UTF-8", value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": value}},
 		{name: "1.7 content-type为form-data,编码为UTF-8,GET,body为空,url带有参数", method: "GET", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.8 content-type为form-data,编码为UTF-8,GET,body为form,url带有参数", method: "GET", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "1.8 content-type为form-data,编码为UTF-8,GET,body为form,url带有参数", method: "GET", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.9 content-type为form-data,编码为UTF-8,DELETE,body为空,url为空", method: "DELETE", encoding: "UTF-8", value: nil, want: map[string]interface{}{}},
 		{name: "1.10 content-type为form-data,编码为UTF-8,DELETE,body为form,url参数为空", method: "DELETE", encoding: "UTF-8", value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": value}},
 		{name: "1.11 content-type为form-data,编码为UTF-8,DELETE,body为空,url带有参数", method: "DELETE", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.12 content-type为form-data,编码为UTF-8,DELETE,body为form,url带有参数", method: "DELETE", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "1.12 content-type为form-data,编码为UTF-8,DELETE,body为form,url带有参数", method: "DELETE", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.13 content-type为form-data,编码为UTF-8,PUT,body为空,url为空", method: "PUT", encoding: "UTF-8", value: nil, want: map[string]interface{}{}},
 		{name: "1.14 content-type为form-data,编码为UTF-8,PUT,body为form,url参数为空", method: "PUT", encoding: "UTF-8", value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": value}},
 		{name: "1.15 content-type为form-data,编码为UTF-8,PUT,body为空,url带有参数", method: "PUT", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.16 content-type为form-data,编码为UTF-8,PUT,body为form,url带有参数", method: "PUT", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "1.16 content-type为form-data,编码为UTF-8,PUT,body为form,url带有参数", method: "PUT", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "1.17 content-type为form-data,编码为UTF-8,GET,body为空,url为空", method: "PATCH", encoding: "UTF-8", value: nil, want: map[string]interface{}{}},
 		{name: "1.18 content-type为form-data,编码为UTF-8,PATCH,body为form,url参数为空", method: "PATCH", encoding: "UTF-8", value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": value}},
 		{name: "1.19 content-type为form-data,编码为UTF-8,PATCH,body为空,url带有参数", method: "PATCH", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), want: map[string]interface{}{"key": value}},
-		{name: "1.20 content-type为form-data,编码为UTF-8,PATCH,body为form,url带有参数", method: "PATCH", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "1.20 content-type为form-data,编码为UTF-8,PATCH,body为form,url带有参数", method: "PATCH", encoding: "UTF-8", queryRaw: getTestQueryRaw(value, "UTF-8"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.1 content-type为form-data,编码为GBK,GET,body为空,url为空", method: "POST", encoding: "GBK", value: nil, want: map[string]interface{}{}},
 		{name: "2.2 content-type为form-data,编码为GBK,POST,body为form,url参数为空", method: "POST", encoding: "GBK", value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": value}},
 		{name: "2.3 content-type为form-data,编码为GBK,POST,body为空,url带有参数", method: "POST", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.4 content-type为form-data,编码为GBK,POST,body为form,url带有参数", method: "POST", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "2.4 content-type为form-data,编码为GBK,POST,body为form,url带有参数", method: "POST", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.5 content-type为form-data,编码为GBK,GET,body为空,url为空", method: "GET", encoding: "GBK", value: nil, want: map[string]interface{}{}},
 		{name: "2.6 content-type为form-data,编码为GBK,GET,body为form,url参数为空", method: "GET", encoding: "GBK", value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": value}},
 		{name: "2.7 content-type为form-data,编码为GBK,GET,body为空,url带有参数", method: "GET", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.8 content-type为form-data,编码为GBK,GET,body为form,url带有参数", method: "GET", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "2.8 content-type为form-data,编码为GBK,GET,body为form,url带有参数", method: "GET", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.9 content-type为form-data,编码为GBK,DELETE,body为空,url为空", method: "DELETE", encoding: "GBK", value: nil, want: map[string]interface{}{}},
 		{name: "2.10 content-type为form-data,编码为GBK,DELETE,body为form,url参数为空", method: "DELETE", encoding: "GBK", value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": value}},
 		{name: "2.11 content-type为form-data,编码为GBK,DELETE,body为空,url带有参数", method: "DELETE", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.12 content-type为form-data,编码为GBK,DELETE,body为form,url带有参数", method: "DELETE", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "2.12 content-type为form-data,编码为GBK,DELETE,body为form,url带有参数", method: "DELETE", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.13 content-type为form-data,编码为GBK,PUT,body为空,url为空", method: "PUT", encoding: "GBK", value: nil, want: map[string]interface{}{}},
 		{name: "2.14 content-type为form-data,编码为GBK,PUT,body为form,url参数为空", method: "PUT", encoding: "GBK", value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": value}},
 		{name: "2.15 content-type为form-data,编码为GBK,PUT,body为空,url带有参数", method: "PUT", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.16 content-type为form-data,编码为GBK,PUT,body为form,url带有参数", method: "PUT", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "2.16 content-type为form-data,编码为GBK,PUT,body为form,url带有参数", method: "PUT", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": []string{value, value}}},
 
 		{name: "2.17 content-type为form-data,编码为GBK,PATCH,body为空,url为空", method: "PATCH", encoding: "GBK", value: nil, want: map[string]interface{}{}},
 		{name: "2.18 content-type为form-data,编码为GBK,PATCH,body为form,url参数为空", method: "PATCH", encoding: "GBK", value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": value}},
 		{name: "2.19 content-type为form-data,编码为GBK,PATCH,body为空,url带有参数", method: "PATCH", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), want: map[string]interface{}{"key": value}},
-		{name: "2.20 content-type为form-data,编码为GBK,PATCH,body为form,url带有参数", method: "PATCH", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": fmt.Sprintf("%s,%s", value, value)}},
+		{name: "2.20 content-type为form-data,编码为GBK,PATCH,body为form,url带有参数", method: "PATCH", encoding: "GBK", queryRaw: getTestQueryRaw(value, "GBK"), value: url.Values{"key": []string{value}}, want: map[string]interface{}{"key": []string{value, value}}},
 	}
 
 	for _, tt := range tests {

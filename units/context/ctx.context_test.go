@@ -1,39 +1,24 @@
 package context
 
 import (
-	"net/url"
 	"reflect"
 	"testing"
 
-	"github.com/micro-plat/hydra-test/units/mocks"
-	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/context"
-	"github.com/micro-plat/hydra/context/ctx"
-	"github.com/micro-plat/hydra/hydra/servers/http"
-	h "github.com/micro-plat/hydra/hydra/servers/http"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
+	"github.com/micro-plat/lib4go/types"
 )
 
 func TestNewCtx(t *testing.T) {
-	if _, err := app.Cache.GetAPPConf(h.API); err != nil {
-		confObj := mocks.NewConfBy("context_new_test", "t") //构建对象
-		confObj.API("8080")                                 //初始化参数
-		serverConf := confObj.GetAPIConf()                  //获取配置
-		_, _ = http.NewResponsive(serverConf)
-	}
-	got := ctx.NewCtx(&mocks.TestContxt{URL: &url.URL{}}, h.API)
+
+	got := mock.NewContext("获取content", mock.WithRHeaders(types.XMap{}))
+
 	assert.NotEqual(t, nil, got, "获取ctx对象")
 }
 
 func TestCtx_Close(t *testing.T) {
-	if _, err := app.Cache.GetAPPConf(h.API); err != nil {
-		confObj := mocks.NewConfBy("context_close_test1", "t") //构建对象
-		confObj.API("8080")                                    //初始化参数
-		serverConf := confObj.GetAPIConf()                     //获取配置
-		_, _ = http.NewResponsive(serverConf)
-	}
-
-	c := ctx.NewCtx(&mocks.TestContxt{URL: &url.URL{}}, h.API)
+	c := mock.NewContext("获取content", mock.WithRHeaders(types.XMap{}))
 
 	c.Close()
 

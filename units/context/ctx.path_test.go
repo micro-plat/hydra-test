@@ -3,108 +3,51 @@ package context
 import (
 	"testing"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/conf/server/api"
 	c "github.com/micro-plat/hydra/conf/server/cron"
 	"github.com/micro-plat/hydra/conf/server/queue"
-	"github.com/micro-plat/hydra/conf/server/router"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
 	"github.com/micro-plat/hydra/context"
 	"github.com/micro-plat/hydra/context/ctx"
+	"github.com/micro-plat/hydra/services"
 	"github.com/micro-plat/lib4go/assert"
 )
-
-func Test_rpath_GetRouter_WithPanic(t *testing.T) {
-
-	confObj := mocks.NewConf() //构建对象
-	confObj.API("8080")        //初始化参数
-	confObj.CRON(c.WithMasterSlave(), c.WithTrace())
-	confObj.Service.API.Add("/api", "/api", []string{"GET"})
-	httpConf := confObj.GetAPIConf() //获取配置
-
-	tests := []struct {
-		name       string
-		ctx        context.IInnerContext
-		serverConf app.IAPPConf
-		meta       conf.IMeta
-		want       *router.Router
-		wantError  string
-	}{
-		{name: "1.1 路径正确 请求方法为DELETE", ctx: &mocks.TestContxt{Routerpath: "/api", Method: "DELETE"}, serverConf: httpConf, meta: conf.NewMeta(), wantError: "未找到与[/api][DELETE]匹配的路由"},
-		{name: "1.2 路径正确 请求方法为POST", ctx: &mocks.TestContxt{Routerpath: "/api", Method: "POST"}, serverConf: httpConf, meta: conf.NewMeta(), wantError: "未找到与[/api][POST]匹配的路由"},
-		{name: "1.3 路径正确 请求方法为PUT", ctx: &mocks.TestContxt{Routerpath: "/api", Method: "PUT"}, serverConf: httpConf, meta: conf.NewMeta(), wantError: "未找到与[/api][PUT]匹配的路由"},
-		{name: "1.4 路径正确 请求方法为PATCH", ctx: &mocks.TestContxt{Routerpath: "/api", Method: "PATCH"}, serverConf: httpConf, meta: conf.NewMeta(), wantError: "未找到与[/api][PATCH]匹配的路由"},
-		{name: "1.5 路径不正确 请求方法正确", ctx: &mocks.TestContxt{Routerpath: "/api2", Method: "GET"}, serverConf: httpConf, meta: conf.NewMeta(), wantError: "未找到与[/api2][GET]匹配的路由"},
-		{name: "1.6 路径不正确 请求方法正不确", ctx: &mocks.TestContxt{Routerpath: "/api2", Method: "PATCH"}, serverConf: httpConf, meta: conf.NewMeta(), wantError: "未找到与[/api2][PATCH]匹配的路由"},
-	}
-
-	for _, tt := range tests {
-		c := ctx.NewRpath(tt.ctx, tt.serverConf, tt.meta)
-		assert.PanicsWithErrorf(t, tt.wantError, func() { c.GetRouter() }, tt.name)
-	}
-}
-
-func Test_rpath_GetRouter(t *testing.T) {
-	confObj := mocks.NewConf() //构建对象
-	confObj.API("8080")
-	confObj.Vars().Redis("5.79", "192.168.5.79:6379")
-	confObj.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
-	confObj.MQC("redis://xxx").Queue(queue.NewQueue("queue1", "/service1")).Queue(queue.NewQueue("queue2", "/service2"))
-	confObj.CRON(c.WithMasterSlave(), c.WithTrace())
-	confObj.Service.API.Add("/api", "/api", []string{"GET"}, api.WithEncoding("utf-8"))
-	confObj.Service.Web.Add("/web", "/web", []string{"GET"}, api.WithEncoding("utf-8"))
-	confObj.Service.WS.Add("/ws", "/ws", []string{"GET"}, api.WithEncoding("utf-8"))
-	apiConf := confObj.GetAPIConf()   //获取配置
-	webConf := confObj.GetWebConf()   //获取配置
-	wsConf := confObj.GetWSConf()     //获取配置
-	mqcConf := confObj.GetMQCConf()   //获取配置
-	cronConf := confObj.GetCronConf() //获取配置
-
-	tests := []struct {
-		name       string
-		ctx        context.IInnerContext
-		serverConf app.IAPPConf
-		meta       conf.IMeta
-		want       *router.Router
-		wantError  string
-	}{
-		{name: "1 api类型的router", ctx: &mocks.TestContxt{Routerpath: "/api", Method: "GET"}, serverConf: apiConf, meta: conf.NewMeta(), want: &router.Router{Path: "/api", Encoding: "utf-8", Action: []string{"GET"}, Service: "/api"}},
-		{name: "2 web类型的router", ctx: &mocks.TestContxt{Routerpath: "/web", Method: "GET"}, serverConf: webConf, meta: conf.NewMeta(), want: &router.Router{Path: "/web", Encoding: "utf-8", Action: []string{"GET"}, Service: "/web"}},
-		{name: "3 ws类型的router", ctx: &mocks.TestContxt{Routerpath: "/ws", Method: "GET"}, serverConf: wsConf, meta: conf.NewMeta(), want: &router.Router{Path: "/ws", Encoding: "utf-8", Action: []string{"GET"}, Service: "/ws"}},
-		{name: "4 cron类型的router", ctx: &mocks.TestContxt{Routerpath: "/mqc"}, serverConf: mqcConf, meta: conf.NewMeta(), want: &router.Router{Path: "/mqc", Encoding: "utf-8", Action: []string{}, Service: "/mqc"}},
-		{name: "5 mqc类型的router", ctx: &mocks.TestContxt{Routerpath: "/cron"}, serverConf: cronConf, meta: conf.NewMeta(), want: &router.Router{Path: "/cron", Encoding: "utf-8", Action: []string{}, Service: "/cron"}},
-	}
-
-	for _, tt := range tests {
-		c := ctx.NewRpath(tt.ctx, tt.serverConf, tt.meta)
-		got, err := c.GetRouter()
-		assert.Equal(t, nil, err, tt.name)
-		assert.Equal(t, tt.want, got, tt.name)
-	}
-}
 
 func Test_rpath_GetEncoding(t *testing.T) {
 	confObj := mocks.NewConf() //构建对象
 	confObj.API("8080")
+	hydra.G.SysName = "apiserver"
+
 	confObj.Vars().Redis("5.79", "192.168.5.79:6379")
 	confObj.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	confObj.MQC("redis://xxx").Queue(queue.NewQueue("queue1", "/service1")).Queue(queue.NewQueue("queue2", "/service2"))
 	confObj.CRON(c.WithMasterSlave(), c.WithTrace())
-	confObj.Service.API.Add("/api", "/api", []string{"GET"}, api.WithEncoding("utf-8"))
-	confObj.Service.API.Add("/api2", "/api2", []string{"GET"}, api.WithEncoding("gbk"))
-	confObj.Service.API.Add("/api3", "/api3", []string{"GET"})
-	confObj.Service.Web.Add("/web", "/web", []string{"GET"}, api.WithEncoding("utf-8"))
-	confObj.Service.Web.Add("/web2", "/web2", []string{"GET"}, api.WithEncoding("gbk"))
-	confObj.Service.Web.Add("/web3", "/web3", []string{"GET"})
-	confObj.Service.WS.Add("/ws", "/ws", []string{"GET"}, api.WithEncoding("utf-8"))
-	confObj.Service.WS.Add("/ws2", "/ws2", []string{"GET"}, api.WithEncoding("gbk"))
-	confObj.Service.WS.Add("/ws3", "/ws3", []string{"GET"})
-	apiConf := confObj.GetAPIConf()   //获取配置
-	webConf := confObj.GetWebConf()   //获取配置
-	wsConf := confObj.GetWSConf()     //获取配置
-	mqcConf := confObj.GetMQCConf()   //获取配置
+
+	services.API.Add("/api", "/api", []string{"GET"}, api.WithEncoding("utf-8"))
+	services.API.Add("/api2", "/api2", []string{"GET"}, api.WithEncoding("gbk"))
+	services.API.Add("/api3", "/api3", []string{"GET"})
+	services.WEB.Add("/web", "/web", []string{"GET"}, api.WithEncoding("utf-8"))
+	services.WEB.Add("/web2", "/web2", []string{"GET"}, api.WithEncoding("gbk"))
+	services.WEB.Add("/web3", "/web3", []string{"GET"})
+	services.WS.Add("/ws", "/ws", []string{"GET"}, api.WithEncoding("utf-8"))
+	services.WS.Add("/ws2", "/ws2", []string{"GET"}, api.WithEncoding("gbk"))
+	services.WS.Add("/ws3", "/ws3", []string{"GET"})
+	apiConf := confObj.GetAPIConf() //获取配置
+
+	hydra.G.SysName = "webserver"
+	webConf := confObj.GetWebConf() //获取配置
+
+	hydra.G.SysName = "wsserver"
+	wsConf := confObj.GetWSConf() //获取配置
+
+	hydra.G.SysName = "mqcserver"
+	mqcConf := confObj.GetMQCConf() //获取配置
+
+	hydra.G.SysName = "cronserver"
 	cronConf := confObj.GetCronConf() //获取配置
 
 	tests := []struct {

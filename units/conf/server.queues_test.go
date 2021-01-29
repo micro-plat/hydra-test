@@ -86,4 +86,7 @@ func TestQueuesGetConf(t *testing.T) {
 	assert.Equal(t, test2.wantErr, (err != nil), test2.name+",err")
 	assert.Equal(t, test2.want, queueObj, test2.name+",obj")
 
+	r := queue.NewEmptyQueues()
+	r.Append(queue.NewQueue("a", "张三"), queue.NewQueue("x", "/a/a/c"), queue.NewQueue("y", "a/a/c"))
+
 }
