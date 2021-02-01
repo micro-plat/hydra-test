@@ -32,21 +32,21 @@ func TestNewValueWatcher(t *testing.T) {
 	confObj := mocks.NewConfBy("hydra_rgst_watcher_value", "rgtwatchevaluetest") //构建对象
 	confObj.API("8080")                                                          //初始化参数
 	serverConf := confObj.GetAPIConf()                                           //获取配置
-	log := logger.GetSession(serverConf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession(serverConf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 	for _, tt := range tests {
 		gotR, err := watcher.NewValueWatcher(tt.registryAddr, []string{}, log)
 		assert.Equal(t, tt.wantErr, err != nil, tt.name)
-		assert.IsNil(t, tt.wantNil, gotR, tt.name)
+		assert.Nil(t, tt.wantNil, gotR, tt.name)
 	}
 }
 
 func TestNewValueWatcherByRegistry(t *testing.T) {
 	confObj := mocks.NewConfBy("hydra_rgst_watcher_value1", "rgtwatchevaluetest1") //构建对象
-	log := logger.GetSession("hydra_rgst_watcher_value1", ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession("hydra_rgst_watcher_value1", ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 
 	gotR, err := watcher.NewValueWatcherByRegistry(confObj.Registry, []string{}, log)
 	assert.Equal(t, nil, err, "构建ValueWatcher")
-	assert.IsNil(t, false, gotR, "构建ValueWatcher")
+	assert.Nil(t, false, gotR, "构建ValueWatcher")
 
 }
 
@@ -67,7 +67,7 @@ func TestNewValueWatcherByServers(t *testing.T) {
 	}
 
 	confObj := mocks.NewConfBy("hydra_rgst_watcher_value2", "rgtwatchevaluetest2") //构建对象
-	log := logger.GetSession("hydra_rgst_watcher_value2", ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession("hydra_rgst_watcher_value2", ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 	for _, tt := range tests {
 		defer func() {
 			r := recover()
@@ -75,7 +75,7 @@ func TestNewValueWatcherByServers(t *testing.T) {
 		}()
 		gotR, err := watcher.NewValueWatcherByServers(confObj.Registry, tt.platName, tt.systemName, tt.serverTypes, tt.clusterName, log)
 		assert.Equal(t, nil, err, tt.name)
-		assert.IsNil(t, false, gotR, tt.name)
+		assert.Nil(t, false, gotR, tt.name)
 		gotC, err := gotR.Start()
 		assert.Equal(t, nil, err, tt.name)
 

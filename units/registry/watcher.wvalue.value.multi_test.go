@@ -10,6 +10,7 @@ import (
 	"github.com/micro-plat/hydra/registry/pub"
 	"github.com/micro-plat/hydra/registry/watcher"
 	"github.com/micro-plat/hydra/registry/watcher/wvalue"
+	"github.com/micro-plat/hydra/services"
 	"github.com/micro-plat/lib4go/assert"
 	"github.com/micro-plat/lib4go/logger"
 )
@@ -18,7 +19,7 @@ func TestNewMultiValueWatcher(t *testing.T) {
 
 	//构建配置对象
 	confObj := mocks.NewConfBy("hydra_rgst_watcher_MultiValue1", "rgtwatcMultiValueest1")
-	log := logger.GetSession("hydra_rgst_watcher_MultiValue1", ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession("hydra_rgst_watcher_MultiValue1", ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 
 	w, _ := wvalue.NewMultiValueWatcher(confObj.Registry, []string{"a", "b", "c"}, log)
 	assert.Equal(t, 3, len(w.Watchers), "构建的值监控对象")
@@ -27,7 +28,7 @@ func TestNewMultiValueWatcher(t *testing.T) {
 func TestMultiValueWatcher_Close(t *testing.T) {
 	//构建配置对象
 	confObj := mocks.NewConfBy("hydra_rgst_watcher_MultiValue", "rgtwatcMultiValueest")
-	log := logger.GetSession("hydra_rgst_watcher_MultiValue", ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession("hydra_rgst_watcher_MultiValue", ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 
 	w, _ := wvalue.NewMultiValueWatcher(confObj.Registry, []string{"a", "b", "c"}, log)
 	w.Close()
@@ -56,10 +57,9 @@ func TestMultiValueWatcher_Start(t *testing.T) {
 		{name: "1. Watcher-Start-监控过程中,值未发生改变", path: c.GetServerPubPath(), r: c.GetRegistry(), wantOp: watcher.ADD, wantErr: false},
 		{name: "2. Watcher-Start-监控过程中,值发生改变", path: "/platname/apiserver/api/test/hosts/server1", r: mocks.NewTestRegistry("platname", "apiserver", "test", ""), wantOp: watcher.ADD, wantErr: false},
 	}
-
-	router, _ := apiconf.GetRouterConf()
+	router, _ := services.GetRouter("api").GetRouters()
 	pub.New(c).Publish("192.168.0.1:9091", "192.168.0.2:9091", c.GetServerID(), router.GetPath()...)
-	log := logger.GetSession(apiconf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession(apiconf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 
 	for _, tt := range tests {
 

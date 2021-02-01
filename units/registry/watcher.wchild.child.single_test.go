@@ -12,6 +12,7 @@ import (
 	"github.com/micro-plat/hydra/registry/pub"
 	"github.com/micro-plat/hydra/registry/watcher"
 	"github.com/micro-plat/hydra/registry/watcher/wchild"
+	"github.com/micro-plat/hydra/services"
 	"github.com/micro-plat/lib4go/assert"
 	"github.com/micro-plat/lib4go/logger"
 )
@@ -21,7 +22,7 @@ func TestChildWatcher_Close(t *testing.T) {
 	confObj.API("8080")
 	apiconf := confObj.GetAPIConf()
 	c := apiconf.GetServerConf()
-	log := logger.GetSession(apiconf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession(apiconf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 	w := wchild.NewChildWatcher(c.GetRegistry(), c.GetServerPubPath(), log)
 
 	w.Close()
@@ -62,10 +63,10 @@ func TestChildWatcher_Start(t *testing.T) {
 	}
 
 	//发布节点到注册中心
-	router, _ := apiconf.GetRouterConf()
+	router, _ := services.GetRouter("api").GetRouters()
 	pub.New(c).Publish(addr1, addr1, c.GetServerID(), router.GetPath()...)
 	pub.New(c).Publish(addr2, addr2, c.GetServerID(), router.GetPath()...)
-	log := logger.GetSession(apiconf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession(apiconf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 
 	for _, tt := range tests {
 
@@ -132,10 +133,10 @@ func TestChildWatcher_Start_2(t *testing.T) {
 	}
 
 	//发布节点到注册中心
-	router, _ := apiconf.GetRouterConf()
+	router, _ := services.GetRouter("api").GetRouters()
 	pub.New(c).Publish(addr1, addr1, c.GetServerID(), router.GetPath()...)
 	pub.New(c).Publish(addr2, addr2, c.GetServerID(), router.GetPath()...)
-	log := logger.GetSession(apiconf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession(apiconf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 
 	for _, tt := range tests {
 		tt.r.Deep = tt.deep
@@ -205,10 +206,10 @@ func TestChildWatcher_deleted(t *testing.T) {
 	}
 
 	//发布节点到注册中心
-	router, _ := apiconf.GetRouterConf()
+	router, _ := services.GetRouter("api").GetRouters()
 	pub.New(c).Publish(addr1, addr1, c.GetServerID(), router.GetPath()...)
 	pub.New(c).Publish(addr2, addr2, c.GetServerID(), router.GetPath()...)
-	log := logger.GetSession(apiconf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession(apiconf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 
 	for _, tt := range tests {
 		tt.r.Deep = tt.deep

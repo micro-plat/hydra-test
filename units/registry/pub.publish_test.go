@@ -8,8 +8,10 @@ import (
 
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/server/api"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/hydra/registry"
 	"github.com/micro-plat/hydra/registry/pub"
+	"github.com/micro-plat/hydra/services"
 	"github.com/micro-plat/lib4go/assert"
 	"github.com/micro-plat/lib4go/jsons"
 )
@@ -96,11 +98,12 @@ func TestPublisher_PubServerNode(t *testing.T) {
 
 func TestPublisher_PubDNSNode_WithDomain(t *testing.T) {
 	tests := []struct {
-		name       string
-		serverName string
+		name        string
+		serverName  string
+		serviceAddr string
 	}{
-		{name: "1. dns发布", serverName: "127.0.0.1:9999"},
-		{name: "2. dns再次发布", serverName: "127.0.0.1:8899"},
+		{name: "1. dns发布", serverName: "127.0.0.1:9999", serviceAddr: "http://127.0.0.1:9999"},
+		{name: "2. dns再次发布", serverName: "127.0.0.1:8899", serviceAddr: "http://127.0.0.1:8899"},
 	}
 
 	confObj := mocks.NewConfBy("rgst_publish_test1", "publishrgt1") //构建对象
@@ -111,7 +114,7 @@ func TestPublisher_PubDNSNode_WithDomain(t *testing.T) {
 	got := map[string]string{}
 	var err error
 	for _, tt := range tests {
-		got, err = pub.New(c).PubDNSNode(tt.serverName)
+		got, err = pub.New(c).PubDNSNode(tt.serverName, tt.serviceAddr)
 		assert.Equal(t, false, err != nil, tt.name)
 	}
 	assert.Equal(t, 1, len(got), "dns服务发布")
@@ -146,7 +149,8 @@ func TestPublisher_Publish_API(t *testing.T) {
 	c := apiconf.GetServerConf()    //获取配置
 
 	//发布api节点和dns节点
-	router, _ := apiconf.GetRouterConf()
+	//router, _ := apiconf.GetRouterConf()
+	router, _ := services.GetRouter("api").GetRouters()
 	err := pub.New(c).Publish("127.0.0.1:9091", "127.0.0.1:9091", c.GetServerID(), router.GetPath()...)
 	assert.Equal(t, false, err != nil, "发布api节点和dns节点")
 
@@ -169,11 +173,12 @@ func TestPublisher_Publish_RPC(t *testing.T) {
 	confObj.Service.API.Add("/api2", "/api1", []string{"GET"})
 	confObj.RPC(":9377")
 	rpcconf := confObj.GetRPCConf() //初始化参数
-	s := confObj.GetAPIConf()       //初始化参数
-	c := rpcconf.GetServerConf()    //获取配置
+	// s := confObj.GetAPIConf()       //初始化参数
+	c := rpcconf.GetServerConf() //获取配置
 
 	//发布rpc节点
-	router, _ := s.GetRouterConf()
+	//	router, _ := s.GetRouterConf()
+	router, _ := services.GetRouter("api").GetRouters()
 	err := pub.New(c).Publish("127.0.0.1:9091", "127.0.0.1:9091", c.GetServerID(), router.GetPath()...)
 	assert.Equal(t, false, err != nil, "发布rpc节点")
 

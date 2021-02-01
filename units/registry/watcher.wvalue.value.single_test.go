@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/micro-plat/hydra/registry/watcher"
+	"github.com/micro-plat/hydra/services"
 
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf"
@@ -22,7 +23,7 @@ func TestSingleValueWatcher_Close(t *testing.T) {
 	confObj.API("8080")
 	apiconf := confObj.GetAPIConf()
 	c := apiconf.GetServerConf()
-	log := logger.GetSession("hydra_rgst_watcher_SingleValue", ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession("hydra_rgst_watcher_SingleValue", ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 
 	w := wvalue.NewSingleValueWatcher(confObj.Registry, c.GetServerPubPath(), log)
 	w.Close()
@@ -50,9 +51,9 @@ func TestSingleValueWatcher_Start(t *testing.T) {
 	}
 
 	//发布节点到注册中心
-	router, _ := apiconf.GetRouterConf()
+	router, _ := services.GetRouter("api").GetRouters()
 	pub.New(c).Publish("192.168.0.1:9091", "192.168.0.2:9091", c.GetServerID(), router.GetPath()...)
-	log := logger.GetSession(apiconf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession(apiconf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 
 	for _, tt := range tests {
 		//变化之前的值

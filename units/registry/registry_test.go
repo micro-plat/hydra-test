@@ -132,7 +132,7 @@ func TestNewRegistry(t *testing.T) {
 	confObj.API("8080")                                       //初始化参数
 	serverConf := confObj.GetAPIConf()                        //获取配置
 	meta := conf.NewMeta()
-	log := logger.GetSession(serverConf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, "", meta).GetRequestID())
+	log := logger.GetSession(serverConf.GetServerConf().GetServerName(), ctx.NewUser(&mocks.TestContxt{}, meta).GetTraceID())
 
 	for _, tt := range tests {
 		gotR, err := registry.GetRegistry(tt.args.address, log)
@@ -140,7 +140,7 @@ func TestNewRegistry(t *testing.T) {
 			assert.Equal(t, tt.err, err.Error(), tt.name)
 		}
 		if !tt.wantErr {
-			assert.IsNil(t, false, gotR, tt.name)
+			assert.Nil(t, false, gotR, tt.name)
 		}
 	}
 }
