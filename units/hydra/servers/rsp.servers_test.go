@@ -84,7 +84,7 @@ func TestRspServers_Start(t *testing.T) {
 		//初始化注册中心
 		sc := mocks.NewConfBy(platName, clusterName)
 		sc.API("50001")
-		sc.RPC(":54241")
+		sc.RPC("54241")
 		sc.GetCronConf()
 		sc.GetAPIConf()
 		sc.Vars().Redis("5.79", varredis.New([]string{"192.168.5.79:6379"}))

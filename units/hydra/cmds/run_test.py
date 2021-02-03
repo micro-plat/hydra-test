@@ -31,8 +31,8 @@ def test_run_Withtrace():
         return u"服务正常启动"
     
     time.sleep(1)
-    #清理trace.out的监控文件
-    os.remove("trace.out")
+    if os.path.exists("trace.out") :   
+        os.remove("trace.out")
 
 
 @test(testName)
@@ -41,8 +41,8 @@ def test_run_error_registry():
     args = ["run","-r","xx://xxx","-c","c"]
     response = runApp(args)
 
-    if not u"不支持的协议类型" in  response:
-        return u"不支持的协议类型测试"
+    if not u"xxx作为注册中心" in  response:
+        return u"xxx作为注册中心"
     
 
 

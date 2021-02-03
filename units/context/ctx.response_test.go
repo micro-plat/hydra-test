@@ -33,7 +33,7 @@ func Test_response_Write_ERR(t *testing.T) {
 		{name: "1.2.内容为err,状态码300", status: 300, content: errors.New("err"), wantRs: 400, wantRc: "err", wantCt: "text/plain; charset=utf-8"},
 		{name: "1.3.内容为err,状态码在200", status: 200, content: errors.New("err"), wantRs: 400, wantRc: "err", wantCt: "text/plain; charset=utf-8"},
 		{name: "1.4.内容为err,状态码400", status: 400, content: errors.New("err"), wantRs: 400, wantRc: "err", wantCt: "text/plain; charset=utf-8"},
-		{name: "1.5.内容为err,状态码900", status: 900, content: errors.New("err"), wantRs: 400, wantRc: "err", wantCt: "text/plain; charset=utf-8"},
+		{name: "1.5.内容为err,状态码900", status: 900, content: errors.New("err"), wantRs: 900, wantRc: "err", wantCt: "text/plain; charset=utf-8"},
 	}
 
 	confObj := mocks.NewConfBy("responsetest", "Writecluster") //构建对象
@@ -543,7 +543,7 @@ func Test_response_Abort(t *testing.T) {
 
 	rc := mock.NewContext("", mock.WithRHeaders(types.XMap{}))
 	c := rc.Response()
-
+	global.IsDebug = false
 	//测试Abort
 	c.Abort(200, fmt.Errorf("终止"))
 	rs, content, cp := c.GetFinalResponse()
