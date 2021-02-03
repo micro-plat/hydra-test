@@ -6,6 +6,7 @@ import (
 
 	//	"github.com/micro-plat/hydra/global"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/components"
 	_ "github.com/micro-plat/hydra/components/caches/cache/redis"
@@ -13,7 +14,6 @@ import (
 	"github.com/micro-plat/hydra/conf/server/task"
 	"github.com/micro-plat/hydra/conf/vars/cache/cacheredis"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
-	confRedis "github.com/micro-plat/hydra/conf/vars/redis"
 	"github.com/micro-plat/hydra/context"
 	"github.com/micro-plat/hydra/hydra/servers/cron"
 	"github.com/micro-plat/hydra/services"
@@ -22,14 +22,15 @@ import (
 
 func TestProcessor_Start(t *testing.T) {
 	confObj := mocks.NewConfBy("cronserver_resserivece_testx", "testcronsdfx")
+	hydra.G.SysName = "cronserver"
 	confObj.CRON()
-	confObj.Vars().Redis("redis", confRedis.New(nil, confRedis.WithAddrs("192.168.5.79:6379")))
-	confObj.Vars().Cache().Redis("redis", cacheredis.New(cacheredis.WithConfigName("redis")))
-	confObj.Vars().Queue().Redis("redis", queueredis.New(queueredis.WithConfigName("redis")))
+	confObj.Vars().Redis("redis", "192.168.5.79:6379")
+	confObj.Vars().Cache().Redis("redis", "", cacheredis.WithConfigName("redis"))
+	confObj.Vars().Queue().Redis("redis", "", queueredis.WithConfigName("redis"))
 	app.Cache.Save(confObj.GetCronConf())
 	services.Def.CRON("/taosy/services1", func(ctx context.IContext) (r interface{}) {
 		queueObj := components.Def.Queue().GetRegularQueue("redis")
-		if err := queueObj.Send("services1:queue1", `1`); err != nil {
+		if err := queueObj.Send("key1", `{"services1":"queue1"}`); err != nil {
 			ctx.Log().Errorf("发送queue1队列消息异常, err:%v", err)
 		}
 		return
@@ -37,7 +38,7 @@ func TestProcessor_Start(t *testing.T) {
 
 	services.Def.CRON("/taosy/services2", func(ctx context.IContext) (r interface{}) {
 		queueObj := components.Def.Queue().GetRegularQueue("redis")
-		if err := queueObj.Send("services2:queue2", `1`); err != nil {
+		if err := queueObj.Send("key2", `{"services2":"queue2"}`); err != nil {
 			ctx.Log().Errorf("发送queue1队列消息异常, err:%v", err)
 		}
 		return
@@ -45,7 +46,7 @@ func TestProcessor_Start(t *testing.T) {
 
 	services.Def.CRON("/taosy/services3", func(ctx context.IContext) (r interface{}) {
 		queueObj := components.Def.Queue().GetRegularQueue("redis")
-		if err := queueObj.Send("services3:queue3", `1`); err != nil {
+		if err := queueObj.Send("key3", `{"services3":"queue3"}`); err != nil {
 			ctx.Log().Errorf("发送queue1队列消息异常, err:%v", err)
 		}
 		return
@@ -53,7 +54,7 @@ func TestProcessor_Start(t *testing.T) {
 
 	services.Def.CRON("/taosy/services4", func(ctx context.IContext) (r interface{}) {
 		queueObj := components.Def.Queue().GetRegularQueue("redis")
-		if err := queueObj.Send("services4:queue4", `1`); err != nil {
+		if err := queueObj.Send("key4", `{"services4":"queue4"}`); err != nil {
 			ctx.Log().Errorf("发送queue1队列消息异常, err:%v", err)
 		}
 		return
@@ -68,7 +69,7 @@ func TestProcessor_Start(t *testing.T) {
 	assert.Equalf(t, true, err == nil, ",err")
 	s.Resume()
 	go s.Start()
-	time.Sleep(51 * time.Second)
+	time.Sleep(1 * time.Second)
 	s.Close()
 
 	cacheObj := components.Def.Cache().GetRegularCache("redis")

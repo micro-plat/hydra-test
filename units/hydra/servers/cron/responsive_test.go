@@ -9,6 +9,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/conf/server/task"
@@ -36,6 +37,7 @@ func rescueTestStdout(rescueStdout *os.File) {
 
 func TestNewResponsive(t *testing.T) {
 	confObj := mocks.NewConfBy("cronserver_resserivece_test", "testcronsdf") //构建对象
+	hydra.G.SysName = "cronserver"
 	confB := confObj.CRON()
 	confB.Task(task.NewTask("@every 10s", "/cron/server1"), task.NewTask("@every 10s", "/cron/server2"))
 	server, err := cron.NewServer(task.NewTask("@every 10s", "/cron/server1"), task.NewTask("@every 10s", "/cron/server2"))
@@ -57,6 +59,7 @@ func TestNewResponsive(t *testing.T) {
 func TestResponsive_Start(t *testing.T) {
 	confObj := mocks.NewConfBy("cronserver_resserivece_test1", "testcronsdf1") //构建对象
 	confObj.CRON()
+	hydra.G.SysName = "cronserver"
 	reg := confObj.Registry
 	tests := []struct {
 		name        string
@@ -142,6 +145,7 @@ func TestResponsive_Start(t *testing.T) {
 
 func TestResponsive_Notify(t *testing.T) {
 	confObj := mocks.NewConfBy("cronserver_resserivece_test2", "testcronsdf2") //构建对象
+	hydra.G.SysName = "cronserver"
 	confObj.CRON()                                                             //初始化参数
 	cnf := confObj.GetCronConf()
 	rsp, err := cron.NewResponsive(cnf)
