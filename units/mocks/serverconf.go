@@ -82,37 +82,37 @@ func (s *SConf) Conf() creator.IConf {
 
 //GetAPIConf 获取API服务器配置
 func (s *SConf) GetAPIConf() app.IAPPConf {
-	conf := s.GetConf(s.PlatName, "apiserver", "api", s.ClusterName)
 	hydra.G.PlatName = s.PlatName
 	hydra.G.SysName = "apiserver"
 	hydra.G.ClusterName = s.ClusterName
+	conf := s.GetConf(s.PlatName, "apiserver", "api", s.ClusterName)
 	return conf
 }
 
 //GetWebConf 获取web服务器配置
 func (s *SConf) GetWebConf() app.IAPPConf {
-	conf := s.GetConf(s.PlatName, "webserver", "web", s.ClusterName)
 	hydra.G.PlatName = s.PlatName
 	hydra.G.SysName = "webserver"
 	hydra.G.ClusterName = s.ClusterName
+	conf := s.GetConf(s.PlatName, "webserver", "web", s.ClusterName)
 	return conf
 }
 
 //GetWSConf 获取API服务器配置
 func (s *SConf) GetWSConf() app.IAPPConf {
-	conf := s.GetConf(s.PlatName, "wsserver", "ws", s.ClusterName)
 	hydra.G.PlatName = s.PlatName
 	hydra.G.SysName = "wsserver"
 	hydra.G.ClusterName = s.ClusterName
+	conf := s.GetConf(s.PlatName, "wsserver", "ws", s.ClusterName)
 	return conf
 }
 
 //GetCronConf 获取cron服务器配置
 func (s *SConf) GetCronConf() app.IAPPConf {
-	conf := s.GetConf(s.PlatName, "cronserver", "cron", s.ClusterName)
 	hydra.G.PlatName = s.PlatName
 	hydra.G.SysName = "cronserver"
 	hydra.G.ClusterName = s.ClusterName
+	conf := s.GetConf(s.PlatName, "cronserver", "cron", s.ClusterName)
 	return conf
 }
 

@@ -15,7 +15,7 @@ func TestNewMultiChildWatcher(t *testing.T) {
 
 	//构建配置对象
 	confObj := mocks.NewConfBy("hydra_rgst_watcher_MultiChild", "rgtwatchMultiChildest")
-	log := logger.GetSession("hydra_rgst_watcher_MultiChild", ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession("hydra_rgst_watcher_MultiChild", ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 
 	w, _ := wchild.NewMultiChildWatcher(confObj.Registry, []string{"a", "b", "c"}, log)
 	assert.Equal(t, 3, len(w.Watchers), "构建节点监控对象")
@@ -24,7 +24,7 @@ func TestNewMultiChildWatcher(t *testing.T) {
 func TestMultiChildWatcher_Close(t *testing.T) {
 	//构建配置对象
 	confObj := mocks.NewConfBy("hydra_rgst_watcher_MultiChild1", "rgtwatchMultiChildest1")
-	log := logger.GetSession("hydra_rgst_watcher_MultiChild1", ctx.NewUser(&mocks.TestContxt{}, "", conf.NewMeta()).GetRequestID())
+	log := logger.GetSession("hydra_rgst_watcher_MultiChild1", ctx.NewUser(&mocks.TestContxt{}, conf.NewMeta()).GetTraceID())
 
 	w, _ := wchild.NewMultiChildWatcher(confObj.Registry, []string{"a", "b", "c"}, log)
 	w.Close()

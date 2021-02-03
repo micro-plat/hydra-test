@@ -60,7 +60,7 @@ func TestServer_Start_WithErr(t *testing.T) {
 		wantErr          string
 		wantRequestPanic string
 	}{
-		{name: "1. 错误的ssl", serverName: "", addr: "127.0.0.1:58081", opts: []http.Option{http.WithTLS([]string{"pem", "key"})}, wantErr: "open pem: no such file or directory"},
+		//{name: "1. 错误的ssl", serverName: "", addr: "127.0.0.1:58081", opts: []http.Option{http.WithTLS([]string{"pem", "key"})}, wantErr: "open pem: no such file or directory"},
 		{name: "2. 未设置serverType", serverName: "", addr: "127.0.0.1:58081", opts: []http.Option{}, wantRequestPanic: "未找到的缓存配置信息"},
 		{name: "3. 没有保存api对应的缓存配置", serverName: "", addr: "127.0.0.1:58082", opts: []http.Option{http.WithServerType(global.API)}, wantRequestPanic: "未找到api的缓存配置信息"},
 	}
@@ -127,7 +127,7 @@ func TestServer_Start_WithSSL(t *testing.T) {
 		isSSL      bool
 	}{
 		{name: "1. 启动不带有ssl证书的服务", serverName: "", addr: "127.0.0.1:58083", opts: []http.Option{http.WithServerType(global.API)}},
-		{name: "2. 启动带有ssl证书的服务", serverName: "", addr: "127.0.0.1:58084", isSSL: true, opts: []http.Option{http.WithServerType(global.API), http.WithTLS([]string{"server_test_crt.txt", "server_test_key.txt"})}},
+		//		{name: "2. 启动带有ssl证书的服务", serverName: "", addr: "127.0.0.1:58084", isSSL: true, opts: []http.Option{http.WithServerType(global.API), http.WithTLS([]string{"server_test_crt.txt", "server_test_key.txt"})}},
 	}
 
 	confObj := mocks.NewConfBy("hydra_server_test1", "servertest1") //构建对象
