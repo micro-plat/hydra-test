@@ -6,7 +6,6 @@ import (
 
 	//	"github.com/micro-plat/hydra/global"
 
-	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/components"
 	_ "github.com/micro-plat/hydra/components/caches/cache/redis"
@@ -22,7 +21,6 @@ import (
 
 func TestProcessor_Start(t *testing.T) {
 	confObj := mocks.NewConfBy("cronserver_resserivece_testx", "testcronsdfx")
-	hydra.G.SysName = "cronserver"
 	confObj.CRON()
 	confObj.Vars().Redis("redis", "192.168.5.79:6379")
 	confObj.Vars().Cache().Redis("redis", "", cacheredis.WithConfigName("redis"))

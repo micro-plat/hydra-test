@@ -22,7 +22,7 @@ func TestNewResponsive(t *testing.T) {
 	confObj := mocks.NewConf() //构建对象
 	confObj.API("55003")       //初始化参数
 	confObj.Web("55002")       //初始化参数
-	confObj.WS(":55001")       //初始化参数
+	confObj.WS("55001")        //初始化参数
 	tests := []struct {
 		name    string
 		proto   string
@@ -102,7 +102,7 @@ func (t *testServer) close() {
 
 func TestResponsive_StartWS(t *testing.T) {
 	confObj := mocks.NewConfBy("serverhttp_test_respince2", "testhttpserver2") //构建对象
-	confObj.WS(":55005")                                                       //初始化参数
+	confObj.WS("55005")                                                        //初始化参数
 	reg := confObj.Registry
 	tests := []struct {
 		name          string
@@ -134,7 +134,7 @@ func TestResponsive_StartWS(t *testing.T) {
 		//禁用服务
 		if tt.isConfStart {
 			path := "/serverhttp_test_respince2/wsserver/ws/testhttpserver2/conf"
-			err := reg.Update(path, `{"address":":55005","status":"stop"}`)
+			err := reg.Update(path, `{"address":"55005","status":"stop"}`)
 			assert.Equal(t, nil, err, tt.name+"禁用服务", err)
 			tt.cnf, _ = app.NewAPPConf(path, reg)
 		}
@@ -149,7 +149,7 @@ func TestResponsive_StartWS(t *testing.T) {
 		//创建节点使服务发布报错
 		if tt.isServerPub {
 			newConfObj := mocks.NewConfBy("serverhttp_test_respince2", "testhttpserver2", "fs://./") //构建对象
-			newConfObj.WS(":55005")
+			newConfObj.WS("55005")
 			tt.cnf = newConfObj.GetWSConf()
 			path := "./serverhttp_test_respince2/wsserver/ws/testhttpserver2/servers"
 			os.RemoveAll(path) //删除文件夹
@@ -238,7 +238,7 @@ func TestResponsive_StartWeb(t *testing.T) {
 		//禁用服务
 		if tt.isConfStart {
 			path := "/serverhttp_test_respince1/webserver/web/testhttpserver1/conf"
-			err := reg.Update(path, `{"address":":55111","status":"stop"}`)
+			err := reg.Update(path, `{"address":"55111","status":"stop"}`)
 			assert.Equal(t, nil, err, tt.name+"禁用服务", err)
 			tt.cnf, _ = app.NewAPPConf(path, reg)
 		}
@@ -341,7 +341,7 @@ func TestResponsive_StartAPI(t *testing.T) {
 		//禁用服务
 		if tt.isConfStart {
 			path := "/serverhttp_test_respince/apiserver/api/testhttpserver/conf"
-			err := reg.Update(path, `{"address":":55004","status":"stop"}`)
+			err := reg.Update(path, `{"address":"55004","status":"stop"}`)
 			assert.Equal(t, nil, err, tt.name+"禁用服务")
 			tt.cnf, _ = app.NewAPPConf(path, reg)
 		}
