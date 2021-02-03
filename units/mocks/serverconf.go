@@ -118,12 +118,18 @@ func (s *SConf) GetCronConf() app.IAPPConf {
 
 //GetMQCConf 获取mqc服务器配置
 func (s *SConf) GetMQCConf() app.IAPPConf {
+	hydra.G.PlatName = s.PlatName
+	hydra.G.SysName = "mqcserver"
+	hydra.G.ClusterName = s.ClusterName
 	global.Def.ServerTypes = []string{http.API, http.Web, http.WS, cron.CRON, mqc.MQC}
 	return s.GetConf(s.PlatName, "mqcserver", "mqc", s.ClusterName)
 }
 
 //GetRPCConf 获取rpc服务器配置
 func (s *SConf) GetRPCConf() app.IAPPConf {
+	hydra.G.PlatName = s.PlatName
+	hydra.G.SysName = "rpcserver"
+	hydra.G.ClusterName = s.ClusterName
 	return s.GetConf(s.PlatName, "rpcserver", "rpc", s.ClusterName)
 }
 

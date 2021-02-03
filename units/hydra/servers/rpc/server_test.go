@@ -67,7 +67,7 @@ func TestServer(t *testing.T) {
 	}
 	for _, tt := range tests {
 		mockConf := mocks.NewConfBy("rpacserve_test", "testrpcserver")
-		mockConf.RPC(":51001")
+		mockConf.RPC("51001")
 		serverConf := mockConf.GetRPCConf()
 		app.Cache.Save(serverConf)
 		services.Def.RPC(tt.path, tt.handle)
@@ -93,8 +93,8 @@ func TestServer(t *testing.T) {
 
 		resp, err := rclient.Request(ctx.Context(), tt.path, tt.params)
 		assert.Equalf(t, true, err == nil, tt.name+"rpc request error", err)
-		assert.Equalf(t, tt.wantStatus, resp.Status, tt.name+"rpc request Status")
-		assert.Equalf(t, tt.wantContent, resp.Result, tt.name+"rpc request Result")
+		assert.Equalf(t, tt.wantStatus, resp.GetStatus(), tt.name+"rpc request Status")
+		assert.Equalf(t, tt.wantContent, resp.GetResult(), tt.name+"rpc request Result")
 
 		server.Shutdown()
 	}
@@ -110,7 +110,7 @@ var serverConf app.IAPPConf
 func BenchmarkRPCServer(b *testing.B) {
 	oncelock.Do(func() {
 		mockConf := mocks.NewConfBy("rpacserve", "Benchmarktestserver")
-		mockConf.RPC(":51001")
+		mockConf.RPC("51001")
 		serverConf = mockConf.GetRPCConf()
 		app.Cache.Save(serverConf)
 		services.Def.RPC("/rpc/server/test1", &okObj{})
@@ -140,8 +140,8 @@ func BenchmarkRPCServer(b *testing.B) {
 
 		resp, err := rclient.Request(ctx.Context(), "/rpc/server/test1", map[string]interface{}{})
 		assert.Equalf(b, true, err == nil, "rpc request error")
-		assert.Equalf(b, 200, resp.Status, "rpc request Status")
-		assert.Equalf(b, "success", resp.Result, "rpc request Result")
+		assert.Equalf(b, 200, resp.GetStatus(), "rpc request Status")
+		assert.Equalf(b, "success", resp.GetResult(), "rpc request Result")
 	}
 }
 

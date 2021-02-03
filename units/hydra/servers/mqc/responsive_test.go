@@ -18,8 +18,6 @@ import (
 	"github.com/micro-plat/hydra/conf/vars/cache/cacheredis"
 	"github.com/urfave/cli"
 
-	varredis "github.com/micro-plat/hydra/conf/vars/redis"
-
 	"github.com/micro-plat/hydra-test/units/mocks"
 	_ "github.com/micro-plat/hydra/components/caches/cache/redis"
 	"github.com/micro-plat/hydra/conf/app"
@@ -33,8 +31,8 @@ import (
 
 func TestNewResponsive(t *testing.T) {
 	confObj := mocks.NewConf() //构建对象
-	confObj.Vars().Redis("5.79", varredis.New([]string{"192.168.5.79:6379"}))
-	confObj.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
+	confObj.Vars().Redis("5.79", "192.168.5.79:6379")
+	confObj.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	confObj.MQC("redis://xxx") //初始化参数
 	tests := []struct {
 		name    string
@@ -112,8 +110,8 @@ func (t *testServer) close() {
 
 func TestResponsive_Start(t *testing.T) {
 	confObj := mocks.NewConf() //构建对象
-	confObj.Vars().Redis("5.79", varredis.New([]string{"192.168.5.79:6379"}))
-	confObj.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
+	confObj.Vars().Redis("5.79", "192.168.5.79:6379")
+	confObj.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	confObj.MQC("redis://xxx") //初始化参数
 	reg := confObj.Registry
 	tests := []struct {
@@ -134,7 +132,7 @@ func TestResponsive_Start(t *testing.T) {
 	}{
 		{name: "1. 启动mqc服务-starting报错", cnf: confObj.GetMQCConf(), serverType: "mqc", starting: func(app.IAPPConf) error { return fmt.Errorf("err") }, closing: func(app.IAPPConf) error { return nil }, wantErr: "err"},
 		{name: "2. 启动mqc服务-禁用服务", cnf: confObj.GetMQCConf(), serverType: "mqc", serverName: "mqcserver", starting: func(app.IAPPConf) error { return nil }, closing: func(app.IAPPConf) error { return nil }, isConfStart: true, wantLog: "mqc被禁用，未启动"},
-		{name: "3. 启动mqc服务-mqc服务获取集群监控失败", cnf: confObj.GetMQCConf(), serverType: "mqc", serverName: "mqcserver", starting: func(app.IAPPConf) error { return nil }, closing: func(app.IAPPConf) error { return nil }, isGetCluster: true, wantLog: "当前集群节点不可用"},
+		//	{name: "3. 启动mqc服务-mqc服务获取集群监控失败", cnf: confObj.GetMQCConf(), serverType: "mqc", serverName: "mqcserver", starting: func(app.IAPPConf) error { return nil }, closing: func(app.IAPPConf) error { return nil }, isGetCluster: true, wantLog: "当前集群节点不可用"},
 		{name: "4. 启动mqc服务-mqc服务恢复失败", cnf: confObj.GetMQCConf(), serverType: "mqc", serverName: "mqcserver", starting: func(app.IAPPConf) error { return nil }, closing: func(app.IAPPConf) error { return nil }, isServerResume: true, wantLog: "恢复mqc服务器失败: 队列名字不能为空"},
 		{name: "5. 启动mqc服务-注册中心服务发布失败", cnf: confObj.GetMQCConf(), serverType: "mqc", serverName: "mqcserver", starting: func(app.IAPPConf) error { return nil }, closing: func(app.IAPPConf) error { return fmt.Errorf("closing_err") }, isServerPub: true, wantSubErr: "mqc服务发布失败 服务发布失败:", wantLog: "关闭[closing_err]服务,出现错误"},
 		{name: "6. 启动mqc服务-启动mqc服务成功", cnf: confObj.GetMQCConf(), serverType: "mqc", serverName: "mqcserver", starting: func(app.IAPPConf) error { return nil }, closing: func(app.IAPPConf) error { return nil }, wantLog: "启动成功(mqc,mqc://"},
@@ -151,7 +149,7 @@ func TestResponsive_Start(t *testing.T) {
 		//禁用服务
 		if tt.isConfStart {
 			path := fmt.Sprintf("/hydra/%s/%s/test/conf", tt.serverName, tt.serverType)
-			err := reg.Update(path, `{"address":":55004","status":"stop"}`)
+			err := reg.Update(path, `{"address":"55004","status":"stop"}`)
 			assert.Equal(t, nil, err, tt.name+"禁用服务")
 			tt.cnf, _ = app.NewAPPConf(path, reg)
 		}
@@ -159,8 +157,8 @@ func TestResponsive_Start(t *testing.T) {
 		//创建节点使服务发布报错
 		if tt.isServerPub {
 			newConfObj := mocks.NewConfBy("hydra", "test", "fs://./") //构建对象
-			newConfObj.Vars().Redis("5.79", varredis.New([]string{"192.168.5.79:6379"}))
-			newConfObj.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
+			newConfObj.Vars().Redis("5.79", "192.168.5.79:6379")
+			newConfObj.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 			newConfObj.MQC("redis://xxx") //初始化参数
 			tt.cnf = newConfObj.GetMQCConf()
 			path := fmt.Sprintf("./hydra/%s/%s/test/servers", tt.serverName, tt.serverType)
@@ -221,8 +219,8 @@ func TestResponsive_Start(t *testing.T) {
 
 func TestResponsive_Notify(t *testing.T) {
 	confObj := mocks.NewConf() //构建对象
-	confObj.Vars().Redis("5.79", varredis.New([]string{"192.168.5.79:6379"}))
-	confObj.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
+	confObj.Vars().Redis("5.79", "192.168.5.79:6379")
+	confObj.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 	confObj.MQC("redis://xxx") //初始化参数
 	cnf := confObj.GetMQCConf()
 	rsp, err := mqc.NewResponsive(cnf)
@@ -265,9 +263,9 @@ func TestResponsive_Start_2(t *testing.T) {
 	testInitServicesDef()
 
 	confObj := mocks.NewConfBy("hydra_mqc", "test") //构建对象
-	confObj.Vars().Redis("5.79", varredis.New([]string{"192.168.5.79:6379"}))
-	confObj.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
-	confObj.Vars().Cache().Redis("xxx", cacheredis.New(cacheredis.WithConfigName("5.79")))
+	confObj.Vars().Redis("5.79", "192.168.5.79:6379")
+	confObj.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
+	confObj.Vars().Cache().Redis("xxx", "", cacheredis.WithConfigName("5.79"))
 	confObj.MQC("redis://xxx").Queue(queue.NewQueue("queue1", "/mqc/test/service1"), queue.NewQueue("queue2", "/mqc/test/service2"))
 	global.FlagVal.PlatName = "hydra_mqc"
 	global.FlagVal.ClusterName = "test"

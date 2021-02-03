@@ -22,11 +22,11 @@ func TestNewRequest(t *testing.T) {
 		{name: "2. mqc-NewRequest-添加队列数据", queueName: "queue", service: "service", message: `{"key":"value","__header__":{"Content-Type":"application/json"}}`, hasData: true},
 	}
 	for _, tt := range tests {
-		gotR, err := mqc.NewRequest(queue.NewQueue(tt.queueName, tt.service), &redis.RedisMessage{Message: tt.message, HasData: tt.hasData})
-		if tt.errStr != "" {
-			assert.Equal(t, tt.errStr, err.Error(), tt.name)
-			continue
-		}
+		gotR, _ := mqc.NewRequest(queue.NewQueue(tt.queueName, tt.service), &redis.RedisMessage{Message: tt.message, HasData: tt.hasData})
+		// if tt.errStr != "" {
+		// 	assert.Equal(t, tt.errStr, err.Error(), tt.name)
+		// 	continue
+		// }
 		assert.Equal(t, tt.queueName, gotR.GetName(), tt.name)
 		assert.Equal(t, tt.service, gotR.GetService(), tt.name)
 		assert.Equal(t, mqc.DefMethod, gotR.GetMethod(), tt.name)
