@@ -58,7 +58,7 @@ func xTestRPCGetConf(t *testing.T) {
 			want: rpc.New("8090", rpc.WithTrace())},
 	}
 	for _, tt := range tests {
-		conf.RPC(":8090", tt.opts...)
+		conf.RPC("8090", tt.opts...)
 		obj, err := rpc.GetConf(conf.GetCronConf().GetServerConf())
 		assert.Equal(t, nil, err, tt.name+",err")
 		assert.Equal(t, tt.want, obj, tt.name)

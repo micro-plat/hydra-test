@@ -8,7 +8,6 @@ import (
 
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/server/api"
-	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/hydra/registry"
 	"github.com/micro-plat/hydra/registry/pub"
 	"github.com/micro-plat/hydra/services"
@@ -135,7 +134,7 @@ func TestPublisher_PubDNSNode_NoDomain(t *testing.T) {
 	confObj.API("8080")
 	s := confObj.GetAPIConf() //初始化参数
 	c := s.GetServerConf()    //获取配置
-	got, err := pub.New(c).PubDNSNode("127.0.0.1")
+	got, err := pub.New(c).PubDNSNode("127.0.0.1", "http://127.0.0.1:8080")
 	assert.Equal(t, false, err != nil, "domain未设置不发布dns")
 	assert.Equal(t, map[string]string{}, got, "domain未设置不发布dns")
 }
@@ -144,7 +143,7 @@ func TestPublisher_Publish_API(t *testing.T) {
 
 	confObj := mocks.NewConfBy("rgst_publish_test3", "publishrgt3") //构建对象
 	confObj.API("8080", api.WithDNS("127.0.0.101"))
-	confObj.RPC(":9377")
+	confObj.RPC("9377")
 	apiconf := confObj.GetAPIConf() //初始化参数
 	c := apiconf.GetServerConf()    //获取配置
 
@@ -171,7 +170,7 @@ func TestPublisher_Publish_RPC(t *testing.T) {
 	confObj.API("8080", api.WithDNS("127.0.0.101"))
 	confObj.Service.API.Add("/api1", "/api1", []string{"GET"})
 	confObj.Service.API.Add("/api2", "/api1", []string{"GET"})
-	confObj.RPC(":9377")
+	confObj.RPC("9377")
 	rpcconf := confObj.GetRPCConf() //初始化参数
 	// s := confObj.GetAPIConf()       //初始化参数
 	c := rpcconf.GetServerConf() //获取配置
@@ -193,7 +192,7 @@ func TestPublisher_Update(t *testing.T) {
 
 	confObj := mocks.NewConfBy("hydra", "test3") //构建对象
 	confObj.API("8089", api.WithDNS("127.0.0.101"))
-	confObj.RPC(":9378")
+	confObj.RPC("9378")
 	apiconf := confObj.GetAPIConf() //初始化参数
 	c := apiconf.GetServerConf()    //获取配置
 	lm := c.GetRegistry()

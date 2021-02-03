@@ -124,7 +124,7 @@ func TestGray_Allow(t *testing.T) {
 	assert.Equal(t, test2.want, got, test2.name)
 
 	conf = mocks.NewConfBy("test", "gray2")
-	conf.RPC(":8090")
+	conf.RPC("8090")
 	grayObj, _ = proxy.GetConf(conf.GetRPCConf().GetServerConf())
 	test3 := test{name: "rpc服务集群获取", fields: grayObj, want: false}
 	got = test3.fields.Allow()

@@ -50,7 +50,7 @@ func rescueTestStdout(rescueStdout *os.File) {
 
 func TestNewResponsive(t *testing.T) {
 	confObj := mocks.NewConfBy("rpcserver_resserivece_test", "testrpacsdf") //构建对象
-	confObj.RPC(":35211")
+	confObj.RPC("35211")
 	tests := []struct {
 		name    string
 		cnf     app.IAPPConf
@@ -70,7 +70,7 @@ func TestNewResponsive(t *testing.T) {
 
 func TestResponsive_Start(t *testing.T) {
 	confObj := mocks.NewConfBy("rpcserver_resserivece_test1", "testrpacsdf1") //构建对象
-	confObj.RPC(":64120")
+	confObj.RPC("64120")
 	reg := confObj.Registry
 	tests := []struct {
 		name          string
@@ -118,7 +118,7 @@ func TestResponsive_Start(t *testing.T) {
 		//创建节点使服务发布报错
 		if tt.isServerPub {
 			newConfObj := mocks.NewConfBy("hydra", "test", "fs://./") //构建对象
-			newConfObj.RPC(":64120")
+			newConfObj.RPC("64120")
 			tt.cnf = newConfObj.GetRPCConf()
 			path := fmt.Sprintf("./hydra/%s/%s/test/servers", tt.serverName, tt.serverType)
 			os.RemoveAll(path) //删除文件夹
@@ -173,7 +173,7 @@ func TestResponsive_Start(t *testing.T) {
 
 func TestResponsive_Notify(t *testing.T) {
 	confObj := mocks.NewConfBy("rpcserver_resserivece_test2", "testrpacsdf2") //构建对象
-	confObj.RPC(":64121")                                                     //初始化参数
+	confObj.RPC("64121")                                                      //初始化参数
 	cnf := confObj.GetRPCConf()
 	rsp, err := rpc.NewResponsive(cnf)
 

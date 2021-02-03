@@ -49,7 +49,7 @@ func TestProcessor_Request(t *testing.T) {
 	services.Def.RPC("/rpcserver/taosy/test1", &rpcServerObj1{})
 	services.Def.RPC("/rpcserver/taosy/test2", &rpcServerObj{})
 	conf := mocks.NewConfBy("server_rpc_pross_test", "tessRpctes")
-	conf.RPC(":41501")
+	conf.RPC("41501")
 	app.Cache.Save(conf.GetRPCConf())
 
 	tests := []struct {

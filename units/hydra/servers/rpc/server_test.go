@@ -67,7 +67,7 @@ func TestServer(t *testing.T) {
 	}
 	for _, tt := range tests {
 		mockConf := mocks.NewConfBy("rpacserve_test", "testrpcserver")
-		mockConf.RPC(":51001")
+		mockConf.RPC("51001")
 		serverConf := mockConf.GetRPCConf()
 		app.Cache.Save(serverConf)
 		services.Def.RPC(tt.path, tt.handle)
@@ -110,7 +110,7 @@ var serverConf app.IAPPConf
 func BenchmarkRPCServer(b *testing.B) {
 	oncelock.Do(func() {
 		mockConf := mocks.NewConfBy("rpacserve", "Benchmarktestserver")
-		mockConf.RPC(":51001")
+		mockConf.RPC("51001")
 		serverConf = mockConf.GetRPCConf()
 		app.Cache.Save(serverConf)
 		services.Def.RPC("/rpc/server/test1", &okObj{})

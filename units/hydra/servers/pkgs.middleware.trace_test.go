@@ -35,8 +35,8 @@ func TestTrace(t *testing.T) {
 		{name: "1.1 Trace-api-未配置trace", serverType: "api", conf: func() app.IAPPConf { confMock.API("5454"); return confMock.GetAPIConf() }, responseStatus: 200, wantSpecial: ""},
 		{name: "1.2 Trace-api-配置trace", serverType: "api", conf: func() app.IAPPConf { confMock.API("5454", api.WithTrace()); return confMock.GetAPIConf() }, responseStatus: 200, wantSpecial: "trace", wantDebug1: "> trace.request: map[]", wantDebug2: "> trace.response: 200"},
 
-		{name: "2.1 Trace-rpc未配置trace", serverType: "rpc", conf: func() app.IAPPConf { confMock.RPC(":6541"); return confMock.GetRPCConf() }, responseStatus: 200, wantSpecial: ""},
-		{name: "2.2 Trace-rpc配置trace", serverType: "rpc", conf: func() app.IAPPConf { confMock.RPC(":5454", rpc.WithTrace()); return confMock.GetRPCConf() }, responseStatus: 200, wantSpecial: "trace", wantDebug1: "> trace.request: map[]", wantDebug2: "> trace.response: 200"},
+		{name: "2.1 Trace-rpc未配置trace", serverType: "rpc", conf: func() app.IAPPConf { confMock.RPC("6541"); return confMock.GetRPCConf() }, responseStatus: 200, wantSpecial: ""},
+		{name: "2.2 Trace-rpc配置trace", serverType: "rpc", conf: func() app.IAPPConf { confMock.RPC("5454", rpc.WithTrace()); return confMock.GetRPCConf() }, responseStatus: 200, wantSpecial: "trace", wantDebug1: "> trace.request: map[]", wantDebug2: "> trace.response: 200"},
 
 		{name: "3.1 Trace-mqc未配置trace", serverType: "mqc", conf: func() app.IAPPConf { confMock.MQC("redis://redisname"); return confMock.GetMQCConf() }, responseStatus: 200, wantSpecial: ""},
 		{name: "3.2 Trace-mqc配置trace", serverType: "mqc", conf: func() app.IAPPConf { confMock.MQC("redis://redisname", mqc.WithTrace()); return confMock.GetMQCConf() }, responseStatus: 200, wantSpecial: "trace", wantDebug1: "> trace.request: map[]", wantDebug2: "> trace.response: 200"},
