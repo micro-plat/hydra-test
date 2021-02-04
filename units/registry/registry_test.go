@@ -140,7 +140,7 @@ func TestNewRegistry(t *testing.T) {
 			assert.Equal(t, tt.err, err.Error(), tt.name)
 		}
 		if !tt.wantErr {
-			assert.Nil(t, false, gotR, tt.name)
+			assert.NotNil(t, gotR, tt.name)
 		}
 	}
 }

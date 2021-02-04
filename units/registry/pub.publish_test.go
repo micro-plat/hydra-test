@@ -106,7 +106,7 @@ func TestPublisher_PubDNSNode_WithDomain(t *testing.T) {
 	}
 
 	confObj := mocks.NewConfBy("rgst_publish_test1", "publishrgt1") //构建对象
-	confObj.API("8080", api.WithDNS("127.0.0.101"))
+	confObj.API("8080", api.WithDNS("www.test.com"))
 	s := confObj.GetAPIConf() //初始化参数
 	c := s.GetServerConf()    //获取配置
 
@@ -142,7 +142,7 @@ func TestPublisher_PubDNSNode_NoDomain(t *testing.T) {
 func TestPublisher_Publish_API(t *testing.T) {
 
 	confObj := mocks.NewConfBy("rgst_publish_test3", "publishrgt3") //构建对象
-	confObj.API("8080", api.WithDNS("127.0.0.101"))
+	confObj.API("8080", api.WithDNS("xwww.test.com"))
 	confObj.RPC("9377")
 	apiconf := confObj.GetAPIConf() //初始化参数
 	c := apiconf.GetServerConf()    //获取配置
@@ -150,7 +150,7 @@ func TestPublisher_Publish_API(t *testing.T) {
 	//发布api节点和dns节点
 	//router, _ := apiconf.GetRouterConf()
 	router, _ := services.GetRouter("api").GetRouters()
-	err := pub.New(c).Publish("127.0.0.1:9091", "127.0.0.1:9091", c.GetServerID(), router.GetPath()...)
+	err := pub.New(c).Publish("127.0.0.1:9091", "http://127.0.0.1:9091", c.GetServerID(), router.GetPath()...)
 	assert.Equal(t, false, err != nil, "发布api节点和dns节点")
 
 	//验证节点发布结果
@@ -159,7 +159,7 @@ func TestPublisher_Publish_API(t *testing.T) {
 	assert.Equal(t, nil, err, "servers服务节点发布验证")
 	_, _, err = lm.GetValue(c.GetServicePubPath())
 	assert.Equal(t, nil, err, "api服务节点发布验证")
-	_, _, err = lm.GetValue(c.GetDNSPubPath("127.0.0.101"))
+	_, _, err = lm.GetValue(c.GetDNSPubPath("xwww.test.com"))
 	assert.Equal(t, nil, err, "dns服务节点发布验证")
 
 }
@@ -167,9 +167,9 @@ func TestPublisher_Publish_API(t *testing.T) {
 func TestPublisher_Publish_RPC(t *testing.T) {
 
 	confObj := mocks.NewConfBy("rgst_publish_test4", "publishrgt4") //构建对象
-	confObj.API("8080", api.WithDNS("127.0.0.101"))
-	confObj.Service.API.Add("/api1", "/api1", []string{"GET"})
-	confObj.Service.API.Add("/api2", "/api1", []string{"GET"})
+	confObj.API("8080", api.WithDNS("xwww.test.com"))
+	services.RPC.Add("/api1", "/api1", []string{"GET"})
+	services.RPC.Add("/api2", "/api1", []string{"GET"})
 	confObj.RPC("9377")
 	rpcconf := confObj.GetRPCConf() //初始化参数
 	// s := confObj.GetAPIConf()       //初始化参数
@@ -177,21 +177,22 @@ func TestPublisher_Publish_RPC(t *testing.T) {
 
 	//发布rpc节点
 	//	router, _ := s.GetRouterConf()
-	router, _ := services.GetRouter("api").GetRouters()
-	err := pub.New(c).Publish("127.0.0.1:9091", "127.0.0.1:9091", c.GetServerID(), router.GetPath()...)
+	router, _ := services.GetRouter("rpc").GetRouters()
+	fmt.Println(router.GetRouters())
+	err := pub.New(c).Publish("127.0.0.1:9091", "http://127.0.0.1:9091", c.GetServerID(), router.GetPath()...)
 	assert.Equal(t, false, err != nil, "发布rpc节点")
 
 	lm := c.GetRegistry()
 	_, _, err = lm.GetValue(c.GetRPCServicePubPath("api1"))
-	assert.Equal(t, nil, err, "rpc服务节点发布验证")
+	assert.Equal(t, nil, err, "rpc服务节点发布验证1")
 	_, _, err = lm.GetValue(c.GetRPCServicePubPath("api2"))
-	assert.Equal(t, nil, err, "rpc服务节点发布验证")
+	assert.Equal(t, nil, err, "rpc服务节点发布验证2")
 }
 
 func TestPublisher_Update(t *testing.T) {
 
 	confObj := mocks.NewConfBy("hydra", "test3") //构建对象
-	confObj.API("8089", api.WithDNS("127.0.0.101"))
+	confObj.API("8089", api.WithDNS("xwww.test.com"))
 	confObj.RPC("9378")
 	apiconf := confObj.GetAPIConf() //初始化参数
 	c := apiconf.GetServerConf()    //获取配置
@@ -213,11 +214,11 @@ func TestPublisher_Update(t *testing.T) {
 	}
 
 	p := pub.New(c)
-	p.Publish("192.168.5.118:9091", "192.168.5.118:9091", c.GetServerID())
+	p.Publish("192.168.5.118:9091", "http://192.168.5.118:9091", c.GetServerID())
 
 	for _, tt := range tests {
 		//更新节点
-		err := p.Update("192.168.5.118:9091", "192.168.5.118:9091", c.GetServerID(), tt.k, tt.v)
+		err := p.Update("192.168.5.118:9091", "http://192.168.5.118:9091", c.GetServerID(), tt.k, tt.v)
 		assert.Equal(t, tt.wantUpdateErr, err != nil, tt.name)
 		//获取更新结果
 		paths, _, _ := lm.GetChildren(tt.path)

@@ -36,7 +36,7 @@ func TestNewChildWatcher(t *testing.T) {
 	for _, tt := range tests {
 		gotR, err := watcher.NewChildWatcher(tt.registryAddr, []string{}, log)
 		assert.Equal(t, tt.wantErr, err != nil, tt.name)
-		assert.Nil(t, tt.wantNil, gotR, tt.name)
+		assert.Equal(t, tt.wantNil, gotR == nil, tt.name)
 	}
 }
 
@@ -47,5 +47,5 @@ func TestNewChildWatcherByRegistry(t *testing.T) {
 
 	gotR, err := watcher.NewChildWatcherByRegistry(confObj.Registry, []string{}, log)
 	assert.Equal(t, nil, err, "构建ChildWatcher")
-	assert.Nil(t, false, gotR, "构建ChildWatcher")
+	assert.Equal(t, false, gotR == nil, "构建ChildWatcher")
 }

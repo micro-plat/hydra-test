@@ -36,7 +36,7 @@ func TestNewValueWatcher(t *testing.T) {
 	for _, tt := range tests {
 		gotR, err := watcher.NewValueWatcher(tt.registryAddr, []string{}, log)
 		assert.Equal(t, tt.wantErr, err != nil, tt.name)
-		assert.Nil(t, tt.wantNil, gotR, tt.name)
+		assert.Equal(t, tt.wantNil, gotR == nil, tt.name)
 	}
 }
 
@@ -46,7 +46,7 @@ func TestNewValueWatcherByRegistry(t *testing.T) {
 
 	gotR, err := watcher.NewValueWatcherByRegistry(confObj.Registry, []string{}, log)
 	assert.Equal(t, nil, err, "构建ValueWatcher")
-	assert.Nil(t, false, gotR, "构建ValueWatcher")
+	assert.Equal(t, false, gotR == nil, "构建ValueWatcher")
 
 }
 
@@ -75,7 +75,7 @@ func TestNewValueWatcherByServers(t *testing.T) {
 		}()
 		gotR, err := watcher.NewValueWatcherByServers(confObj.Registry, tt.platName, tt.systemName, tt.serverTypes, tt.clusterName, log)
 		assert.Equal(t, nil, err, tt.name)
-		assert.Nil(t, false, gotR, tt.name)
+		assert.Equal(t, false, gotR == nil, tt.name)
 		gotC, err := gotR.Start()
 		assert.Equal(t, nil, err, tt.name)
 

@@ -1,6 +1,7 @@
 package registry
 
 import (
+	"fmt"
 	"sort"
 	"strings"
 	"testing"
@@ -14,7 +15,7 @@ import (
 )
 
 func getRegistry() (*redis.Redis, error) {
-	return redis.NewRedisBy("", "", []string{"192.168.106.204:6379"}, 0, 10)
+	return redis.NewRedisBy("", "", []string{"192.168.106.204:6379"}, 1, 10)
 }
 
 func TestRedisCreateTempNode(t *testing.T) {
@@ -194,20 +195,20 @@ func TestRedisUpdateNode(t *testing.T) {
 		{name: "1.1 LMUpdate-节点不存在-更新数据", isE: false, path: "/hydrauodate1", value: "1", nvalue: "2333"},
 
 		{name: "2.1 LMUpdate-节点存在-数据为空-更新为空", isE: true, path: "/hydrauodate2", value: "1", nvalue: "2333"},
-		{name: "2.1 LMUpdate-节点存在-数据为空-更新为数字", isE: true, path: "/hydrauodate3", value: "1", nvalue: "2333"},
-		{name: "2.1 LMUpdate-节点存在-数据为空-更新为字符", isE: true, path: "sdsd343434", value: "2", nvalue: "sdfd"},
-		{name: "2.1 LMUpdate-节点存在-数据为空-更新为中文", isE: true, path: "123hydraddd", value: "3", nvalue: "研发"},
-		{name: "2.1 LMUpdate-节点存在-数据为空-更新为特殊字符", isE: true, path: "1232hydrqqa#$%", value: "4", nvalue: "研发12312@#@"},
-		{name: "2.1 LMUpdate-节点存在-数据为空-更新为json", isE: true, path: "#$@×&#(%", value: "5", nvalue: `{"abc":"ef",age:[10,20]}`},
-		{name: "2.1 LMUpdate-节点存在-数据为空-更新为xml", isE: true, path: "/hydrauodate/apiserver/api/conf", value: "5", nvalue: `<xml><node id="abc"/></xml>`},
+		{name: "2.2 LMUpdate-节点存在-数据为空-更新为数字", isE: true, path: "/hydrauodate3", value: "1", nvalue: "2333"},
+		{name: "2.3 LMUpdate-节点存在-数据为空-更新为字符", isE: true, path: "/sdsd343434", value: "2", nvalue: "sdfd"},
+		{name: "2.4 LMUpdate-节点存在-数据为空-更新为中文", isE: true, path: "/123hydraddd", value: "3", nvalue: "研发"},
+		{name: "2.5 LMUpdate-节点存在-数据为空-更新为特殊字符", isE: true, path: "/1232hydrqqa#$%", value: "4", nvalue: "研发12312@#@"},
+		{name: "2.6 LMUpdate-节点存在-数据为空-更新为json", isE: true, path: "/#$@×&#(%", value: "5", nvalue: `{"abc":"ef",age:[10,20]}`},
+		{name: "2.7 LMUpdate-节点存在-数据为空-更新为xml", isE: true, path: "/hydrauodate/apiserver/api/conf", value: "5", nvalue: `<xml><node id="abc"/></xml>`},
 
 		{name: "3.1 LMUpdate-节点存在-数据存在-更新为空", isE: true, path: "/hydrauodate5", value: "1", nvalue: ""},
-		{name: "3.1 LMUpdate-节点存在-数据存在-更新为数字", isE: true, path: "/hydrauodate6", value: "1", nvalue: "2333"},
-		{name: "3.1 LMUpdate-节点存在-数据存在-更新为字符", isE: true, path: "561233gdfg", value: "2", nvalue: "sdfd"},
-		{name: "3.1 LMUpdate-节点存在-数据存在-更新为中文", isE: true, path: "123hydra212", value: "3", nvalue: "研发"},
-		{name: "3.1 LMUpdate-节点存在-数据存在-更新为特殊字符", isE: true, path: "1232hydra#**&$%", value: "4", nvalue: "研发12312@#@"},
-		{name: "3.1 LMUpdate-节点存在-数据存在-更新为json", isE: true, path: "#$8787%", value: "5", nvalue: `{"abc":"ef",age:[10,20]}`},
-		{name: "3.1 LMUpdate-节点存在-数据存在-更新为xml", isE: true, path: "/hydrauodate9/apiserver/api/conf", value: "5", nvalue: `<xml><node id="abc"/></xml>`},
+		{name: "3.2 LMUpdate-节点存在-数据存在-更新为数字", isE: true, path: "/hydrauodate6", value: "1", nvalue: "2333"},
+		{name: "3.3 LMUpdate-节点存在-数据存在-更新为字符", isE: true, path: "/561233gdfg", value: "2", nvalue: "sdfd"},
+		{name: "3.4 LMUpdate-节点存在-数据存在-更新为中文", isE: true, path: "/123hydra212", value: "3", nvalue: "研发"},
+		{name: "3.5 LMUpdate-节点存在-数据存在-更新为特殊字符", isE: true, path: "/1232hydra#**&$%", value: "4", nvalue: "研发12312@#@"},
+		{name: "3.6 LMUpdate-节点存在-数据存在-更新为json", isE: true, path: "/#$8787%", value: "5", nvalue: `{"abc":"ef",age:[10,20]}`},
+		{name: "3.7 LMUpdate-节点存在-数据存在-更新为xml", isE: true, path: "/hydrauodate9/apiserver/api/conf", value: "5", nvalue: `<xml><node id="abc"/></xml>`},
 	}
 	//创建节点,更新节点
 	for _, c := range cases {
@@ -223,7 +224,7 @@ func TestRedisUpdateNode(t *testing.T) {
 
 		err := lm.Update(c.path, c.nvalue)
 		if !c.isE {
-			assert.Equal(t, true, strings.Contains(err.Error(), "不存在"), err.Error())
+			assert.Equal(t, true, strings.Contains(err.Error(), "redis: nil"), err.Error())
 		} else {
 			assert.Equal(t, nil, err, c.name)
 		}
@@ -407,8 +408,10 @@ func TestRedisChildren(t *testing.T) {
 
 		//创建节点
 		for _, ch := range c.children {
-			err := lm.CreateTempNode(registry.Join(c.path, ch), c.value)
+			p := registry.Join(c.path, ch)
+			err := lm.CreateTempNode(p, c.value)
 			assert.Equal(t, nil, err, c.name)
+			fmt.Println("xxfff", c.name, p, err)
 		}
 
 		if len(c.children) == 0 {
@@ -419,17 +422,17 @@ func TestRedisChildren(t *testing.T) {
 		paths, v, err := lm.GetChildren(c.path)
 		assert.Equal(t, nil, err, c.name)
 		assert.NotEqual(t, v, 0, c.name)
-		assert.Equal(t, len(c.children), len(paths), paths)
+		assert.Equal(t, len(c.children), len(paths), c.name)
 
 		//排序列表
 		sort.Strings(paths)
 		sort.Strings(c.children)
 		assert.Equal(t, c.children, paths, c.name)
 
-		for _, ch := range c.children {
-			err := lm.Delete(registry.Join(c.path, ch))
-			assert.Equal(t, nil, err, c.name)
-		}
+		// for _, ch := range c.children {
+		// 	err := lm.Delete(registry.Join(c.path, ch))
+		// 	assert.Equal(t, nil, err, c.name)
+		// }
 
 	}
 }
