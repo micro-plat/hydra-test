@@ -69,7 +69,7 @@ func TestHeader(t *testing.T) {
 		// 	MockAPPConf: serverConf,
 		// }
 		ctx := mock.NewContext("")
-		midCtx := middleware.NewMiddleContext(ctx, &mocks.Middle{})
+		midCtx := middleware.NewMiddleContext(ctx, &mock.Middle{})
 
 		//获取中间件
 		handler := middleware.Header()

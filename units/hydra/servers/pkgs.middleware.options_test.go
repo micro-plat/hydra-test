@@ -3,7 +3,6 @@ package servers
 import (
 	"testing"
 
-	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
 	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
@@ -41,7 +40,7 @@ func TestOptions(t *testing.T) {
 		// 	MockAPPConf:  mocks.NewConfBy("middleware_options_test", "options").GetAPIConf(),
 		// }
 		ctx := mock.NewContext("")
-		midCtx := middleware.NewMiddleContext(ctx, &mocks.Middle{})
+		midCtx := middleware.NewMiddleContext(ctx, &mock.Middle{})
 
 		//调用中间件
 		handler := middleware.Options()

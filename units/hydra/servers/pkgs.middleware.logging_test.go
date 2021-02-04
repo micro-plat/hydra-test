@@ -7,7 +7,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
 	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
@@ -50,7 +49,7 @@ func TestLogging(t *testing.T) {
 		// 	MockAPPConf:  mocks.NewConfBy("middleware_logging_test", "logging").GetAPIConf(),
 		// }
 		ctx := mock.NewContext("")
-		midCtx := middleware.NewMiddleContext(ctx, &mocks.Middle{})
+		midCtx := middleware.NewMiddleContext(ctx, &mock.Middle{})
 
 		//构建的新的os.Stdout
 		rescueStdout := os.Stdout

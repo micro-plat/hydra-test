@@ -111,7 +111,7 @@ func TestHandler(t *testing.T) {
 		// 	MockAPPConf:  serverConf,
 		// }
 		ctx := mock.NewContext("")
-		midCtx := middleware.NewMiddleContext(ctx, &mocks.Middle{})
+		midCtx := middleware.NewMiddleContext(ctx, &mock.Middle{})
 
 		if tt.golHandlingFunc != nil {
 			services.Def.OnHandleExecuting(tt.golHandlingFunc, http.API)
@@ -208,7 +208,7 @@ func TestHandler1(t *testing.T) {
 		// }
 
 		ctx := mock.NewContext("")
-		midCtx := middleware.NewMiddleContext(ctx, &mocks.Middle{})
+		midCtx := middleware.NewMiddleContext(ctx, &mock.Middle{})
 
 		if tt.golHandlingFunc != nil {
 			services.Def.OnHandleExecuting(tt.golHandlingFunc, http.API)

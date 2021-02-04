@@ -53,7 +53,7 @@ func TestStatic(t *testing.T) {
 		// 	MockAPPConf:  c.GetAPIConf(),
 		// }
 		orgctx := mock.NewContext("")
-		ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
+		ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
 
 		//调用中间件
 		handler := middleware.Static()

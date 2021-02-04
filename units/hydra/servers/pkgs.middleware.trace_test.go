@@ -62,7 +62,7 @@ func TestTrace(t *testing.T) {
 		// }
 
 		orgctx := mock.NewContext("")
-		ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
+		ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
 
 		//构建的新的os.Stdout
 		rescueStdout := os.Stdout

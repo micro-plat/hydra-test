@@ -69,7 +69,7 @@ func TestLimit(t *testing.T) {
 			mock.WithRHeaders(types.XMap{"Client-IP": "192.168.0.1"}),
 			mock.WithConf(apiConf),
 		)
-		ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
+		ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
 		ctx.Response().Write(tt.wantStatus, "success")
 
 		//获取中间件
@@ -140,7 +140,7 @@ func TestLimit1(t *testing.T) {
 					mock.WithRHeaders(types.XMap{"Client-IP": "192.168.0.1"}),
 					mock.WithConf(apiConf),
 				)
-				ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
+				ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
 				ctx.Response().Write(tt.wantStatus, "success")
 
 				//调用中间件

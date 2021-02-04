@@ -41,7 +41,7 @@ func TestTag(t *testing.T) {
 		// 	MockAPPConf:  tt.conf,
 		// }
 		orgctx := mock.NewContext("")
-		ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
+		ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
 
 		//调用中间件
 		handler := middleware.Tag()

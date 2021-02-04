@@ -62,7 +62,7 @@ func TestBlackList(t *testing.T) {
 			mock.WithRHeaders(types.XMap{"Client-IP": "192.168.0.1"}),
 			mock.WithConf(mockConf),
 		)
-		ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
+		ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
 		ctx.Response().Write(tt.wantStatus, "success")
 		//获取中间件
 		handler := middleware.BlackList()

@@ -94,7 +94,7 @@ func TestRender(t *testing.T) {
 		// 	MockAPPConf:  conf.GetAPIConf(),
 		// }
 		orgctx := mock.NewContext("")
-		ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
+		ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
 
 		//调用中间件
 		context.Del()
@@ -131,7 +131,7 @@ func BenchmarkRender(b *testing.B) {
 		// 	MockAPPConf:  conf.GetAPIConf(),
 		// }
 		orgctx := mock.NewContext("")
-		ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
+		ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
 
 		context.Cache(ctx)
 		handler := middleware.Render()
