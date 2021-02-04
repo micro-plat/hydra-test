@@ -63,7 +63,7 @@ func NewConfBy(platName, clusterName string, addr ...string) *SConf {
 	//RPC rpc服务的路由信息
 	c.Service.RPC = services.NewORouter()
 
-	c.IConf = creator.NewByLoader(c.getRouter)
+	c.IConf = creator.Conf // creator.NewByLoader(c.getRouter)
 	var err error
 	c.Registry, err = registry.GetRegistry(c.registryAddr, global.Def.Log())
 	if err != nil {

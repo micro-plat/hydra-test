@@ -101,6 +101,12 @@ func (ctx *MiddleContext) Tracer() extcontext.ITracer {
 	return nil
 }
 
+
+
+
+
+
+
 //GetHttpReqResp GetHttpReqResp
 func (ctx *MiddleContext) GetHttpReqResp() (*http.Request, http.ResponseWriter) {
 	return ctx.HttpRequest, ctx.HttpResponse

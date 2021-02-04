@@ -3,12 +3,10 @@ package servers
 import (
 	"testing"
 
-	"github.com/micro-plat/hydra/conf"
-	octx "github.com/micro-plat/hydra/context/ctx"
-
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/server/auth/jwt"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 	wjwt "github.com/micro-plat/lib4go/security/jwt"
 	"github.com/micro-plat/lib4go/utility"
@@ -19,7 +17,7 @@ import (
 //desc:测试jwt验证中间件逻辑
 func TestJWTAuth(t *testing.T) {
 	secert := utility.GetGUID()
-	requestPath := "/jwt/test"
+	//requestPath := "/jwt/test"
 	type testCase struct {
 		name        string
 		jwtOpts     []jwt.Option
@@ -68,25 +66,27 @@ func TestJWTAuth(t *testing.T) {
 		} else {
 			cookieMap[jwt.JWTName] = tt.token
 		}
-		serverConf := mockConf.GetAPIConf()
-		ctx := &mocks.MiddleContext{
-			MockMeta:     conf.NewMeta(),
-			MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1", MockAuth: &octx.Auth{}},
-			MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string][]string{}},
-			MockRequest: &mocks.MockRequest{
-				MockHeader:  headerMap,
-				MockCookies: cookieMap,
-				MockPath: &mocks.MockPath{
-					MockRequestPath: requestPath,
-				},
-			},
-			MockAPPConf: serverConf,
-		}
+		//serverConf := mockConf.GetAPIConf()
+		// ctx := &mocks.MiddleContext{
+		// 	MockMeta:     conf.NewMeta(),
+		// 	MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1", MockAuth: &octx.Auth{}},
+		// 	MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string][]string{}},
+		// 	MockRequest: &mocks.MockRequest{
+		// 		MockHeader:  headerMap,
+		// 		MockCookies: cookieMap,
+		// 		MockPath: &mocks.MockPath{
+		// 			MockRequestPath: requestPath,
+		// 		},
+		// 	},
+		// 	MockAPPConf: serverConf,
+		// }
+		ctx := mock.NewContext("")
+		midCtx := middleware.NewMiddleContext(ctx, &mocks.Middle{})
 
 		//获取中间件
 		handler := middleware.JwtAuth()
 		//调用中间件
-		handler(ctx)
+		handler(midCtx)
 		//断言结果
 		gotStatus, _, _ := ctx.Response().GetFinalResponse()
 		assert.Equalf(t, tt.wantStatus, gotStatus, tt.name, tt.wantStatus, gotStatus)

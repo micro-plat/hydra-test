@@ -9,6 +9,7 @@ import (
 
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 )
 
@@ -42,12 +43,14 @@ func TestLogging(t *testing.T) {
 	for _, tt := range tests {
 		time.Sleep(time.Second)
 		//初始化测试用例参数
-		ctx := &mocks.MiddleContext{
-			MockUser:     &mocks.MockUser{MockClientIP: tt.clientIP, MockRequestID: tt.requstID},
-			MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockURL: tt.requestURL, MockMethod: tt.method}},
-			MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus},
-			MockAPPConf:  mocks.NewConfBy("middleware_logging_test", "logging").GetAPIConf(),
-		}
+		// ctx := &mocks.MiddleContext{
+		// 	MockUser:     &mocks.MockUser{MockClientIP: tt.clientIP, MockRequestID: tt.requstID},
+		// 	MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockURL: tt.requestURL, MockMethod: tt.method}},
+		// 	MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus},
+		// 	MockAPPConf:  mocks.NewConfBy("middleware_logging_test", "logging").GetAPIConf(),
+		// }
+		ctx := mock.NewContext("")
+		midCtx := middleware.NewMiddleContext(ctx, &mocks.Middle{})
 
 		//构建的新的os.Stdout
 		rescueStdout := os.Stdout
@@ -56,7 +59,7 @@ func TestLogging(t *testing.T) {
 
 		//调用中间件
 		handler := middleware.Logging()
-		handler(ctx)
+		handler(midCtx)
 		time.Sleep(time.Second * 1)
 
 		//获取输出

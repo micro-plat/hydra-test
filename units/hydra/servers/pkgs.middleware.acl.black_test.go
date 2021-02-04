@@ -6,8 +6,11 @@ import (
 
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/server/acl/blacklist"
+	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
+	"github.com/micro-plat/lib4go/types"
 )
 
 //author:liujinyin
@@ -22,16 +25,19 @@ func TestBlackList(t *testing.T) {
 		wantContent string
 		wantSpecial string
 	}
-
+	global.IsDebug = true
+	defer func() {
+		global.IsDebug = false
+	}()
 	tests := []*testCase{
-		{name: "1.1 黑名单-配置不存在", isBool: false, blackOpts: []blacklist.Option{}, wantStatus: 200, wantContent: "", wantSpecial: ""},
+		{name: "1.1 黑名单-配置不存在", isBool: false, blackOpts: []blacklist.Option{}, wantStatus: 200, wantContent: "success", wantSpecial: ""},
 
-		{name: "2.1 黑名单-配置存在-未启用-列表为空", isBool: true, blackOpts: []blacklist.Option{blacklist.WithDisable()}, wantStatus: 200, wantContent: "", wantSpecial: ""},
-		{name: "2.2 黑名单-配置存在-未启用-黑名单IP", isBool: true, blackOpts: []blacklist.Option{blacklist.WithDisable(), blacklist.WithIP("192.168.0.1")}, wantStatus: 200, wantContent: "", wantSpecial: ""},
-		{name: "2.3 黑名单-配置存在-未启用-IP不在列表单内", isBool: true, blackOpts: []blacklist.Option{blacklist.WithDisable(), blacklist.WithIP("192.168.0.3", "192.168.0.2")}, wantStatus: 200, wantContent: "", wantSpecial: ""},
+		{name: "2.1 黑名单-配置存在-未启用-列表为空", isBool: true, blackOpts: []blacklist.Option{blacklist.WithDisable()}, wantStatus: 200, wantContent: "success", wantSpecial: ""},
+		{name: "2.2 黑名单-配置存在-未启用-黑名单IP", isBool: true, blackOpts: []blacklist.Option{blacklist.WithDisable(), blacklist.WithIP("192.168.0.1")}, wantStatus: 200, wantContent: "success", wantSpecial: ""},
+		{name: "2.3 黑名单-配置存在-未启用-IP不在列表单内", isBool: true, blackOpts: []blacklist.Option{blacklist.WithDisable(), blacklist.WithIP("192.168.0.3", "192.168.0.2")}, wantStatus: 200, wantContent: "success", wantSpecial: ""},
 
-		{name: "3.1 黑名单-配置存在-启用-列表为空", isBool: true, blackOpts: []blacklist.Option{blacklist.WithEnable()}, wantStatus: 200, wantContent: "", wantSpecial: "black"},
-		{name: "3.2 黑名单-配置存在-启用-IP不在列表单内", isBool: true, blackOpts: []blacklist.Option{blacklist.WithEnable(), blacklist.WithIP("192.168.0.2", "192.168.0.3")}, wantStatus: 200, wantContent: "", wantSpecial: "black"},
+		{name: "3.1 黑名单-配置存在-启用-列表为空", isBool: true, blackOpts: []blacklist.Option{blacklist.WithEnable()}, wantStatus: 200, wantContent: "success", wantSpecial: "black"},
+		{name: "3.2 黑名单-配置存在-启用-IP不在列表单内", isBool: true, blackOpts: []blacklist.Option{blacklist.WithEnable(), blacklist.WithIP("192.168.0.2", "192.168.0.3")}, wantStatus: 200, wantContent: "success", wantSpecial: "black"},
 		{name: "3.3 黑名单-配置存在-启用-黑名单IP", isBool: true, blackOpts: []blacklist.Option{blacklist.WithEnable(), blacklist.WithIP("192.168.0.1", "192.168.0.2")}, wantStatus: http.StatusForbidden, wantContent: "黑名单限制[192.168.0.1]不允许访问", wantSpecial: "black"},
 	}
 	for _, tt := range tests {
@@ -42,18 +48,27 @@ func TestBlackList(t *testing.T) {
 		if tt.isBool {
 			confB.BlackList(tt.blackOpts...)
 		}
-		serverConf := mockConf.GetAPIConf()
-		ctx := &mocks.MiddleContext{
-			MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1"},
-			MockResponse: &mocks.MockResponse{MockStatus: 200},
-			MockAPPConf:  serverConf,
-		}
-
+		//serverConf := mockConf.GetAPIConf()
+		// ctx := &mocks.MiddleContext{
+		// 	MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1"},
+		// 	MockResponse: &mocks.MockResponse{MockStatus: 200},
+		// 	MockAPPConf:  serverConf,
+		// }
+		orgctx := mock.NewContext("",
+			mock.WithPlatName("middleware_black_test"),
+			mock.WithClusterName("black"),
+			mock.WithServerType("api"),
+			mock.WithURL("/api/request"),
+			mock.WithRHeaders(types.XMap{"Client-IP": "192.168.0.1"}),
+			mock.WithConf(mockConf),
+		)
+		ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
+		ctx.Response().Write(tt.wantStatus, "success")
 		//获取中间件
 		handler := middleware.BlackList()
-
 		//调用中间件
 		handler(ctx)
+		ctx.Response().Flush()
 		//断言结果
 		gotStatus, gotContent, _ := ctx.Response().GetFinalResponse()
 		gotSpecial := ctx.Response().GetSpecials()

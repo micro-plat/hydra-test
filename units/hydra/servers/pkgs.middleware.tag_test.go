@@ -6,6 +6,7 @@ import (
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 )
 
@@ -35,10 +36,12 @@ func TestTag(t *testing.T) {
 
 	for _, tt := range tests {
 		//初始化测试用例参数
-		ctx := &mocks.MiddleContext{
-			MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string][]string{}},
-			MockAPPConf:  tt.conf,
-		}
+		// ctx := &mocks.MiddleContext{
+		// 	MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string][]string{}},
+		// 	MockAPPConf:  tt.conf,
+		// }
+		orgctx := mock.NewContext("")
+		ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
 
 		//调用中间件
 		handler := middleware.Tag()

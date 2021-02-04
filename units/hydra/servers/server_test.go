@@ -30,5 +30,5 @@ func TestRegister(t *testing.T) {
 	assert.Equal(t, tps, []string{"api", "api-1"}, "获取服务2")
 
 	//再次注册服务
-	assert.PanicError(t, "服务器[api-1]不能多次注册", func() { servers.Register("api-1", fn) }, "再次注册服务")
+	assert.Panics(t, func() { servers.Register("api-1", fn) }, "再次注册服务")
 }

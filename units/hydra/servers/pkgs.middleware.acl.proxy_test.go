@@ -19,8 +19,10 @@ import (
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 	"github.com/micro-plat/lib4go/errs"
+	"github.com/micro-plat/lib4go/types"
 )
 
 var script0 = `
@@ -82,7 +84,7 @@ upcluster := getContent()`
 //desc:测试灰度中间件逻辑
 func TestProxy(t *testing.T) {
 
-	startUpstreamServer(":5121")
+	startUpstreamServer("5121")
 	type testCase struct {
 		name            string
 		isSet           bool
@@ -118,31 +120,42 @@ func TestProxy(t *testing.T) {
 			confN.Proxy(tt.script)
 		}
 
-		req, _ := orhttp.NewRequest("GET", "http://"+tt.localIP+tt.requestURL, nil)
+		//req, _ := orhttp.NewRequest("GET", "http://"+tt.localIP+tt.requestURL, nil)
 
-		req.Header = map[string][]string{}
+		//req.Header = map[string][]string{}
 		//初始化测试用例参数
-		ctx := &mocks.MiddleContext{
-			MockUser:     &mocks.MockUser{MockClientIP: tt.localIP},
-			MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: tt.requestURL}},
-			MockResponse: &mocks.MockResponse{MockStatus: tt.Status, MockContent: tt.Content, MockHeader: map[string][]string{"Content-Type": []string{tt.CType}}},
-			MockAPPConf:  conf.GetAPIConf(),
-			HttpRequest:  req,
-			HttpResponse: &MockResponseWriter{},
-		}
+		// ctx := &mocks.MiddleContext{
+		// 	MockUser:     &mocks.MockUser{MockClientIP: tt.localIP},
+		// 	MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: tt.requestURL}},
+		// 	MockResponse: &mocks.MockResponse{MockStatus: tt.Status, MockContent: tt.Content, MockHeader: map[string][]string{"Content-Type": []string{tt.CType}}},
+		// 	MockAPPConf:  conf.GetAPIConf(),
+		// 	HttpRequest:  req,
+		// 	HttpResponse: &MockResponseWriter{},
+		// }
 
+		ctx := mock.NewContext("",
+			mock.WithPlatName("middleware_porxy_test"),
+			mock.WithClusterName("porxy"),
+			mock.WithServerType("api"),
+			mock.WithURL("http://www.test.com"+tt.requestURL),
+			mock.WithRHeaders(types.XMap{"Client-IP": tt.localIP}),
+			mock.WithConf(conf),
+		)
+		midCtx := middleware.NewMiddleContext(ctx, &mocks.Middle{})
+		midCtx.Response().Write(tt.wantStatus, "success")
+		midCtx.Response().ContentType(tt.wantContentType)
 		//调用中间件
-		gid := global.GetGoroutineID()
-		context.Del(gid)
+		context.Del()
 		context.Cache(ctx)
 		handler := middleware.Proxy()
-		handler(ctx)
+		handler(midCtx)
+		midCtx.Response().Flush()
 
 		gotStatus, gotContent, _ := ctx.Response().GetFinalResponse()
 		assert.Equalf(t, tt.wantStatus, gotStatus, tt.name)
 		assert.Equalf(t, true, strings.Contains(gotContent, tt.wantContent), tt.name)
 		gotHeaders := ctx.Response().GetHeaders()
-		assert.Equalf(t, tt.wantContentType, gotHeaders["Content-Type"][0], tt.name)
+		assert.Equalf(t, tt.wantContentType, gotHeaders["Content-Type"], tt.name)
 		if tt.wantSpecial != "" {
 			gotSpecial := ctx.Response().GetSpecials()
 			assert.Equalf(t, tt.wantSpecial, gotSpecial, tt.name)
@@ -165,28 +178,29 @@ func BenchmarkRPCServer(b *testing.B) {
 		app.Cache.Save(serverConf)
 	})
 
-	startUpstreamServer(":5122")
+	startUpstreamServer("5122")
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 
 		req, _ := orhttp.NewRequest("POST", "http://192.168.0.111/upcluster/ok", nil)
 		req.Header = map[string][]string{}
-		//初始化测试用例参数
-		ctx := &mocks.MiddleContext{
-			MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.111"},
-			MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: "/upcluster/ok"}},
-			MockResponse: &mocks.MockResponse{MockStatus: 200, MockContent: "success", MockHeader: map[string][]string{"Content-Type": []string{"json"}}},
-			MockAPPConf:  serverConf,
-			HttpRequest:  req,
-			HttpResponse: &MockResponseWriter{},
-		}
+		// //初始化测试用例参数
+		// ctx := &mocks.MiddleContext{
+		// 	MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.111"},
+		// 	MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: "/upcluster/ok"}},
+		// 	MockResponse: &mocks.MockResponse{MockStatus: 200, MockContent: "success", MockHeader: map[string][]string{"Content-Type": []string{"json"}}},
+		// 	MockAPPConf:  serverConf,
+		// 	HttpRequest:  req,
+		// 	HttpResponse: &MockResponseWriter{},
+		// }
 
-		gid := global.GetGoroutineID()
-		context.Del(gid)
+		ctx := mock.NewContext("")
+		midCtx := middleware.NewMiddleContext(ctx, &mocks.Middle{})
+		context.Del()
 		context.Cache(ctx)
 		handler := middleware.Proxy()
-		handler(ctx)
+		handler(midCtx)
 
 		gotStatus, _, _ := ctx.Response().GetFinalResponse()
 		assert.Equalf(b, 200, gotStatus, "BenchmarkRPCServer status error")

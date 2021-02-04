@@ -4,8 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/micro-plat/hydra/conf"
-	octx "github.com/micro-plat/hydra/context/ctx"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/encoding/base64"
 
 	"github.com/micro-plat/hydra-test/units/mocks"
@@ -55,24 +54,27 @@ func TestAuthBasic(t *testing.T) {
 		if tt.isSet {
 			confB.Basic(tt.basicOpts...)
 		}
-		serverConf := mockConf.GetAPIConf()
-		ctx := &mocks.MiddleContext{
-			MockMeta:     conf.NewMeta(),
-			MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1", MockAuth: &octx.Auth{}},
-			MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string][]string{}},
-			MockRequest: &mocks.MockRequest{
-				MockHeader: map[string]interface{}{"Authorization": []string{tt.reqHeadVal}},
-				MockPath: &mocks.MockPath{
-					MockRequestPath: tt.requestPath,
-				},
-			},
-			MockAPPConf: serverConf,
-		}
+		// serverConf := mockConf.GetAPIConf()
+		// ctx := &mocks.MiddleContext{
+		// 	MockMeta:     conf.NewMeta(),
+		// 	MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1", MockAuth: &octx.Auth{}},
+		// 	MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string][]string{}},
+		// 	MockRequest: &mocks.MockRequest{
+		// 		MockHeader: map[string]interface{}{"Authorization": []string{tt.reqHeadVal}},
+		// 		MockPath: &mocks.MockPath{
+		// 			MockRequestPath: tt.requestPath,
+		// 		},
+		// 	},
+		// 	MockAPPConf: serverConf,
+		// }
+
+		ctx := mock.NewContext("")
+		midCtx := middleware.NewMiddleContext(ctx, &mocks.Middle{})
 
 		//获取中间件
 		handler := middleware.BasicAuth()
 		//调用中间件
-		handler(ctx)
+		handler(midCtx)
 		//断言结果
 		gotStatus, _, _ := ctx.Response().GetFinalResponse()
 		assert.Equalf(t, tt.wantStatus, gotStatus, tt.name, tt.wantStatus, gotStatus)

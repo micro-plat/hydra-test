@@ -11,7 +11,6 @@ import (
 
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
-	varredis "github.com/micro-plat/hydra/conf/vars/redis"
 	"github.com/micro-plat/hydra/hydra/servers"
 	"github.com/micro-plat/hydra/registry"
 	_ "github.com/micro-plat/hydra/registry/registry/localmemory"
@@ -87,8 +86,8 @@ func TestRspServers_Start(t *testing.T) {
 		sc.RPC("54241")
 		sc.GetCronConf()
 		sc.GetAPIConf()
-		sc.Vars().Redis("5.79", varredis.New([]string{"192.168.5.79:6379"}))
-		sc.Vars().Queue().Redis("xxx", queueredis.New(queueredis.WithConfigName("5.79")))
+		sc.Vars().Redis("5.79", "192.168.5.79:6379")
+		sc.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 		sc.MQC("redis://xxx")
 		sc.GetMQCConf()
 		time.Sleep(time.Second * 1)

@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	"github.com/micro-plat/hydra-test/units/mocks"
-	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server/header"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 )
 
@@ -55,24 +55,26 @@ func TestHeader(t *testing.T) {
 		if tt.isSet {
 			confb.Header(tt.headerOpts...)
 		}
-		serverConf := mockConf.GetAPIConf()
-		ctx := &mocks.MiddleContext{
-			MockMeta:     conf.NewMeta(),
-			MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1"},
-			MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string][]string{}},
-			MockRequest: &mocks.MockRequest{
-				MockHeader: map[string]interface{}{"Origin": []string{"www.baidu.com"}},
-				MockPath: &mocks.MockPath{
-					MockRequestPath: "/header/test",
-				},
-			},
-			MockAPPConf: serverConf,
-		}
+		//serverConf := mockConf.GetAPIConf()
+		// ctx := &mocks.MiddleContext{
+		// 	MockMeta:     conf.NewMeta(),
+		// 	MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1"},
+		// 	MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string][]string{}},
+		// 	MockRequest: &mocks.MockRequest{
+		// 		MockHeader: map[string]interface{}{"Origin": []string{"www.baidu.com"}},
+		// 		MockPath: &mocks.MockPath{
+		// 			MockRequestPath: "/header/test",
+		// 		},
+		// 	},
+		// 	MockAPPConf: serverConf,
+		// }
+		ctx := mock.NewContext("")
+		midCtx := middleware.NewMiddleContext(ctx, &mocks.Middle{})
 
 		//获取中间件
 		handler := middleware.Header()
 		//调用中间件
-		handler(ctx)
+		handler(midCtx)
 
 		//断言结果
 		gotStatus, _, _ := ctx.Response().GetFinalResponse()

@@ -1,16 +1,12 @@
 package servers
 
 import (
-	"fmt"
-	"strings"
 	"testing"
-
-	"github.com/micro-plat/hydra/conf"
-	octx "github.com/micro-plat/hydra/context/ctx"
 
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/server/auth/jwt"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 	wjwt "github.com/micro-plat/lib4go/security/jwt"
 	"github.com/micro-plat/lib4go/utility"
@@ -21,7 +17,7 @@ import (
 //desc:测试jwt设置中间件逻辑
 func TestJWTWriter(t *testing.T) {
 	secert := utility.GetGUID()
-	requestPath := "/jwtwrtier/test"
+	//requestPath := "/jwtwrtier/test"
 	data := map[string]interface{}{"sdsd": "sdfd", "3ddfs": "gggggg"}
 	rawData, _ := wjwt.Encrypt(secert, jwt.ModeHS512, data, 86400)
 	type testCase struct {
@@ -65,44 +61,39 @@ func TestJWTWriter(t *testing.T) {
 		if tt.isSet {
 			confB.Jwt(tt.jwtOpts...)
 		}
-		serverConf := mockConf.GetAPIConf()
-		userAuth := &octx.Auth{}
-		userAuth.Response(tt.authData)
-		ctx := &mocks.MiddleContext{
-			MockMeta:     conf.NewMeta(),
-			MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1", MockAuth: userAuth},
-			MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string][]string{}},
-			MockRequest: &mocks.MockRequest{
-				MockPath: &mocks.MockPath{
-					MockRequestPath: requestPath,
-				},
-			},
-			MockAPPConf: serverConf,
-		}
+		//serverConf := mockConf.GetAPIConf()
+		//userAuth := &octx.Auth{}
+		//userAuth.Response(tt.authData)
+		// ctx := &mocks.MiddleContext{
+		// 	MockMeta:     conf.NewMeta(),
+		// 	MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1", MockAuth: userAuth},
+		// 	MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string][]string{}},
+		// 	MockRequest: &mocks.MockRequest{
+		// 		MockPath: &mocks.MockPath{
+		// 			MockRequestPath: requestPath,
+		// 		},
+		// 	},
+		// 	MockAPPConf: serverConf,
+		// }
+		ctx := mock.NewContext("")
+		midCtx := middleware.NewMiddleContext(ctx, &mocks.Middle{})
 
 		//获取中间件
 		handler := middleware.JwtWriter()
 		//调用中间件
-		handler(ctx)
+		handler(midCtx)
 		//断言结果
 		gotStatus, _, _ := ctx.Response().GetFinalResponse()
 		assert.Equalf(t, tt.wantStatus, gotStatus, tt.name, tt.wantStatus, gotStatus)
 		headers := ctx.Response().GetHeaders()
 		if tt.isSucc {
 			if tt.isSource == "header" {
-				assert.Equalf(t, []string{tt.wanttoken}, headers["Authorization-Jwt"], tt.name, tt.wanttoken, headers["Authorization-Jwt"])
+				assert.Equalf(t, []string{tt.wanttoken}, headers["Authorization"], tt.name, tt.wanttoken, headers["Authorization"])
 			} else {
-				cookies := headers["Set-Cookie"]
-				assert.Equal(t, 1, len(cookies), tt.name+",cookie不存在")
-				vals := strings.Split(cookies[0], "/")
-				assert.Equal(t, 2, len(vals), tt.name+",cookie-split错误")
-				if len(tt.domain) > 0 {
-					res := fmt.Sprintf("Authorization-Jwt=%s;domain=%s;path=", tt.wanttoken, tt.domain)
-					assert.Equalf(t, res, vals[0], tt.name, tt.wanttoken, vals[0])
-				} else {
-					res := fmt.Sprintf("Authorization-Jwt=%s;path=", tt.wanttoken)
-					assert.Equalf(t, res, vals[0], tt.name, tt.wanttoken, vals[0])
-				}
+				cookies := headers.GetString("Set-Cookie")
+
+				assert.Equal(t, true, len(cookies) > 0, tt.name, tt.wanttoken)
+
 			}
 		}
 	}

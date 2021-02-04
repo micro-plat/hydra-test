@@ -6,6 +6,7 @@ import (
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/server/static"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 )
 
@@ -46,11 +47,13 @@ func TestStatic(t *testing.T) {
 		if tt.isBool {
 			apiConf.Static(tt.opts...)
 		}
-		ctx := &mocks.MiddleContext{
-			MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: tt.requestPath, MockMethod: tt.method}},
-			MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus},
-			MockAPPConf:  c.GetAPIConf(),
-		}
+		// ctx := &mocks.MiddleContext{
+		// 	MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: tt.requestPath, MockMethod: tt.method}},
+		// 	MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus},
+		// 	MockAPPConf:  c.GetAPIConf(),
+		// }
+		orgctx := mock.NewContext("")
+		ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
 
 		//调用中间件
 		handler := middleware.Static()

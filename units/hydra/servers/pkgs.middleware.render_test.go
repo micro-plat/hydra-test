@@ -6,8 +6,8 @@ import (
 
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/context"
-	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 )
 
@@ -86,17 +86,18 @@ func TestRender(t *testing.T) {
 		if tt.isSet {
 			confN.Render(tt.script)
 		}
-		//初始化测试用例参数
-		ctx := &mocks.MiddleContext{
-			MockUser:     &mocks.MockUser{},
-			MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: tt.requestURL}},
-			MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus, MockContent: tt.responseContent, MockHeader: map[string][]string{"Content-Type": []string{tt.responseCType}}},
-			MockAPPConf:  conf.GetAPIConf(),
-		}
+		// //初始化测试用例参数
+		// ctx := &mocks.MiddleContext{
+		// 	MockUser:     &mocks.MockUser{},
+		// 	MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: tt.requestURL}},
+		// 	MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus, MockContent: tt.responseContent, MockHeader: map[string][]string{"Content-Type": []string{tt.responseCType}}},
+		// 	MockAPPConf:  conf.GetAPIConf(),
+		// }
+		orgctx := mock.NewContext("")
+		ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
 
 		//调用中间件
-		gid := global.GetGoroutineID()
-		context.Del(gid)
+		context.Del()
 		context.Cache(ctx)
 		handler := middleware.Render()
 		handler(ctx)
@@ -105,7 +106,7 @@ func TestRender(t *testing.T) {
 		assert.Equalf(t, tt.wantStatus, gotStatus, tt.name)
 		assert.Equalf(t, true, strings.Contains(gotContent, tt.wantContent), tt.name)
 		gotHeaders := ctx.Response().GetHeaders()
-		assert.Equalf(t, tt.wantContentType, gotHeaders["Content-Type"][0], tt.name)
+		assert.Equalf(t, tt.wantContentType, gotHeaders["Content-Type"], tt.name)
 
 		if tt.wantSpecial != "" {
 			gotSpecial := ctx.Response().GetSpecials()
@@ -122,14 +123,16 @@ func BenchmarkRender(b *testing.B) {
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		gid := global.GetGoroutineID()
-		context.Del(gid)
-		ctx := &mocks.MiddleContext{
-			MockUser:     &mocks.MockUser{},
-			MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: "/tx/request"}},
-			MockResponse: &mocks.MockResponse{MockStatus: 200, MockContent: "success", MockHeader: map[string][]string{"Content-Type": []string{"application/json"}}},
-			MockAPPConf:  conf.GetAPIConf(),
-		}
+		context.Del()
+		// ctx := &mocks.MiddleContext{
+		// 	MockUser:     &mocks.MockUser{},
+		// 	MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: "/tx/request"}},
+		// 	MockResponse: &mocks.MockResponse{MockStatus: 200, MockContent: "success", MockHeader: map[string][]string{"Content-Type": []string{"application/json"}}},
+		// 	MockAPPConf:  conf.GetAPIConf(),
+		// }
+		orgctx := mock.NewContext("")
+		ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
+
 		context.Cache(ctx)
 		handler := middleware.Render()
 		handler(ctx)
@@ -146,7 +149,7 @@ func BenchmarkRender(b *testing.B) {
 		}
 
 		gotHeaders := ctx.Response().GetHeaders()
-		if "application/json" != gotHeaders["Content-Type"][0] {
+		if "application/json" != gotHeaders["Content-Type"] {
 			b.Error("获取的数据有误2")
 			return
 		}

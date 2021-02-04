@@ -1,7 +1,6 @@
 package servers
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -15,6 +14,7 @@ import (
 	"github.com/micro-plat/hydra/conf/server/mqc"
 	"github.com/micro-plat/hydra/conf/server/rpc"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
+	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 )
 
@@ -53,13 +53,16 @@ func TestTrace(t *testing.T) {
 
 	for _, tt := range tests {
 		//初始化测试用例参数
-		ctx := &mocks.MiddleContext{
-			MockNext:     func() { fmt.Println("output") },
-			MockUser:     &mocks.MockUser{MockClientIP: "127.0.0.1", MockRequestID: "06c6fb24c"},
-			MockRequest:  &mocks.MockRequest{MockQueryMap: tt.requestMap},
-			MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus},
-			MockAPPConf:  tt.conf(),
-		}
+		// ctx := &mocks.MiddleContext{
+		// 	MockNext:     func() { fmt.Println("output") },
+		// 	MockUser:     &mocks.MockUser{MockClientIP: "127.0.0.1", MockRequestID: "06c6fb24c"},
+		// 	MockRequest:  &mocks.MockRequest{MockQueryMap: tt.requestMap},
+		// 	MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus},
+		// 	MockAPPConf:  tt.conf(),
+		// }
+
+		orgctx := mock.NewContext("")
+		ctx := middleware.NewMiddleContext(orgctx, &mocks.Middle{})
 
 		//构建的新的os.Stdout
 		rescueStdout := os.Stdout
