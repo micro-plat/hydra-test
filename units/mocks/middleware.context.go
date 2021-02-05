@@ -226,6 +226,7 @@ type MockRequest struct {
 	MockCookies map[string]interface{}
 	MockHeader  types.XMap
 	extcontext.IFile
+	OrgRequest *http.Request
 }
 
 func (r *MockRequest) GetError() error {
@@ -234,7 +235,7 @@ func (r *MockRequest) GetError() error {
 
 //GetHTTPRequest 获取http request原生对象
 func (r *MockRequest) GetHTTPRequest() *http.Request {
-	return nil
+	return r.OrgRequest
 }
 
 //Path 地址、头、cookie相关信息
@@ -330,11 +331,12 @@ type MockResponse struct {
 	MockContent     string
 	MockError       error
 	MockContentType string
+	OrgWriter       http.ResponseWriter
 }
 
 //GetHTTPReponse 获取http response原生对象
 func (res *MockResponse) GetHTTPReponse() http.ResponseWriter {
-	return nil
+	return res.OrgWriter
 }
 
 func (res *MockResponse) JSON(code int, data interface{}) interface{} {
