@@ -1,10 +1,11 @@
 package servers
 
 import (
+	"net/url"
 	"testing"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
-	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 )
 
@@ -34,17 +35,18 @@ func TestOptions(t *testing.T) {
 
 	for _, tt := range tests {
 		//初始化测试用例参数
-		// ctx := &mocks.MiddleContext{
-		// 	MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockURL: tt.requestURL, MockMethod: tt.method}},
-		// 	MockResponse: &mocks.MockResponse{MockStatus: tt.status, MockContent: tt.content},
-		// 	MockAPPConf:  mocks.NewConfBy("middleware_options_test", "options").GetAPIConf(),
-		// }
-		ctx := mock.NewContext("")
-		midCtx := middleware.NewMiddleContext(ctx, &mock.Middle{})
+		murl, _ := url.Parse(tt.requestURL)
+		ctx := &mocks.MiddleContext{
+			MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockURL: murl, MockMethod: tt.method}},
+			MockResponse: &mocks.MockResponse{MockStatus: tt.status, MockContent: tt.content},
+			MockAPPConf:  mocks.NewConfBy("middleware_options_test", "options").GetAPIConf(),
+		}
+		//octx := mock.NewContext("")
+		//ctx := middleware.NewMiddleContext(octx, &mock.Middle{})
 
 		//调用中间件
 		handler := middleware.Options()
-		handler(midCtx)
+		handler(ctx)
 
 		gotStatus, gotContent, _ := ctx.Response().GetFinalResponse()
 		assert.Equalf(t, tt.wantStatus, gotStatus, tt.name)

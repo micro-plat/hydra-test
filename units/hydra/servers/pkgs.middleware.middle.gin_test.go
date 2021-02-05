@@ -54,7 +54,7 @@ func Test_ginCtx_Get(t *testing.T) {
 
 	//GetHeaders
 	gotHeader := g.GetHeaders()
-	assert.Equal(t, http.Header{"Content-Type": []string{ctp}, "Cookie": []string{"session=value"}}, gotHeader, "GetHeaders")
+	assert.Equal(t, http.Header{"Content-Type": []string{ctp}, "Cookie": []string{"session=value"}, "Host": []string{"localhost:9091"}}, gotHeader, "GetHeaders")
 
 	//GetCookies
 	gotCookies := g.GetCookies()

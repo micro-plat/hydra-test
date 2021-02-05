@@ -6,8 +6,8 @@ import (
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
-	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
+	"github.com/micro-plat/lib4go/types"
 )
 
 // tag中间件只有在websocket在使用    现在websocket服务暂时不开放
@@ -17,7 +17,7 @@ func TestTag(t *testing.T) {
 	confMock.RPC("6541")
 	confMock.MQC("redis://redisname")
 	confMock.Web("8541")
-	confMock.WS(":5214")
+	confMock.WS("5214")
 	confMock.CRON()
 
 	tests := []struct {
@@ -36,12 +36,14 @@ func TestTag(t *testing.T) {
 
 	for _, tt := range tests {
 		//初始化测试用例参数
-		// ctx := &mocks.MiddleContext{
-		// 	MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string][]string{}},
-		// 	MockAPPConf:  tt.conf,
-		// }
-		orgctx := mock.NewContext("")
-		ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
+		ctx := &mocks.MiddleContext{
+			MockResponse: &mocks.MockResponse{
+				MockStatus: 200,
+				MockHeader: types.XMap{}},
+			MockAPPConf: tt.conf,
+		}
+		//orgctx := mock.NewContext("")
+		//ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
 
 		//调用中间件
 		handler := middleware.Tag()

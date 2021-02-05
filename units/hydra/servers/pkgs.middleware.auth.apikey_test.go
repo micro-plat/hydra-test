@@ -10,6 +10,7 @@ import (
 	"github.com/micro-plat/lib4go/assert"
 	"github.com/micro-plat/lib4go/net"
 	"github.com/micro-plat/lib4go/security/md5"
+	"github.com/micro-plat/lib4go/types"
 )
 
 //author:taoshouyin
@@ -21,7 +22,7 @@ func TestAuthAPIKey(t *testing.T) {
 	type testCase struct {
 		name        string
 		apikeyOpts  []apikey.Option
-		params      map[string]string
+		params      types.XMap
 		isSet       bool
 		wantStatus  int
 		wantContent string
@@ -29,23 +30,24 @@ func TestAuthAPIKey(t *testing.T) {
 	}
 
 	tests := []*testCase{
-		{name: "1.1 apikey-配置不存在", isSet: false, params: map[string]string{"f1": "21"}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{}},
+		//{name: "1.1 apikey-配置不存在", isSet: false, params: map[string]string{"f1": "21"}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{}},
 
-		{name: "2.1 apikey-配置存在-未启动-无数据", isSet: true, params: map[string]string{"f1": "21"}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret(secret)}},
-		{name: "2.2 apikey-配置存在-未启动-配置错误", isSet: true, params: map[string]string{"f1": "21"}, wantStatus: 510, wantContent: "apikey配置数据有误", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret("错误密钥")}},
-		{name: "2.3 apikey-配置存在-未启动-路径被排除", isSet: true, params: map[string]string{"f1": "21"}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test")}},
-		{name: "2.4 apikey-配置存在-未启动-缺少sign字段", isSet: true, params: map[string]string{"f1": "21", "timestamp": "1212121221"}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
-		{name: "2.5 apikey-配置存在-未启动-缺少timestamp字段", isSet: true, params: map[string]string{"f1": "21", "sign": getSign(map[string]string{"f1": "21"}, secret)}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
-		{name: "2.6 apikey-配置存在-未启动-验证失败", isSet: true, params: map[string]string{"f1": "21", "sign": "4444444", "timestamp": "5421515"}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
-		{name: "2.7 apikey-配置存在-未启动-验证通过-utf8", isSet: true, params: map[string]string{"f1": "21", "timestamp": "5421515", "sign": getSign(map[string]string{"f1": "21", "timestamp": "5421515"}, secret)}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
+		//{name: "2.1 apikey-配置存在-未启动-无数据", isSet: true, params: map[string]string{"f1": "21"}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret(secret)}},
+		//{name: "2.2 apikey-配置存在-未启动-配置错误", isSet: true, params: map[string]string{"f1": "21"}, wantStatus: 510, wantContent: "apikey配置数据有误", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret("错误密钥")}},
+		{name: "2.3 apikey-配置存在-未启动-路径被排除", isSet: true, params: types.XMap{"f1": "21"}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test")}},
+		{name: "2.4 apikey-配置存在-未启动-缺少sign字段", isSet: true, params: types.XMap{"f1": "21", "timestamp": "1212121221"}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
+		{name: "2.5 apikey-配置存在-未启动-缺少timestamp字段", isSet: true, params: types.XMap{"f1": "21", "sign": getSign(map[string]string{"f1": "21"}, secret)}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
+		{name: "2.6 apikey-配置存在-未启动-验证失败", isSet: true, params: types.XMap{"f1": "21", "sign": "4444444", "timestamp": "5421515"}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
+		{name: "2.7 apikey-配置存在-未启动-验证通过-utf8", isSet: true, params: types.XMap{"f1": "21", "timestamp": "5421515", "sign": getSign(map[string]string{"f1": "21", "timestamp": "5421515"}, secret)}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithDisable(), apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
 
-		{name: "3.1 apikey-配置存在-启动-无数据", isSet: true, params: map[string]string{"f1": "21"}, wantStatus: 510, wantContent: "apikey配置数据有误", wantSpecial: "", apikeyOpts: []apikey.Option{}},
-		{name: "3.2 apikey-配置存在-启动-配置错误", isSet: true, params: map[string]string{"f1": "21"}, wantStatus: 510, wantContent: "apikey配置数据有误", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithSecret("错误密钥")}},
-		{name: "3.3 apikey-配置存在-启动-路径被排除", isSet: true, params: map[string]string{"f1": "21"}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test")}},
-		{name: "3.4 apikey-配置存在-启动-缺少sign字段", isSet: true, params: map[string]string{"f1": "21", "timestamp": "1212121221"}, wantStatus: 401, wantContent: "", wantSpecial: "apikey", apikeyOpts: []apikey.Option{apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
-		{name: "3.5 apikey-配置存在-启动-缺少timestamp字段", isSet: true, params: map[string]string{"f1": "21", "sign": getSign(map[string]string{"f1": "21"}, secret)}, wantStatus: 401, wantContent: "", wantSpecial: "apikey", apikeyOpts: []apikey.Option{apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
-		{name: "3.6 apikey-配置存在-启动-验证失败", isSet: true, params: map[string]string{"f1": "21", "sign": "4444444", "timestamp": "5421515"}, wantStatus: 403, wantContent: "", wantSpecial: "apikey", apikeyOpts: []apikey.Option{apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
-		{name: "3.7 apikey-配置存在-启动-验证通过", isSet: true, params: map[string]string{"f1": "21", "timestamp": "5421515", "sign": getSign(map[string]string{"f1": "21", "timestamp": "5421515"}, secret)}, wantStatus: 200, wantContent: "", wantSpecial: "apikey", apikeyOpts: []apikey.Option{apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
+		//{name: "3.1 apikey-配置存在-启动-无数据", isSet: true, params: map[string]string{"f1": "21"}, wantStatus: 510, wantContent: "apikey配置数据有误", wantSpecial: "", apikeyOpts: []apikey.Option{}},
+		//{name: "3.2 apikey-配置存在-启动-配置错误", isSet: true, params: map[string]string{"f1": "21"}, wantStatus: 510, wantContent: "apikey配置数据有误", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithSecret("错误密钥")}},
+
+		{name: "3.3 apikey-配置存在-启动-路径被排除", isSet: true, params: types.XMap{"f1": "21"}, wantStatus: 200, wantContent: "", wantSpecial: "", apikeyOpts: []apikey.Option{apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test")}},
+		{name: "3.4 apikey-配置存在-启动-缺少sign字段", isSet: true, params: types.XMap{"f1": "21", "timestamp": "1212121221"}, wantStatus: 401, wantContent: "", wantSpecial: "apikey", apikeyOpts: []apikey.Option{apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
+		{name: "3.5 apikey-配置存在-启动-缺少timestamp字段", isSet: true, params: types.XMap{"f1": "21", "sign": getSign(map[string]string{"f1": "21"}, secret)}, wantStatus: 401, wantContent: "", wantSpecial: "apikey", apikeyOpts: []apikey.Option{apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
+		{name: "3.6 apikey-配置存在-启动-验证失败", isSet: true, params: types.XMap{"f1": "21", "sign": "4444444", "timestamp": "5421515"}, wantStatus: 403, wantContent: "", wantSpecial: "apikey", apikeyOpts: []apikey.Option{apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
+		{name: "3.7 apikey-配置存在-启动-验证通过", isSet: true, params: types.XMap{"f1": "21", "timestamp": "5421515", "sign": getSign(map[string]string{"f1": "21", "timestamp": "5421515"}, secret)}, wantStatus: 200, wantContent: "", wantSpecial: "apikey", apikeyOpts: []apikey.Option{apikey.WithSecret(secret), apikey.WithMD5Mode(), apikey.WithExcludes("/apikey/test1")}},
 	}
 	for _, tt := range tests {
 		mockConf := mocks.NewConfBy("middleware_apikey_test", "apikey")
@@ -59,7 +61,7 @@ func TestAuthAPIKey(t *testing.T) {
 			MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1"},
 			MockResponse: &mocks.MockResponse{MockStatus: 200},
 			MockRequest: &mocks.MockRequest{
-				MockParamMap: tt.params,
+				XMap: tt.params,
 				MockPath: &mocks.MockPath{
 					MockRequestPath: "/apikey/test",
 				},

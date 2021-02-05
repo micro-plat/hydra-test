@@ -7,7 +7,6 @@ import (
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/context"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
-	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 )
 
@@ -35,7 +34,7 @@ render := getContent()`
 
 var scriptERR = `
 getContent := func(){
-	return "error"
+	return [200,"error","dddd"]
 }
 
 render := getContent()`
@@ -74,7 +73,7 @@ func TestRender(t *testing.T) {
 		{name: "1. render 配置不存在(就是不启用)", isSet: false, script: "", requestURL: "/tx/request", responseStatus: 200, responseContent: "success", responseCType: "dddd", wantStatus: 200, wantContent: "success", wantContentType: "dddd", wantSpecial: ""},
 		{name: "2. render 配置存在-设置错误的节点,编译报错", isSet: true, script: scriptERR1, requestURL: "/tx/request", responseStatus: 200, wantStatus: 510, responseContent: "success", responseCType: "dddd", wantContent: "render脚本错误", wantContentType: "dddd", wantSpecial: ""},
 		{name: "3. render 配置存在-设置正确节点,运行报错", isSet: true, script: scriptERR2, requestURL: "/tx/ssss", responseStatus: 200, wantStatus: 200, responseContent: "success", responseCType: "dddd", wantContent: "success", wantContentType: "dddd", wantSpecial: ""},
-		{name: "4. render 配置存在-设置返回一个参数的节点", isSet: true, script: scriptERR, requestURL: "/tx/request", responseStatus: 200, responseContent: "success", responseCType: "dddd", wantStatus: 200, wantContent: "success", wantContentType: "dddd", wantSpecial: ""},
+		{name: "4. render 配置存在-设置返回一个参数的节点", isSet: true, script: scriptERR, requestURL: "/tx/request", responseStatus: 200, responseContent: "success", responseCType: "dddd", wantStatus: 200, wantContent: "error", wantContentType: "dddd", wantSpecial: ""},
 		{name: "5. render 配置存在-设置正确节点,返回xml数据", isSet: true, script: scriptOK, requestURL: "/tx/request", responseStatus: 200, wantStatus: 333, responseContent: "success", responseCType: "application/xml", wantContent: "<response><code>200</code><msg>success</msg></response>", wantContentType: "application/xml", wantSpecial: "render"},
 		{name: "6. render 配置存在-设置正确节点,返回json数据", isSet: true, script: scriptOK, requestURL: "/tx/query", responseStatus: 200, wantStatus: 444, responseContent: "success", responseCType: "application/json", wantContent: "<json>", wantContentType: "application/json", wantSpecial: "render"},
 		{name: "7. render 配置存在-设置正确节点,返回两个参数数据", isSet: true, script: scriptOK, requestURL: "/tx/ssss", responseStatus: 200, wantStatus: 204, responseContent: "success", responseCType: "", wantContent: "success", wantContentType: "", wantSpecial: "render"},
@@ -87,14 +86,16 @@ func TestRender(t *testing.T) {
 			confN.Render(tt.script)
 		}
 		// //初始化测试用例参数
-		// ctx := &mocks.MiddleContext{
-		// 	MockUser:     &mocks.MockUser{},
-		// 	MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: tt.requestURL}},
-		// 	MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus, MockContent: tt.responseContent, MockHeader: map[string][]string{"Content-Type": []string{tt.responseCType}}},
-		// 	MockAPPConf:  conf.GetAPIConf(),
-		// }
-		orgctx := mock.NewContext("")
-		ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
+		ctx := &mocks.MiddleContext{
+			MockUser:    &mocks.MockUser{},
+			MockRequest: &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: tt.requestURL}},
+			MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus,
+				MockContent: tt.responseContent,
+				MockHeader:  map[string]interface{}{"Content-Type": tt.responseCType}},
+			MockAPPConf: conf.GetAPIConf(),
+		}
+		//orgctx := mock.NewContext("")
+		//ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
 
 		//调用中间件
 		context.Del()
@@ -124,14 +125,16 @@ func BenchmarkRender(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		context.Del()
-		// ctx := &mocks.MiddleContext{
-		// 	MockUser:     &mocks.MockUser{},
-		// 	MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: "/tx/request"}},
-		// 	MockResponse: &mocks.MockResponse{MockStatus: 200, MockContent: "success", MockHeader: map[string][]string{"Content-Type": []string{"application/json"}}},
-		// 	MockAPPConf:  conf.GetAPIConf(),
-		// }
-		orgctx := mock.NewContext("")
-		ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
+		ctx := &mocks.MiddleContext{
+			MockUser:    &mocks.MockUser{},
+			MockRequest: &mocks.MockRequest{MockPath: &mocks.MockPath{MockRequestPath: "/tx/request"}},
+			MockResponse: &mocks.MockResponse{MockStatus: 200,
+				MockContent: "success",
+				MockHeader:  map[string]interface{}{"Content-Type": "application/json"}},
+			MockAPPConf: conf.GetAPIConf(),
+		}
+		//orgctx := mock.NewContext("")
+		//ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
 
 		context.Cache(ctx)
 		handler := middleware.Render()
@@ -144,12 +147,12 @@ func BenchmarkRender(b *testing.B) {
 		}
 
 		if gotContent != "<response><code>200</code><msg>success</msg></response>" {
-			b.Error("获取的数据有误1")
+			b.Error("获取的数据有误1", gotContent)
 			return
 		}
 
 		gotHeaders := ctx.Response().GetHeaders()
-		if "application/json" != gotHeaders["Content-Type"] {
+		if "application/xml" != gotHeaders["Content-Type"] {
 			b.Error("获取的数据有误2")
 			return
 		}

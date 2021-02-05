@@ -2,10 +2,11 @@ package servers
 
 import (
 	"net/http"
+	"net/url"
 	"testing"
 
+	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
-	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 )
 
@@ -32,15 +33,16 @@ func TestRecovery(t *testing.T) {
 
 	for _, tt := range tests {
 		//初始化测试用例参数
-		// ctx := &mocks.MiddleContext{
-		// 	MockNext:     tt.next,
-		// 	MockUser:     &mocks.MockUser{MockClientIP: tt.clientIP, MockRequestID: tt.requstID},
-		// 	MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockURL: tt.requestURL, MockMethod: tt.method}},
-		// 	MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus},
-		// 	MockAPPConf:  mocks.NewConfBy("middleware_recovery_test", "recovery").GetAPIConf(),
-		// }
-		orgctx := mock.NewContext("")
-		ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
+		murl, _ := url.Parse(tt.requestURL)
+		ctx := &mocks.MiddleContext{
+			MockNext:     tt.next,
+			MockUser:     &mocks.MockUser{MockClientIP: tt.clientIP, MockRequestID: tt.requstID},
+			MockRequest:  &mocks.MockRequest{MockPath: &mocks.MockPath{MockURL: murl, MockMethod: tt.method}},
+			MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus},
+			MockAPPConf:  mocks.NewConfBy("middleware_recovery_test", "recovery").GetAPIConf(),
+		}
+		//orgctx := mock.NewContext("")
+		//ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
 
 		//调用中间件
 		handler := middleware.Recovery()

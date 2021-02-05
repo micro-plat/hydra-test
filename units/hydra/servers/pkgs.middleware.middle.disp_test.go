@@ -39,8 +39,8 @@ func Test_dispCtx_GetRouterPath(t *testing.T) {
 		request dispatcher.IRequest
 		want    string
 	}{
-		{name: "1. cron-ctx-GetRouterPath", request: getTestCronTask("@every 1h30m", "cron_service"), want: "cron_service"},
-		{name: "2. mqc-ctx-GetRouterPath", request: getTestMqcQueue("queue_name", "queue_service", `{"data":"message"}`, true), want: "queue_service"},
+		{name: "1. cron-ctx-GetRouterPath", request: getTestCronTask("@every 1h30m", "cron_service"), want: "89cda16fcb71017c70b98d427f579462"},
+		{name: "2. mqc-ctx-GetRouterPath", request: getTestMqcQueue("queue_name", "queue_service", `{"data":"message"}`, true), want: "queue_name"},
 	}
 	for _, tt := range tests {
 		g := middleware.NewDispCtx()
@@ -115,7 +115,10 @@ func Test_dispCtx_GetHeaders(t *testing.T) {
 		g := middleware.NewDispCtx()
 		g.Request = tt.request
 		got := g.GetHeaders()
-		assert.Equal(t, tt.want, got, tt.name)
+
+		for k, v := range tt.want {
+			assert.Equal(t, v, got[k], tt.name)
+		}
 	}
 }
 
@@ -126,7 +129,7 @@ func Test_dispCtx_GetForm(t *testing.T) {
 		want    url.Values
 	}{
 		{name: "1. cron-ctx-GetForm(默认是空，不能进行设置)", request: getTestCronTask("@every 1h30m", "cron_service"), want: url.Values{}},
-		{name: "2. mqc-ctx-GetForm", request: getTestMqcQueue("queue_name", "queue_service", `{"data":"message"}`, true), want: url.Values{"__body__": []string{`{"data":"message"}`}, "data": []string{"message"}}},
+		{name: "2. mqc-ctx-GetForm", request: getTestMqcQueue("queue_name", "queue_service", `{"data":"message"}`, true), want: url.Values{"__body__": []string{`{"data":"message"}`}}},
 	}
 	for _, tt := range tests {
 		g := middleware.NewDispCtx()

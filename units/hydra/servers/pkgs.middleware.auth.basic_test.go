@@ -4,16 +4,20 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/micro-plat/hydra/mock"
+	"github.com/micro-plat/hydra/context"
+	octx "github.com/micro-plat/hydra/context/ctx"
+
 	"github.com/micro-plat/lib4go/encoding/base64"
+	"github.com/micro-plat/lib4go/types"
 
 	"github.com/micro-plat/hydra-test/units/mocks"
+	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server/auth/basic"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
 	"github.com/micro-plat/lib4go/assert"
 )
 
-var authUserKey = "userName"
+var authUserKey = context.UserName
 
 //author:taoshouyin
 //time:2020-11-11
@@ -54,33 +58,33 @@ func TestAuthBasic(t *testing.T) {
 		if tt.isSet {
 			confB.Basic(tt.basicOpts...)
 		}
-		// serverConf := mockConf.GetAPIConf()
-		// ctx := &mocks.MiddleContext{
-		// 	MockMeta:     conf.NewMeta(),
-		// 	MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1", MockAuth: &octx.Auth{}},
-		// 	MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string][]string{}},
-		// 	MockRequest: &mocks.MockRequest{
-		// 		MockHeader: map[string]interface{}{"Authorization": []string{tt.reqHeadVal}},
-		// 		MockPath: &mocks.MockPath{
-		// 			MockRequestPath: tt.requestPath,
-		// 		},
-		// 	},
-		// 	MockAPPConf: serverConf,
-		// }
+		serverConf := mockConf.GetAPIConf()
+		ctx := &mocks.MiddleContext{
+			MockMeta:     conf.NewMeta(),
+			MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1", MockAuth: &octx.Auth{}},
+			MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: types.XMap{}},
+			MockRequest: &mocks.MockRequest{
+				MockHeader: map[string]interface{}{"Authorization": tt.reqHeadVal},
+				MockPath: &mocks.MockPath{
+					MockRequestPath: tt.requestPath,
+				},
+			},
+			MockAPPConf: serverConf,
+		}
 
-		ctx := mock.NewContext("")
-		midCtx := middleware.NewMiddleContext(ctx, &mock.Middle{})
+		//ctx := mock.NewContext("")
+		//midCtx := middleware.NewMiddleContext(ctx, &mock.Middle{})
 
 		//获取中间件
 		handler := middleware.BasicAuth()
 		//调用中间件
-		handler(midCtx)
+		handler(ctx)
 		//断言结果
 		gotStatus, _, _ := ctx.Response().GetFinalResponse()
 		assert.Equalf(t, tt.wantStatus, gotStatus, tt.name, tt.wantStatus, gotStatus)
 		gotSpecial := ctx.Response().GetSpecials()
 		assert.Equalf(t, tt.wantSpecial, gotSpecial, tt.name, tt.wantSpecial, gotSpecial)
-		gotUser := ctx.Meta().GetString(authUserKey)
+		gotUser := types.GetString(ctx.Meta().GetValue(context.UserName))
 		assert.Equalf(t, tt.user, gotUser, tt.name, tt.user, gotUser)
 		if tt.user != "" {
 			quthReq := (ctx.User().Auth().Request()).(map[string]interface{})

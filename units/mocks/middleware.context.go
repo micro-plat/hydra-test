@@ -101,12 +101,6 @@ func (ctx *MiddleContext) Tracer() extcontext.ITracer {
 	return nil
 }
 
-
-
-
-
-
-
 //GetHttpReqResp GetHttpReqResp
 func (ctx *MiddleContext) GetHttpReqResp() (*http.Request, http.ResponseWriter) {
 	return ctx.HttpRequest, ctx.HttpResponse
@@ -398,7 +392,7 @@ func (res *MockResponse) GetSpecials() string {
 
 //Header 设置响应头
 func (res *MockResponse) Header(key string, val string) {
-	res.MockHeader[key] = []string{val}
+	res.MockHeader[key] = val
 }
 
 //GetHeaders 设置响应头

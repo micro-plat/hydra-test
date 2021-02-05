@@ -6,10 +6,11 @@ import (
 	"testing"
 
 	"github.com/micro-plat/hydra-test/units/mocks"
+	"github.com/micro-plat/hydra/conf"
 	"github.com/micro-plat/hydra/conf/server/header"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
-	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
+	"github.com/micro-plat/lib4go/types"
 )
 
 const (
@@ -33,19 +34,19 @@ func TestHeader(t *testing.T) {
 		isSet       bool
 		headerOpts  []header.Option
 		wantStatus  int
-		wantheader  map[string]interface{}
+		wantheader  types.XMap
 		wantSpecial string
 	}
 
 	tests := []*testCase{
-		{name: "1. header-不设置", isSet: false, wantheader: map[string]interface{}{}, wantStatus: 200, wantSpecial: ""},
-		{name: "2. header-设置-没有数据", isSet: true, wantheader: map[string]interface{}{}, wantStatus: 200, wantSpecial: ""},
-		{name: "3. header-设置-默认跨域头,无其他头", isSet: true, wantStatus: 200, wantSpecial: "hdr", headerOpts: []header.Option{header.WithCrossDomain()}, wantheader: map[string]interface{}{HeadeAllowCredentials: []string{"true"}, HeadeAllowMethods: []string{strings.Join(allMethods, ",")}, HeadeAllowOrigin: []string{"www.baidu.com"}, HeadeAllowHeaders: []string{strings.Join(allowHeader, ",")}, HeadeExposeHeaders: []string{strings.Join(exposeHeader, ",")}}},
-		{name: "4. header-设置-默认跨域头,有其他头", isSet: true, wantStatus: 200, wantSpecial: "hdr", headerOpts: []header.Option{header.WithCrossDomain(), header.WithHeader("test1", "testttt")}, wantheader: map[string]interface{}{HeadeAllowCredentials: []string{"true"}, HeadeAllowMethods: []string{strings.Join(allMethods, ",")}, HeadeAllowOrigin: []string{"www.baidu.com"}, HeadeAllowHeaders: []string{strings.Join(allowHeader, ",")}, HeadeExposeHeaders: []string{strings.Join(exposeHeader, ",")}, "test1": []string{"testttt"}}},
-		{name: "5. header-设置-指定跨域头,不允许跨域,无其他头", isSet: true, wantStatus: 200, wantSpecial: "hdr", headerOpts: []header.Option{header.WithCrossDomain("www.sdswds.com")}, wantheader: map[string]interface{}{HeadeExposeHeaders: []string{strings.Join(exposeHeader, ",")}}},
-		{name: "6. header-设置-指定跨域头,不允许跨域,有其他头", isSet: true, wantStatus: 200, wantSpecial: "hdr", headerOpts: []header.Option{header.WithCrossDomain("www.sdswds.com"), header.WithHeader("test1", "testttt")}, wantheader: map[string]interface{}{HeadeExposeHeaders: []string{strings.Join(exposeHeader, ",")}, "test1": []string{"testttt"}}},
-		{name: "7. header-设置-指定跨域头,允许跨域,无其他头", isSet: true, wantStatus: 200, wantSpecial: "hdr", headerOpts: []header.Option{header.WithCrossDomain("www.baidu.com")}, wantheader: map[string]interface{}{HeadeAllowCredentials: []string{"true"}, HeadeAllowMethods: []string{strings.Join(allMethods, ",")}, HeadeAllowOrigin: []string{"www.baidu.com"}, HeadeAllowHeaders: []string{strings.Join(allowHeader, ",")}, HeadeExposeHeaders: []string{strings.Join(exposeHeader, ",")}}},
-		{name: "8. header-设置-指定跨域头,允许跨域,有其他头", isSet: true, wantStatus: 200, wantSpecial: "hdr", headerOpts: []header.Option{header.WithCrossDomain("www.baidu.com"), header.WithHeader("test1", "testttt")}, wantheader: map[string]interface{}{HeadeAllowCredentials: []string{"true"}, HeadeAllowMethods: []string{strings.Join(allMethods, ",")}, HeadeAllowOrigin: []string{"www.baidu.com"}, HeadeAllowHeaders: []string{strings.Join(allowHeader, ",")}, HeadeExposeHeaders: []string{strings.Join(exposeHeader, ",")}, "test1": []string{"testttt"}}},
+		{name: "1. header-不设置", isSet: false, wantheader: types.XMap{}, wantStatus: 200, wantSpecial: ""},
+		{name: "2. header-设置-没有数据", isSet: true, wantheader: types.XMap{}, wantStatus: 200, wantSpecial: ""},
+		{name: "3. header-设置-默认跨域头,无其他头", isSet: true, wantStatus: 200, wantSpecial: "hdr", headerOpts: []header.Option{header.WithCrossDomain()}, wantheader: map[string]interface{}{HeadeAllowCredentials: "true", HeadeAllowMethods: strings.Join(allMethods, ","), HeadeAllowOrigin: "www.baidu.com", HeadeAllowHeaders: strings.Join(allowHeader, ","), HeadeExposeHeaders: strings.Join(exposeHeader, ",")}},
+		{name: "4. header-设置-默认跨域头,有其他头", isSet: true, wantStatus: 200, wantSpecial: "hdr", headerOpts: []header.Option{header.WithCrossDomain(), header.WithHeader("test1", "testttt")}, wantheader: map[string]interface{}{HeadeAllowCredentials: "true", HeadeAllowMethods: strings.Join(allMethods, ","), HeadeAllowOrigin: "www.baidu.com", HeadeAllowHeaders: strings.Join(allowHeader, ","), HeadeExposeHeaders: strings.Join(exposeHeader, ","), "test1": "testttt"}},
+		{name: "5. header-设置-指定跨域头,不允许跨域,无其他头", isSet: true, wantStatus: 200, wantSpecial: "hdr", headerOpts: []header.Option{header.WithCrossDomain("www.sdswds.com")}, wantheader: map[string]interface{}{HeadeExposeHeaders: strings.Join(exposeHeader, ",")}},
+		{name: "6. header-设置-指定跨域头,不允许跨域,有其他头", isSet: true, wantStatus: 200, wantSpecial: "hdr", headerOpts: []header.Option{header.WithCrossDomain("www.sdswds.com"), header.WithHeader("test1", "testttt")}, wantheader: map[string]interface{}{HeadeExposeHeaders: strings.Join(exposeHeader, ","), "test1": "testttt"}},
+		{name: "7. header-设置-指定跨域头,允许跨域,无其他头", isSet: true, wantStatus: 200, wantSpecial: "hdr", headerOpts: []header.Option{header.WithCrossDomain("www.baidu.com")}, wantheader: map[string]interface{}{HeadeAllowCredentials: "true", HeadeAllowMethods: strings.Join(allMethods, ","), HeadeAllowOrigin: "www.baidu.com", HeadeAllowHeaders: strings.Join(allowHeader, ","), HeadeExposeHeaders: strings.Join(exposeHeader, ",")}},
+		{name: "8. header-设置-指定跨域头,允许跨域,有其他头", isSet: true, wantStatus: 200, wantSpecial: "hdr", headerOpts: []header.Option{header.WithCrossDomain("www.baidu.com"), header.WithHeader("test1", "testttt")}, wantheader: map[string]interface{}{HeadeAllowCredentials: "true", HeadeAllowMethods: strings.Join(allMethods, ","), HeadeAllowOrigin: "www.baidu.com", HeadeAllowHeaders: strings.Join(allowHeader, ","), HeadeExposeHeaders: strings.Join(exposeHeader, ","), "test1": "testttt"}},
 	}
 
 	for _, tt := range tests {
@@ -55,26 +56,26 @@ func TestHeader(t *testing.T) {
 		if tt.isSet {
 			confb.Header(tt.headerOpts...)
 		}
-		//serverConf := mockConf.GetAPIConf()
-		// ctx := &mocks.MiddleContext{
-		// 	MockMeta:     conf.NewMeta(),
-		// 	MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1"},
-		// 	MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string][]string{}},
-		// 	MockRequest: &mocks.MockRequest{
-		// 		MockHeader: map[string]interface{}{"Origin": []string{"www.baidu.com"}},
-		// 		MockPath: &mocks.MockPath{
-		// 			MockRequestPath: "/header/test",
-		// 		},
-		// 	},
-		// 	MockAPPConf: serverConf,
-		// }
-		ctx := mock.NewContext("")
-		midCtx := middleware.NewMiddleContext(ctx, &mock.Middle{})
+		serverConf := mockConf.GetAPIConf()
+		ctx := &mocks.MiddleContext{
+			MockMeta:     conf.NewMeta(),
+			MockUser:     &mocks.MockUser{MockClientIP: "192.168.0.1"},
+			MockResponse: &mocks.MockResponse{MockStatus: 200, MockHeader: map[string]interface{}{}},
+			MockRequest: &mocks.MockRequest{
+				MockHeader: map[string]interface{}{"Origin": "www.baidu.com"},
+				MockPath: &mocks.MockPath{
+					MockRequestPath: "/header/test",
+				},
+			},
+			MockAPPConf: serverConf,
+		}
+		// octx := mock.NewContext("")
+		// ctx := middleware.NewMiddleContext(octx, &mock.Middle{})
 
 		//获取中间件
 		handler := middleware.Header()
 		//调用中间件
-		handler(midCtx)
+		handler(ctx)
 
 		//断言结果
 		gotStatus, _, _ := ctx.Response().GetFinalResponse()

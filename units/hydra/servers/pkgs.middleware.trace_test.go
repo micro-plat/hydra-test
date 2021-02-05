@@ -1,6 +1,7 @@
 package servers
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -14,14 +15,13 @@ import (
 	"github.com/micro-plat/hydra/conf/server/mqc"
 	"github.com/micro-plat/hydra/conf/server/rpc"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
-	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/lib4go/assert"
 )
 
 func TestTrace(t *testing.T) {
 	confMock := mocks.NewConfBy("middleware_trace_test", "trace")
 	confMock.Web("8541")
-	confMock.WS(":5214")
+	confMock.WS("5214")
 	tests := []struct {
 		name           string
 		conf           func() app.IAPPConf
@@ -47,22 +47,23 @@ func TestTrace(t *testing.T) {
 		{name: "5.1 Trace-web未配置trace", serverType: "web", conf: func() app.IAPPConf { confMock.Web("8541"); return confMock.GetWebConf() }, responseStatus: 200, wantSpecial: ""},
 		{name: "5.2 Trace-web配置trace", serverType: "web", conf: func() app.IAPPConf { confMock.Web("8541", api.WithTrace()); return confMock.GetWebConf() }, responseStatus: 200, wantSpecial: "trace", wantDebug1: "> trace.request: map[]", wantDebug2: "> trace.response: 200"},
 
-		{name: "6.1 Trace-ws未配置trace", serverType: "ws", conf: func() app.IAPPConf { confMock.WS(":5214"); return confMock.GetWSConf() }, responseStatus: 200, wantSpecial: ""},
-		{name: "6.2 Trace-ws配置trace", serverType: "ws", conf: func() app.IAPPConf { confMock.WS(":5214", api.WithTrace()); return confMock.GetWSConf() }, responseStatus: 200, wantSpecial: "trace", wantDebug1: "> trace.request: map[]", wantDebug2: "> trace.response: 200"},
+		{name: "6.1 Trace-ws未配置trace", serverType: "ws", conf: func() app.IAPPConf { confMock.WS("5214"); return confMock.GetWSConf() }, responseStatus: 200, wantSpecial: ""},
+		{name: "6.2 Trace-ws配置trace", serverType: "ws", conf: func() app.IAPPConf { confMock.WS("5214", api.WithTrace()); return confMock.GetWSConf() }, responseStatus: 200, wantSpecial: "trace", wantDebug1: "> trace.request: map[]", wantDebug2: "> trace.response: 200"},
 	}
 
 	for _, tt := range tests {
+		fmt.Println("name:", tt.name)
 		//初始化测试用例参数
-		// ctx := &mocks.MiddleContext{
-		// 	MockNext:     func() { fmt.Println("output") },
-		// 	MockUser:     &mocks.MockUser{MockClientIP: "127.0.0.1", MockRequestID: "06c6fb24c"},
-		// 	MockRequest:  &mocks.MockRequest{MockQueryMap: tt.requestMap},
-		// 	MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus},
-		// 	MockAPPConf:  tt.conf(),
-		// }
+		ctx := &mocks.MiddleContext{
+			MockNext:     func() { fmt.Println("output") },
+			MockUser:     &mocks.MockUser{MockClientIP: "127.0.0.1", MockRequestID: "06c6fb24c"},
+			MockRequest:  &mocks.MockRequest{MockQueryMap: tt.requestMap},
+			MockResponse: &mocks.MockResponse{MockStatus: tt.responseStatus},
+			MockAPPConf:  tt.conf(),
+		}
 
-		orgctx := mock.NewContext("")
-		ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
+		//orgctx := mock.NewContext("")
+		//ctx := middleware.NewMiddleContext(orgctx, &mock.Middle{})
 
 		//构建的新的os.Stdout
 		rescueStdout := os.Stdout

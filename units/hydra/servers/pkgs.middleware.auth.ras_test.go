@@ -20,7 +20,7 @@ import (
 //time:2020-11-12
 //desc:测试RAS授权
 func TestRASAuth(t *testing.T) {
-	reqUrl := "/single/hydra/newversion/md5/auth@authserver.sas_debug"
+	reqURL := "/single/hydra/newversion/md5/auth@sas_v1_debug"
 	global.Def.RegistryAddr = "zk://192.168.0.101"
 	type testCase struct {
 		name        string
@@ -35,23 +35,23 @@ func TestRASAuth(t *testing.T) {
 		{name: "1.1 rasAuth-配置不存在", isSet: false, wantStatus: 200, wantSpecial: "", queryMap: nil, opts: []ras.Option{}},
 
 		{name: "2.1 rasAuth-配置存在-未启用-无数据", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: nil, opts: []ras.Option{ras.WithDisable()}},
-		{name: "2.2 rasAuth-配置存在-未启用-未在验证范围内", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: nil, opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New(reqUrl, ras.WithRequest("/rasauth/test1"), ras.WithSignAlias("sign")))}},
-		{name: "2.3 rasAuth-配置存在-未启用-请求数据为空", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: nil, opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New(reqUrl, ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
-		{name: "2.4 rasAuth-配置存在-未启用-没有签名字段", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: map[string]interface{}{"fied1": "111111"}, opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New(reqUrl, ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
+		{name: "2.2 rasAuth-配置存在-未启用-未在验证范围内", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: nil, opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New(reqURL, ras.WithRequest("/rasauth/test1"), ras.WithSignAlias("sign")))}},
+		{name: "2.3 rasAuth-配置存在-未启用-请求数据为空", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: nil, opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New(reqURL, ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
+		{name: "2.4 rasAuth-配置存在-未启用-没有签名字段", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: map[string]interface{}{"fied1": "111111"}, opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New(reqURL, ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
 		{name: "2.5 rasAuth-配置存在-未启用-错误的请求路径", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: map[string]interface{}{"fied1": "111111"}, opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New("/error/path/auth@authserver.sas_debug", ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
 		{name: "2.6 rasAuth-配置存在-未启用-错误的服务器地址", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: map[string]interface{}{"fied1": "111111"}, opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New("/single/hydra/newversion/md5/auth@authserver.sas_err", ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
-		{name: "2.7 rasAuth-配置存在-未启用-错误的签名字段", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: map[string]interface{}{"fied1": "111111", "sign": "errordata", "euid": "test1"}, opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New(reqUrl, ras.WithConnect(ras.WithConnectChar("=", "&"), ras.WithConnectSortByData(), ras.WithSecretConnect(ras.WithSecretHeadMode(""))), ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
-		{name: "2.8 rasAuth-配置存在-未启用-签名认证成功", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: map[string]interface{}{"fied1": "111111", "euid": "test1", "sign": getRasSign(map[string]interface{}{"fied1": "111111", "euid": "test1"})}, opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New(reqUrl, ras.WithConnect(ras.WithConnectChar("=", "&"), ras.WithConnectSortByData(), ras.WithSecretConnect(ras.WithSecretHeadMode(""))), ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
+		{name: "2.7 rasAuth-配置存在-未启用-错误的签名字段", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: map[string]interface{}{"fied1": "111111", "sign": "errordata", "euid": "test1"}, opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New(reqURL, ras.WithConnect(ras.WithConnectChar("=", "&"), ras.WithConnectSortByData(), ras.WithSecretConnect(ras.WithSecretHeadMode(""))), ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
+		{name: "2.8 rasAuth-配置存在-未启用-签名认证成功", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: map[string]interface{}{"fied1": "111111", "euid": "test1", "sign": getRasSign(map[string]interface{}{"fied1": "111111", "euid": "test1"})}, opts: []ras.Option{ras.WithDisable(), ras.WithAuths(ras.New(reqURL, ras.WithConnect(ras.WithConnectChar("=", "&"), ras.WithConnectSortByData(), ras.WithSecretConnect(ras.WithSecretHeadMode(""))), ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
 
 		{name: "3.1 rasAuth-配置存在-启用-无数据", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: nil, opts: []ras.Option{}},
-		{name: "3.2 rasAuth-配置存在-启用-未在验证范围内", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: nil, opts: []ras.Option{ras.WithAuths(ras.New(reqUrl, ras.WithRequest("/rasauth/test1"), ras.WithSignAlias("sign")))}},
-		{name: "3.3 rasAuth-配置存在-启用-请求数据为空", isSet: true, wantStatus: 500, wantSpecial: "ras", queryMap: nil, opts: []ras.Option{ras.WithAuths(ras.New(reqUrl, ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
-		{name: "3.4 rasAuth-配置存在-启用-没有签名字段", isSet: true, wantStatus: 403, wantSpecial: "ras", queryMap: map[string]interface{}{"fied1": "111111"}, opts: []ras.Option{ras.WithAuths(ras.New(reqUrl, ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
+		{name: "3.2 rasAuth-配置存在-启用-未在验证范围内", isSet: true, wantStatus: 200, wantSpecial: "", queryMap: nil, opts: []ras.Option{ras.WithAuths(ras.New(reqURL, ras.WithRequest("/rasauth/test1"), ras.WithSignAlias("sign")))}},
+		{name: "3.3 rasAuth-配置存在-启用-请求数据为空", isSet: true, wantStatus: 403, wantSpecial: "ras", queryMap: types.XMap{}, opts: []ras.Option{ras.WithAuths(ras.New(reqURL, ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
+		{name: "3.4 rasAuth-配置存在-启用-没有签名字段", isSet: true, wantStatus: 403, wantSpecial: "ras", queryMap: map[string]interface{}{"fied1": "111111"}, opts: []ras.Option{ras.WithAuths(ras.New(reqURL, ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
 		{name: "3.5 rasAuth-配置存在-启用-错误的请求路径", isSet: true, wantStatus: 500, wantSpecial: "ras", queryMap: map[string]interface{}{"fied1": "111111"}, opts: []ras.Option{ras.WithAuths(ras.New("/error/path/auth@authserver.sas_debug", ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
 		{name: "3.6 rasAuth-配置存在-启用-错误的服务器地址", isSet: true, wantStatus: 500, wantSpecial: "ras", queryMap: map[string]interface{}{"fied1": "111111"}, opts: []ras.Option{ras.WithAuths(ras.New("/single/hydra/newversion/md5/auth@authserver.sas_err", ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
-		{name: "3.7 rasAuth-配置存在-启用-错误的签名字段", isSet: true, wantStatus: 403, wantSpecial: "ras", queryMap: map[string]interface{}{"fied1": "111111", "sign": "errordata", "euid": "test1"}, opts: []ras.Option{ras.WithAuths(ras.New(reqUrl, ras.WithConnect(ras.WithConnectChar("=", "&"), ras.WithConnectSortByData(), ras.WithSecretConnect(ras.WithSecretHeadMode(""))), ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
-		{name: "3.8 rasAuth-配置存在-启用-签名认证成功", isSet: true, wantStatus: 200, wantSpecial: "ras", queryMap: map[string]interface{}{"fied1": "111111", "euid": "test1", "sign": getRasSign(map[string]interface{}{"fied1": "111111", "euid": "test1"})}, opts: []ras.Option{ras.WithAuths(ras.New(reqUrl, ras.WithConnect(ras.WithConnectChar("=", "&"), ras.WithConnectSortByData(), ras.WithSecretConnect(ras.WithSecretHeadMode(""))), ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
-		{name: "3.9 rasAuth-配置存在-启用-空数据签名认证成功", isSet: true, wantStatus: 200, wantSpecial: "ras", queryMap: map[string]interface{}{"euid": "test1", "sign": getRasSign(map[string]interface{}{"euid": "test1"})}, opts: []ras.Option{ras.WithAuths(ras.New(reqUrl, ras.WithConnect(ras.WithConnectChar("=", "&"), ras.WithConnectSortByData(), ras.WithSecretConnect(ras.WithSecretHeadMode(""))), ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
+		{name: "3.7 rasAuth-配置存在-启用-错误的签名字段", isSet: true, wantStatus: 403, wantSpecial: "ras", queryMap: map[string]interface{}{"fied1": "111111", "sign": "errordata", "euid": "test1"}, opts: []ras.Option{ras.WithAuths(ras.New(reqURL, ras.WithConnect(ras.WithConnectChar("=", "&"), ras.WithConnectSortByData(), ras.WithSecretConnect(ras.WithSecretHeadMode(""))), ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
+		{name: "3.8 rasAuth-配置存在-启用-签名认证成功", isSet: true, wantStatus: 200, wantSpecial: "ras", queryMap: map[string]interface{}{"fied1": "111111", "euid": "test1", "timestamp": "12345678", "sign": getRasSign(map[string]interface{}{"fied1": "111111", "euid": "test1"})}, opts: []ras.Option{ras.WithAuths(ras.New(reqURL, ras.WithConnect(ras.WithConnectChar("=", "&"), ras.WithConnectSortByData(), ras.WithSecretConnect(ras.WithSecretHeadMode(""))), ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
+		{name: "3.9 rasAuth-配置存在-启用-空数据签名认证成功", isSet: true, wantStatus: 200, wantSpecial: "ras", queryMap: map[string]interface{}{"euid": "test1", "timestamp": "12345678", "sign": getRasSign(map[string]interface{}{"euid": "test1"})}, opts: []ras.Option{ras.WithAuths(ras.New(reqURL, ras.WithConnect(ras.WithConnectChar("=", "&"), ras.WithConnectSortByData(), ras.WithSecretConnect(ras.WithSecretHeadMode(""))), ras.WithRequest("/rasauth/test"), ras.WithSignAlias("sign")))}},
 	}
 	for _, tt := range tests {
 		global.Def.ServerTypes = []string{http.API}
@@ -72,6 +72,7 @@ func TestRASAuth(t *testing.T) {
 		ctx := &mocks.MiddleContext{
 			MockMeta: types.XMap{},
 			MockRequest: &mocks.MockRequest{
+				XMap:         tt.queryMap,
 				MockPath:     &mocks.MockPath{MockRequestPath: "/rasauth/test"},
 				MockQueryMap: tt.queryMap,
 			},
@@ -96,6 +97,7 @@ func TestRASAuth(t *testing.T) {
 
 func getRasSign(param map[string]interface{}) string {
 	secret := "JHfReB4Mn38z6V3npU3AKIvYqXI8b3VT"
+	param["timestamp"] = "12345678"
 	values := net.NewValues()
 	for key, v := range param {
 		values.Set(key, v.(string))

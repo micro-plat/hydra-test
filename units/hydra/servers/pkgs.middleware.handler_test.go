@@ -14,7 +14,6 @@ import (
 	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 	"github.com/micro-plat/hydra/hydra/servers/pkg/middleware"
-	"github.com/micro-plat/hydra/mock"
 	"github.com/micro-plat/hydra/services"
 	"github.com/micro-plat/lib4go/assert"
 )
@@ -94,24 +93,24 @@ func TestHandler(t *testing.T) {
 		mockConf.API("51001")
 		mockConf.GetAPI()
 		app.API(tt.service, tt.handleObj)
-		//serverConf := mockConf.GetAPIConf()
-		// ctx := &mocks.MiddleContext{
-		// 	MockMeta: types.XMap{},
-		// 	MockUser: &mocks.MockUser{MockRequestID: utility.GetGUID()},
-		// 	MockRequest: &mocks.MockRequest{
+		serverConf := mockConf.GetAPIConf()
+		ctx := &mocks.MiddleContext{
+			MockMeta: types.XMap{},
+			MockUser: &mocks.MockUser{MockRequestID: utility.GetGUID()},
+			MockRequest: &mocks.MockRequest{
 
-		// 		MockPath: &mocks.MockPath{
-		// 			MockRequestPath:   tt.service,
-		// 			MockIsLimit:       tt.isLimited,
-		// 			MockAllowFallback: tt.fallback,
-		// 		},
-		// 	},
+				MockPath: &mocks.MockPath{
+					MockRequestPath:   tt.service,
+					MockIsLimit:       tt.isLimited,
+					MockAllowFallback: tt.fallback,
+				},
+			},
 
-		// 	MockResponse: &mocks.MockResponse{MockStatus: 200},
-		// 	MockAPPConf:  serverConf,
-		// }
-		ctx := mock.NewContext("")
-		midCtx := middleware.NewMiddleContext(ctx, &mock.Middle{})
+			MockResponse: &mocks.MockResponse{MockStatus: 200},
+			MockAPPConf:  serverConf,
+		}
+		// octx := mock.NewContext("")
+		// ctx := middleware.NewMiddleContext(octx, &mock.Middle{})
 
 		if tt.golHandlingFunc != nil {
 			services.Def.OnHandleExecuting(tt.golHandlingFunc, http.API)
@@ -125,7 +124,7 @@ func TestHandler(t *testing.T) {
 		handler := middleware.ExecuteHandler(tt.service)
 
 		//调用中间件
-		handler(midCtx)
+		handler(ctx)
 
 		//断言结果
 		gotStatus, gotContent, _ := ctx.Response().GetFinalResponse()
@@ -190,25 +189,25 @@ func TestHandler1(t *testing.T) {
 		mockConf.API("51001")
 		mockConf.GetAPI()
 		app.API(tt.service, tt.handleObj)
-		//serverConf := mockConf.GetAPIConf()
-		// ctx := &mocks.MiddleContext{
-		// 	MockMeta: types.XMap{},
-		// 	MockUser: &mocks.MockUser{MockRequestID: utility.GetGUID()},
-		// 	MockRequest: &mocks.MockRequest{
+		serverConf := mockConf.GetAPIConf()
+		ctx := &mocks.MiddleContext{
+			MockMeta: types.XMap{},
+			MockUser: &mocks.MockUser{MockRequestID: utility.GetGUID()},
+			MockRequest: &mocks.MockRequest{
 
-		// 		MockPath: &mocks.MockPath{
-		// 			MockRequestPath:   tt.service,
-		// 			MockIsLimit:       tt.isLimited,
-		// 			MockAllowFallback: tt.fallback,
-		// 		},
-		// 	},
+				MockPath: &mocks.MockPath{
+					MockRequestPath:   tt.service,
+					MockIsLimit:       tt.isLimited,
+					MockAllowFallback: tt.fallback,
+				},
+			},
 
-		// 	MockResponse: &mocks.MockResponse{MockStatus: 200},
-		// 	MockAPPConf:  serverConf,
-		// }
+			MockResponse: &mocks.MockResponse{MockStatus: 200},
+			MockAPPConf:  serverConf,
+		}
 
-		ctx := mock.NewContext("")
-		midCtx := middleware.NewMiddleContext(ctx, &mock.Middle{})
+		// ctx := mock.NewContext("")
+		// midCtx := middleware.NewMiddleContext(ctx, &mock.Middle{})
 
 		if tt.golHandlingFunc != nil {
 			services.Def.OnHandleExecuting(tt.golHandlingFunc, http.API)
@@ -222,7 +221,7 @@ func TestHandler1(t *testing.T) {
 		handler := middleware.ExecuteHandler(tt.service)
 
 		//调用中间件
-		handler(midCtx)
+		handler(ctx)
 
 		//断言结果
 		gotStatus, gotContent, _ := ctx.Response().GetFinalResponse()
