@@ -28,11 +28,11 @@ func Test_file_GetFileSize(t *testing.T) {
 		wantName    string
 		wantErr     string
 	}{
-		{name: "1.1 content-type为multipart/form-data,POST", contentType: "multipart/form-data", method: "POST", fileKey: "upload", wantbody: "ADASDASDASFHNOJM~!@#$%^&*", wantName: "upload.test.txt", wantSize: 25},
-		{name: "1.2 content-type为multipart/form-data,GET", contentType: "multipart/form-data", method: "GET", fileKey: "upload", wantbody: "ADASDASDASFHNOJM~!@#$%^&*", wantName: "upload.test.txt", wantSize: 25},
-		{name: "1.3 content-type为multipart/form-data,DELETE", contentType: "multipart/form-data", method: "POST", fileKey: "upload", wantbody: "ADASDASDASFHNOJM~!@#$%^&*", wantName: "upload.test.txt", wantSize: 25},
-		{name: "1.4 content-type为multipart/form-data,PUT", contentType: "multipart/form-data", method: "POST", fileKey: "upload", wantbody: "ADASDASDASFHNOJM~!@#$%^&*", wantName: "upload.test.txt", wantSize: 25},
-		{name: "1.5 content-type为multipart/form-data,PATCH", contentType: "multipart/form-data", method: "POST", fileKey: "upload", wantbody: "ADASDASDASFHNOJM~!@#$%^&*", wantName: "upload.test.txt", wantSize: 25},
+		{name: "1.1 content-type为multipart/form-data,POST", contentType: "multipart/form-data", method: "POST", fileKey: "upload", wantbody: "0123456789", wantName: "upload.test.txt", wantSize: 10},
+		{name: "1.2 content-type为multipart/form-data,GET", contentType: "multipart/form-data", method: "GET", fileKey: "upload", wantbody: "0123456789", wantName: "upload.test.txt", wantSize: 10},
+		{name: "1.3 content-type为multipart/form-data,DELETE", contentType: "multipart/form-data", method: "POST", fileKey: "upload", wantbody: "0123456789", wantName: "upload.test.txt", wantSize: 10},
+		{name: "1.4 content-type为multipart/form-data,PUT", contentType: "multipart/form-data", method: "POST", fileKey: "upload", wantbody: "0123456789", wantName: "upload.test.txt", wantSize: 10},
+		{name: "1.5 content-type为multipart/form-data,PATCH", contentType: "multipart/form-data", method: "POST", fileKey: "upload", wantbody: "0123456789", wantName: "upload.test.txt", wantSize: 10},
 
 		{name: "2.1 content-type为application/x-www-form-urlencoded,POST", contentType: "application/x-www-form-urlencoded", method: "POST", fileKey: "upload", wantErr: "request Content-Type isn't multipart/form-data"},
 		{name: "3.1 content-type为application/json,POST", contentType: "application/json", method: "POST", fileKey: "upload", wantErr: "request Content-Type isn't multipart/form-data"},

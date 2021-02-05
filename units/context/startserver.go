@@ -259,5 +259,5 @@ func getTestMIMEMultipartPOSTForm(kv url.Values) (string, string) {
 }
 
 func getUploadBody() string {
-	return "Content-Disposition: form-data; name=\"upload\"; filename=\"upload.test.txt\"\r\nContent-Type: application/octet-stream\r\n\r\nADASDASDASFHNOJM~!@#$%^&*"
+	return "Content-Disposition: form-data; name=\"upload\"; filename=\"upload.test.txt\"\r\nContent-Type: application/octet-stream\r\n\r\n0123456789"
 }
