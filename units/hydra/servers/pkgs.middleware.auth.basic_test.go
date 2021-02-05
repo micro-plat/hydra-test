@@ -93,7 +93,7 @@ func TestAuthBasic(t *testing.T) {
 
 		if tt.repHeadVal != "" {
 			header := ctx.Response().GetHeaders()
-			assert.Equalf(t, []string{tt.repHeadVal}, header["WWW-Authenticate"], tt.name, tt.repHeadVal, header["WWW-Authenticate"])
+			assert.Equalf(t, tt.repHeadVal, header["WWW-Authenticate"], tt.name, tt.repHeadVal, header["WWW-Authenticate"])
 		}
 	}
 }

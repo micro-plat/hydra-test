@@ -169,7 +169,7 @@ func (n *okObj) Handle(ctx context.IContext) interface{} { return "success" }
 func BenchmarkHttpServer(b *testing.B) {
 	oncelock.Do(func() {
 		mockConf := mocks.NewConfBy("httpserver", "Benchmarktestserver")
-		mockConf.API("550010")
+		mockConf.API("55010")
 		serverConf = mockConf.GetAPIConf()
 		app.Cache.Save(serverConf)
 

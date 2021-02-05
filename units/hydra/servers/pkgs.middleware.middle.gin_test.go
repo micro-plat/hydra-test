@@ -89,6 +89,7 @@ func Test_ginCtx_Get_WithForm(t *testing.T) {
 
 	//替换gin上下文的请求
 	c.Request = r
+	r.ParseForm()
 	router.HandleContext(c)
 
 	g := middleware.NewGinCtx(c)
@@ -107,7 +108,9 @@ func Test_ginCtx_Get_WithForm(t *testing.T) {
 
 	//GetHeaders
 	gotHeader := g.GetHeaders()
-	assert.Equal(t, http.Header{"Content-Type": []string{ctp}, "Cookie": []string{"session=value"}}, gotHeader, "GetHeaders")
+	assert.Equal(t, http.Header{"Content-Type": []string{ctp}, "Cookie": []string{"session=value"}, "Host": []string{"localhost:9091"}},
+		gotHeader,
+		"GetHeaders")
 
 	//GetCookies
 	gotCookies := g.GetCookies()
