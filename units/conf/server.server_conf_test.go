@@ -136,7 +136,7 @@ func TestNewAPIServerConf(t *testing.T) {
 
 	confM := mocks.NewConfBy(platName, clusterName)
 	confN := confM.API("8080", api.WithDisable(), api.WithTrace(), api.WithDNS("ip1"), api.WithHeaderReadTimeout(10), api.WithTimeout(11, 11))
-	confN.APIKEY("123456", apikey.WithDisable(), apikey.WithSHA256Mode(), apikey.WithExcludes("/p1/p2"))
+	confN.APIKEY("123456789", apikey.WithDisable(), apikey.WithSHA256Mode(), apikey.WithExcludes("/p1/p2"))
 	confN.Basic(basic.WithDisable(), basic.WithUP("basicName", "basicPwd"), basic.WithExcludes("/basic/basic1"))
 	confN.BlackList(blacklist.WithEnable(), blacklist.WithIP("192.168.0.121"))
 	//confN.Proxy(proxy.WithDisable(), proxy.WithFilter("Filter"), proxy.WithUPCluster("UPCluster"))
@@ -151,7 +151,9 @@ func TestNewAPIServerConf(t *testing.T) {
 		static.WithExts(".htm"), static.WithArchive("testsss"), static.AppendExts(".js"), static.WithPrefix("ssss"), static.WithDisable(), static.WithExclude("/views/", ".exe", ".so", ".zip"))
 	confN.WhiteList(whitelist.WithIPList(whitelist.NewIPList([]string{"/t1/t2/*"}, []string{"192.168.0.101"}...)))
 	confM.Conf().Pub(platName, sysName, clusterName, "lm://.", true)
+
 	gotS, err := app.NewAPPConfBy(platName, sysName, serverType, clusterName, rgst)
+
 	assert.Equal(t, true, err == nil, "测试conf初始化,设置主节点")
 
 	mainConf, err := server.NewServerConf(platName, sysName, serverType, clusterName, rgst)
@@ -185,10 +187,16 @@ func TestNewAPIServerConf(t *testing.T) {
 	staticC := static.New(static.WithRoot("./test"), static.WithHomePage("index1.html"), static.WithRewriters("/", "indextest.htm", "defaulttest.html"),
 		static.WithExts(".htm"), static.WithArchive("testsss"), static.AppendExts(".js"), static.WithPrefix("ssss"), static.WithDisable(), static.WithExclude("/views/", ".exe", ".so", ".zip"))
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取static对象失败")
-	assert.Equal(t, staticC, staticConf, "测试conf初始化,判断static节点对象")
+	assert.Equal(t, staticC.Dir, staticConf.Dir, "测试conf初始化,判断static节点对象")
+	assert.Equal(t, staticC.Archive, staticConf.Archive, "测试conf初始化,判断static节点对象")
+	assert.Equal(t, staticC.Prefix, staticConf.Prefix, "测试conf初始化,判断static节点对象")
+	assert.Equal(t, staticC.Exts, staticConf.Exts, "测试conf初始化,判断static节点对象")
+	assert.Equal(t, staticC.Exclude, staticConf.Exclude, "测试conf初始化,判断static节点对象")
+	assert.Equal(t, staticC.HomePage, staticConf.HomePage, "测试conf初始化,判断static节点对象")
+	assert.Equal(t, staticC.Disable, staticConf.Disable, "测试conf初始化,判断static节点对象")
 
 	apikeyConf, err := gotS.GetAPIKeyConf()
-	apikeyC := apikey.New("123456", apikey.WithDisable(), apikey.WithSHA256Mode(), apikey.WithExcludes("/p1/p2"))
+	apikeyC := apikey.New("123456789", apikey.WithDisable(), apikey.WithSHA256Mode(), apikey.WithExcludes("/p1/p2"))
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取apikey对象失败")
 	assert.Equal(t, apikeyC, apikeyConf, "测试conf初始化,判断apikey节点对象")
 
@@ -234,13 +242,6 @@ func TestNewAPIServerConf(t *testing.T) {
 		assert.Equal(t, garyC.UPCluster, garyConf.UPCluster, "测试conf初始化,判断gary.UPCluster节点对象")
 
 	*/
-
-	_, err = gotS.GetMQCMainConf()
-	assert.Equal(t, false, err == nil, "测试conf初始化,获取mqc对象失败")
-
-	queuesObj, err := gotS.GetMQCQueueConf()
-	assert.Equal(t, true, err == nil, "测试conf初始化,获取queues对象失败")
-	assert.Equal(t, &queue.Queues{}, queuesObj, "测试conf初始化,判断queues节点对象")
 
 	layoutObj, err := gotS.GetRLogConf()
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取layout对象失败")
@@ -320,8 +321,10 @@ func TestNewCRONServerConf(t *testing.T) {
 	assert.Equal(t, false, err == nil, "测试conf初始化,没有设置主节点")
 
 	confN := confM.CRON(cron.WithTrace(), cron.WithDisable(), cron.WithSharding(1))
-	confN.Task(task.NewTask("cron1", "service1"), task.NewTask("cron2", "service2", task.WithDisable()))
+	confN.Task(task.NewTask("cron1", "/service1"), task.NewTask("cron2", "/service2", task.WithDisable()))
+
 	confM.Conf().Pub(platName, sysName, clusterName, "lm://.", true)
+
 	gotS, err = app.NewAPPConfBy(platName, sysName, serverType, clusterName, rgst)
 	assert.Equal(t, true, err == nil, "测试conf初始化,设置主节点")
 
@@ -334,7 +337,7 @@ func TestNewCRONServerConf(t *testing.T) {
 	assert.Equal(t, varConf, gotS.GetVarConf(), "测试conf初始化,判断Var节点对象")
 
 	taskConf, err := gotS.GetCRONTaskConf()
-	taskC := task.NewTasks(task.NewTask("cron1", "service1"), task.NewTask("cron2", "service2", task.WithDisable()))
+	taskC := task.NewTasks(task.NewTask("cron1", "/service1"), task.NewTask("cron2", "/service2", task.WithDisable()))
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取cron对象失败")
 	assert.Equal(t, taskC, taskConf, "测试conf初始化,判断task节点对象")
 }
@@ -351,7 +354,7 @@ func TestNewVARServerConf(t *testing.T) {
 	gotS, err := app.NewAPPConfBy(platName, sysName, serverType, clusterName, rgst)
 	assert.Equal(t, false, err == nil, "测试conf初始化,没有设置主节点")
 
-	confM.MQC("redis://11").Queue(queue.NewQueue("queue1", "service1"), queue.NewQueue("queue2", "service2"))
+	confM.MQC("redis://11").Queue(queue.NewQueue("queue1", "/service1"), queue.NewQueue("queue2", "/service2"))
 	confM.Vars().Queue().Redis("redis", "", queueredis.WithAddrs("192.168.0.1"))
 
 	confM.Conf().Pub(platName, sysName, clusterName, "lm://.", true)

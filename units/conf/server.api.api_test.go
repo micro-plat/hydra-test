@@ -8,7 +8,6 @@ package conf
 import (
 	"testing"
 
-	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
 	"github.com/micro-plat/hydra/conf/server/api"
 	"github.com/micro-plat/lib4go/assert"
@@ -41,11 +40,11 @@ func TestAPIGetConf(t *testing.T) {
 	}
 
 	conf := mocks.NewConfBy("hydraconf_apimain_test", "apimain")
-	hydra.G.SysName = "apiserver"
-	test1 := test{name: "1.1 Conf-APIGetConf-节点不存在,获取默认对象", opts: []api.Option{}, want: &api.Server{Address: "8080", Status: "start", RTimeout: 30, WTimeout: 30, RHTimeout: 30}}
-	obj, err := api.GetConf(conf.GetAPIConf().GetServerConf())
-	assert.Equal(t, nil, err, test1.name+",err")
-	assert.Equal(t, test1.want, obj, test1.name)
+	// hydra.G.SysName = "apiserver"
+	// test1 := test{name: "1.1 Conf-APIGetConf-节点不存在,获取默认对象", opts: []api.Option{}, want: &api.Server{Address: "8080", Status: "start", RTimeout: 30, WTimeout: 30, RHTimeout: 30}}
+	// obj, err := api.GetConf(conf.GetAPIConf().GetServerConf())
+	// assert.Equal(t, nil, err, test1.name+",err")
+	// assert.Equal(t, test1.want, obj, test1.name)
 
 	tests := []test{
 		{name: "2.1 Conf-APIGetConf-节点为空,获取默认对象", opts: []api.Option{}, want: api.New("8080")},

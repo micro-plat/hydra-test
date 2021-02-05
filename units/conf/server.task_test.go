@@ -75,7 +75,7 @@ func TestTask_Validate(t *testing.T) {
 		{name: "2. Conf-TaskValidate-service空报错,数据合法性判定", fields: task.NewTask("xxx", ""), wantErr: true},
 		{name: "3. Conf-TaskValidate-cron中文报错,数据合法性判定", fields: task.NewTask("中文报错", "yyy"), wantErr: true},
 		{name: "4. Conf-TaskValidate-service中文报错,数据合法性判定", fields: task.NewTask("xxxx", "中文报错"), wantErr: true},
-		{name: "5. Conf-TaskValidate-正确数据,数据合法性判定", fields: task.NewTask("xxx", "yyy"), wantErr: false},
+		{name: "5. Conf-TaskValidate-正确数据,数据合法性判定", fields: task.NewTask("xxx", "/yyy"), wantErr: false},
 	}
 	for _, tt := range tests {
 		err := tt.fields.Validate()
@@ -152,17 +152,10 @@ func TestTasksGetConf(t *testing.T) {
 	if err == nil {
 		assert.Equal(t, len(test1.want.Tasks), len(queueObj.Tasks), test1.name)
 	}
-	//todo:不存在错误的场景
-	// confB = conf.CRON(cron.WithTrace())
-	// confB.Task(task.NewTask("中文错误", "s2"))
-	// test2 := test{name: "2. Conf-TasksGetConf-task节点存在,数据错误", cnf: conf.GetCronConf().GetServerConf(), want: nil, wantErr: true}
-	// queueObj, err = task.GetConf(test2.cnf)
-	// assert.Equal(t, test2.wantErr, (err != nil), test2.name+",err")
-	// assert.Equal(t, test2.want, queueObj, test2.name+",obj")
 
 	confB = conf.CRON(cron.WithTrace())
-	confB.Task(task.NewTask("@once", "s2"))
-	test3 := test{name: "3. Conf-TasksGetConf-task节点存在,数据正确", cnf: conf.GetCronConf().GetServerConf(), want: task.NewTasks(task.NewTask("@once", "s2")), wantErr: false}
+	confB.Task(task.NewTask("@once", "/s2"))
+	test3 := test{name: "3. Conf-TasksGetConf-task节点存在,数据正确", cnf: conf.GetCronConf().GetServerConf(), want: task.NewTasks(task.NewTask("@once", "/s2")), wantErr: false}
 	queueObj, err = task.GetConf(test3.cnf)
 	assert.Equal(t, test3.wantErr, (err != nil), test3.name+",err")
 	assert.Equal(t, test3.want, queueObj, test3.name+",obj")
