@@ -9,7 +9,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra-test/units/mocks"
+	"github.com/micro-plat/hydra/conf/app"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
 	"github.com/micro-plat/hydra/hydra/servers"
 	"github.com/micro-plat/hydra/registry"
@@ -57,9 +59,10 @@ func TestRspServers_Start(t *testing.T) {
 		addrs      string
 		isFirst    bool
 		wantErr    bool
+		getConf    func() app.IAPPConf
 	}{
 		{name: "1. 启动cronServer", serverName: "cronserver", sysType: "cron", addrs: "redis://xxx", isFirst: true},
-		{name: "2. 启动apiServer", serverName: "apiserver", sysType: "api", addrs: ":50002"},
+		{name: "2. 启动apiServer", serverName: "apiserver", sysType: "api", addrs: "50002"},
 		{name: "3. 启动mqcServer", serverName: "mqcserver", sysType: "mqc", addrs: "redis://xxx"},
 		//{name: "4. 启动rpcServer", serverName: "rpcserver", sysType: "rpc"},
 	}
@@ -90,6 +93,7 @@ func TestRspServers_Start(t *testing.T) {
 		sc.Vars().Queue().Redis("xxx", "", queueredis.WithConfigName("5.79"))
 		sc.MQC("redis://xxx")
 		sc.GetMQCConf()
+		hydra.G.SysName = tt.serverName
 		time.Sleep(time.Second * 1)
 
 		//注册中心节点值发生变化
@@ -97,7 +101,7 @@ func TestRspServers_Start(t *testing.T) {
 		registry, err := registry.GetRegistry(registryAddr, logger.New("hydra"))
 		assert.Equalf(t, false, err != nil, tt.name)
 
-		err = registry.Update(path, fmt.Sprintf(`{"status":"start","addr":"%s"}`, tt.addrs))
+		err = registry.Update(path, fmt.Sprintf(`{"status":"start","address":"%s","addr":"%s"}`, tt.addrs, tt.addrs))
 
 		assert.Equalf(t, false, err != nil, tt.name)
 		time.Sleep(time.Second * 1)
