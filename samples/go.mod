@@ -1,6 +1,6 @@
 module github.com/micro-plat/hydra-test/samples
 
-go 1.15
+go 1.16
 
 replace github.com/micro-plat/lib4go => ../../../../github.com/micro-plat/lib4go
 
