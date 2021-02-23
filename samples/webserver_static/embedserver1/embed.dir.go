@@ -2,7 +2,11 @@
 
 package main
 
-import "embed"
+ import (
+	"embed"
+	"github.com/micro-plat/hydra/conf/server/static"
+
+)
 
 //go:embed static
 var fs embed.FS
