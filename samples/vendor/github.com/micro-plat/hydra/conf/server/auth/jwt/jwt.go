@@ -12,6 +12,7 @@ import (
 	"github.com/micro-plat/hydra/registry"
 	"github.com/micro-plat/lib4go/errs"
 	"github.com/micro-plat/lib4go/security/jwt"
+	"github.com/micro-plat/lib4go/types"
 	"github.com/micro-plat/lib4go/utility"
 )
 
@@ -84,7 +85,7 @@ type JWTAuth struct {
 //NewJWT 构建JWT配置参数
 func NewJWT(opts ...Option) *JWTAuth {
 	jwt := &JWTAuth{
-		Name:     JWTName,
+		Name:     AuthorizationHeader,
 		Mode:     ModeHS512,
 		Secret:   utility.GetGUID(),
 		ExpireAt: 86400,
@@ -102,6 +103,11 @@ func (j *JWTAuth) CheckJWT(token string) (data interface{}, err error) {
 	if token == "" {
 		return nil, errs.NewError(JWTStatusTokenError, fmt.Errorf("未传入jwt.token(%s %s值为空)", j.Source, j.Name))
 	}
+	if !strings.HasPrefix(token, TokenBearerPrefix) {
+		return nil, errs.NewError(JWTStatusTokenError, fmt.Errorf("jwt.token格式错误(%s)", token))
+	}
+	token = token[len(TokenBearerPrefix):]
+
 	//2. 解密jwt判断是否有效，是否过期
 	data, er := jwt.Decrypt(token, j.Secret)
 	if er != nil {
@@ -114,9 +120,29 @@ func (j *JWTAuth) CheckJWT(token string) (data interface{}, err error) {
 	return data, nil
 }
 
-//GetExpireTime 获取jwt的超时时间
-func (j *JWTAuth) GetExpireTime() string {
-	expireTime := time.Now().Add(time.Duration(time.Duration(j.ExpireAt)*time.Second - 8*60*60*time.Second))
+//GetJWTForRspns 获取jwt响应参数值
+func (j *JWTAuth) GetJWTForRspns(token string, expired ...bool) (string, string, bool) {
+
+	isExpired := types.GetBoolByIndex(expired, 0, false)
+	token = TokenBearerPrefix + token
+	switch strings.ToUpper(j.Source) {
+	case SourceHeader, SourceHeaderShort: //"HEADER", "H":
+		return AuthorizationHeader, token, isExpired == false
+	default:
+		expireVal := j.getExpireTime(isExpired)
+		if j.Domain != "" {
+			return "Set-Cookie", fmt.Sprintf("%s=%s;domain=%s;path=/;expires=%s;HttpOnly", j.Name, token, j.Domain, expireVal), true
+		}
+		return "Set-Cookie", fmt.Sprintf("%s=%s;path=/;expires=%s;HttpOnly", j.Name, token, expireVal), true
+	}
+}
+
+//getExpireTime 获取jwt的超时时间
+func (j *JWTAuth) getExpireTime(expired bool) string {
+	expireTime := time.Now().Add(time.Hour * -24)
+	if !expired {
+		expireTime = time.Now().Add(time.Duration(time.Duration(j.ExpireAt)*time.Second - 8*60*60*time.Second))
+	}
 	return expireTime.Format("Mon, 02 Jan 2006 15:04:05 GMT")
 }
 

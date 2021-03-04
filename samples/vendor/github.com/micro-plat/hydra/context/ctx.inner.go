@@ -15,22 +15,24 @@ type IInnerContext interface {
 	GetHeaders() http.Header    //Request.Header
 	GetCookies() []*http.Cookie //Request.Cookies()
 	GetParams() map[string]interface{}
-	GetRouterPath() string //Context.FullPath()
 	GetPostForm() url.Values
 	GetRawForm() map[string]interface{}
 	ContentType() string
 
 	Abort()
-	WStatus(int)              //c.Context.Writer.WriteHeader(s)
-	Status() int              //Context.Writer.Status()
-	Written() bool            //Context.Writer.Written()
-	WHeaders() http.Header    //c.Context.Writer.Header()
-	WHeader(string) string    //c.Context.Writer.Header().Get
-	File(string)              //Context.File(path)
+	WStatus(int)           //c.Context.Writer.WriteHeader(s)
+	Status() int           //Context.Writer.Status()
+	Written() bool         //Context.Writer.Written()
+	WHeaders() http.Header //c.Context.Writer.Header()
+	WHeader(string) string //c.Context.Writer.Header().Get
+	// File(string)           //Context.File(path)
+	ServeContent(filepath string, fs http.FileSystem) int
 	Data(int, string, []byte) //c.Context.Data(status, tpName, v)
 	Redirect(int, string)
+	GetRouterPath() string
+	//获取原始服务路径(包括请求method)
 	GetService() string
 	GetFile(fileKey string) (string, io.ReadCloser, int64, error)
-	//GetHTTPReqResp 获取http request,response原生对象
 	GetHTTPReqResp() (*http.Request, http.ResponseWriter)
+	ClearAuth(c ...bool) bool
 }

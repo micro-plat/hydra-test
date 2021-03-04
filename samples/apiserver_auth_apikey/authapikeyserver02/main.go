@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra/conf/server/auth/apikey"
+	"github.com/micro-plat/hydra/conf/server/processor"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 )
 
@@ -15,7 +16,13 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API("8072").APIKEY("123456", apikey.WithMD5Mode(), apikey.WithExcludes("/hydratest/apiserver/*", "/hydratest/apiserver1/apikey"))
+	hydra.Conf.API("8072").
+		APIKEY("12345678",
+			apikey.WithMD5Mode(),
+			apikey.WithExcludes("/ppp/hydratest/apiserver/*", "/hydratest/apiserver1/apikey"),
+		).
+		Processor(processor.WithServicePrefix("ppp"))
+
 	app.API("/hydratest/apiserver/apikey", funcAPIKey)
 	app.API("/hydratest/apiserver1/apikey", funcAPIKey)
 	app.API("/hydratest/apiserver1/apikey1", funcAPIKey)

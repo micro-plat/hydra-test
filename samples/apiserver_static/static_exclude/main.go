@@ -16,7 +16,7 @@ var app = hydra.NewApp(
 
 func init() {
 	hydra.Conf.API("8070").Static(
-		static.WithExclude(".zip", ".css", "/exclude/"), static.WithRoot("../root"), static.WithEnable())
+		static.WithExclude(".zip", ".css", "/exclude/"), static.WithEnable())
 
 	app.API("/api", func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Info("api_static")

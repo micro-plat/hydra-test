@@ -7,6 +7,7 @@ import (
 
 	"github.com/micro-plat/hydra"
 	componentrpc "github.com/micro-plat/hydra/components/rpcs/rpc"
+	"github.com/micro-plat/hydra/conf/server/processor"
 	varconf "github.com/micro-plat/hydra/conf/vars/rpc"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 	"github.com/micro-plat/hydra/hydra/servers/rpc"
@@ -23,8 +24,8 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.RPC("50025")
-	hydra.Conf.API("50026")
+	hydra.Conf.RPC("50025").Processor(processor.WithServicePrefix("rpccc"))
+	hydra.Conf.API("50026").Processor(processor.WithServicePrefix("apiii"))
 
 	hydra.Conf.Vars().RPC("rpc", varconf.WithRoundRobin())
 	app.API("/api/request/:datatype", apiRequest)
@@ -114,7 +115,7 @@ var apiRequest = func(ctx hydra.IContext) (r interface{}) {
 		"datatype": dataType,
 	}
 
-	respones, err := hydra.C.RPC().GetRegularRPC().Request("/rpc/proc@hydratest", input, opts...)
+	respones, err := hydra.C.RPC().GetRegularRPC().Request("/rpccc/rpc/proc@hydratest", input, opts...)
 	if err != nil {
 		ctx.Log().Errorf("rpc 请求异常：%v", err)
 		return

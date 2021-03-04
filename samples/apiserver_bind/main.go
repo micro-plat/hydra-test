@@ -12,6 +12,7 @@ func main() {
 		hydra.WithPlatName("hydra"),
 		hydra.WithServerTypes(http.API),
 	)
+	hydra.Conf.API("50001")
 	app.API("/request", request, api.WithEncoding("gbk"))
 	app.Start()
 }

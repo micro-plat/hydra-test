@@ -20,13 +20,11 @@ var app = hydra.NewApp(
 
 func init() {
 	hydra.Conf.Web("8072").Static(
-		static.WithRoot("./src"),
-		static.WithArchive("staticfile"),
-		static.WithExts(".so", ".exe", ".pdf", ".txt", ".zip", ".gz", ".7z", ".tar", ".war", ".html", ".js", ".css", ".htm", ".ico", ".png", ".jpg", ".jpeg", ".md"),
+		static.WithAutoRewrite(),
+		static.WithAssetsPath("staticfile"),
 		static.WithExclude(".png", ".exe", "/press/file7.gz", "/press/"),
 		static.WithHomePage("index.html"),
-		static.WithPrefix("/taosytest"),
-		static.WithRewriters("/file5", "/"))
+		static.WithUnrewrite("/file5", "/"))
 
 	hydra.Conf.Vars().Custom("config", "vue", map[string]interface{}{
 		"api_addr":         fmt.Sprintf("//%s:50002", global.LocalIP()),

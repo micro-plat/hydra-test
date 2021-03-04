@@ -2,10 +2,9 @@
 
 package main
 
- import (
+import (
 	"embed"
 	"github.com/micro-plat/hydra/conf/server/static"
-
 )
 
 //go:embed static

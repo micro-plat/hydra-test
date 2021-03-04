@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/micro-plat/hydra"
+	"github.com/micro-plat/hydra/conf/server/processor"
 	"github.com/micro-plat/hydra/conf/server/static"
 	"github.com/micro-plat/hydra/context"
 	"github.com/micro-plat/hydra/hydra/servers/http"
@@ -11,7 +12,7 @@ import (
 var opts []static.Option
 
 var app = hydra.NewApp(
-	hydra.WithServerTypes(http.Web),
+	hydra.WithServerTypes(http.Web, http.API),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("webserverstatic"),
 	hydra.WithClusterName("test"),
@@ -25,7 +26,8 @@ var app = hydra.NewApp(
 //go build -mod=mod -tags=oszip
 
 func main() {
-	hydra.Conf.Web("50005").Static(opts...)
+	hydra.Conf.Web("50005").Static(opts...).Processor(processor.WithServicePrefix("xxxxx"))
+	hydra.Conf.API("60005").Static(opts...).Processor(processor.WithServicePrefix("xxxxx"))
 	app.Micro("/struct", &GetStruct{})
 	app.Micro("/func", singleFunc)
 	app.Micro("/func.view", singleFunc)

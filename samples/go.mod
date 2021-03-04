@@ -13,5 +13,4 @@ require (
 	github.com/mattn/go-oci8 v0.1.0
 	github.com/micro-plat/hydra v0.0.0-00010101000000-000000000000
 	github.com/micro-plat/lib4go v1.0.10
-	gopkg.in/yaml.v2 v2.3.0 // indirect
 )

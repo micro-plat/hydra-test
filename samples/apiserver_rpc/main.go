@@ -6,6 +6,8 @@ import (
 	"github.com/micro-plat/hydra"
 	crpc "github.com/micro-plat/hydra/components/rpcs/rpc"
 	"github.com/micro-plat/hydra/conf/server/api"
+	"github.com/micro-plat/hydra/conf/server/processor"
+	"github.com/micro-plat/hydra/conf/server/router"
 	"github.com/micro-plat/hydra/global"
 
 	"github.com/micro-plat/hydra/hydra/servers/http"
@@ -22,7 +24,7 @@ var app = hydra.NewApp(
 
 func init() {
 	hydra.Conf.API("50008", api.WithTimeout(10, 10))
-	hydra.Conf.RPC("50009")
+	hydra.Conf.RPC("50009").Processor(processor.WithServicePrefix("/pprc"))
 
 	hydra.Conf.Vars().RPC("rpc")
 	localIP := global.LocalIP()
@@ -30,7 +32,7 @@ func init() {
 	//1.请求 /api/localrpc
 	//2.对比 requestID 和 /rpc/localrpc 是否一致
 
-	app.API("/api/requestbyctx", rpcRequestByCtx)
+	app.API("/api/requestbyctx", rpcRequestByCtx, router.WithEncoding("gb2312"))
 	app.API("/api/swap", rpcSwap)
 	app.API("/api/request", rpcRequest)
 
@@ -39,6 +41,7 @@ func init() {
 
 	app.API("/api/remoterpcip", rpcSrv)
 	app.RPC("/rpc/localrpc", func(ctx hydra.IContext) (r interface{}) {
+		ctx.Log().Info("GetRequestPath:", ctx.Request().Path().GetRequestPath())
 		ctx.Log().Info("/rpc/localrpc:RequestID:", ctx.User().GetTraceID(), ctx.Request().GetString("name"))
 		return ctx.User().GetTraceID()
 	})
@@ -66,7 +69,7 @@ var rpcRequestByCtx = func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Error("GetRPC:", err)
 		return
 	}
-	res, err := request.RequestByCtx(ctx.Context(), "/rpc/localrpc@hydratest", data, crpc.WithTraceID(requestID))
+	res, err := request.RequestByCtx(ctx.Context(), "/pprc/rpc/localrpc@hydratest", data, crpc.WithTraceID(requestID))
 	if err != nil {
 		ctx.Log().Error("RequestByCtx:", err)
 		return

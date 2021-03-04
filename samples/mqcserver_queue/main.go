@@ -3,7 +3,9 @@ package main
 import (
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra/components"
+	"github.com/micro-plat/hydra/conf/server/processor"
 	"github.com/micro-plat/hydra/conf/server/queue"
+
 	//"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
 	//"github.com/micro-plat/hydra/conf/vars/queue/lmq"
 	"github.com/micro-plat/hydra/hydra/servers/http"
@@ -19,7 +21,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API("8072")
+	hydra.Conf.API("18072").Processor(processor.WithServicePrefix("api"))
 	hydra.Conf.MQC("redis://queuename").Queue(queue.NewQueue("mqcserver:queue2", "/hydratest/mqcserver/queue2"))
 	//hydra.Conf.Vars().Redis("redis", )
 	hydra.Conf.Vars().Queue().Redis("queuename", "192.168.5.79:6379")

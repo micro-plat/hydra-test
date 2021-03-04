@@ -1,6 +1,7 @@
 package ctx
 
 import (
+	"net/url"
 	"strings"
 
 	"github.com/micro-plat/hydra/conf"
@@ -52,6 +53,30 @@ func (c *rpath) Params() types.XMap {
 func (c *rpath) GetService() string {
 	return c.ctx.GetService()
 }
+
+//GetGroup 获取当前服务注册的group名
+func (c *rpath) GetGroup() string {
+	return services.Def.GetGroup(c.appConf.GetServerConf().GetServerType(), c.GetService())
+}
+
+//GetPageAndTag 获取服务对应的页面路径与tag标签(page:静态文件prefix+服务原始注册路径,tag：对象中的函数名)
+func (c *rpath) GetPageAndTag() (page string, tag string, ok bool) {
+
+	//获取服务注册的路径名，tag标签
+	tp := c.appConf.GetServerConf().GetServerType()
+	page, tag, ok = services.Def.GetRawPathAndTag(tp, c.GetService())
+	if !ok {
+		return "", "", false
+	}
+
+	//处理tag为空时，获取当前method
+	if tag == "" {
+		tag = c.ctx.GetMethod()
+	}
+
+	return page, tag, ok
+}
+
 func (c *rpath) GetEncoding() string {
 	if c.encoding != "" {
 		return c.encoding
@@ -60,6 +85,7 @@ func (c *rpath) GetEncoding() string {
 	//从router配置获取
 	routerObj, err := c.GetRouter()
 	if err != nil {
+		c.encoding = encoding.UTF8
 		return c.encoding
 	}
 	if c.encoding = routerObj.Encoding; c.encoding != "" {
@@ -93,14 +119,13 @@ func (c *rpath) GetRouter() (*router.Router, error) {
 		}
 		return routerObj.Match(c.ctx.GetRouterPath(), c.ctx.GetMethod())
 	default:
-		return router.NewRouter(c.ctx.GetRouterPath(), c.ctx.GetRouterPath(), []string{}, router.WithEncoding("utf-8")), nil
+		return router.NewRouter(c.ctx.GetRouterPath(), c.ctx.GetService(), []string{}, router.WithEncoding("utf-8")), nil
 	}
-
 }
 
 //GetURL 获取请求路径
-func (c *rpath) GetURL() string {
-	return c.ctx.GetURL().String()
+func (c *rpath) GetURL() *url.URL {
+	return c.ctx.GetURL()
 }
 
 //GetRequestPath 获取请求路径

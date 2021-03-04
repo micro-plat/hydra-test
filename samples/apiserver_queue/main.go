@@ -17,11 +17,12 @@ var app = hydra.NewApp(
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserver_queue"),
 	hydra.WithClusterName("t"),
-	hydra.WithRegistry("zk://192.168.0.101"),
+
+//	hydra.WithRegistry("zk://192.168.0.101"),
 )
 
 func init() {
-	hydra.Conf.API("8070")
+	hydra.Conf.API("18070")
 
 	hydra.Conf.Vars().Redis("5.79", "192.168.5.79:6379", redis.WithPoolSize(10))
 	hydra.Conf.Vars().Queue().MQTT("mqtt", "192.168.0.219:8883", mqtt.WithDialTimeout(500), mqtt.WithUP("mqtt", "abc123$"), mqtt.WithCert("./ca.pem"))

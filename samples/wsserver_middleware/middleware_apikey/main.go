@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.WS(":8080").APIKEY("123456", apikey.WithSHA1Mode())
+	hydra.Conf.WS("8180").APIKEY("12345678", apikey.WithSHA1Mode())
 	app.WS("/ws", func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Info("ws中间件启用")
 		return "success"

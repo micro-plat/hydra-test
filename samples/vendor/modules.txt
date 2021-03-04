@@ -65,6 +65,7 @@ github.com/go-redis/redis/internal/util
 github.com/go-sql-driver/mysql
 # github.com/golang/protobuf v1.4.3
 github.com/golang/protobuf/proto
+github.com/golang/protobuf/protoc-gen-go/descriptor
 github.com/golang/protobuf/ptypes
 github.com/golang/protobuf/ptypes/any
 github.com/golang/protobuf/ptypes/duration
@@ -113,6 +114,7 @@ github.com/micro-plat/hydra/components
 github.com/micro-plat/hydra/components/caches
 github.com/micro-plat/hydra/components/caches/cache
 github.com/micro-plat/hydra/components/caches/cache/gocache
+github.com/micro-plat/hydra/components/caches/cache/redis
 github.com/micro-plat/hydra/components/container
 github.com/micro-plat/hydra/components/dbs
 github.com/micro-plat/hydra/components/dlock
@@ -152,6 +154,7 @@ github.com/micro-plat/hydra/conf/server/cron
 github.com/micro-plat/hydra/conf/server/header
 github.com/micro-plat/hydra/conf/server/metric
 github.com/micro-plat/hydra/conf/server/mqc
+github.com/micro-plat/hydra/conf/server/processor
 github.com/micro-plat/hydra/conf/server/queue
 github.com/micro-plat/hydra/conf/server/render
 github.com/micro-plat/hydra/conf/server/router
@@ -222,6 +225,7 @@ github.com/micro-plat/lib4go/db
 github.com/micro-plat/lib4go/db/tpl
 github.com/micro-plat/lib4go/encoding
 github.com/micro-plat/lib4go/encoding/base64
+github.com/micro-plat/lib4go/envs
 github.com/micro-plat/lib4go/errs
 github.com/micro-plat/lib4go/file
 github.com/micro-plat/lib4go/jsons
@@ -359,6 +363,8 @@ google.golang.org/grpc/internal/transport/networktype
 google.golang.org/grpc/keepalive
 google.golang.org/grpc/metadata
 google.golang.org/grpc/peer
+google.golang.org/grpc/reflection
+google.golang.org/grpc/reflection/grpc_reflection_v1alpha
 google.golang.org/grpc/resolver
 google.golang.org/grpc/resolver/manual
 google.golang.org/grpc/serviceconfig
@@ -392,11 +398,11 @@ google.golang.org/protobuf/reflect/protoreflect
 google.golang.org/protobuf/reflect/protoregistry
 google.golang.org/protobuf/runtime/protoiface
 google.golang.org/protobuf/runtime/protoimpl
+google.golang.org/protobuf/types/descriptorpb
 google.golang.org/protobuf/types/known/anypb
 google.golang.org/protobuf/types/known/durationpb
 google.golang.org/protobuf/types/known/timestamppb
 # gopkg.in/yaml.v2 v2.3.0
-## explicit
 gopkg.in/yaml.v2
 # gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776
 gopkg.in/yaml.v3

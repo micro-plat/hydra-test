@@ -15,7 +15,7 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	secert := "123456"
+	secert := "12345678"
 	hbulder := hydra.Conf.API("8080")
 	hbulder.Jwt(jwt.WithEnable(), jwt.WithHeader(), jwt.WithAuthURL("https://www.baidu.com"), jwt.WithSecret(secert), jwt.WithName("__jwt_"), jwt.WithMode(jwt.ModeHS512), jwt.WithExcludes("/api/exclude"))
 

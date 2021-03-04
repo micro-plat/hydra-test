@@ -17,6 +17,11 @@ var EmptyVarConf = &VarConf{
 	varNodeConfs: make(map[string]conf.RawConf),
 }
 
+type cacheObj struct {
+	obj     interface{}
+	version int32
+}
+
 //VarConf 变量信息
 type VarConf struct {
 	conf.IVarPub
