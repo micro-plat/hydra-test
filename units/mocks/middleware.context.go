@@ -32,6 +32,7 @@ type MiddleContext struct {
 	HttpRequest  *http.Request
 	HttpResponse http.ResponseWriter
 	MockAPPConf  app.IAPPConf
+	MockRootPath string
 }
 
 func (ctx *MiddleContext) Next() {
@@ -46,6 +47,9 @@ func (ctx *MiddleContext) Meta() conf.IMeta {
 
 func (ctx *MiddleContext) Service(string) {
 
+}
+func (ctx *MiddleContext) GetRouterPath() string {
+	return ctx.MockRootPath
 }
 
 //Invoke 调用本地服务
@@ -212,6 +216,9 @@ func (p *MockPath) AllowFallback() bool {
 //GetPageAndTag 获取服务对应的页面路径与tag标签(page:静态文件prefix+服务原始注册路径,tag：对象中的函数名)
 func (p *MockPath) GetPageAndTag() (page string, tag string, ok bool) {
 	return
+}
+func (p *MockPath) GetGroup() string {
+	return ""
 }
 
 var _ extcontext.IRequest = &MockRequest{}
@@ -441,7 +448,7 @@ func (res *MockResponse) WriteAny(v interface{}) error {
 }
 
 //File 向响应流中写入文件(立即写入)
-func (res *MockResponse) File(path string) {
+func (res *MockResponse) File(path string, fs http.FileSystem) {
 	res.MockContent = path
 	res.MockStatus = http.StatusOK
 }

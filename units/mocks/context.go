@@ -155,3 +155,7 @@ func (t *TestContxt) ClearAuth(c ...bool) bool {
 func (t *TestContxt) GetHTTPReqResp() (*http.Request, http.ResponseWriter) {
 	return nil, nil
 }
+
+func (g *TestContxt) ServeContent(filepath string, fs http.FileSystem) int {
+	return http.StatusOK
+}

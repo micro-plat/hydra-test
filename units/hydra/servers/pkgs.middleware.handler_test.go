@@ -121,7 +121,7 @@ func TestHandler(t *testing.T) {
 		}
 
 		//获取中间件
-		handler := middleware.ExecuteHandler(tt.service)
+		handler := middleware.ExecuteHandler()
 
 		//调用中间件
 		handler(ctx)
@@ -218,7 +218,7 @@ func TestHandler1(t *testing.T) {
 		}
 
 		//获取中间件
-		handler := middleware.ExecuteHandler(tt.service)
+		handler := middleware.ExecuteHandler()
 
 		//调用中间件
 		handler(ctx)
@@ -311,7 +311,7 @@ func TestHandler2(t *testing.T) {
 		}
 
 		//获取中间件
-		handler := middleware.ExecuteHandler(tt.service)
+		handler := middleware.ExecuteHandler()
 
 		//调用中间件
 		handler(ctx)
@@ -398,7 +398,7 @@ func TestHandler3(t *testing.T) {
 		}
 
 		//获取中间件
-		handler := middleware.ExecuteHandler(tt.service)
+		handler := middleware.ExecuteHandler()
 
 		//调用中间件
 		handler(ctx)
@@ -485,7 +485,7 @@ func TestHandler4(t *testing.T) {
 		}
 
 		//获取中间件
-		handler := middleware.ExecuteHandler(tt.service)
+		handler := middleware.ExecuteHandler()
 
 		//调用中间件
 		handler(ctx)
@@ -572,7 +572,7 @@ func TestHandler5(t *testing.T) {
 		}
 
 		//获取中间件
-		handler := middleware.ExecuteHandler(tt.service)
+		handler := middleware.ExecuteHandler()
 
 		//调用中间件
 		handler(ctx)
@@ -660,7 +660,7 @@ func TestHandler6(t *testing.T) {
 		}
 
 		//获取中间件
-		handler := middleware.ExecuteHandler(tt.service)
+		handler := middleware.ExecuteHandler()
 
 		//调用中间件
 		handler(ctx)
@@ -747,7 +747,7 @@ func TestHandler7(t *testing.T) {
 		}
 
 		//获取中间件
-		handler := middleware.ExecuteHandler(tt.service)
+		handler := middleware.ExecuteHandler()
 
 		//调用中间件
 		handler(ctx)
@@ -834,7 +834,7 @@ func TestHandler8(t *testing.T) {
 		}
 
 		//获取中间件
-		handler := middleware.ExecuteHandler(tt.service)
+		handler := middleware.ExecuteHandler()
 
 		//调用中间件
 		handler(ctx)

@@ -52,16 +52,16 @@ func NewConfBy(platName, clusterName string, addr ...string) *SConf {
 	hydra.G.PlatName = platName
 	hydra.G.ClusterName = clusterName
 	//API  路由信息
-	c.Service.API = services.NewORouter()
+	c.Service.API = services.NewORouter("API")
 
 	//WEB web服务的路由信息
-	c.Service.Web = services.NewORouter()
+	c.Service.Web = services.NewORouter("Web")
 
 	//WS web socket路由信息
-	c.Service.WS = services.NewORouter()
+	c.Service.WS = services.NewORouter("WS")
 
 	//RPC rpc服务的路由信息
-	c.Service.RPC = services.NewORouter()
+	c.Service.RPC = services.NewORouter("RPC")
 
 	c.IConf = creator.Conf // creator.NewByLoader(c.getRouter)
 	var err error

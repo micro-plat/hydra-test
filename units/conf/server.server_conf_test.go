@@ -76,8 +76,7 @@ func TestNewEmptyServerConf(t *testing.T) {
 
 	staticConf, err := gotS.GetStaticConf()
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取static对象失败")
-	rwers := []string{"/", "/default.htm", "/default.html", "/index.htm"}
-	assert.Equal(t, &static.Static{Dir: "./static", Archive: "", Prefix: "", Exts: []string{}, Exclude: []string{"/view/", "/views/", "/web/", ".exe", ".so"}, HomePage: "index.html", Rewriters: rwers, Disable: true, FileMap: map[string]static.FileInfo{}, RewritersMatch: conf.NewPathMatch(rwers...)},
+	assert.Equal(t, &static.Static{Path: "static", HomePage: "index.html", Disable: true},
 		staticConf, "测试conf初始化,判断static节点对象")
 
 	apikeyConf, err := gotS.GetAPIKeyConf()
@@ -147,8 +146,8 @@ func TestNewAPIServerConf(t *testing.T) {
 	confN.Ras(ras.WithDisable(), ras.WithAuths(ras.New("service1", ras.WithRequest("/t1/t2"), ras.WithRequired("taofield"), ras.WithUIDAlias("userID"), ras.WithTimestampAlias("timespan"), ras.WithSignAlias("signname"),
 		ras.WithCheckTimestamp(false), ras.WithDecryptName("duser"), ras.WithParam("key1", "v1"), ras.WithParam("key2", "v2"), ras.WithAuthDisable())))
 	//confN.Render(render.WithDisable(), render.WithTmplt("/path1", "success", render.WithStatus("500"), render.WithContentType("tpltm1")))
-	confN.Static(static.WithRoot("./test"), static.WithHomePage("index1.html"), static.WithRewriters("/", "indextest.htm", "defaulttest.html"),
-		static.WithExts(".htm"), static.WithArchive("testsss"), static.AppendExts(".js"), static.WithPrefix("ssss"), static.WithDisable(), static.WithExclude("/views/", ".exe", ".so", ".zip"))
+	confN.Static(static.WithHomePage("index1.html"),
+		static.WithAssetsPath("testsss"), static.WithDisable(), static.WithExclude("/views/", ".exe", ".so", ".zip"))
 	confN.WhiteList(whitelist.WithIPList(whitelist.NewIPList([]string{"/t1/t2/*"}, []string{"192.168.0.101"}...)))
 	confM.Conf().Pub(platName, sysName, clusterName, "lm://.", true)
 
@@ -184,14 +183,14 @@ func TestNewAPIServerConf(t *testing.T) {
 	assert.Equal(t, metricC, metricConf, "测试conf初始化,判断metric节点对象")
 
 	staticConf, err := gotS.GetStaticConf()
-	staticC := static.New(static.WithRoot("./test"), static.WithHomePage("index1.html"), static.WithRewriters("/", "indextest.htm", "defaulttest.html"),
-		static.WithExts(".htm"), static.WithArchive("testsss"), static.AppendExts(".js"), static.WithPrefix("ssss"), static.WithDisable(), static.WithExclude("/views/", ".exe", ".so", ".zip"))
+	staticC := static.New("web", static.WithHomePage("index1.html"), static.WithAutoRewrite(),
+		static.WithAssetsPath("testsss"), static.WithDisable(), static.WithExclude("/views/", ".exe", ".so", ".zip"))
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取static对象失败")
-	assert.Equal(t, staticC.Dir, staticConf.Dir, "测试conf初始化,判断static节点对象")
-	assert.Equal(t, staticC.Archive, staticConf.Archive, "测试conf初始化,判断static节点对象")
-	assert.Equal(t, staticC.Prefix, staticConf.Prefix, "测试conf初始化,判断static节点对象")
-	assert.Equal(t, staticC.Exts, staticConf.Exts, "测试conf初始化,判断static节点对象")
-	assert.Equal(t, staticC.Exclude, staticConf.Exclude, "测试conf初始化,判断static节点对象")
+	//assert.Equal(t, staticC.Dir, staticConf.Dir, "测试conf初始化,判断static节点对象")
+	assert.Equal(t, staticC.Path, staticConf.Path, "测试conf初始化,判断static节点对象")
+	//assert.Equal(t, staticC.Prefix, staticConf.Prefix, "测试conf初始化,判断static节点对象")
+	//assert.Equal(t, staticC.Exts, staticConf.Exts, "测试conf初始化,判断static节点对象")
+	assert.Equal(t, staticC.Excludes, staticConf.Excludes, "测试conf初始化,判断static节点对象")
 	assert.Equal(t, staticC.HomePage, staticConf.HomePage, "测试conf初始化,判断static节点对象")
 	assert.Equal(t, staticC.Disable, staticConf.Disable, "测试conf初始化,判断static节点对象")
 

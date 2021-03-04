@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"os"
 	"testing"
 
 	"github.com/micro-plat/hydra"
@@ -560,7 +561,7 @@ func Test_response_File(t *testing.T) {
 	c := rc.Response()
 
 	//测试File
-	c.File("upload.test.txt")
+	c.File("upload.test.txt", http.FS(os.DirFS("")))
 	c.Flush()
 	rs, content, cp := c.GetFinalResponse()
 

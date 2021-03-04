@@ -13,6 +13,7 @@ import (
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
 	"github.com/micro-plat/hydra/context"
 	"github.com/micro-plat/hydra/context/ctx"
+	"github.com/micro-plat/hydra/global"
 	"github.com/micro-plat/hydra/services"
 	"github.com/micro-plat/lib4go/assert"
 )
@@ -36,6 +37,11 @@ func Test_rpath_GetEncoding(t *testing.T) {
 	services.WS.Add("/ws", "/ws", []string{"GET"}, api.WithEncoding("utf-8"))
 	services.WS.Add("/ws2", "/ws2", []string{"GET"}, api.WithEncoding("gbk"))
 	services.WS.Add("/ws3", "/ws3", []string{"GET"})
+
+	services.GetRouter(global.API).BuildRouters("")
+	services.GetRouter(global.Web).BuildRouters("")
+	services.GetRouter(global.WS).BuildRouters("")
+
 	apiConf := confObj.GetAPIConf() //获取配置
 
 	hydra.G.SysName = "webserver"
