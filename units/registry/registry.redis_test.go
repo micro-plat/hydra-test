@@ -1,7 +1,6 @@
 package registry
 
 import (
-	"fmt"
 	"sort"
 	"strings"
 	"testing"
@@ -411,7 +410,6 @@ func TestRedisChildren(t *testing.T) {
 			p := registry.Join(c.path, ch)
 			err := lm.CreateTempNode(p, c.value)
 			assert.Equal(t, nil, err, c.name)
-			fmt.Println("xxfff", c.name, p, err)
 		}
 
 		if len(c.children) == 0 {

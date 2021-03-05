@@ -82,7 +82,7 @@ func TestNewVarConf(t *testing.T) {
 	assert.Equal(t, "oracle", dbConf.GetString("provider"), "获取db节点Provider配置数据不正确")
 	assert.Equal(t, "taosy/123456@tnsName", dbConf.GetString("connString"), "获取db节点connString配置数据不正确")
 	assert.Equal(t, 10, dbConf.GetInt("maxOpen"), "获取db节点maxOpen配置数据不正确")
-	assert.Equal(t, 3, dbConf.GetInt("maxIdle"), "获取db节点maxIdle配置数据不正确")
+	assert.Equal(t, 10, dbConf.GetInt("maxIdle"), "获取db节点maxIdle配置数据不正确")
 	assert.Equal(t, 600, dbConf.GetInt("lifeTime"), "获取db节点lifeTime配置数据不正确")
 
 	_, vsion, err = confN.Registry.GetValue(varConfPath)
@@ -101,7 +101,7 @@ func TestNewVarConf(t *testing.T) {
 	assert.Equal(t, vsion1, vsion, "获取db子节点对象版本号不正确2")
 	assert.Equal(t, "oracle", dbObj.Provider, "获取db子节点对象失败,Provider")
 	assert.Equal(t, 10, dbObj.MaxOpen, "获取db子节点对象失败,MaxOpen")
-	assert.Equal(t, 3, dbObj.MaxIdle, "获取db子节点对象失败,MaxIdle")
+	assert.Equal(t, 10, dbObj.MaxIdle, "获取db子节点对象失败,MaxIdle")
 	assert.Equal(t, 600, dbObj.LifeTime, "获取db子节点对象失败,LifeTime")
 	assert.Equal(t, "taosy/123456@tnsName", dbObj.ConnString, "获取db子节点对象失败,ConnString")
 
@@ -174,7 +174,7 @@ func TestVarConf_GetConf(t *testing.T) {
 			assert.Equal(t, "oracle", dbConf.GetString("provider"), "获取db节点Provider配置数据不正确")
 			assert.Equal(t, "taosy/123456@tnsName", dbConf.GetString("connString"), "获取db节点connString配置数据不正确")
 			assert.Equal(t, 10, dbConf.GetInt("maxOpen"), "获取db节点maxOpen配置数据不正确")
-			assert.Equal(t, 3, dbConf.GetInt("maxIdle"), "获取db节点maxIdle配置数据不正确")
+			assert.Equal(t, 10, dbConf.GetInt("maxIdle"), "获取db节点maxIdle配置数据不正确")
 			assert.Equal(t, 600, dbConf.GetInt("lifeTime"), "获取db节点lifeTime配置数据不正确")
 		} else {
 			assert.Equal(t, true, strings.Contains(err.Error(), conf.ErrNoSetting.Error()), "获取db节点配置异常1")
@@ -267,7 +267,7 @@ func TestVarConf_GetObject(t *testing.T) {
 			assert.Equal(t, vsion1, vsion, "获取db子节点对象版本号不正确2")
 			assert.Equal(t, "oracle", dbObj.Provider, "获取db子节点对象失败,Provider")
 			assert.Equal(t, 10, dbObj.MaxOpen, "获取db子节点对象失败,MaxOpen")
-			assert.Equal(t, 3, dbObj.MaxIdle, "获取db子节点对象失败,MaxIdle")
+			assert.Equal(t, 10, dbObj.MaxIdle, "获取db子节点对象失败,MaxIdle")
 			assert.Equal(t, 600, dbObj.LifeTime, "获取db子节点对象失败,LifeTime")
 			assert.Equal(t, "taosy/123456@tnsName", dbObj.ConnString, "获取db子节点对象失败,ConnString")
 		} else {

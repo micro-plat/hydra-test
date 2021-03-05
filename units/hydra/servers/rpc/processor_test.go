@@ -35,12 +35,11 @@ func TestNewProcessor(t *testing.T) {
 		routers []*router.Router
 	}{
 		{name: "1. 添加空路由", routers: []*router.Router{}},
-		{name: "2. 添加单条路由", routers: []*router.Router{router.NewRouter("/rpcserver/taosy/test", "/rpcserver/taosy/test", []string{"Get"})}},
-		{name: "3. 添加多条路由", routers: []*router.Router{router.NewRouter("/rpcserver/taosy/test", "/rpcserver/taosy/test", []string{"Get"}), router.NewRouter("/rpcserver/taosy/test1", "/rpcserver/taosy/test1", []string{"Post"})}},
+		{name: "2. 添加单条路由", routers: []*router.Router{router.NewRouter("/rpcserver/taosy/test", "/rpcserver/taosy/test", []string{"GET"})}},
+		{name: "3. 添加多条路由", routers: []*router.Router{router.NewRouter("/rpcserver/taosy/test", "/rpcserver/taosy/test", []string{"GET"}), router.NewRouter("/rpcserver/taosy/test1", "/rpcserver/taosy/test1", []string{"Post"})}},
 	}
 	for _, tt := range tests {
 		gotP := rpc.NewProcessor(tt.routers...)
-		assert.Equalf(t, 6, len(gotP.GetServices()), tt.name+",中间件数量")
 		assert.Equalf(t, len(tt.routers), len(gotP.GetServices()), tt.name+",路由数量")
 	}
 }
@@ -51,6 +50,7 @@ func TestProcessor_Request(t *testing.T) {
 	conf := mocks.NewConfBy("server_rpc_pross_test", "tessRpctes")
 	conf.RPC("41501")
 	app.Cache.Save(conf.GetRPCConf())
+	services.GetRouter("rpc").BuildRouters("")
 
 	tests := []struct {
 		name    string
@@ -61,7 +61,7 @@ func TestProcessor_Request(t *testing.T) {
 		wantErr string
 	}{
 		{name: "1. Processor_Request-设置错误的request对象", fields: rpc.NewProcessor([]*router.Router{}...), context: nil, request: &pb.RequestContext{Header: "错误数据"}, wantP: &pb.ResponseContext{Status: http.StatusNotAcceptable, Header: "", Result: "输入参数有误"}, wantErr: ""},
-		//	{name: "2. Processor_Request-设置请求路径不存在", fields: rpc.NewProcessor([]*router.Router{router.NewRouter("/rpcserver/taosy/test2", "/rpcserver/taosy/test2", []string{"GET"})}...), context: nil, request: &pb.RequestContext{Service: "/rpcserver/taosy/testx", Method: "GET", Header: `{"Host":"baidu.com"}`, Input: "{}"}, wantP: &pb.ResponseContext{Status: 404, Header: "", Result: "404 service not found"}, wantErr: ""},
+		{name: "2. Processor_Request-设置请求路径不存在", fields: rpc.NewProcessor([]*router.Router{router.NewRouter("/rpcserver/taosy/test2", "/rpcserver/taosy/test2", []string{"GET"})}...), context: nil, request: &pb.RequestContext{Service: "/rpcserver/taosy/testx", Method: "GET", Header: `{"Host":"baidu.com"}`, Input: "{}"}, wantP: &pb.ResponseContext{Status: 404, Header: "", Result: ""}, wantErr: ""},
 		{name: "3. Processor_Request-设置错误的请求路径", fields: rpc.NewProcessor([]*router.Router{router.NewRouter("/rpcserver/taosy/test1", "/rpcserver/taosy/test1", []string{"GET"})}...), context: nil, request: &pb.RequestContext{Service: "/rpcserver/taosy/test1", Method: "GET", Header: `{"Host":"baidu.com"}`, Input: "{}"}, wantP: &pb.ResponseContext{Status: 668, Header: "", Result: "Internal Server Error"}, wantErr: ""},
 		{name: "4. Processor_Request-设置正确请求路径", fields: rpc.NewProcessor([]*router.Router{router.NewRouter("/rpcserver/taosy/test2", "/rpcserver/taosy/test2", []string{"GET"})}...), context: nil, request: &pb.RequestContext{Service: "/rpcserver/taosy/test2", Method: "GET", Header: `{"Host":"baidu.com"}`, Input: "{}"}, wantP: &pb.ResponseContext{Status: 200, Header: "", Result: "success"}, wantErr: ""},
 	}

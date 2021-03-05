@@ -71,6 +71,7 @@ func TestServer(t *testing.T) {
 		serverConf := mockConf.GetRPCConf()
 		app.Cache.Save(serverConf)
 		services.Def.RPC(tt.path, tt.handle)
+		services.RPC.BuildRouters("")
 
 		server, err := rpc.NewServer(tt.address, tt.routers, crpc.DefaultMaxRecvMsgSize, crpc.DefaultMaxSendMsgSize)
 		assert.Equalf(t, true, err == nil, tt.name+"server error")

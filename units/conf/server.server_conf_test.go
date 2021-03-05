@@ -76,7 +76,7 @@ func TestNewEmptyServerConf(t *testing.T) {
 
 	staticConf, err := gotS.GetStaticConf()
 	assert.Equal(t, true, err == nil, "测试conf初始化,获取static对象失败")
-	assert.Equal(t, &static.Static{Path: "static", HomePage: "index.html", Disable: true},
+	assert.Equal(t, static.New("api", static.WithDisable()),
 		staticConf, "测试conf初始化,判断static节点对象")
 
 	apikeyConf, err := gotS.GetAPIKeyConf()

@@ -167,7 +167,7 @@ func (p *MockPath) GetMethod() string {
 }
 
 func (p *MockPath) GetEncoding() string {
-	return ""
+	return "utf-8"
 }
 
 func (p *MockPath) GetService() string {

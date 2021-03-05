@@ -170,6 +170,7 @@ func TestPublisher_Publish_RPC(t *testing.T) {
 	confObj.API("8080", api.WithDNS("xwww.test.com"))
 	services.RPC.Add("/api1", "/api1", []string{"GET"})
 	services.RPC.Add("/api2", "/api1", []string{"GET"})
+	services.RPC.BuildRouters("")
 	confObj.RPC("9377")
 	rpcconf := confObj.GetRPCConf() //初始化参数
 	// s := confObj.GetAPIConf()       //初始化参数
@@ -178,7 +179,6 @@ func TestPublisher_Publish_RPC(t *testing.T) {
 	//发布rpc节点
 	//	router, _ := s.GetRouterConf()
 	router, _ := services.GetRouter("rpc").GetRouters()
-	fmt.Println(router.GetRouters())
 	err := pub.New(c).Publish("127.0.0.1:9091", "http://127.0.0.1:9091", c.GetServerID(), router.GetPath()...)
 	assert.Equal(t, false, err != nil, "发布rpc节点")
 
