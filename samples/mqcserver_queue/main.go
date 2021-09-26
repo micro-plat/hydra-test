@@ -3,8 +3,7 @@ package main
 import (
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/hydra/components"
-	"github.com/micro-plat/hydra/conf/server/processor"
-	"github.com/micro-plat/hydra/conf/server/queue"
+	//"github.com/micro-plat/hydra/conf/server/queue"
 
 	//"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
 	//"github.com/micro-plat/hydra/conf/vars/queue/lmq"
@@ -21,8 +20,8 @@ var app = hydra.NewApp(
 )
 
 func init() {
-	hydra.Conf.API("18072").Processor(processor.WithServicePrefix("api"))
-	hydra.Conf.MQC("redis://queuename").Queue(queue.NewQueue("mqcserver:queue2", "/hydratest/mqcserver/queue2"))
+	hydra.Conf.API("18072")
+	hydra.Conf.MQC("redis://queuename") //.Queue(queue.NewQueue("mqcserver:queue2", "/hydratest/mqcserver/queue2"))
 	//hydra.Conf.Vars().Redis("redis", )
 	hydra.Conf.Vars().Queue().Redis("queuename", "192.168.5.79:6379")
 	//hydra.Conf.MQC(lmq.MQ)
@@ -30,7 +29,7 @@ func init() {
 
 	app.API("/hydratest/mqcserver/:queue", funcAPI)
 	app.MQC("/hydratest/mqcserver/queue1", funcMQC1, "mqcserver:queue1")
-	app.MQC("/hydratest/mqcserver/queue2", funcMQC2)
+	app.MQC("/hydratest/mqcserver/queue2", funcMQC2, "mqcserver:queue2")
 }
 
 // mqcserver-queue 静态加载队列后，手动修改注册配置demo
@@ -61,7 +60,7 @@ func main() {
 }
 
 var funcAPI = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("mqcserver-queue-api 静态加载队列后，手动修改注册配置demo")
+	ctx.Log().Debug("mqcserver-queue-api")
 	queue := ""
 	value := ""
 	p := ctx.Request().Path().Params()
@@ -85,15 +84,19 @@ var funcAPI = func(ctx hydra.IContext) (r interface{}) {
 }
 
 var funcMQC1 = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("mqcserver-queue-mqc1 静态加载队列后，手动修改注册配置demo")
+	ctx.Log().Debug("mqcserver-queue-mqc1")
 	xmap := ctx.Request().GetMap()
-	ctx.Log().Info("ctx.Request().GetMap()：", xmap)
+	ctx.Log().Info("ctx.Request().GetMap：", xmap)
+	val := ctx.Request().GetString("taosytest")
+	ctx.Log().Info("ctx.Request().GetString：", val)
 	return
 }
 
 var funcMQC2 = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("mqcserver-queue-mqc2 静态加载队列后，手动修改注册配置demo")
+	ctx.Log().Debug("mqcserver-queue-mqc2")
 	xmap := ctx.Request().GetMap()
-	ctx.Log().Info("ctx.Request().GetMap()：", xmap)
+	ctx.Log().Info("ctx.Request().GetMap：", xmap)
+	val := ctx.Request().GetString("taosytest")
+	ctx.Log().Info("ctx.Request().GetString：", val)
 	return
 }
