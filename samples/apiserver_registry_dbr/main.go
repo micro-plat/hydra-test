@@ -3,23 +3,23 @@
  * @Autor: taoshouyin
  * @Date: 2021-09-26 09:54:02
  * @LastEditors: taoshouyin
- * @LastEditTime: 2021-09-26 15:20:27
+ * @LastEditTime: 2021-09-26 17:03:04
  */
 package main
 
 import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/micro-plat/hydra"
-	"github.com/micro-plat/hydra/conf/vars/cache/cacheredis"
+	"github.com/micro-plat/hydra/conf/server/mqc"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
 	"github.com/micro-plat/hydra/conf/vars/redis"
-	"github.com/micro-plat/hydra/hydra/servers/cron"
 	"github.com/micro-plat/hydra/hydra/servers/http"
+	mqcx "github.com/micro-plat/hydra/hydra/servers/mqc"
 	"github.com/micro-plat/hydra/hydra/servers/rpc"
 )
 
 var app = hydra.NewApp(
-	hydra.WithServerTypes(http.API, rpc.RPC, cron.CRON),
+	hydra.WithServerTypes(http.API, rpc.RPC, mqcx.MQC),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserver_dbr"),
 	hydra.WithClusterName("test"),
@@ -33,8 +33,7 @@ func init() {
 	hydra.Conf.RPC("28081")
 	hydra.Conf.Vars().Redis("5.79", redisAddr, redis.WithPoolSize(100))
 	hydra.Conf.Vars().Queue().Redis("queue", "", queueredis.WithConfigName("5.79"))
-	hydra.Conf.Vars().Cache().Redis("redis", "", cacheredis.WithConfigName("5.79"))
-	hydra.Conf.MQC("redis://queue")
+	hydra.Conf.MQC(mqc.WithRedis("queue"))
 	hydra.Conf.CRON()
 
 	hydra.S.CRON("/cron", func(ctx hydra.IContext) (r interface{}) {
