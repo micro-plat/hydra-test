@@ -3,7 +3,7 @@
  * @Autor: taoshouyin
  * @Date: 2021-09-26 09:54:02
  * @LastEditors: taoshouyin
- * @LastEditTime: 2021-09-26 17:03:04
+ * @LastEditTime: 2021-09-27 09:31:41
  */
 package main
 
@@ -13,13 +13,14 @@ import (
 	"github.com/micro-plat/hydra/conf/server/mqc"
 	"github.com/micro-plat/hydra/conf/vars/queue/queueredis"
 	"github.com/micro-plat/hydra/conf/vars/redis"
+	"github.com/micro-plat/hydra/hydra/servers/cron"
 	"github.com/micro-plat/hydra/hydra/servers/http"
 	mqcx "github.com/micro-plat/hydra/hydra/servers/mqc"
 	"github.com/micro-plat/hydra/hydra/servers/rpc"
 )
 
 var app = hydra.NewApp(
-	hydra.WithServerTypes(http.API, rpc.RPC, mqcx.MQC),
+	hydra.WithServerTypes(http.API, rpc.RPC, cron.CRON, mqcx.MQC),
 	hydra.WithPlatName("hydratest"),
 	hydra.WithSystemName("apiserver_dbr"),
 	hydra.WithClusterName("test"),
@@ -39,7 +40,7 @@ func init() {
 	hydra.S.CRON("/cron", func(ctx hydra.IContext) (r interface{}) {
 		ctx.Log().Info("-------------db测试----------------")
 		return
-	}, "@every 3s")
+	}, "@every 10s")
 	hydra.S.MQC("/mqc", mqcRecve, "apiserverdbr:redis:queue1")
 	hydra.S.RPC("/rpc", rpcServer)
 
