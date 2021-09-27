@@ -3,7 +3,7 @@
  * @Autor: taoshouyin
  * @Date: 2021-09-26 09:54:02
  * @LastEditors: taoshouyin
- * @LastEditTime: 2021-09-27 09:31:41
+ * @LastEditTime: 2021-09-27 09:36:24
  */
 package main
 
@@ -45,8 +45,6 @@ func init() {
 	hydra.S.RPC("/rpc", rpcServer)
 
 	hydra.S.API("/reg/reqrpc", reqRPC)
-	hydra.S.API("/reg/sendmqc", mqcSend)
-
 	hydra.S.API("/reg/create", create)
 	hydra.S.API("/reg/update", update)
 	hydra.S.API("/reg/delete", delete)

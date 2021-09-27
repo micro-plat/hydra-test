@@ -35,13 +35,6 @@ var create = func(ctx hydra.IContext) (r interface{}) {
 
 var rpcServer = func(ctx hydra.IContext) (r interface{}) {
 	ctx.Log().Info("registry-dbr-rpcServer")
-	return map[string]interface{}{
-		"xxxxxx": "sdfsdfdsfdsfdsfsf",
-	}
-}
-
-var mqcSend = func(ctx hydra.IContext) (r interface{}) {
-	ctx.Log().Info("registry-dbr-mqcSend")
 	queueClient, err := hydra.C.Queue().GetQueue()
 	if err != nil {
 		return fmt.Errorf("get queueclient fail,err:%+v", err)
@@ -49,7 +42,9 @@ var mqcSend = func(ctx hydra.IContext) (r interface{}) {
 	if err := queueClient.Send("apiserverdbr:redis:queue1", fmt.Sprintf(`{"time":"%s"}`, time.Now().Format("2006-01-02 15:04:05"))); err != nil {
 		return fmt.Errorf("send queue fail,err:%+v", err)
 	}
-	return "success"
+	return map[string]interface{}{
+		"xxxxxx": "sdfsdfdsfdsfdsfsf",
+	}
 }
 
 var mqcRecve = func(ctx hydra.IContext) (r interface{}) {
